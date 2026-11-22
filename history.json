@@ -1,0 +1,269 @@
+{
+  "tracked": {
+    "MU": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 594.51,
+      "targetFairValue": 1231.45,
+      "healthScore": 4.62
+    },
+    "ORCL": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 101.19,
+      "targetFairValue": 192.72,
+      "healthScore": 3.47
+    },
+    "ADBE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 217.71,
+      "targetFairValue": 395.31,
+      "healthScore": 4.34
+    },
+    "FGR.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 105.8,
+      "targetFairValue": 189.2,
+      "healthScore": 3.24
+    },
+    "CRM": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 180.62,
+      "targetFairValue": 314.15,
+      "healthScore": 4.02
+    },
+    "VK.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 15.47,
+      "targetFairValue": 26.6,
+      "healthScore": 3.57
+    },
+    "DTE.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 26.34,
+      "targetFairValue": 44.92,
+      "healthScore": 3.74
+    },
+    "SK.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 51.6,
+      "targetFairValue": 85.09,
+      "healthScore": 2.78
+    },
+    "DG.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 111.0,
+      "targetFairValue": 180.85,
+      "healthScore": 3.36
+    },
+    "DEC.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 27.1,
+      "targetFairValue": 43.99,
+      "healthScore": 3.44
+    },
+    "TTE.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 78.19,
+      "targetFairValue": 124.14,
+      "healthScore": 3.88
+    },
+    "EN.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 42.5,
+      "targetFairValue": 66.52,
+      "healthScore": 2.74
+    },
+    "NFLX": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 56.73,
+      "targetFairValue": 88.4,
+      "healthScore": 4.03
+    },
+    "RNO.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 26.13,
+      "targetFairValue": 40.54,
+      "healthScore": 2.86
+    },
+    "SAN.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 84.92,
+      "targetFairValue": 130.29,
+      "healthScore": 3.93
+    },
+    "ACA.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 15.3,
+      "targetFairValue": 23.11,
+      "healthScore": 3.63
+    },
+    "STMPA.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 36.72,
+      "targetFairValue": 55.36,
+      "healthScore": 3.33
+    },
+    "FR.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 10.4,
+      "targetFairValue": 15.67,
+      "healthScore": 2.83
+    },
+    "GLE.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 61.74,
+      "targetFairValue": 92.31,
+      "healthScore": 3.82
+    },
+    "EDEN.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 24.33,
+      "targetFairValue": 36.09,
+      "healthScore": 3.52
+    },
+    "ORA.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 15.12,
+      "targetFairValue": 22.01,
+      "healthScore": 3.28
+    },
+    "NVDA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 125.53,
+      "targetFairValue": 180.75,
+      "healthScore": 4.59
+    },
+    "IPN.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 161.6,
+      "targetFairValue": 231.9,
+      "healthScore": 4.62
+    },
+    "ZAL.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 28.24,
+      "targetFairValue": 40.4,
+      "healthScore": 2.87
+    },
+    "UNH": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 339.85,
+      "targetFairValue": 485.54,
+      "healthScore": 3.1
+    },
+    "AMAT": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 302.63,
+      "targetFairValue": 432.13,
+      "healthScore": 4.03
+    },
+    "BNP.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 89.55,
+      "targetFairValue": 127.72,
+      "healthScore": 3.66
+    },
+    "BAYN.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 53.36,
+      "targetFairValue": 74.63,
+      "healthScore": 3.18
+    },
+    "CAP.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 117.7,
+      "targetFairValue": 164.06,
+      "healthScore": 3.25
+    },
+    "NEX.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 120.0,
+      "targetFairValue": 165.65,
+      "healthScore": 2.58
+    },
+    "ENR.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 118.32,
+      "targetFairValue": 160.33,
+      "healthScore": 3.89
+    },
+    "HNR1.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 293.8,
+      "targetFairValue": 394.25,
+      "healthScore": 3.42
+    },
+    "DBK.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 29.13,
+      "targetFairValue": 38.32,
+      "healthScore": 3.45
+    },
+    "GOOGL": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 265.29,
+      "targetFairValue": 345.36,
+      "healthScore": 3.22
+    },
+    "SGO.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 71.22,
+      "targetFairValue": 92.55,
+      "healthScore": 3.02
+    },
+    "SPIE.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 44.0,
+      "targetFairValue": 56.99,
+      "healthScore": 2.75
+    },
+    "INTC": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 51.28,
+      "targetFairValue": 66.39,
+      "healthScore": 2.68
+    },
+    "SOI.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 96.3,
+      "targetFairValue": 120.24,
+      "healthScore": 3.43
+    },
+    "HEN3.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 85.72,
+      "targetFairValue": 106.95,
+      "healthScore": 2.96
+    },
+    "PFE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 27.4,
+      "targetFairValue": 34.14,
+      "healthScore": 3.44
+    },
+    "BAC": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 47.04,
+      "targetFairValue": 58.1,
+      "healthScore": 3.18
+    },
+    "SCR.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 35.04,
+      "targetFairValue": 42.28,
+      "healthScore": 2.87
+    },
+    "CAT": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 510.45,
+      "targetFairValue": 615.59,
+      "healthScore": 3.33
+    },
+    "AM.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 295.2,
+      "targetFairValue": 355.53,
+      "healthScore": 3.51
+    }
+  },
+  "winners": []
+}
