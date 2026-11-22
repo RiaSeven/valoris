@@ -1,0 +1,41 @@
+name: Mise à jour quotidienne Valoris
+
+on:
+  schedule:
+    # Exécution du lundi au vendredi à 20h30 UTC (21h30 hiver / 22h30 été à Paris)
+    - cron: '30 20 * * 1-5'
+  workflow_dispatch: # Permet de lancer la mise à jour manuellement depuis l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Configurer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installer les dépendances
+        run: pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Collecter les données et calculer les scores
+        run: python fetch_and_score.py
+
+      - name: Publier les données mises à jour
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data.json history.json
+          if git diff --staged --quiet; then
+            echo "Aucun changement détecté."
+          else
+            git commit -m "chore: mise à jour automatique des valorisations ($(date +'%Y-%m-%d'))"
+            git push
+          fi
