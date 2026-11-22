@@ -1,35 +1,187 @@
 {
-  "updatedAt": "2026-11-22T16:16:15.205211+00:00",
-  "count": 146,
+  "version": "2.0",
+  "updatedAt": "2026-11-22T17:09:27.772192+00:00",
+  "fxRates": {
+    "EUR": 1.0,
+    "USD": 1.097,
+    "JPY": 175.168,
+    "KRW": 1462.41
+  },
+  "count": 206,
   "stocks": [
     {
-      "ticker": "STLAP.PA",
-      "name": "STELLANTIS NV",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 3.13,
-      "fairValue": 6.98,
-      "upside": 123.3,
-      "marketCapB": 9.08,
-      "healthScore": 1.8,
-      "healthLabel": "Faible",
+      "ticker": "000660.KS",
+      "name": "SK hynix",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Technologie",
+      "price": 1113000.0,
+      "fairValue": 3056126.8,
+      "upside": 174.6,
+      "marketCapB": 536.69,
+      "healthScore": 4.6,
+      "healthLabel": "Excellent",
       "scores": {
-        "growth": 2.1,
-        "profitability": 1.0,
-        "cashflow": 1.2,
-        "balanceSheet": 1.3,
-        "valuation": 3.4
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 3.0,
+        "balanceSheet": 5.0,
+        "valuation": 5.0
       },
       "models": {
         "dcf": null,
-        "multiples": 5.97,
-        "analysts": 8.0
+        "multiples": null,
+        "analysts": 3056126.8
       },
-      "pe": 8.0,
-      "evEbitda": 14.7,
+      "pe": 2.1,
+      "evEbitda": 3.2,
+      "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "005930.KS",
+      "name": "SamsungElec",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Technologie",
+      "price": 183100.0,
+      "fairValue": 478326.35,
+      "upside": 161.2,
+      "marketCapB": 815.32,
+      "healthScore": 4.71,
+      "healthLabel": "Excellent",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 3.6,
+        "balanceSheet": 5.0,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 484795.54,
+        "multiples": null,
+        "analysts": 471857.16
+      },
+      "pe": 2.3,
+      "evEbitda": 3.1,
+      "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "034730.KS",
+      "name": "SK",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Industrie",
+      "price": 462000.0,
+      "fairValue": 1075724.83,
+      "upside": 132.8,
+      "marketCapB": 17.23,
+      "healthScore": 3.48,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 3.2,
+        "cashflow": 1.8,
+        "balanceSheet": 2.4,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 1375540.6,
+        "multiples": null,
+        "analysts": 775909.06
+      },
+      "pe": 2.7,
+      "evEbitda": 7.4,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "005490.KS",
+      "name": "POSCO Holdings",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Matériaux",
+      "price": 252000.0,
+      "fairValue": 549089.78,
+      "upside": 117.9,
+      "marketCapB": 13.03,
+      "healthScore": 2.62,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.4,
+        "profitability": 1.0,
+        "cashflow": 1.0,
+        "balanceSheet": 3.9,
+        "valuation": 4.8
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 668179.56,
+        "analysts": 430000.0
+      },
+      "pe": 9.2,
+      "evEbitda": 6.2,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "ALO.PA",
+      "name": "ALSTOM",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 8.38,
+      "fairValue": 17.72,
+      "upside": 111.5,
+      "marketCapB": 3.88,
+      "healthScore": 1.92,
+      "healthLabel": "Faible",
+      "scores": {
+        "growth": 2.4,
+        "profitability": 1.0,
+        "cashflow": 2.1,
+        "balanceSheet": 1.1,
+        "valuation": 3.0
+      },
+      "models": {
+        "dcf": 16.65,
+        "multiples": 21.86,
+        "analysts": 14.64
+      },
+      "pe": 6.0,
+      "evEbitda": 37.4,
       "analystConsensus": "Conserver",
       "valueTrap": true
+    },
+    {
+      "ticker": "017670.KS",
+      "name": "SKTelecom",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Télécoms & Médias",
+      "price": 69700.0,
+      "fairValue": 145732.3,
+      "upside": 109.1,
+      "marketCapB": 10.15,
+      "healthScore": 3.46,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.1,
+        "profitability": 2.3,
+        "cashflow": 3.0,
+        "balanceSheet": 3.2,
+        "valuation": 4.7
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 183322.93,
+        "analysts": 108141.66
+      },
+      "pe": 10.5,
+      "evEbitda": 4.0,
+      "analystConsensus": "Achat",
+      "valueTrap": false
     },
     {
       "ticker": "MU",
@@ -38,9 +190,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 594.51,
-      "fairValue": 1231.45,
-      "upside": 107.1,
-      "marketCapB": 672.64,
+      "fairValue": 1235.56,
+      "upside": 107.8,
+      "marketCapB": 613.17,
       "healthScore": 4.62,
       "healthLabel": "Excellent",
       "scores": {
@@ -52,7 +204,7 @@
       },
       "models": {
         "dcf": 593.88,
-        "multiples": 1538.57,
+        "multiples": 1550.89,
         "analysts": 1561.91
       },
       "pe": 2.8,
@@ -61,32 +213,206 @@
       "valueTrap": false
     },
     {
+      "ticker": "000270.KS",
+      "name": "KIA CORP.",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Conso. cyclique",
+      "price": 88200.0,
+      "fairValue": 175833.36,
+      "upside": 99.4,
+      "marketCapB": 23.44,
+      "healthScore": 3.23,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.3,
+        "profitability": 2.2,
+        "cashflow": 1.7,
+        "balanceSheet": 4.0,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 189400.06,
+        "multiples": null,
+        "analysts": 162266.67
+      },
+      "pe": 4.6,
+      "evEbitda": 1.2,
+      "analystConsensus": "Achat fort",
+      "valueTrap": true
+    },
+    {
+      "ticker": "STLAP.PA",
+      "name": "STELLANTIS NV",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 3.13,
+      "fairValue": 6.0,
+      "upside": 92.0,
+      "marketCapB": 9.08,
+      "healthScore": 1.74,
+      "healthLabel": "Faible",
+      "scores": {
+        "growth": 2.1,
+        "profitability": 1.0,
+        "cashflow": 1.2,
+        "balanceSheet": 1.3,
+        "valuation": 3.2
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 4.0,
+        "analysts": 8.0
+      },
+      "pe": 8.0,
+      "evEbitda": 14.7,
+      "analystConsensus": "Conserver",
+      "valueTrap": true
+    },
+    {
       "ticker": "ORCL",
       "name": "Oracle Corporation",
       "market": "US",
       "currency": "$",
       "sector": "Technologie",
       "price": 101.19,
-      "fairValue": 192.72,
-      "upside": 90.5,
-      "marketCapB": 315.48,
-      "healthScore": 3.47,
+      "fairValue": 193.07,
+      "upside": 90.8,
+      "marketCapB": 287.59,
+      "healthScore": 3.48,
       "healthLabel": "Bon",
       "scores": {
         "growth": 5.0,
         "profitability": 5.0,
         "cashflow": 1.0,
         "balanceSheet": 1.8,
-        "valuation": 4.5
+        "valuation": 4.6
       },
       "models": {
         "dcf": null,
-        "multiples": 149.25,
+        "multiples": 149.95,
         "analysts": 236.18
       },
       "pe": 9.2,
       "evEbitda": 12.9,
       "analystConsensus": "Achat fort",
+      "valueTrap": true
+    },
+    {
+      "ticker": "035720.KS",
+      "name": "Kakao",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Télécoms & Médias",
+      "price": 31000.0,
+      "fairValue": 58839.98,
+      "upside": 89.8,
+      "marketCapB": 9.38,
+      "healthScore": 3.62,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 4.0,
+        "profitability": 1.8,
+        "cashflow": 4.6,
+        "balanceSheet": 4.1,
+        "valuation": 3.7
+      },
+      "models": {
+        "dcf": 78091.77,
+        "multiples": 54372.16,
+        "analysts": 44056.0
+      },
+      "pe": 17.2,
+      "evEbitda": 4.7,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "006400.KS",
+      "name": "SAMSUNG SDI CO.,LTD.",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Industrie",
+      "price": 402500.0,
+      "fairValue": 752121.2,
+      "upside": 86.9,
+      "marketCapB": 21.66,
+      "healthScore": 2.55,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 1.0,
+        "cashflow": 3.0,
+        "balanceSheet": 2.1,
+        "valuation": 1.6
+      },
+      "models": {
+        "dcf": null,
+        "multiples": null,
+        "analysts": 752121.2
+      },
+      "pe": 22.7,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "9984.T",
+      "name": "SOFTBANK GROUP CORP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Télécoms & Médias",
+      "price": 3025.0,
+      "fairValue": 5574.22,
+      "upside": 84.3,
+      "marketCapB": 98.42,
+      "healthScore": 2.44,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 4.6,
+        "profitability": 2.7,
+        "cashflow": 1.0,
+        "balanceSheet": 1.2,
+        "valuation": 2.7
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 4083.86,
+        "analysts": 7064.58
+      },
+      "pe": 10.2,
+      "evEbitda": 102.2,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "FGR.PA",
+      "name": "EIFFAGE",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 105.8,
+      "fairValue": 193.37,
+      "upside": 82.8,
+      "marketCapB": 10.37,
+      "healthScore": 3.24,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.7,
+        "profitability": 2.6,
+        "cashflow": 4.0,
+        "balanceSheet": 1.9,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 233.7,
+        "multiples": 192.3,
+        "analysts": 154.12
+      },
+      "pe": 8.6,
+      "evEbitda": 5.8,
+      "analystConsensus": "Achat",
       "valueTrap": true
     },
     {
@@ -96,9 +422,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 217.71,
-      "fairValue": 395.31,
-      "upside": 81.6,
-      "marketCapB": 84.73,
+      "fairValue": 395.85,
+      "upside": 81.8,
+      "marketCapB": 77.24,
       "healthScore": 4.34,
       "healthLabel": "Très bon",
       "scores": {
@@ -110,7 +436,7 @@
       },
       "models": {
         "dcf": 512.91,
-        "multiples": 406.11,
+        "multiples": 407.74,
         "analysts": 266.91
       },
       "pe": 7.9,
@@ -119,33 +445,62 @@
       "valueTrap": false
     },
     {
-      "ticker": "FGR.PA",
-      "name": "EIFFAGE",
-      "market": "FR",
-      "currency": "€",
+      "ticker": "012450.KS",
+      "name": "HANWHA AEROSPACE",
+      "market": "KR",
+      "currency": "₩",
       "sector": "Industrie",
-      "price": 105.8,
-      "fairValue": 189.2,
-      "upside": 78.8,
-      "marketCapB": 10.28,
-      "healthScore": 3.24,
-      "healthLabel": "Bon",
+      "price": 605000.0,
+      "fairValue": 1066546.39,
+      "upside": 76.3,
+      "marketCapB": 21.28,
+      "healthScore": 2.18,
+      "healthLabel": "Passable",
       "scores": {
-        "growth": 2.7,
+        "growth": 1.0,
         "profitability": 2.6,
-        "cashflow": 4.0,
-        "balanceSheet": 1.9,
-        "valuation": 5.0
+        "cashflow": 1.0,
+        "balanceSheet": 2.2,
+        "valuation": 4.1
       },
       "models": {
-        "dcf": 235.72,
-        "multiples": 177.76,
-        "analysts": 154.12
+        "dcf": null,
+        "multiples": 838806.98,
+        "analysts": 1294285.8
       },
-      "pe": 8.6,
-      "evEbitda": 5.8,
-      "analystConsensus": "Achat",
+      "pe": 11.5,
+      "evEbitda": 11.7,
+      "analystConsensus": "Achat fort",
       "valueTrap": true
+    },
+    {
+      "ticker": "7011.T",
+      "name": "MITSUBISHI HEAVY INDUSTRIES",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Industrie",
+      "price": 2722.0,
+      "fairValue": 4790.09,
+      "upside": 76.0,
+      "marketCapB": 52.24,
+      "healthScore": 3.35,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.0,
+        "profitability": 2.8,
+        "cashflow": 5.0,
+        "balanceSheet": 3.7,
+        "valuation": 2.3
+      },
+      "models": {
+        "dcf": 6870.11,
+        "multiples": 2190.77,
+        "analysts": 5309.38
+      },
+      "pe": 29.4,
+      "evEbitda": 11.7,
+      "analystConsensus": "Achat fort",
+      "valueTrap": false
     },
     {
       "ticker": "CRM",
@@ -154,10 +509,10 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 180.62,
-      "fairValue": 314.15,
-      "upside": 73.9,
-      "marketCapB": 148.65,
-      "healthScore": 4.02,
+      "fairValue": 314.48,
+      "upside": 74.1,
+      "marketCapB": 135.51,
+      "healthScore": 4.03,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 4.4,
@@ -168,7 +523,7 @@
       },
       "models": {
         "dcf": 430.88,
-        "multiples": 225.43,
+        "multiples": 226.43,
         "analysts": 286.14
       },
       "pe": 11.3,
@@ -177,14 +532,43 @@
       "valueTrap": false
     },
     {
+      "ticker": "051910.KS",
+      "name": "LGCHEM",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Matériaux",
+      "price": 203000.0,
+      "fairValue": 349184.43,
+      "upside": 72.0,
+      "marketCapB": 10.87,
+      "healthScore": 2.51,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 1.0,
+        "cashflow": 1.0,
+        "balanceSheet": 1.7,
+        "valuation": 3.8
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 332368.87,
+        "analysts": 366000.0
+      },
+      "pe": 9.7,
+      "evEbitda": 10.6,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
       "ticker": "VK.PA",
       "name": "VALLOUREC",
       "market": "FR",
       "currency": "€",
       "sector": "Matériaux",
       "price": 15.47,
-      "fairValue": 26.6,
-      "upside": 71.9,
+      "fairValue": 25.97,
+      "upside": 67.8,
       "marketCapB": 4.13,
       "healthScore": 3.57,
       "healthLabel": "Très bon",
@@ -197,7 +581,7 @@
       },
       "models": {
         "dcf": 24.13,
-        "multiples": 29.68,
+        "multiples": 27.78,
         "analysts": 25.99
       },
       "pe": 8.3,
@@ -206,31 +590,31 @@
       "valueTrap": false
     },
     {
-      "ticker": "DTE.DE",
-      "name": "DEUTSCHE TELEKOM AG           N",
-      "market": "DE",
+      "ticker": "RNO.PA",
+      "name": "RENAULT",
+      "market": "FR",
       "currency": "€",
-      "sector": "Télécoms & Médias",
-      "price": 26.34,
-      "fairValue": 44.92,
-      "upside": 70.5,
-      "marketCapB": 125.97,
-      "healthScore": 3.74,
-      "healthLabel": "Très bon",
+      "sector": "Conso. cyclique",
+      "price": 26.13,
+      "fairValue": 43.82,
+      "upside": 67.7,
+      "marketCapB": 7.56,
+      "healthScore": 2.87,
+      "healthLabel": "Bon",
       "scores": {
         "growth": 3.5,
-        "profitability": 3.5,
-        "cashflow": 5.0,
-        "balanceSheet": 1.9,
-        "valuation": 4.8
+        "profitability": 1.4,
+        "cashflow": 3.7,
+        "balanceSheet": 1.3,
+        "valuation": 4.4
       },
       "models": {
-        "dcf": null,
-        "multiples": 54.03,
-        "analysts": 35.81
+        "dcf": 31.85,
+        "multiples": 61.59,
+        "analysts": 38.03
       },
-      "pe": 10.3,
-      "evEbitda": 6.7,
+      "pe": 4.2,
+      "evEbitda": 9.7,
       "analystConsensus": "Achat",
       "valueTrap": true
     },
@@ -241,8 +625,8 @@
       "currency": "€",
       "sector": "Finance",
       "price": 47.54,
-      "fairValue": 80.86,
-      "upside": 70.1,
+      "fairValue": 79.62,
+      "upside": 67.5,
       "marketCapB": 2.99,
       "healthScore": 2.2,
       "healthLabel": "Passable",
@@ -255,7 +639,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 91.16,
+        "multiples": 88.68,
         "analysts": 70.57
       },
       "pe": 5.4,
@@ -264,62 +648,33 @@
       "valueTrap": true
     },
     {
-      "ticker": "MBG.DE",
-      "name": "Mercedes-Benz Group AG        N",
-      "market": "DE",
-      "currency": "€",
+      "ticker": "012330.KS",
+      "name": "Mobis",
+      "market": "KR",
+      "currency": "₩",
       "sector": "Conso. cyclique",
-      "price": 37.62,
-      "fairValue": 63.68,
-      "upside": 69.3,
-      "marketCapB": 35.71,
-      "healthScore": 2.43,
-      "healthLabel": "Passable",
-      "scores": {
-        "growth": 3.0,
-        "profitability": 1.7,
-        "cashflow": 1.1,
-        "balanceSheet": 1.7,
-        "valuation": 4.6
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 77.11,
-        "analysts": 50.25
-      },
-      "pe": 6.5,
-      "evEbitda": 8.7,
-      "analystConsensus": "Achat",
-      "valueTrap": true
-    },
-    {
-      "ticker": "SK.PA",
-      "name": "S.E.B.",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 51.6,
-      "fairValue": 85.09,
-      "upside": 64.9,
-      "marketCapB": 2.83,
-      "healthScore": 2.78,
+      "price": 323000.0,
+      "fairValue": 539509.72,
+      "upside": 67.0,
+      "marketCapB": 19.7,
+      "healthScore": 3.06,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 1.9,
-        "profitability": 1.5,
-        "cashflow": 3.8,
-        "balanceSheet": 2.0,
-        "valuation": 4.8
+        "growth": 1.8,
+        "profitability": 1.8,
+        "cashflow": 1.8,
+        "balanceSheet": 5.0,
+        "valuation": 4.9
       },
       "models": {
-        "dcf": 77.87,
-        "multiples": 105.35,
-        "analysts": 72.05
+        "dcf": 330649.37,
+        "multiples": 699279.8,
+        "analysts": 588600.0
       },
-      "pe": 7.0,
-      "evEbitda": 7.5,
-      "analystConsensus": "Achat",
-      "valueTrap": false
+      "pe": 6.7,
+      "evEbitda": 4.1,
+      "analystConsensus": "Achat fort",
+      "valueTrap": true
     },
     {
       "ticker": "DG.PA",
@@ -328,21 +683,21 @@
       "currency": "€",
       "sector": "Industrie",
       "price": 111.0,
-      "fairValue": 180.85,
-      "upside": 62.9,
+      "fairValue": 182.82,
+      "upside": 64.7,
       "marketCapB": 61.06,
-      "healthScore": 3.36,
+      "healthScore": 3.38,
       "healthLabel": "Bon",
       "scores": {
         "growth": 2.8,
         "profitability": 2.9,
         "cashflow": 4.3,
         "balanceSheet": 2.1,
-        "valuation": 4.7
+        "valuation": 4.8
       },
       "models": {
         "dcf": 208.19,
-        "multiples": 194.0,
+        "multiples": 199.91,
         "analysts": 140.35
       },
       "pe": 11.2,
@@ -351,31 +706,60 @@
       "valueTrap": false
     },
     {
-      "ticker": "DEC.PA",
-      "name": "JCDECAUX SE",
+      "ticker": "FR.PA",
+      "name": "VALEO",
       "market": "FR",
       "currency": "€",
-      "sector": "Télécoms & Médias",
-      "price": 27.1,
-      "fairValue": 43.99,
-      "upside": 62.3,
-      "marketCapB": 5.77,
-      "healthScore": 3.44,
+      "sector": "Conso. cyclique",
+      "price": 10.4,
+      "fairValue": 16.99,
+      "upside": 63.4,
+      "marketCapB": 2.51,
+      "healthScore": 2.83,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 3.8,
-        "profitability": 3.1,
-        "cashflow": 5.0,
-        "balanceSheet": 2.1,
-        "valuation": 3.3
+        "growth": 1.8,
+        "profitability": 1.5,
+        "cashflow": 3.5,
+        "balanceSheet": 2.3,
+        "valuation": 5.0
       },
       "models": {
-        "dcf": 76.06,
-        "multiples": 26.8,
-        "analysts": 29.1
+        "dcf": 17.59,
+        "multiples": 19.63,
+        "analysts": 13.74
       },
-      "pe": 16.6,
-      "evEbitda": 10.4,
+      "pe": 5.4,
+      "evEbitda": 3.3,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "EN.PA",
+      "name": "BOUYGUES",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 42.5,
+      "fairValue": 68.05,
+      "upside": 60.1,
+      "marketCapB": 16.38,
+      "healthScore": 2.76,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.6,
+        "profitability": 1.3,
+        "cashflow": 3.7,
+        "balanceSheet": 2.3,
+        "valuation": 4.8
+      },
+      "models": {
+        "dcf": 84.64,
+        "multiples": 60.72,
+        "analysts": 58.78
+      },
+      "pe": 11.0,
+      "evEbitda": 5.8,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -415,7 +799,7 @@
       "currency": "€",
       "sector": "Énergie",
       "price": 78.19,
-      "fairValue": 124.14,
+      "fairValue": 124.13,
       "upside": 58.8,
       "marketCapB": 171.28,
       "healthScore": 3.88,
@@ -429,11 +813,127 @@
       },
       "models": {
         "dcf": 127.23,
-        "multiples": 153.12,
+        "multiples": 153.09,
         "analysts": 92.08
       },
       "pe": 7.5,
       "evEbitda": 4.2,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "066570.KS",
+      "name": "LGELECTRONICS",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Technologie",
+      "price": 130600.0,
+      "fairValue": 207034.33,
+      "upside": 58.5,
+      "marketCapB": 16.02,
+      "healthScore": 3.45,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.2,
+        "profitability": 1.4,
+        "cashflow": 3.4,
+        "balanceSheet": 3.3,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 176068.65,
+        "multiples": null,
+        "analysts": 238000.0
+      },
+      "pe": 8.1,
+      "evEbitda": 4.4,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "032830.KS",
+      "name": "SAMSUNG LIFE",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Finance",
+      "price": 239000.0,
+      "fairValue": 377205.88,
+      "upside": 57.8,
+      "marketCapB": 29.35,
+      "healthScore": 3.12,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.1,
+        "profitability": 2.5,
+        "cashflow": 1.0,
+        "balanceSheet": 5.0,
+        "valuation": 4.1
+      },
+      "models": {
+        "dcf": null,
+        "multiples": null,
+        "analysts": 377205.88
+      },
+      "pe": 8.3,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "SAN.PA",
+      "name": "SANOFI",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Santé",
+      "price": 84.92,
+      "fairValue": 133.6,
+      "upside": 57.3,
+      "marketCapB": 101.96,
+      "healthScore": 3.94,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 3.9,
+        "profitability": 2.9,
+        "cashflow": 4.8,
+        "balanceSheet": 3.0,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 138.3,
+        "multiples": 166.14,
+        "analysts": 96.36
+      },
+      "pe": 8.9,
+      "evEbitda": 7.9,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "DEC.PA",
+      "name": "JCDECAUX SE",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Télécoms & Médias",
+      "price": 27.1,
+      "fairValue": 42.53,
+      "upside": 56.9,
+      "marketCapB": 5.77,
+      "healthScore": 3.33,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.8,
+        "profitability": 3.1,
+        "cashflow": 5.0,
+        "balanceSheet": 2.1,
+        "valuation": 2.7
+      },
+      "models": {
+        "dcf": 76.06,
+        "multiples": 22.44,
+        "analysts": 29.1
+      },
+      "pe": 16.6,
+      "evEbitda": 10.4,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -447,14 +947,14 @@
       "fairValue": 98.16,
       "upside": 56.8,
       "marketCapB": 31.39,
-      "healthScore": 2.32,
+      "healthScore": 2.33,
       "healthLabel": "Passable",
       "scores": {
         "growth": 1.0,
         "profitability": 1.1,
         "cashflow": 3.5,
         "balanceSheet": 1.4,
-        "valuation": 4.5
+        "valuation": 4.6
       },
       "models": {
         "dcf": null,
@@ -467,120 +967,120 @@
       "valueTrap": true
     },
     {
-      "ticker": "EN.PA",
-      "name": "BOUYGUES",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Industrie",
-      "price": 42.5,
-      "fairValue": 66.52,
-      "upside": 56.5,
-      "marketCapB": 16.38,
-      "healthScore": 2.74,
-      "healthLabel": "Bon",
+      "ticker": "015760.KS",
+      "name": "KEPCO",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Services publics",
+      "price": 25550.0,
+      "fairValue": 39681.82,
+      "upside": 55.3,
+      "marketCapB": 11.22,
+      "healthScore": 2.03,
+      "healthLabel": "Passable",
       "scores": {
-        "growth": 1.6,
-        "profitability": 1.3,
-        "cashflow": 3.7,
-        "balanceSheet": 2.3,
-        "valuation": 4.7
+        "growth": 1.2,
+        "profitability": 2.1,
+        "cashflow": 1.0,
+        "balanceSheet": 1.0,
+        "valuation": 4.8
       },
       "models": {
-        "dcf": 84.64,
-        "multiples": 56.13,
-        "analysts": 58.78
+        "dcf": null,
+        "multiples": null,
+        "analysts": 39681.82
       },
-      "pe": 11.0,
-      "evEbitda": 5.8,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "NFLX",
-      "name": "Netflix, Inc.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Télécoms & Médias",
-      "price": 56.73,
-      "fairValue": 88.4,
-      "upside": 55.8,
-      "marketCapB": 232.95,
-      "healthScore": 4.03,
-      "healthLabel": "Très bon",
-      "scores": {
-        "growth": 4.5,
-        "profitability": 5.0,
-        "cashflow": 5.0,
-        "balanceSheet": 3.1,
-        "valuation": 2.6
-      },
-      "models": {
-        "dcf": 132.64,
-        "multiples": 48.02,
-        "analysts": 84.55
-      },
-      "pe": 15.0,
-      "evEbitda": 15.2,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "RNO.PA",
-      "name": "RENAULT",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 26.13,
-      "fairValue": 40.54,
-      "upside": 55.1,
-      "marketCapB": 7.56,
-      "healthScore": 2.86,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 3.5,
-        "profitability": 1.4,
-        "cashflow": 3.7,
-        "balanceSheet": 1.3,
-        "valuation": 4.4
-      },
-      "models": {
-        "dcf": 31.85,
-        "multiples": 51.73,
-        "analysts": 38.03
-      },
-      "pe": 4.2,
-      "evEbitda": 9.7,
+      "pe": 3.2,
+      "evEbitda": 6.8,
       "analystConsensus": "Achat",
       "valueTrap": true
     },
     {
-      "ticker": "SAN.PA",
-      "name": "SANOFI",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Santé",
-      "price": 84.92,
-      "fairValue": 130.29,
-      "upside": 53.4,
-      "marketCapB": 101.96,
-      "healthScore": 3.93,
-      "healthLabel": "Très bon",
+      "ticker": "030200.KS",
+      "name": "KT",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Télécoms & Médias",
+      "price": 45500.0,
+      "fairValue": 70327.5,
+      "upside": 54.6,
+      "marketCapB": 7.37,
+      "healthScore": 2.44,
+      "healthLabel": "Passable",
       "scores": {
-        "growth": 3.9,
-        "profitability": 2.9,
-        "cashflow": 4.8,
-        "balanceSheet": 3.0,
+        "growth": 1.3,
+        "profitability": 1.7,
+        "cashflow": 1.2,
+        "balanceSheet": 2.9,
         "valuation": 5.0
       },
       "models": {
-        "dcf": 138.3,
-        "multiples": 156.21,
-        "analysts": 96.36
+        "dcf": null,
+        "multiples": null,
+        "analysts": 70327.5
       },
-      "pe": 8.9,
-      "evEbitda": 7.9,
+      "pe": 7.3,
+      "evEbitda": 3.6,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "SK.PA",
+      "name": "S.E.B.",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 51.6,
+      "fairValue": 79.67,
+      "upside": 54.4,
+      "marketCapB": 2.83,
+      "healthScore": 2.76,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.9,
+        "profitability": 1.5,
+        "cashflow": 3.8,
+        "balanceSheet": 2.0,
+        "valuation": 4.7
+      },
+      "models": {
+        "dcf": 77.87,
+        "multiples": 89.08,
+        "analysts": 72.05
+      },
+      "pe": 7.0,
+      "evEbitda": 7.5,
       "analystConsensus": "Achat",
       "valueTrap": false
+    },
+    {
+      "ticker": "MBG.DE",
+      "name": "Mercedes-Benz Group AG        N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 37.62,
+      "fairValue": 57.47,
+      "upside": 52.8,
+      "marketCapB": 35.71,
+      "healthScore": 2.43,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 3.0,
+        "profitability": 1.7,
+        "cashflow": 1.1,
+        "balanceSheet": 1.7,
+        "valuation": 4.6
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 64.69,
+        "analysts": 50.25
+      },
+      "pe": 6.5,
+      "evEbitda": 8.7,
+      "analystConsensus": "Achat",
+      "valueTrap": true
     },
     {
       "ticker": "WLN.PA",
@@ -612,33 +1112,91 @@
       "valueTrap": true
     },
     {
-      "ticker": "ACA.PA",
-      "name": "CREDIT AGRICOLE",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Finance",
-      "price": 15.3,
-      "fairValue": 23.11,
-      "upside": 51.0,
-      "marketCapB": 46.29,
-      "healthScore": 3.63,
+      "ticker": "NFLX",
+      "name": "Netflix, Inc.",
+      "market": "US",
+      "currency": "$",
+      "sector": "Télécoms & Médias",
+      "price": 56.73,
+      "fairValue": 86.51,
+      "upside": 52.5,
+      "marketCapB": 212.35,
+      "healthScore": 3.92,
       "healthLabel": "Très bon",
       "scores": {
-        "growth": 3.0,
-        "profitability": 4.2,
-        "cashflow": 3.0,
-        "balanceSheet": 3.0,
-        "valuation": 5.0
+        "growth": 4.5,
+        "profitability": 5.0,
+        "cashflow": 5.0,
+        "balanceSheet": 3.1,
+        "valuation": 2.0
+      },
+      "models": {
+        "dcf": 132.64,
+        "multiples": 42.34,
+        "analysts": 84.55
+      },
+      "pe": 15.0,
+      "evEbitda": 15.2,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "DTE.DE",
+      "name": "DEUTSCHE TELEKOM AG           N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Télécoms & Médias",
+      "price": 26.34,
+      "fairValue": 40.12,
+      "upside": 52.3,
+      "marketCapB": 125.97,
+      "healthScore": 3.67,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 3.5,
+        "profitability": 3.5,
+        "cashflow": 5.0,
+        "balanceSheet": 1.9,
+        "valuation": 4.4
       },
       "models": {
         "dcf": null,
-        "multiples": 25.4,
-        "analysts": 20.82
+        "multiples": 44.42,
+        "analysts": 35.81
       },
-      "pe": 6.2,
-      "evEbitda": null,
+      "pe": 10.3,
+      "evEbitda": 6.7,
       "analystConsensus": "Achat",
-      "valueTrap": false
+      "valueTrap": true
+    },
+    {
+      "ticker": "CA.PA",
+      "name": "CARREFOUR",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. défensive",
+      "price": 13.5,
+      "fairValue": 20.55,
+      "upside": 52.2,
+      "marketCapB": 9.55,
+      "healthScore": 2.63,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.2,
+        "profitability": 1.4,
+        "cashflow": 3.4,
+        "balanceSheet": 1.1,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 10.38,
+        "multiples": 35.82,
+        "analysts": 15.44
+      },
+      "pe": 7.5,
+      "evEbitda": 7.5,
+      "analystConsensus": "Conserver",
+      "valueTrap": true
     },
     {
       "ticker": "STMPA.PA",
@@ -647,8 +1205,8 @@
       "currency": "€",
       "sector": "Technologie",
       "price": 36.72,
-      "fairValue": 55.36,
-      "upside": 50.8,
+      "fairValue": 55.47,
+      "upside": 51.1,
       "marketCapB": 32.79,
       "healthScore": 3.33,
       "healthLabel": "Bon",
@@ -661,7 +1219,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 45.99,
+        "multiples": 46.21,
         "analysts": 64.73
       },
       "pe": 15.0,
@@ -670,61 +1228,90 @@
       "valueTrap": true
     },
     {
-      "ticker": "BMW.DE",
-      "name": "BAYERISCHE MOTOREN WERKE AG   S",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 53.46,
-      "fairValue": 80.63,
-      "upside": 50.8,
-      "marketCapB": 31.6,
-      "healthScore": 2.09,
-      "healthLabel": "Passable",
+      "ticker": "055550.KS",
+      "name": "ShinhanGroup",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Finance",
+      "price": 86200.0,
+      "fairValue": 130122.73,
+      "upside": 51.0,
+      "marketCapB": 27.29,
+      "healthScore": 3.59,
+      "healthLabel": "Très bon",
       "scores": {
-        "growth": 1.0,
-        "profitability": 1.7,
-        "cashflow": 2.1,
-        "balanceSheet": 1.4,
-        "valuation": 4.3
+        "growth": 3.0,
+        "profitability": 4.1,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 4.8
       },
       "models": {
         "dcf": null,
-        "multiples": 94.32,
-        "analysts": 66.93
+        "multiples": null,
+        "analysts": 130122.73
       },
-      "pe": 6.7,
-      "evEbitda": 10.2,
-      "analystConsensus": "Conserver",
+      "pe": 6.5,
+      "evEbitda": null,
+      "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "005380.KS",
+      "name": "HyundaiMtr",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Conso. cyclique",
+      "price": 255000.0,
+      "fairValue": 383407.95,
+      "upside": 50.4,
+      "marketCapB": 45.88,
+      "healthScore": 1.87,
+      "healthLabel": "Faible",
+      "scores": {
+        "growth": 1.1,
+        "profitability": 1.6,
+        "cashflow": 1.0,
+        "balanceSheet": 1.8,
+        "valuation": 3.8
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 251069.81,
+        "analysts": 515746.1
+      },
+      "pe": 6.2,
+      "evEbitda": 13.1,
+      "analystConsensus": "Achat",
       "valueTrap": true
     },
     {
-      "ticker": "FR.PA",
-      "name": "VALEO",
+      "ticker": "ACA.PA",
+      "name": "CREDIT AGRICOLE",
       "market": "FR",
       "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 10.4,
-      "fairValue": 15.67,
-      "upside": 50.7,
-      "marketCapB": 2.51,
-      "healthScore": 2.83,
-      "healthLabel": "Bon",
+      "sector": "Finance",
+      "price": 15.3,
+      "fairValue": 22.78,
+      "upside": 48.8,
+      "marketCapB": 46.29,
+      "healthScore": 3.62,
+      "healthLabel": "Très bon",
       "scores": {
-        "growth": 1.8,
-        "profitability": 1.5,
-        "cashflow": 3.5,
-        "balanceSheet": 2.3,
-        "valuation": 5.0
+        "growth": 3.0,
+        "profitability": 4.2,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 4.9
       },
       "models": {
-        "dcf": 17.59,
-        "multiples": null,
-        "analysts": 13.74
+        "dcf": null,
+        "multiples": 24.74,
+        "analysts": 20.82
       },
-      "pe": 5.4,
-      "evEbitda": 3.3,
-      "analystConsensus": "Conserver",
+      "pe": 6.2,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -734,10 +1321,10 @@
       "currency": "€",
       "sector": "Finance",
       "price": 61.74,
-      "fairValue": 92.31,
-      "upside": 49.5,
+      "fairValue": 91.0,
+      "upside": 47.4,
       "marketCapB": 44.25,
-      "healthScore": 3.82,
+      "healthScore": 3.81,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 4.1,
@@ -748,7 +1335,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 96.46,
+        "multiples": 93.84,
         "analysts": 88.15
       },
       "pe": 6.6,
@@ -763,83 +1350,25 @@
       "currency": "€",
       "sector": "Finance",
       "price": 24.33,
-      "fairValue": 36.09,
-      "upside": 48.3,
+      "fairValue": 35.86,
+      "upside": 47.4,
       "marketCapB": 5.55,
-      "healthScore": 3.52,
+      "healthScore": 3.5,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 1.8,
         "profitability": 5.0,
         "cashflow": 5.0,
         "balanceSheet": 2.3,
-        "valuation": 3.5
+        "valuation": 3.4
       },
       "models": {
         "dcf": 52.06,
-        "multiples": 24.96,
+        "multiples": 24.29,
         "analysts": 31.24
       },
       "pe": 10.1,
       "evEbitda": 7.0,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "ORA.PA",
-      "name": "ORANGE",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Télécoms & Médias",
-      "price": 15.12,
-      "fairValue": 22.01,
-      "upside": 45.6,
-      "marketCapB": 40.08,
-      "healthScore": 3.28,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.8,
-        "profitability": 3.2,
-        "cashflow": 4.7,
-        "balanceSheet": 1.4,
-        "valuation": 4.2
-      },
-      "models": {
-        "dcf": 23.02,
-        "multiples": 24.25,
-        "analysts": 18.77
-      },
-      "pe": 13.6,
-      "evEbitda": 7.3,
-      "analystConsensus": "Achat",
-      "valueTrap": true
-    },
-    {
-      "ticker": "NVDA",
-      "name": "NVIDIA Corporation",
-      "market": "US",
-      "currency": "$",
-      "sector": "Technologie",
-      "price": 125.53,
-      "fairValue": 180.75,
-      "upside": 44.0,
-      "marketCapB": 3031.17,
-      "healthScore": 4.59,
-      "healthLabel": "Excellent",
-      "scores": {
-        "growth": 5.0,
-        "profitability": 5.0,
-        "cashflow": 3.3,
-        "balanceSheet": 5.0,
-        "valuation": 4.6
-      },
-      "models": {
-        "dcf": 91.84,
-        "multiples": 206.23,
-        "analysts": 244.18
-      },
-      "pe": 7.6,
-      "evEbitda": 12.2,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -850,55 +1379,26 @@
       "currency": "€",
       "sector": "Santé",
       "price": 161.6,
-      "fairValue": 231.9,
-      "upside": 43.5,
+      "fairValue": 236.84,
+      "upside": 46.6,
       "marketCapB": 13.32,
-      "healthScore": 4.62,
+      "healthScore": 4.64,
       "healthLabel": "Excellent",
       "scores": {
         "growth": 4.8,
         "profitability": 3.8,
         "cashflow": 5.0,
         "balanceSheet": 4.7,
-        "valuation": 4.8
+        "valuation": 4.9
       },
       "models": {
         "dcf": 284.89,
-        "multiples": 248.57,
+        "multiples": 263.39,
         "analysts": 162.23
       },
       "pe": 11.2,
       "evEbitda": 8.2,
       "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "ZAL.DE",
-      "name": "Zalando SE                    I",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 28.24,
-      "fairValue": 40.4,
-      "upside": 43.1,
-      "marketCapB": 6.9,
-      "healthScore": 2.87,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.8,
-        "profitability": 1.0,
-        "cashflow": 3.8,
-        "balanceSheet": 3.2,
-        "valuation": 3.6
-      },
-      "models": {
-        "dcf": 55.69,
-        "multiples": 30.16,
-        "analysts": 35.35
-      },
-      "pe": 14.6,
-      "evEbitda": 10.3,
-      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -908,26 +1408,84 @@
       "currency": "$",
       "sector": "Santé",
       "price": 339.85,
-      "fairValue": 485.54,
-      "upside": 42.9,
-      "marketCapB": 304.51,
-      "healthScore": 3.1,
+      "fairValue": 493.76,
+      "upside": 45.3,
+      "marketCapB": 277.59,
+      "healthScore": 3.14,
       "healthLabel": "Bon",
       "scores": {
         "growth": 3.4,
         "profitability": 2.2,
         "cashflow": 3.8,
         "balanceSheet": 2.3,
-        "valuation": 3.8
+        "valuation": 4.0
       },
       "models": {
         "dcf": 592.06,
-        "multiples": 386.09,
+        "multiples": 410.73,
         "analysts": 478.48
       },
       "pe": 14.5,
       "evEbitda": 12.4,
       "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "market": "US",
+      "currency": "$",
+      "sector": "Technologie",
+      "price": 125.53,
+      "fairValue": 180.96,
+      "upside": 44.2,
+      "marketCapB": 2763.15,
+      "healthScore": 4.59,
+      "healthLabel": "Excellent",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 3.3,
+        "balanceSheet": 5.0,
+        "valuation": 4.7
+      },
+      "models": {
+        "dcf": 91.84,
+        "multiples": 206.87,
+        "analysts": 244.18
+      },
+      "pe": 7.6,
+      "evEbitda": 12.2,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "BAYN.DE",
+      "name": "Bayer AG                      N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Santé",
+      "price": 53.36,
+      "fairValue": 76.68,
+      "upside": 43.7,
+      "marketCapB": 52.42,
+      "healthScore": 3.19,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.6,
+        "profitability": 1.8,
+        "cashflow": 4.0,
+        "balanceSheet": 2.6,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": 61.83,
+        "multiples": 107.13,
+        "analysts": 61.08
+      },
+      "pe": 11.0,
+      "evEbitda": 7.5,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -937,56 +1495,27 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 302.63,
-      "fairValue": 432.13,
-      "upside": 42.8,
-      "marketCapB": 240.17,
-      "healthScore": 4.03,
+      "fairValue": 432.61,
+      "upside": 43.0,
+      "marketCapB": 218.93,
+      "healthScore": 4.04,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 5.0,
         "profitability": 5.0,
         "cashflow": 1.9,
         "balanceSheet": 5.0,
-        "valuation": 3.2
+        "valuation": 3.3
       },
       "models": {
         "dcf": null,
-        "multiples": 306.39,
+        "multiples": 307.35,
         "analysts": 557.86
       },
       "pe": 12.3,
       "evEbitda": 19.9,
       "analystConsensus": "Achat fort",
       "valueTrap": true
-    },
-    {
-      "ticker": "BNP.PA",
-      "name": "BNP PARIBAS ACT.A",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Finance",
-      "price": 89.55,
-      "fairValue": 127.72,
-      "upside": 42.6,
-      "marketCapB": 98.15,
-      "healthScore": 3.66,
-      "healthLabel": "Très bon",
-      "scores": {
-        "growth": 3.3,
-        "profitability": 4.3,
-        "cashflow": 3.0,
-        "balanceSheet": 3.0,
-        "valuation": 4.7
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 134.37,
-        "analysts": 121.08
-      },
-      "pe": 6.9,
-      "evEbitda": null,
-      "analystConsensus": "Achat",
-      "valueTrap": false
     },
     {
       "ticker": "COV.PA",
@@ -1018,32 +1547,148 @@
       "valueTrap": true
     },
     {
-      "ticker": "BAYN.DE",
-      "name": "Bayer AG                      N",
+      "ticker": "CON.DE",
+      "name": "CONTINENTAL AG                I",
       "market": "DE",
       "currency": "€",
-      "sector": "Santé",
-      "price": 53.36,
-      "fairValue": 74.63,
-      "upside": 39.9,
-      "marketCapB": 52.42,
-      "healthScore": 3.18,
+      "sector": "Conso. cyclique",
+      "price": 69.54,
+      "fairValue": 97.91,
+      "upside": 40.8,
+      "marketCapB": 13.91,
+      "healthScore": 2.52,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 2.6,
-        "profitability": 1.8,
-        "cashflow": 4.0,
-        "balanceSheet": 2.6,
-        "valuation": 5.0
+        "growth": 1.0,
+        "profitability": 3.0,
+        "cashflow": 1.1,
+        "balanceSheet": 3.4,
+        "valuation": 4.2
       },
       "models": {
-        "dcf": 61.83,
-        "multiples": 100.99,
-        "analysts": 61.08
+        "dcf": null,
+        "multiples": 115.16,
+        "analysts": 80.67
       },
-      "pe": 11.0,
-      "evEbitda": 7.5,
+      "pe": 10.3,
+      "evEbitda": 5.8,
       "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "105560.KS",
+      "name": "KBFinancialGroup",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Finance",
+      "price": 152400.0,
+      "fairValue": 214500.0,
+      "upside": 40.7,
+      "marketCapB": 36.18,
+      "healthScore": 3.46,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.7,
+        "profitability": 4.2,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 4.4
+      },
+      "models": {
+        "dcf": null,
+        "multiples": null,
+        "analysts": 214500.0
+      },
+      "pe": 7.6,
+      "evEbitda": null,
+      "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "BNP.PA",
+      "name": "BNP PARIBAS ACT.A",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Finance",
+      "price": 89.55,
+      "fairValue": 125.9,
+      "upside": 40.6,
+      "marketCapB": 98.15,
+      "healthScore": 3.65,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 3.3,
+        "profitability": 4.3,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 4.7
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 130.72,
+        "analysts": 121.08
+      },
+      "pe": 6.9,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "NEX.PA",
+      "name": "NEXANS",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 120.0,
+      "fairValue": 168.44,
+      "upside": 40.4,
+      "marketCapB": 5.23,
+      "healthScore": 2.61,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.0,
+        "profitability": 1.7,
+        "cashflow": 1.2,
+        "balanceSheet": 2.7,
+        "valuation": 4.4
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 168.82,
+        "analysts": 168.07
+      },
+      "pe": 12.8,
+      "evEbitda": 8.5,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "6758.T",
+      "name": "SONY GROUP CORPORATION",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Technologie",
+      "price": 4312.0,
+      "fairValue": 6039.39,
+      "upside": 40.1,
+      "marketCapB": 143.47,
+      "healthScore": 3.68,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 4.3,
+        "profitability": 2.6,
+        "cashflow": 5.0,
+        "balanceSheet": 3.6,
+        "valuation": 2.9
+      },
+      "models": {
+        "dcf": 8578.26,
+        "multiples": 4497.74,
+        "analysts": 5042.17
+      },
+      "pe": 23.5,
+      "evEbitda": 11.2,
+      "analystConsensus": "Achat fort",
       "valueTrap": false
     },
     {
@@ -1053,8 +1698,8 @@
       "currency": "€",
       "sector": "Technologie",
       "price": 117.7,
-      "fairValue": 164.06,
-      "upside": 39.4,
+      "fairValue": 164.46,
+      "upside": 39.7,
       "marketCapB": 19.22,
       "healthScore": 3.25,
       "healthLabel": "Bon",
@@ -1067,7 +1712,7 @@
       },
       "models": {
         "dcf": 111.43,
-        "multiples": 229.83,
+        "multiples": 231.03,
         "analysts": 150.91
       },
       "pe": 8.4,
@@ -1076,32 +1721,61 @@
       "valueTrap": false
     },
     {
-      "ticker": "NEX.PA",
-      "name": "NEXANS",
-      "market": "FR",
+      "ticker": "ZAL.DE",
+      "name": "Zalando SE                    I",
+      "market": "DE",
       "currency": "€",
-      "sector": "Industrie",
-      "price": 120.0,
-      "fairValue": 165.65,
-      "upside": 38.0,
-      "marketCapB": 5.23,
-      "healthScore": 2.58,
+      "sector": "Conso. cyclique",
+      "price": 28.24,
+      "fairValue": 38.94,
+      "upside": 37.9,
+      "marketCapB": 6.9,
+      "healthScore": 2.7,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 3.0,
-        "profitability": 1.7,
-        "cashflow": 1.2,
-        "balanceSheet": 2.7,
-        "valuation": 4.3
+        "growth": 2.8,
+        "profitability": 1.0,
+        "cashflow": 3.8,
+        "balanceSheet": 3.2,
+        "valuation": 2.7
       },
       "models": {
-        "dcf": null,
-        "multiples": 163.23,
-        "analysts": 168.07
+        "dcf": 55.69,
+        "multiples": 25.77,
+        "analysts": 35.35
       },
-      "pe": 12.8,
-      "evEbitda": 8.5,
+      "pe": 14.6,
+      "evEbitda": 10.3,
       "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "028260.KS",
+      "name": "SAMSUNG C&T",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Industrie",
+      "price": 258000.0,
+      "fairValue": 354264.98,
+      "upside": 37.3,
+      "marketCapB": 28.87,
+      "healthScore": 3.13,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.5,
+        "profitability": 1.9,
+        "cashflow": 1.9,
+        "balanceSheet": 4.0,
+        "valuation": 4.4
+      },
+      "models": {
+        "dcf": 169716.45,
+        "multiples": 393078.48,
+        "analysts": 500000.0
+      },
+      "pe": 11.3,
+      "evEbitda": 9.8,
+      "analystConsensus": "Achat fort",
       "valueTrap": true
     },
     {
@@ -1111,21 +1785,21 @@
       "currency": "€",
       "sector": "Industrie",
       "price": 118.32,
-      "fairValue": 160.33,
-      "upside": 35.5,
+      "fairValue": 162.09,
+      "upside": 37.0,
       "marketCapB": 100.67,
-      "healthScore": 3.89,
+      "healthScore": 3.92,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 5.0,
         "profitability": 3.4,
         "cashflow": 4.6,
         "balanceSheet": 3.1,
-        "valuation": 3.3
+        "valuation": 3.4
       },
       "models": {
         "dcf": 172.57,
-        "multiples": 116.9,
+        "multiples": 122.17,
         "analysts": 191.53
       },
       "pe": 13.3,
@@ -1134,27 +1808,85 @@
       "valueTrap": false
     },
     {
+      "ticker": "ORA.PA",
+      "name": "ORANGE",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Télécoms & Médias",
+      "price": 15.12,
+      "fairValue": 20.46,
+      "upside": 35.4,
+      "marketCapB": 40.08,
+      "healthScore": 3.19,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.8,
+        "profitability": 3.2,
+        "cashflow": 4.7,
+        "balanceSheet": 1.4,
+        "valuation": 3.8
+      },
+      "models": {
+        "dcf": 23.02,
+        "multiples": 19.6,
+        "analysts": 18.77
+      },
+      "pe": 13.6,
+      "evEbitda": 7.3,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "BMW.DE",
+      "name": "BAYERISCHE MOTOREN WERKE AG   S",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 53.46,
+      "fairValue": 72.4,
+      "upside": 35.4,
+      "marketCapB": 31.6,
+      "healthScore": 2.09,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 1.0,
+        "profitability": 1.7,
+        "cashflow": 2.1,
+        "balanceSheet": 1.4,
+        "valuation": 4.2
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 77.86,
+        "analysts": 66.93
+      },
+      "pe": 6.7,
+      "evEbitda": 10.2,
+      "analystConsensus": "Conserver",
+      "valueTrap": true
+    },
+    {
       "ticker": "HNR1.DE",
       "name": "HANNOVER RUECK SE NA O.N.",
       "market": "DE",
       "currency": "€",
       "sector": "Finance",
       "price": 293.8,
-      "fairValue": 394.25,
-      "upside": 34.2,
+      "fairValue": 391.99,
+      "upside": 33.4,
       "marketCapB": 35.43,
-      "healthScore": 3.42,
+      "healthScore": 3.4,
       "healthLabel": "Bon",
       "scores": {
         "growth": 2.6,
         "profitability": 3.8,
         "cashflow": 5.0,
         "balanceSheet": 3.0,
-        "valuation": 2.7
+        "valuation": 2.6
       },
       "models": {
         "dcf": 646.62,
-        "multiples": 249.32,
+        "multiples": 242.54,
         "analysts": 286.8
       },
       "pe": 12.2,
@@ -1163,62 +1895,62 @@
       "valueTrap": false
     },
     {
-      "ticker": "DBK.DE",
-      "name": "DEUTSCHE BANK AG              N",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Finance",
-      "price": 29.13,
-      "fairValue": 38.32,
-      "upside": 31.5,
-      "marketCapB": 54.01,
-      "healthScore": 3.45,
-      "healthLabel": "Bon",
+      "ticker": "8035.T",
+      "name": "TOKYO ELECTRON",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Technologie",
+      "price": 8309.0,
+      "fairValue": 11049.01,
+      "upside": 33.0,
+      "marketCapB": 107.37,
+      "healthScore": 4.5,
+      "healthLabel": "Excellent",
       "scores": {
-        "growth": 2.6,
-        "profitability": 4.1,
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 3.8,
+        "balanceSheet": 5.0,
+        "valuation": 3.7
+      },
+      "models": {
+        "dcf": 5065.53,
+        "multiples": 13064.11,
+        "analysts": 15017.39
+      },
+      "pe": 6.5,
+      "evEbitda": 19.8,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "086790.KS",
+      "name": "HANAFINANCIALGR",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Finance",
+      "price": 123900.0,
+      "fairValue": 163804.34,
+      "upside": 32.2,
+      "marketCapB": 22.63,
+      "healthScore": 3.79,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 3.3,
+        "profitability": 5.0,
         "cashflow": 3.0,
         "balanceSheet": 3.0,
         "valuation": 4.6
       },
       "models": {
         "dcf": null,
-        "multiples": 41.11,
-        "analysts": 35.53
+        "multiples": null,
+        "analysts": 163804.34
       },
-      "pe": 7.3,
+      "pe": 7.0,
       "evEbitda": null,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "GOOGL",
-      "name": "Alphabet Inc.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Télécoms & Médias",
-      "price": 265.29,
-      "fairValue": 345.36,
-      "upside": 30.2,
-      "marketCapB": 3261.48,
-      "healthScore": 3.22,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 3.0,
-        "profitability": 5.0,
-        "cashflow": 1.2,
-        "balanceSheet": 5.0,
-        "valuation": 1.9
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 293.59,
-        "analysts": 397.13
-      },
-      "pe": 17.3,
-      "evEbitda": 17.1,
       "analystConsensus": "Achat fort",
-      "valueTrap": true
+      "valueTrap": false
     },
     {
       "ticker": "SGO.PA",
@@ -1227,21 +1959,21 @@
       "currency": "€",
       "sector": "Industrie",
       "price": 71.22,
-      "fairValue": 92.55,
-      "upside": 29.9,
+      "fairValue": 93.86,
+      "upside": 31.8,
       "marketCapB": 34.7,
-      "healthScore": 3.02,
+      "healthScore": 3.05,
       "healthLabel": "Bon",
       "scores": {
         "growth": 1.3,
         "profitability": 2.4,
         "cashflow": 3.8,
         "balanceSheet": 2.9,
-        "valuation": 4.7
+        "valuation": 4.8
       },
       "models": {
         "dcf": 63.73,
-        "multiples": 120.53,
+        "multiples": 124.45,
         "analysts": 93.4
       },
       "pe": 10.8,
@@ -1256,21 +1988,21 @@
       "currency": "€",
       "sector": "Industrie",
       "price": 44.0,
-      "fairValue": 56.99,
-      "upside": 29.5,
+      "fairValue": 57.67,
+      "upside": 31.1,
       "marketCapB": 7.61,
-      "healthScore": 2.75,
+      "healthScore": 2.77,
       "healthLabel": "Bon",
       "scores": {
         "growth": 2.5,
         "profitability": 2.2,
         "cashflow": 4.1,
         "balanceSheet": 1.3,
-        "valuation": 3.6
+        "valuation": 3.8
       },
       "models": {
         "dcf": 67.75,
-        "multiples": 46.65,
+        "multiples": 48.71,
         "analysts": 56.56
       },
       "pe": 12.7,
@@ -1285,9 +2017,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 51.28,
-      "fairValue": 66.39,
-      "upside": 29.5,
-      "marketCapB": 272.55,
+      "fairValue": 66.51,
+      "upside": 29.7,
+      "marketCapB": 248.45,
       "healthScore": 2.68,
       "healthLabel": "Bon",
       "scores": {
@@ -1299,7 +2031,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 42.13,
+        "multiples": 42.36,
         "analysts": 90.65
       },
       "pe": 28.6,
@@ -1308,13 +2040,100 @@
       "valueTrap": true
     },
     {
+      "ticker": "9433.T",
+      "name": "KDDI CORPORATION",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Télécoms & Médias",
+      "price": 2853.0,
+      "fairValue": 3700.43,
+      "upside": 29.7,
+      "marketCapB": 60.03,
+      "healthScore": 2.95,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.0,
+        "profitability": 3.5,
+        "cashflow": 5.0,
+        "balanceSheet": 2.0,
+        "valuation": 2.3
+      },
+      "models": {
+        "dcf": 4858.45,
+        "multiples": 3153.43,
+        "analysts": 3089.4
+      },
+      "pe": 1224.5,
+      "evEbitda": 8.6,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "DBK.DE",
+      "name": "DEUTSCHE BANK AG              N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Finance",
+      "price": 29.13,
+      "fairValue": 37.76,
+      "upside": 29.6,
+      "marketCapB": 54.01,
+      "healthScore": 3.44,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.6,
+        "profitability": 4.1,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 4.5
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 39.99,
+        "analysts": 35.53
+      },
+      "pe": 7.3,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "PFE",
+      "name": "Pfizer, Inc.",
+      "market": "US",
+      "currency": "$",
+      "sector": "Santé",
+      "price": 27.4,
+      "fairValue": 35.19,
+      "upside": 28.4,
+      "marketCapB": 142.37,
+      "healthScore": 3.45,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.4,
+        "profitability": 2.9,
+        "cashflow": 5.0,
+        "balanceSheet": 3.0,
+        "valuation": 4.9
+      },
+      "models": {
+        "dcf": 22.7,
+        "multiples": 52.66,
+        "analysts": 30.22
+      },
+      "pe": 9.3,
+      "evEbitda": 8.2,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
       "ticker": "SOI.PA",
       "name": "SOITEC",
       "market": "FR",
       "currency": "€",
       "sector": "Technologie",
       "price": 96.3,
-      "fairValue": 120.24,
+      "fairValue": 120.31,
       "upside": 24.9,
       "marketCapB": 3.45,
       "healthScore": 3.43,
@@ -1328,7 +2147,7 @@
       },
       "models": {
         "dcf": 132.74,
-        "multiples": 56.73,
+        "multiples": 56.92,
         "analysts": 171.26
       },
       "pe": 23.2,
@@ -1337,60 +2156,118 @@
       "valueTrap": false
     },
     {
-      "ticker": "HEN3.DE",
-      "name": "Henkel AG & Co. KGaA          I",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Conso. défensive",
-      "price": 85.72,
-      "fairValue": 106.95,
-      "upside": 24.8,
-      "marketCapB": 34.7,
-      "healthScore": 2.96,
-      "healthLabel": "Bon",
+      "ticker": "4568.T",
+      "name": "DAIICHI SANKYO COMPANY LIMITED",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Santé",
+      "price": 2707.0,
+      "fairValue": 3369.71,
+      "upside": 24.5,
+      "marketCapB": 28.16,
+      "healthScore": 3.6,
+      "healthLabel": "Très bon",
       "scores": {
-        "growth": 1.5,
-        "profitability": 2.8,
-        "cashflow": 2.8,
-        "balanceSheet": 3.2,
-        "valuation": 4.4
+        "growth": 5.0,
+        "profitability": 3.5,
+        "cashflow": 1.0,
+        "balanceSheet": 5.0,
+        "valuation": 3.5
       },
       "models": {
-        "dcf": 111.5,
-        "multiples": 126.93,
-        "analysts": 82.42
+        "dcf": null,
+        "multiples": 2774.42,
+        "analysts": 3965.0
       },
-      "pe": 14.4,
-      "evEbitda": 11.4,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
+      "pe": 18.9,
+      "evEbitda": 12.7,
+      "analystConsensus": "Achat",
+      "valueTrap": true
     },
     {
-      "ticker": "PFE",
-      "name": "Pfizer, Inc.",
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
       "market": "US",
       "currency": "$",
-      "sector": "Santé",
-      "price": 27.4,
-      "fairValue": 34.14,
-      "upside": 24.6,
-      "marketCapB": 156.18,
-      "healthScore": 3.44,
+      "sector": "Télécoms & Médias",
+      "price": 265.29,
+      "fairValue": 326.9,
+      "upside": 23.2,
+      "marketCapB": 2973.09,
+      "healthScore": 3.17,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 1.4,
-        "profitability": 2.9,
-        "cashflow": 5.0,
-        "balanceSheet": 3.0,
-        "valuation": 4.9
+        "growth": 3.0,
+        "profitability": 5.0,
+        "cashflow": 1.2,
+        "balanceSheet": 5.0,
+        "valuation": 1.7
       },
       "models": {
-        "dcf": 22.7,
-        "multiples": 49.49,
-        "analysts": 30.22
+        "dcf": null,
+        "multiples": 256.68,
+        "analysts": 397.13
       },
-      "pe": 9.3,
-      "evEbitda": 8.2,
+      "pe": 17.3,
+      "evEbitda": 17.1,
+      "analystConsensus": "Achat fort",
+      "valueTrap": true
+    },
+    {
+      "ticker": "CAT",
+      "name": "Caterpillar, Inc.",
+      "market": "US",
+      "currency": "$",
+      "sector": "Industrie",
+      "price": 510.45,
+      "fairValue": 625.17,
+      "upside": 22.5,
+      "marketCapB": 212.93,
+      "healthScore": 3.37,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.9,
+        "profitability": 4.4,
+        "cashflow": 1.8,
+        "balanceSheet": 2.9,
+        "valuation": 2.8
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 443.08,
+        "analysts": 807.26
+      },
+      "pe": 15.9,
+      "evEbitda": 16.0,
+      "analystConsensus": "Achat",
+      "valueTrap": true
+    },
+    {
+      "ticker": "8316.T",
+      "name": "SUMITOMO MITSUI FINANCIAL GROUP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Finance",
+      "price": 2936.0,
+      "fairValue": 3586.35,
+      "upside": 22.2,
+      "marketCapB": 127.08,
+      "healthScore": 3.2,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.2,
+        "profitability": 4.1,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 3.7
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 3206.7,
+        "analysts": 3966.0
+      },
+      "pe": 9.2,
+      "evEbitda": null,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -1401,21 +2278,21 @@
       "currency": "$",
       "sector": "Finance",
       "price": 47.04,
-      "fairValue": 58.1,
-      "upside": 23.5,
-      "marketCapB": 324.59,
-      "healthScore": 3.18,
+      "fairValue": 57.37,
+      "upside": 22.0,
+      "marketCapB": 295.89,
+      "healthScore": 3.16,
       "healthLabel": "Bon",
       "scores": {
         "growth": 1.7,
         "profitability": 4.2,
         "cashflow": 3.0,
         "balanceSheet": 3.0,
-        "valuation": 3.9
+        "valuation": 3.8
       },
       "models": {
         "dcf": null,
-        "multiples": 53.73,
+        "multiples": 52.27,
         "analysts": 62.48
       },
       "pe": 9.1,
@@ -1424,90 +2301,61 @@
       "valueTrap": false
     },
     {
-      "ticker": "SCR.PA",
-      "name": "SCOR SE",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Finance",
-      "price": 35.04,
-      "fairValue": 42.28,
-      "upside": 20.7,
-      "marketCapB": 6.26,
-      "healthScore": 2.87,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 1.6,
-        "profitability": 2.3,
-        "cashflow": 1.0,
-        "balanceSheet": 5.0,
-        "valuation": 4.5
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 47.59,
-        "analysts": 36.98
-      },
-      "pe": 7.6,
-      "evEbitda": 5.9,
-      "analystConsensus": "Achat",
-      "valueTrap": true
-    },
-    {
-      "ticker": "CAT",
-      "name": "Caterpillar, Inc.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Industrie",
-      "price": 510.45,
-      "fairValue": 615.59,
-      "upside": 20.6,
-      "marketCapB": 233.58,
-      "healthScore": 3.33,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 4.9,
-        "profitability": 4.4,
-        "cashflow": 1.8,
-        "balanceSheet": 2.9,
-        "valuation": 2.7
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 423.92,
-        "analysts": 807.26
-      },
-      "pe": 15.9,
-      "evEbitda": 16.0,
-      "analystConsensus": "Achat",
-      "valueTrap": true
-    },
-    {
       "ticker": "AM.PA",
       "name": "DASSAULT AVIATION",
       "market": "FR",
       "currency": "€",
       "sector": "Industrie",
       "price": 295.2,
-      "fairValue": 355.53,
-      "upside": 20.4,
+      "fairValue": 359.26,
+      "upside": 21.7,
       "marketCapB": 22.51,
-      "healthScore": 3.51,
+      "healthScore": 3.54,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 4.1,
         "profitability": 3.0,
         "cashflow": 4.0,
         "balanceSheet": 3.4,
-        "valuation": 3.1
+        "valuation": 3.2
       },
       "models": {
         "dcf": 426.93,
-        "multiples": 279.02,
+        "multiples": 290.21,
         "analysts": 360.65
       },
       "pe": 15.7,
       "evEbitda": 13.6,
       "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "HEN3.DE",
+      "name": "Henkel AG & Co. KGaA          I",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Conso. défensive",
+      "price": 85.72,
+      "fairValue": 104.01,
+      "upside": 21.3,
+      "marketCapB": 34.7,
+      "healthScore": 2.88,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.5,
+        "profitability": 2.8,
+        "cashflow": 2.8,
+        "balanceSheet": 3.2,
+        "valuation": 4.1
+      },
+      "models": {
+        "dcf": 111.5,
+        "multiples": 118.12,
+        "analysts": 82.42
+      },
+      "pe": 14.4,
+      "evEbitda": 11.4,
+      "analystConsensus": "Conserver",
       "valueTrap": false
     },
     {
@@ -1531,11 +2379,40 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 64.03,
+        "multiples": 64.04,
         "analysts": 83.85
       },
       "pe": 9.3,
       "evEbitda": 18.3,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "FRE.DE",
+      "name": "Fresenius SE & Co. KGaA       N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Santé",
+      "price": 51.38,
+      "fairValue": 61.35,
+      "upside": 19.4,
+      "marketCapB": 28.94,
+      "healthScore": 2.62,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.9,
+        "profitability": 2.2,
+        "cashflow": 1.3,
+        "balanceSheet": 2.6,
+        "valuation": 4.1
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 64.51,
+        "analysts": 58.19
+      },
+      "pe": 13.1,
+      "evEbitda": 12.7,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -1546,9 +2423,9 @@
       "currency": "$",
       "sector": "Énergie",
       "price": 208.37,
-      "fairValue": 248.51,
+      "fairValue": 248.5,
       "upside": 19.3,
-      "marketCapB": 406.58,
+      "marketCapB": 370.63,
       "healthScore": 3.88,
       "healthLabel": "Très bon",
       "scores": {
@@ -1560,11 +2437,69 @@
       },
       "models": {
         "dcf": 279.67,
-        "multiples": 223.33,
+        "multiples": 223.29,
         "analysts": 242.54
       },
       "pe": 12.6,
       "evEbitda": 7.5,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "SCR.PA",
+      "name": "SCOR SE",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Finance",
+      "price": 35.04,
+      "fairValue": 41.64,
+      "upside": 18.8,
+      "marketCapB": 6.26,
+      "healthScore": 2.86,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.6,
+        "profitability": 2.3,
+        "cashflow": 1.0,
+        "balanceSheet": 5.0,
+        "valuation": 4.4
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 46.3,
+        "analysts": 36.98
+      },
+      "pe": 7.6,
+      "evEbitda": 5.9,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "MRK.DE",
+      "name": "MERCK KGAA                    I",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Santé",
+      "price": 146.45,
+      "fairValue": 171.0,
+      "upside": 16.8,
+      "marketCapB": 63.67,
+      "healthScore": 3.29,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.9,
+        "profitability": 2.7,
+        "cashflow": 4.2,
+        "balanceSheet": 3.7,
+        "valuation": 3.9
+      },
+      "models": {
+        "dcf": 177.12,
+        "multiples": 175.89,
+        "analysts": 160.0
+      },
+      "pe": 16.0,
+      "evEbitda": 11.8,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -1575,21 +2510,21 @@
       "currency": "$",
       "sector": "Finance",
       "price": 53.29,
-      "fairValue": 62.64,
-      "upside": 17.5,
-      "marketCapB": 44.27,
-      "healthScore": 3.49,
+      "fairValue": 62.08,
+      "upside": 16.5,
+      "marketCapB": 40.35,
+      "healthScore": 3.47,
       "healthLabel": "Bon",
       "scores": {
         "growth": 2.0,
         "profitability": 4.2,
         "cashflow": 4.0,
         "balanceSheet": 3.4,
-        "valuation": 3.9
+        "valuation": 3.8
       },
       "models": {
         "dcf": 69.37,
-        "multiples": 61.23,
+        "multiples": 59.57,
         "analysts": 57.31
       },
       "pe": 9.0,
@@ -1604,7 +2539,7 @@
       "currency": "€",
       "sector": "Énergie",
       "price": 35.76,
-      "fairValue": 41.44,
+      "fairValue": 41.43,
       "upside": 15.9,
       "marketCapB": 3.7,
       "healthScore": 2.86,
@@ -1618,7 +2553,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 40.29,
+        "multiples": 40.28,
         "analysts": 42.59
       },
       "pe": 10.3,
@@ -1627,60 +2562,31 @@
       "valueTrap": false
     },
     {
-      "ticker": "VIV.PA",
-      "name": "VIVENDI SE",
+      "ticker": "ADP.PA",
+      "name": "ADP",
       "market": "FR",
       "currency": "€",
-      "sector": "Télécoms & Médias",
-      "price": 1.54,
-      "fairValue": 1.77,
-      "upside": 14.9,
-      "marketCapB": 1.54,
-      "healthScore": 1.61,
-      "healthLabel": "Faible",
+      "sector": "Industrie",
+      "price": 115.9,
+      "fairValue": 133.56,
+      "upside": 15.2,
+      "marketCapB": 11.47,
+      "healthScore": 2.63,
+      "healthLabel": "Bon",
       "scores": {
-        "growth": 1.3,
-        "profitability": 1.3,
+        "growth": 3.6,
+        "profitability": 3.2,
         "cashflow": 1.0,
-        "balanceSheet": 1.0,
-        "valuation": 3.4
+        "balanceSheet": 1.8,
+        "valuation": 3.6
       },
       "models": {
         "dcf": null,
-        "multiples": 1.54,
-        "analysts": 2.01
+        "multiples": 141.77,
+        "analysts": 125.34
       },
-      "pe": 15.0,
-      "evEbitda": null,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "ADS.DE",
-      "name": "adidas AG                     N",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 165.0,
-      "fairValue": 189.31,
-      "upside": 14.7,
-      "marketCapB": 27.9,
-      "healthScore": 3.51,
-      "healthLabel": "Très bon",
-      "scores": {
-        "growth": 4.3,
-        "profitability": 3.0,
-        "cashflow": 3.6,
-        "balanceSheet": 3.2,
-        "valuation": 3.5
-      },
-      "models": {
-        "dcf": 198.89,
-        "multiples": 169.91,
-        "analysts": 199.13
-      },
-      "pe": 14.1,
-      "evEbitda": 11.2,
+      "pe": 17.3,
+      "evEbitda": 10.1,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -1714,15 +2620,44 @@
       "valueTrap": false
     },
     {
+      "ticker": "DHL.DE",
+      "name": "DHL AG                        N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 57.1,
+      "fairValue": 65.25,
+      "upside": 14.3,
+      "marketCapB": 63.91,
+      "healthScore": 3.2,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.6,
+        "profitability": 2.5,
+        "cashflow": 3.7,
+        "balanceSheet": 2.2,
+        "valuation": 4.0
+      },
+      "models": {
+        "dcf": 67.28,
+        "multiples": 69.49,
+        "analysts": 58.97
+      },
+      "pe": 14.5,
+      "evEbitda": 9.9,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
       "ticker": "EOAN.DE",
       "name": "E.ON SE                       N",
       "market": "DE",
       "currency": "€",
       "sector": "Services publics",
       "price": 18.61,
-      "fairValue": 21.28,
-      "upside": 14.3,
-      "marketCapB": 48.63,
+      "fairValue": 21.26,
+      "upside": 14.2,
+      "marketCapB": 48.65,
       "healthScore": 2.4,
       "healthLabel": "Passable",
       "scores": {
@@ -1734,11 +2669,98 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 21.61,
+        "multiples": 21.57,
         "analysts": 20.96
       },
       "pe": 14.9,
       "evEbitda": 8.7,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "2914.T",
+      "name": "JAPAN TOBACCO INC",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Conso. défensive",
+      "price": 5265.0,
+      "fairValue": 5993.3,
+      "upside": 13.8,
+      "marketCapB": 53.36,
+      "healthScore": 3.93,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 3.0,
+        "profitability": 4.4,
+        "cashflow": 3.7,
+        "balanceSheet": 4.3,
+        "valuation": 4.2
+      },
+      "models": {
+        "dcf": 4047.72,
+        "multiples": 6857.62,
+        "analysts": 7074.57
+      },
+      "pe": 17.5,
+      "evEbitda": 8.5,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "6861.T",
+      "name": "KEYENCE CORP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Technologie",
+      "price": 14025.0,
+      "fairValue": 15836.62,
+      "upside": 12.9,
+      "marketCapB": 97.09,
+      "healthScore": 4.4,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 4.6,
+        "cashflow": 3.9,
+        "balanceSheet": 5.0,
+        "valuation": 3.6
+      },
+      "models": {
+        "dcf": 7916.91,
+        "multiples": 19686.71,
+        "analysts": 19906.25
+      },
+      "pe": 7.5,
+      "evEbitda": 20.7,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "HO.PA",
+      "name": "THALES",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 223.4,
+      "fairValue": 251.91,
+      "upside": 12.8,
+      "marketCapB": 45.92,
+      "healthScore": 3.13,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.0,
+        "profitability": 3.0,
+        "cashflow": 5.0,
+        "balanceSheet": 3.0,
+        "valuation": 2.7
+      },
+      "models": {
+        "dcf": 281.46,
+        "multiples": 189.6,
+        "analysts": 284.68
+      },
+      "pe": 18.0,
+      "evEbitda": 15.1,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -1749,55 +2771,26 @@
       "currency": "€",
       "sector": "Finance",
       "price": 36.35,
-      "fairValue": 41.53,
-      "upside": 14.3,
+      "fairValue": 40.98,
+      "upside": 12.7,
       "marketCapB": 39.29,
-      "healthScore": 3.64,
+      "healthScore": 3.62,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 4.2,
         "profitability": 4.2,
         "cashflow": 3.0,
         "balanceSheet": 3.0,
-        "valuation": 3.8
+        "valuation": 3.7
       },
       "models": {
         "dcf": null,
-        "multiples": 40.55,
+        "multiples": 39.45,
         "analysts": 42.51
       },
       "pe": 9.3,
       "evEbitda": null,
       "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "P911.DE",
-      "name": "Dr. Ing. h.c. F. Porsche AG   I",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 43.49,
-      "fairValue": 49.59,
-      "upside": 14.0,
-      "marketCapB": 39.62,
-      "healthScore": 2.33,
-      "healthLabel": "Passable",
-      "scores": {
-        "growth": 1.0,
-        "profitability": 2.0,
-        "cashflow": 2.3,
-        "balanceSheet": 3.7,
-        "valuation": 2.6
-      },
-      "models": {
-        "dcf": 33.91,
-        "multiples": 67.57,
-        "analysts": 47.29
-      },
-      "pe": 25.7,
-      "evEbitda": 8.6,
-      "analystConsensus": "Conserver",
       "valueTrap": false
     },
     {
@@ -1807,171 +2800,26 @@
       "currency": "$",
       "sector": "Finance",
       "price": 790.69,
-      "fairValue": 900.92,
-      "upside": 13.9,
-      "marketCapB": 228.06,
-      "healthScore": 3.86,
+      "fairValue": 890.45,
+      "upside": 12.6,
+      "marketCapB": 207.9,
+      "healthScore": 3.84,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 5.0,
         "profitability": 4.7,
         "cashflow": 3.0,
         "balanceSheet": 3.3,
-        "valuation": 3.3
+        "valuation": 3.2
       },
       "models": {
         "dcf": null,
-        "multiples": 771.13,
+        "multiples": 750.18,
         "analysts": 1030.71
       },
       "pe": 10.6,
       "evEbitda": null,
       "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "KER.PA",
-      "name": "KERING",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 172.32,
-      "fairValue": 195.68,
-      "upside": 13.6,
-      "marketCapB": 21.13,
-      "healthScore": 2.65,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 1.2,
-        "profitability": 1.5,
-        "cashflow": 4.9,
-        "balanceSheet": 3.1,
-        "valuation": 2.5
-      },
-      "models": {
-        "dcf": 208.38,
-        "multiples": 138.83,
-        "analysts": 239.84
-      },
-      "pe": 19.3,
-      "evEbitda": 12.5,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "MRK.DE",
-      "name": "MERCK KGAA                    I",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Santé",
-      "price": 146.45,
-      "fairValue": 166.35,
-      "upside": 13.6,
-      "marketCapB": 63.67,
-      "healthScore": 3.25,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 1.9,
-        "profitability": 2.7,
-        "cashflow": 4.2,
-        "balanceSheet": 3.7,
-        "valuation": 3.7
-      },
-      "models": {
-        "dcf": 177.12,
-        "multiples": 161.92,
-        "analysts": 160.0
-      },
-      "pe": 16.0,
-      "evEbitda": 11.8,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "ADP.PA",
-      "name": "ADP",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Industrie",
-      "price": 115.9,
-      "fairValue": 131.55,
-      "upside": 13.5,
-      "marketCapB": 11.47,
-      "healthScore": 2.6,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 3.6,
-        "profitability": 3.2,
-        "cashflow": 1.0,
-        "balanceSheet": 1.8,
-        "valuation": 3.4
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 137.75,
-        "analysts": 125.34
-      },
-      "pe": 17.3,
-      "evEbitda": 10.1,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "DHL.DE",
-      "name": "DHL AG                        N",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Industrie",
-      "price": 57.1,
-      "fairValue": 64.76,
-      "upside": 13.4,
-      "marketCapB": 63.38,
-      "healthScore": 3.17,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 3.6,
-        "profitability": 2.5,
-        "cashflow": 3.7,
-        "balanceSheet": 2.2,
-        "valuation": 3.8
-      },
-      "models": {
-        "dcf": 67.84,
-        "multiples": 67.46,
-        "analysts": 58.97
-      },
-      "pe": 14.5,
-      "evEbitda": 9.9,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "COFA.PA",
-      "name": "COFACE",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Finance",
-      "price": 15.61,
-      "fairValue": 17.66,
-      "upside": 13.1,
-      "marketCapB": 2.33,
-      "healthScore": 2.08,
-      "healthLabel": "Passable",
-      "scores": {
-        "growth": 1.2,
-        "profitability": 3.2,
-        "cashflow": 1.0,
-        "balanceSheet": 1.3,
-        "valuation": 3.7
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 17.08,
-        "analysts": 18.25
-      },
-      "pe": 9.5,
-      "evEbitda": 18.0,
-      "analystConsensus": "Conserver",
       "valueTrap": false
     },
     {
@@ -2004,56 +2852,27 @@
       "valueTrap": false
     },
     {
-      "ticker": "HO.PA",
-      "name": "THALES",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Industrie",
-      "price": 223.4,
-      "fairValue": 249.45,
-      "upside": 11.7,
-      "marketCapB": 45.92,
-      "healthScore": 3.09,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.0,
-        "profitability": 3.0,
-        "cashflow": 5.0,
-        "balanceSheet": 3.0,
-        "valuation": 2.5
-      },
-      "models": {
-        "dcf": 281.46,
-        "multiples": 182.22,
-        "analysts": 284.68
-      },
-      "pe": 18.0,
-      "evEbitda": 15.1,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
       "ticker": "RHM.DE",
       "name": "RHEINMETALL AG                I",
       "market": "DE",
       "currency": "€",
       "sector": "Industrie",
       "price": 693.4,
-      "fairValue": 768.35,
-      "upside": 10.8,
+      "fairValue": 778.21,
+      "upside": 12.2,
       "marketCapB": 32.36,
-      "healthScore": 3.41,
+      "healthScore": 3.44,
       "healthLabel": "Bon",
       "scores": {
         "growth": 5.0,
         "profitability": 3.6,
         "cashflow": 2.5,
         "balanceSheet": 2.8,
-        "valuation": 3.2
+        "valuation": 3.3
       },
       "models": {
         "dcf": 313.64,
-        "multiples": 665.17,
+        "multiples": 694.75,
         "analysts": 1326.23
       },
       "pe": 14.0,
@@ -2062,32 +2881,119 @@
       "valueTrap": false
     },
     {
-      "ticker": "CS.PA",
-      "name": "AXA",
+      "ticker": "P911.DE",
+      "name": "Dr. Ing. h.c. F. Porsche AG   I",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 43.49,
+      "fairValue": 48.78,
+      "upside": 12.2,
+      "marketCapB": 39.62,
+      "healthScore": 2.34,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 1.0,
+        "profitability": 2.0,
+        "cashflow": 2.3,
+        "balanceSheet": 3.7,
+        "valuation": 2.6
+      },
+      "models": {
+        "dcf": 33.91,
+        "multiples": 65.14,
+        "analysts": 47.29
+      },
+      "pe": 25.7,
+      "evEbitda": 8.6,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "6146.T",
+      "name": "DISCO CORPORATION",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Technologie",
+      "price": 41350.0,
+      "fairValue": 46298.79,
+      "upside": 12.0,
+      "marketCapB": 25.61,
+      "healthScore": 4.28,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 4.4,
+        "balanceSheet": 5.0,
+        "valuation": 2.0
+      },
+      "models": {
+        "dcf": 33467.3,
+        "multiples": 29174.06,
+        "analysts": 76255.0
+      },
+      "pe": 30.4,
+      "evEbitda": 17.5,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "COFA.PA",
+      "name": "COFACE",
       "market": "FR",
       "currency": "€",
       "sector": "Finance",
-      "price": 45.14,
-      "fairValue": 49.32,
-      "upside": 9.3,
-      "marketCapB": 91.33,
-      "healthScore": 3.15,
-      "healthLabel": "Bon",
+      "price": 15.61,
+      "fairValue": 17.44,
+      "upside": 11.7,
+      "marketCapB": 2.33,
+      "healthScore": 2.06,
+      "healthLabel": "Passable",
       "scores": {
-        "growth": 3.2,
-        "profitability": 3.1,
+        "growth": 1.2,
+        "profitability": 3.2,
         "cashflow": 1.0,
-        "balanceSheet": 5.0,
-        "valuation": 3.5
+        "balanceSheet": 1.3,
+        "valuation": 3.6
       },
       "models": {
         "dcf": null,
-        "multiples": 46.53,
-        "analysts": 52.12
+        "multiples": 16.62,
+        "analysts": 18.25
       },
-      "pe": 10.1,
+      "pe": 9.5,
+      "evEbitda": 18.0,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "VIV.PA",
+      "name": "VIVENDI SE",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Télécoms & Médias",
+      "price": 1.54,
+      "fairValue": 1.71,
+      "upside": 11.0,
+      "marketCapB": 1.54,
+      "healthScore": 1.54,
+      "healthLabel": "Faible",
+      "scores": {
+        "growth": 1.3,
+        "profitability": 1.3,
+        "cashflow": 1.0,
+        "balanceSheet": 1.0,
+        "valuation": 3.1
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 1.42,
+        "analysts": 2.01
+      },
+      "pe": 15.0,
       "evEbitda": null,
-      "analystConsensus": "Achat",
+      "analystConsensus": "Conserver",
       "valueTrap": false
     },
     {
@@ -2097,26 +3003,142 @@
       "currency": "€",
       "sector": "Santé",
       "price": 91.3,
-      "fairValue": 99.62,
-      "upside": 9.1,
-      "marketCapB": 10.75,
-      "healthScore": 3.92,
+      "fairValue": 101.3,
+      "upside": 11.0,
+      "marketCapB": 10.77,
+      "healthScore": 3.96,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 3.1,
         "profitability": 3.2,
         "cashflow": 4.7,
         "balanceSheet": 5.0,
-        "valuation": 3.6
+        "valuation": 3.8
       },
       "models": {
-        "dcf": 110.87,
-        "multiples": 98.94,
+        "dcf": 110.62,
+        "multiples": 104.25,
         "analysts": 89.04
       },
       "pe": 19.5,
       "evEbitda": 10.0,
       "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "9432.T",
+      "name": "NTT INC",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Télécoms & Médias",
+      "price": 167.7,
+      "fairValue": 184.99,
+      "upside": 10.3,
+      "marketCapB": 77.29,
+      "healthScore": 2.82,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.0,
+        "profitability": 2.3,
+        "cashflow": 5.0,
+        "balanceSheet": 1.0,
+        "valuation": 3.7
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 187.63,
+        "analysts": 182.36
+      },
+      "pe": 11.5,
+      "evEbitda": 9.0,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "KER.PA",
+      "name": "KERING",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 172.32,
+      "fairValue": 189.34,
+      "upside": 9.9,
+      "marketCapB": 21.13,
+      "healthScore": 2.53,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.2,
+        "profitability": 1.5,
+        "cashflow": 4.9,
+        "balanceSheet": 3.1,
+        "valuation": 1.9
+      },
+      "models": {
+        "dcf": 208.38,
+        "multiples": 119.79,
+        "analysts": 239.84
+      },
+      "pe": 19.3,
+      "evEbitda": 12.5,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "ADS.DE",
+      "name": "adidas AG                     N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 165.0,
+      "fairValue": 180.46,
+      "upside": 9.4,
+      "marketCapB": 27.9,
+      "healthScore": 3.34,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.3,
+        "profitability": 3.0,
+        "cashflow": 3.6,
+        "balanceSheet": 3.2,
+        "valuation": 2.6
+      },
+      "models": {
+        "dcf": 198.89,
+        "multiples": 143.37,
+        "analysts": 199.13
+      },
+      "pe": 14.0,
+      "evEbitda": 11.2,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "4063.T",
+      "name": "SHIN-ETSU CHEMICAL CO",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Matériaux",
+      "price": 5237.0,
+      "fairValue": 5725.05,
+      "upside": 9.3,
+      "marketCapB": 54.29,
+      "healthScore": 4.05,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 4.6,
+        "profitability": 4.3,
+        "cashflow": 3.0,
+        "balanceSheet": 5.0,
+        "valuation": 3.3
+      },
+      "models": {
+        "dcf": 4456.26,
+        "multiples": 5150.13,
+        "analysts": 7568.75
+      },
+      "pe": 15.9,
+      "evEbitda": 9.0,
+      "analystConsensus": "Achat fort",
       "valueTrap": false
     },
     {
@@ -2126,9 +3148,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 424.39,
-      "fairValue": 462.93,
+      "fairValue": 462.92,
       "upside": 9.1,
-      "marketCapB": 702.39,
+      "marketCapB": 640.29,
       "healthScore": 3.82,
       "healthLabel": "Très bon",
       "scores": {
@@ -2140,12 +3162,41 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 268.11,
+        "multiples": 268.1,
         "analysts": 657.74
       },
       "pe": 24.1,
       "evEbitda": 61.9,
       "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "MTX.DE",
+      "name": "MTU Aero Engines AG           N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 333.4,
+      "fairValue": 363.55,
+      "upside": 9.0,
+      "marketCapB": 17.96,
+      "healthScore": 2.88,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.6,
+        "profitability": 3.5,
+        "cashflow": 1.5,
+        "balanceSheet": 3.5,
+        "valuation": 3.2
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 318.75,
+        "analysts": 408.35
+      },
+      "pe": 16.1,
+      "evEbitda": 13.5,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2155,8 +3206,8 @@
       "currency": "€",
       "sector": "Services publics",
       "price": 55.7,
-      "fairValue": 60.69,
-      "upside": 9.0,
+      "fairValue": 60.55,
+      "upside": 8.7,
       "marketCapB": 43.45,
       "healthScore": 2.16,
       "healthLabel": "Passable",
@@ -2169,7 +3220,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 51.45,
+        "multiples": 51.17,
         "analysts": 69.93
       },
       "pe": 16.2,
@@ -2178,61 +3229,90 @@
       "valueTrap": false
     },
     {
-      "ticker": "MTX.DE",
-      "name": "MTU Aero Engines AG           N",
-      "market": "DE",
-      "currency": "€",
+      "ticker": "373220.KS",
+      "name": "LG Energy Solution",
+      "market": "KR",
+      "currency": "₩",
       "sector": "Industrie",
-      "price": 333.4,
-      "fairValue": 357.37,
-      "upside": 7.2,
-      "marketCapB": 17.96,
-      "healthScore": 2.85,
-      "healthLabel": "Bon",
+      "price": 299500.0,
+      "fairValue": 323529.35,
+      "upside": 8.0,
+      "marketCapB": 47.92,
+      "healthScore": 1.9,
+      "healthLabel": "Faible",
       "scores": {
-        "growth": 2.6,
-        "profitability": 3.5,
-        "cashflow": 1.5,
-        "balanceSheet": 3.5,
-        "valuation": 3.0
+        "growth": 5.0,
+        "profitability": 1.0,
+        "cashflow": 1.0,
+        "balanceSheet": 1.5,
+        "valuation": 1.0
       },
       "models": {
         "dcf": null,
-        "multiples": 306.39,
-        "analysts": 408.35
+        "multiples": 164835.36,
+        "analysts": 482223.34
       },
-      "pe": 16.1,
-      "evEbitda": 13.5,
+      "pe": 42.3,
+      "evEbitda": 20.6,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
-      "ticker": "VZ",
-      "name": "Verizon Communications Inc.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Télécoms & Médias",
-      "price": 46.48,
-      "fairValue": 49.82,
-      "upside": 7.2,
-      "marketCapB": 192.64,
-      "healthScore": 3.31,
+      "ticker": "CS.PA",
+      "name": "AXA",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Finance",
+      "price": 45.14,
+      "fairValue": 48.69,
+      "upside": 7.9,
+      "marketCapB": 91.33,
+      "healthScore": 3.12,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 2.5,
-        "profitability": 4.0,
-        "cashflow": 3.8,
-        "balanceSheet": 1.4,
-        "valuation": 4.8
+        "growth": 3.2,
+        "profitability": 3.1,
+        "cashflow": 1.0,
+        "balanceSheet": 5.0,
+        "valuation": 3.4
       },
       "models": {
-        "dcf": 14.6,
-        "multiples": 84.22,
-        "analysts": 50.65
+        "dcf": null,
+        "multiples": 45.26,
+        "analysts": 52.12
       },
-      "pe": 8.8,
-      "evEbitda": 7.4,
-      "analystConsensus": "Conserver",
+      "pe": 10.1,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "035420.KS",
+      "name": "NAVER",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Télécoms & Médias",
+      "price": 161600.0,
+      "fairValue": 172548.0,
+      "upside": 6.8,
+      "marketCapB": 17.29,
+      "healthScore": 2.93,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.4,
+        "profitability": 2.9,
+        "cashflow": 1.5,
+        "balanceSheet": 4.0,
+        "valuation": 3.9
+      },
+      "models": {
+        "dcf": 56988.21,
+        "multiples": 187691.52,
+        "analysts": 272964.28
+      },
+      "pe": 12.2,
+      "evEbitda": 7.7,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2242,8 +3322,8 @@
       "currency": "€",
       "sector": "Technologie",
       "price": 22.25,
-      "fairValue": 23.72,
-      "upside": 6.6,
+      "fairValue": 23.75,
+      "upside": 6.7,
       "marketCapB": 29.24,
       "healthScore": 4.09,
       "healthLabel": "Très bon",
@@ -2256,12 +3336,41 @@
       },
       "models": {
         "dcf": 23.66,
-        "multiples": 22.39,
+        "multiples": 22.48,
         "analysts": 25.12
       },
       "pe": 15.4,
       "evEbitda": 15.4,
       "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "PUB.PA",
+      "name": "PUBLICIS GROUPE SA",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Télécoms & Médias",
+      "price": 99.78,
+      "fairValue": 106.49,
+      "upside": 6.7,
+      "marketCapB": 24.92,
+      "healthScore": 3.19,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.1,
+        "profitability": 3.3,
+        "cashflow": 4.3,
+        "balanceSheet": 2.7,
+        "valuation": 3.6
+      },
+      "models": {
+        "dcf": 97.65,
+        "multiples": 105.52,
+        "analysts": 116.31
+      },
+      "pe": 11.6,
+      "evEbitda": 9.6,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2271,9 +3380,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 484.52,
-      "fairValue": 516.0,
-      "upside": 6.5,
-      "marketCapB": 3598.14,
+      "fairValue": 516.9,
+      "upside": 6.7,
+      "marketCapB": 3279.98,
       "healthScore": 3.45,
       "healthLabel": "Bon",
       "scores": {
@@ -2285,41 +3394,12 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 395.88,
+        "multiples": 397.67,
         "analysts": 636.12
       },
       "pe": 20.0,
       "evEbitda": 17.8,
       "analystConsensus": "Achat fort",
-      "valueTrap": false
-    },
-    {
-      "ticker": "MS",
-      "name": "Morgan Stanley",
-      "market": "US",
-      "currency": "$",
-      "sector": "Finance",
-      "price": 165.67,
-      "fairValue": 176.47,
-      "upside": 6.5,
-      "marketCapB": 258.95,
-      "healthScore": 3.73,
-      "healthLabel": "Très bon",
-      "scores": {
-        "growth": 3.4,
-        "profitability": 4.7,
-        "cashflow": 3.0,
-        "balanceSheet": 4.8,
-        "valuation": 2.7
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 141.45,
-        "analysts": 211.5
-      },
-      "pe": 12.1,
-      "evEbitda": null,
-      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2329,10 +3409,10 @@
       "currency": "€",
       "sector": "Technologie",
       "price": 45.44,
-      "fairValue": 48.14,
-      "upside": 5.9,
+      "fairValue": 48.2,
+      "upside": 6.1,
       "marketCapB": 59.1,
-      "healthScore": 3.52,
+      "healthScore": 3.53,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 5.0,
@@ -2343,12 +3423,41 @@
       },
       "models": {
         "dcf": 11.43,
-        "multiples": 52.19,
+        "multiples": 52.39,
         "analysts": 80.79
       },
       "pe": 11.7,
       "evEbitda": 15.6,
       "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "7203.T",
+      "name": "TOYOTA MOTOR CORP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Conso. cyclique",
+      "price": 3312.0,
+      "fairValue": 3504.28,
+      "upside": 5.8,
+      "marketCapB": 221.9,
+      "healthScore": 2.09,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 2.2,
+        "profitability": 2.4,
+        "cashflow": 1.0,
+        "balanceSheet": 1.6,
+        "valuation": 3.3
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 3210.4,
+        "analysts": 3798.16
+      },
+      "pe": 10.2,
+      "evEbitda": 11.6,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2358,26 +3467,200 @@
       "currency": "€",
       "sector": "Technologie",
       "price": 183.68,
-      "fairValue": 193.58,
-      "upside": 5.4,
+      "fairValue": 193.8,
+      "upside": 5.5,
       "marketCapB": 212.0,
-      "healthScore": 3.9,
+      "healthScore": 3.91,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 3.9,
         "profitability": 4.7,
         "cashflow": 5.0,
         "balanceSheet": 3.5,
-        "valuation": 2.3
+        "valuation": 2.4
       },
       "models": {
         "dcf": 189.49,
-        "multiples": 147.71,
+        "multiples": 148.38,
         "analysts": 243.54
       },
       "pe": 21.6,
       "evEbitda": 17.2,
       "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "MS",
+      "name": "Morgan Stanley",
+      "market": "US",
+      "currency": "$",
+      "sector": "Finance",
+      "price": 165.67,
+      "fairValue": 174.56,
+      "upside": 5.4,
+      "marketCapB": 236.05,
+      "healthScore": 3.7,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 3.4,
+        "profitability": 4.7,
+        "cashflow": 3.0,
+        "balanceSheet": 4.8,
+        "valuation": 2.6
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 137.61,
+        "analysts": 211.5
+      },
+      "pe": 12.1,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "6857.T",
+      "name": "ADVANTEST CORP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Technologie",
+      "price": 24255.0,
+      "fairValue": 25333.4,
+      "upside": 4.4,
+      "marketCapB": 99.99,
+      "healthScore": 4.04,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 3.9,
+        "balanceSheet": 5.0,
+        "valuation": 1.3
+      },
+      "models": {
+        "dcf": 12701.93,
+        "multiples": 16674.45,
+        "analysts": 46623.81
+      },
+      "pe": 102.0,
+      "evEbitda": 23.1,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "6954.T",
+      "name": "FANUC CORPORATION",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Industrie",
+      "price": 5047.0,
+      "fairValue": 5264.53,
+      "upside": 4.3,
+      "marketCapB": 26.65,
+      "healthScore": 4.02,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 4.7,
+        "profitability": 4.2,
+        "cashflow": 4.4,
+        "balanceSheet": 5.0,
+        "valuation": 1.8
+      },
+      "models": {
+        "dcf": 5156.47,
+        "multiples": 3565.54,
+        "analysts": 7071.58
+      },
+      "pe": 29.2,
+      "evEbitda": 14.8,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "8031.T",
+      "name": "MITSUI & CO",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Industrie",
+      "price": 4476.0,
+      "fairValue": 4658.54,
+      "upside": 4.1,
+      "marketCapB": 72.02,
+      "healthScore": 2.4,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 4.6,
+        "profitability": 2.0,
+        "cashflow": 1.0,
+        "balanceSheet": 2.1,
+        "valuation": 2.3
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 3240.16,
+        "analysts": 6076.92
+      },
+      "pe": 15.2,
+      "evEbitda": 22.1,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "8766.T",
+      "name": "TOKIO MARINE HOLDINGS INC",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Finance",
+      "price": 577.5,
+      "fairValue": 596.3,
+      "upside": 3.3,
+      "marketCapB": 92.44,
+      "healthScore": 3.23,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.5,
+        "profitability": 1.7,
+        "cashflow": 1.0,
+        "balanceSheet": 5.0,
+        "valuation": 5.0
+      },
+      "models": {
+        "dcf": null,
+        "multiples": null,
+        "analysts": 596.3
+      },
+      "pe": 1.2,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "BVI.PA",
+      "name": "BUREAU VERITAS",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 29.68,
+      "fairValue": 30.61,
+      "upside": 3.1,
+      "marketCapB": 13.13,
+      "healthScore": 2.47,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 1.6,
+        "profitability": 3.6,
+        "cashflow": 1.2,
+        "balanceSheet": 2.9,
+        "valuation": 3.1
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 27.72,
+        "analysts": 33.49
+      },
+      "pe": 18.3,
+      "evEbitda": 12.5,
+      "analystConsensus": "Conserver",
       "valueTrap": false
     },
     {
@@ -2387,10 +3670,10 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 224.44,
-      "fairValue": 231.13,
-      "upside": 3.0,
-      "marketCapB": 212.12,
-      "healthScore": 3.54,
+      "fairValue": 231.5,
+      "upside": 3.1,
+      "marketCapB": 193.37,
+      "healthScore": 3.55,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 3.8,
@@ -2401,7 +3684,7 @@
       },
       "models": {
         "dcf": 224.93,
-        "multiples": 208.6,
+        "multiples": 209.72,
         "analysts": 259.85
       },
       "pe": 17.0,
@@ -2410,31 +3693,31 @@
       "valueTrap": false
     },
     {
-      "ticker": "JPM",
-      "name": "JP Morgan Chase & Co.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Finance",
-      "price": 310.53,
-      "fairValue": 319.36,
-      "upside": 2.8,
-      "marketCapB": 824.65,
-      "healthScore": 3.38,
+      "ticker": "VIE.PA",
+      "name": "VEOLIA ENVIRON.",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 33.75,
+      "fairValue": 34.65,
+      "upside": 2.7,
+      "marketCapB": 24.7,
+      "healthScore": 2.74,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 3.5,
-        "profitability": 4.7,
-        "cashflow": 3.0,
-        "balanceSheet": 3.0,
-        "valuation": 2.7
+        "growth": 2.4,
+        "profitability": 2.1,
+        "cashflow": 3.7,
+        "balanceSheet": 1.2,
+        "valuation": 4.3
       },
       "models": {
-        "dcf": null,
-        "multiples": 265.24,
-        "analysts": 373.48
+        "dcf": 12.22,
+        "multiples": 53.57,
+        "analysts": 38.15
       },
-      "pe": 12.1,
-      "evEbitda": null,
+      "pe": 12.8,
+      "evEbitda": 8.9,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -2445,9 +3728,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 149.94,
-      "fairValue": 153.54,
-      "upside": 2.4,
-      "marketCapB": 160.44,
+      "fairValue": 153.75,
+      "upside": 2.5,
+      "marketCapB": 146.25,
       "healthScore": 3.5,
       "healthLabel": "Très bon",
       "scores": {
@@ -2455,45 +3738,16 @@
         "profitability": 4.7,
         "cashflow": 3.8,
         "balanceSheet": 4.2,
-        "valuation": 3.7
+        "valuation": 3.8
       },
       "models": {
         "dcf": 109.05,
-        "multiples": 166.33,
+        "multiples": 166.96,
         "analysts": 185.25
       },
       "pe": 12.3,
       "evEbitda": 15.9,
       "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "BN.PA",
-      "name": "DANONE",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. défensive",
-      "price": 68.28,
-      "fairValue": 69.66,
-      "upside": 2.0,
-      "marketCapB": 43.98,
-      "healthScore": 3.16,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.8,
-        "profitability": 2.7,
-        "cashflow": 3.7,
-        "balanceSheet": 2.3,
-        "valuation": 4.2
-      },
-      "models": {
-        "dcf": 42.79,
-        "multiples": 87.4,
-        "analysts": 78.8
-      },
-      "pe": 16.3,
-      "evEbitda": 11.8,
-      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2517,7 +3771,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 37.93,
+        "multiples": 37.94,
         "analysts": 37.94
       },
       "pe": 12.8,
@@ -2526,90 +3780,32 @@
       "valueTrap": false
     },
     {
-      "ticker": "PEP",
-      "name": "Pepsico, Inc.",
+      "ticker": "JPM",
+      "name": "JP Morgan Chase & Co.",
       "market": "US",
       "currency": "$",
-      "sector": "Conso. défensive",
-      "price": 140.54,
-      "fairValue": 143.05,
-      "upside": 1.8,
-      "marketCapB": 191.52,
-      "healthScore": 3.42,
+      "sector": "Finance",
+      "price": 310.53,
+      "fairValue": 315.75,
+      "upside": 1.7,
+      "marketCapB": 751.73,
+      "healthScore": 3.36,
       "healthLabel": "Bon",
       "scores": {
         "growth": 3.5,
-        "profitability": 3.9,
-        "cashflow": 3.3,
-        "balanceSheet": 2.3,
-        "valuation": 4.2
-      },
-      "models": {
-        "dcf": 111.55,
-        "multiples": 176.45,
-        "analysts": 141.14
-      },
-      "pe": 16.4,
-      "evEbitda": 12.1,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "RI.PA",
-      "name": "PERNOD RICARD",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. défensive",
-      "price": 71.24,
-      "fairValue": 72.31,
-      "upside": 1.5,
-      "marketCapB": 17.94,
-      "healthScore": 3.26,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 1.0,
-        "profitability": 3.6,
-        "cashflow": 3.9,
-        "balanceSheet": 3.2,
-        "valuation": 4.6
-      },
-      "models": {
-        "dcf": 20.41,
-        "multiples": 115.86,
-        "analysts": 80.66
-      },
-      "pe": 12.0,
-      "evEbitda": 11.3,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "BVI.PA",
-      "name": "BUREAU VERITAS",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Industrie",
-      "price": 29.68,
-      "fairValue": 30.13,
-      "upside": 1.5,
-      "marketCapB": 13.13,
-      "healthScore": 2.43,
-      "healthLabel": "Passable",
-      "scores": {
-        "growth": 1.6,
-        "profitability": 3.6,
-        "cashflow": 1.2,
-        "balanceSheet": 2.9,
-        "valuation": 2.9
+        "profitability": 4.7,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 2.6
       },
       "models": {
         "dcf": null,
-        "multiples": 26.76,
-        "analysts": 33.49
+        "multiples": 258.03,
+        "analysts": 373.48
       },
-      "pe": 18.3,
-      "evEbitda": 12.5,
-      "analystConsensus": "Conserver",
+      "pe": 12.1,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2619,9 +3815,9 @@
       "currency": "$",
       "sector": "Énergie",
       "price": 159.99,
-      "fairValue": 161.89,
+      "fairValue": 161.88,
       "upside": 1.2,
-      "marketCapB": 652.63,
+      "marketCapB": 594.93,
       "healthScore": 3.55,
       "healthLabel": "Très bon",
       "scores": {
@@ -2633,40 +3829,11 @@
       },
       "models": {
         "dcf": 145.55,
-        "multiples": 155.93,
+        "multiples": 155.9,
         "analysts": 184.18
       },
       "pe": 12.8,
       "evEbitda": 8.7,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "VIE.PA",
-      "name": "VEOLIA ENVIRON.",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Industrie",
-      "price": 33.75,
-      "fairValue": 34.12,
-      "upside": 1.1,
-      "marketCapB": 24.7,
-      "healthScore": 2.71,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.4,
-        "profitability": 2.1,
-        "cashflow": 3.7,
-        "balanceSheet": 1.2,
-        "valuation": 4.2
-      },
-      "models": {
-        "dcf": 12.22,
-        "multiples": 51.99,
-        "analysts": 38.15
-      },
-      "pe": 12.8,
-      "evEbitda": 8.9,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -2691,70 +3858,12 @@
       },
       "models": {
         "dcf": 173.47,
-        "multiples": 142.25,
+        "multiples": 142.23,
         "analysts": 233.83
       },
       "pe": 14.8,
       "evEbitda": 11.9,
       "analystConsensus": "Achat fort",
-      "valueTrap": false
-    },
-    {
-      "ticker": "AMZN",
-      "name": "Amazon.com, Inc.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Conso. cyclique",
-      "price": 246.82,
-      "fairValue": 245.8,
-      "upside": -0.4,
-      "marketCapB": 2668.9,
-      "healthScore": 2.48,
-      "healthLabel": "Passable",
-      "scores": {
-        "growth": 2.9,
-        "profitability": 4.2,
-        "cashflow": 1.0,
-        "balanceSheet": 2.8,
-        "valuation": 1.5
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 165.1,
-        "analysts": 326.51
-      },
-      "pe": 22.6,
-      "evEbitda": 15.6,
-      "analystConsensus": "Achat fort",
-      "valueTrap": false
-    },
-    {
-      "ticker": "MC.PA",
-      "name": "LVMH",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 381.95,
-      "fairValue": 379.35,
-      "upside": -0.7,
-      "marketCapB": 187.4,
-      "healthScore": 3.43,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 1.8,
-        "profitability": 4.1,
-        "cashflow": 4.3,
-        "balanceSheet": 3.6,
-        "valuation": 3.3
-      },
-      "models": {
-        "dcf": 271.92,
-        "multiples": 374.77,
-        "analysts": 491.36
-      },
-      "pe": 16.0,
-      "evEbitda": 10.7,
-      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -2764,10 +3873,10 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 90.64,
-      "fairValue": 89.69,
-      "upside": -1.0,
-      "marketCapB": 357.34,
-      "healthScore": 3.93,
+      "fairValue": 89.8,
+      "upside": -0.9,
+      "marketCapB": 325.75,
+      "healthScore": 3.94,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 5.0,
@@ -2778,11 +3887,127 @@
       },
       "models": {
         "dcf": 53.46,
-        "multiples": 85.12,
+        "multiples": 85.45,
         "analysts": 130.5
       },
       "pe": 15.0,
       "evEbitda": 18.0,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "SU.PA",
+      "name": "SCHNEIDER ELECTRIC SE",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 226.55,
+      "fairValue": 223.5,
+      "upside": -1.3,
+      "marketCapB": 133.13,
+      "healthScore": 3.48,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.3,
+        "profitability": 3.8,
+        "cashflow": 4.3,
+        "balanceSheet": 2.6,
+        "valuation": 2.4
+      },
+      "models": {
+        "dcf": 171.17,
+        "multiples": 175.86,
+        "analysts": 323.48
+      },
+      "pe": 18.0,
+      "evEbitda": 16.9,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "6501.T",
+      "name": "HITACHI",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Industrie",
+      "price": 4763.0,
+      "fairValue": 4701.51,
+      "upside": -1.3,
+      "marketCapB": 120.58,
+      "healthScore": 3.07,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.7,
+        "profitability": 2.6,
+        "cashflow": 4.1,
+        "balanceSheet": 3.5,
+        "valuation": 2.4
+      },
+      "models": {
+        "dcf": 3456.87,
+        "multiples": 4103.92,
+        "analysts": 6543.75
+      },
+      "pe": 26.7,
+      "evEbitda": 11.1,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "ERF.PA",
+      "name": "EUROFINS SCIENT.",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Santé",
+      "price": 85.3,
+      "fairValue": 83.92,
+      "upside": -1.6,
+      "marketCapB": 14.59,
+      "healthScore": 3.0,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.7,
+        "profitability": 2.7,
+        "cashflow": 2.6,
+        "balanceSheet": 2.4,
+        "valuation": 3.7
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 93.07,
+        "analysts": 74.78
+      },
+      "pe": 18.0,
+      "evEbitda": 12.2,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "7267.T",
+      "name": "HONDA MOTOR CO",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Conso. cyclique",
+      "price": 1736.5,
+      "fairValue": 1693.49,
+      "upside": -2.5,
+      "marketCapB": 38.59,
+      "healthScore": 2.06,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 2.6,
+        "profitability": 1.0,
+        "cashflow": 1.8,
+        "balanceSheet": 1.7,
+        "valuation": 3.1
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 1509.47,
+        "analysts": 1877.5
+      },
+      "pe": 7.6,
+      "evEbitda": 15.2,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -2793,9 +4018,9 @@
       "currency": "$",
       "sector": "Finance",
       "price": 1101.72,
-      "fairValue": 1079.35,
-      "upside": -2.0,
-      "marketCapB": 170.13,
+      "fairValue": 1073.25,
+      "upside": -2.6,
+      "marketCapB": 155.09,
       "healthScore": 4.06,
       "healthLabel": "Très bon",
       "scores": {
@@ -2807,7 +4032,7 @@
       },
       "models": {
         "dcf": 1198.42,
-        "multiples": 673.64,
+        "multiples": 655.34,
         "analysts": 1366.0
       },
       "pe": 17.0,
@@ -2816,30 +4041,30 @@
       "valueTrap": false
     },
     {
-      "ticker": "SU.PA",
-      "name": "SCHNEIDER ELECTRIC SE",
+      "ticker": "AIR.PA",
+      "name": "AIRBUS SE",
       "market": "FR",
       "currency": "€",
       "sector": "Industrie",
-      "price": 226.55,
-      "fairValue": 221.0,
-      "upside": -2.4,
-      "marketCapB": 133.13,
-      "healthScore": 3.44,
+      "price": 189.96,
+      "fairValue": 184.81,
+      "upside": -2.7,
+      "marketCapB": 149.91,
+      "healthScore": 2.57,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 4.3,
-        "profitability": 3.8,
-        "cashflow": 4.3,
-        "balanceSheet": 2.6,
-        "valuation": 2.2
+        "growth": 3.0,
+        "profitability": 3.2,
+        "cashflow": 1.3,
+        "balanceSheet": 3.4,
+        "valuation": 1.9
       },
       "models": {
-        "dcf": 171.17,
-        "multiples": 168.36,
-        "analysts": 323.48
+        "dcf": null,
+        "multiples": 138.08,
+        "analysts": 231.54
       },
-      "pe": 18.0,
+      "pe": 21.9,
       "evEbitda": 16.9,
       "analystConsensus": "Achat",
       "valueTrap": false
@@ -2851,9 +4076,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 304.41,
-      "fairValue": 295.89,
-      "upside": -2.8,
-      "marketCapB": 1453.14,
+      "fairValue": 296.19,
+      "upside": -2.7,
+      "marketCapB": 1324.65,
       "healthScore": 4.19,
       "healthLabel": "Très bon",
       "scores": {
@@ -2865,7 +4090,7 @@
       },
       "models": {
         "dcf": 131.95,
-        "multiples": 229.25,
+        "multiples": 230.16,
         "analysts": 526.47
       },
       "pe": 15.7,
@@ -2903,147 +4128,205 @@
       "valueTrap": false
     },
     {
-      "ticker": "AC.PA",
-      "name": "ACCOR",
+      "ticker": "BN.PA",
+      "name": "DANONE",
       "market": "FR",
       "currency": "€",
-      "sector": "Conso. cyclique",
-      "price": 47.57,
-      "fairValue": 45.99,
-      "upside": -3.3,
-      "marketCapB": 10.8,
-      "healthScore": 1.89,
-      "healthLabel": "Faible",
+      "sector": "Conso. défensive",
+      "price": 68.28,
+      "fairValue": 66.22,
+      "upside": -3.0,
+      "marketCapB": 43.98,
+      "healthScore": 3.08,
+      "healthLabel": "Bon",
       "scores": {
-        "growth": 1.5,
-        "profitability": 2.5,
-        "cashflow": 1.0,
-        "balanceSheet": 2.2,
-        "valuation": 2.3
+        "growth": 2.8,
+        "profitability": 2.7,
+        "cashflow": 3.7,
+        "balanceSheet": 2.3,
+        "valuation": 3.8
       },
       "models": {
-        "dcf": null,
-        "multiples": 36.71,
-        "analysts": 55.27
+        "dcf": 42.79,
+        "multiples": 77.08,
+        "analysts": 78.8
       },
-      "pe": 17.9,
-      "evEbitda": 14.6,
+      "pe": 16.3,
+      "evEbitda": 11.8,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
-      "ticker": "BEI.DE",
-      "name": "BEIERSDORF AG                 I",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Conso. défensive",
-      "price": 79.18,
-      "fairValue": 76.6,
-      "upside": -3.3,
-      "marketCapB": 17.27,
-      "healthScore": 3.2,
+      "ticker": "VZ",
+      "name": "Verizon Communications Inc.",
+      "market": "US",
+      "currency": "$",
+      "sector": "Télécoms & Médias",
+      "price": 46.48,
+      "fairValue": 45.08,
+      "upside": -3.0,
+      "marketCapB": 175.61,
+      "healthScore": 3.24,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 1.7,
-        "profitability": 2.9,
-        "cashflow": 2.4,
-        "balanceSheet": 4.7,
-        "valuation": 4.2
+        "growth": 2.5,
+        "profitability": 4.0,
+        "cashflow": 3.8,
+        "balanceSheet": 1.4,
+        "valuation": 4.5
       },
       "models": {
-        "dcf": 47.76,
-        "multiples": 100.17,
-        "analysts": 81.86
+        "dcf": 14.6,
+        "multiples": 69.98,
+        "analysts": 50.65
       },
-      "pe": 19.9,
-      "evEbitda": 9.2,
+      "pe": 8.8,
+      "evEbitda": 7.4,
       "analystConsensus": "Conserver",
       "valueTrap": false
     },
     {
-      "ticker": "AIR.PA",
-      "name": "AIRBUS SE",
+      "ticker": "PEP",
+      "name": "Pepsico, Inc.",
+      "market": "US",
+      "currency": "$",
+      "sector": "Conso. défensive",
+      "price": 140.54,
+      "fairValue": 136.1,
+      "upside": -3.2,
+      "marketCapB": 174.58,
+      "healthScore": 3.34,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.5,
+        "profitability": 3.9,
+        "cashflow": 3.3,
+        "balanceSheet": 2.3,
+        "valuation": 3.8
+      },
+      "models": {
+        "dcf": 111.55,
+        "multiples": 155.61,
+        "analysts": 141.14
+      },
+      "pe": 16.4,
+      "evEbitda": 12.1,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "SW.PA",
+      "name": "SODEXO",
       "market": "FR",
       "currency": "€",
       "sector": "Industrie",
-      "price": 189.96,
-      "fairValue": 182.23,
-      "upside": -4.1,
-      "marketCapB": 149.91,
-      "healthScore": 2.52,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 3.0,
-        "profitability": 3.2,
-        "cashflow": 1.3,
-        "balanceSheet": 3.4,
-        "valuation": 1.7
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 132.92,
-        "analysts": 231.54
-      },
-      "pe": 21.9,
-      "evEbitda": 16.9,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "CA.PA",
-      "name": "CARREFOUR",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. défensive",
-      "price": 13.5,
-      "fairValue": 12.91,
+      "price": 59.3,
+      "fairValue": 56.7,
       "upside": -4.4,
-      "marketCapB": 9.55,
-      "healthScore": 2.64,
-      "healthLabel": "Bon",
+      "marketCapB": 8.63,
+      "healthScore": 2.37,
+      "healthLabel": "Passable",
       "scores": {
-        "growth": 2.2,
+        "growth": 1.7,
         "profitability": 1.4,
-        "cashflow": 3.4,
-        "balanceSheet": 1.1,
-        "valuation": 5.0
+        "cashflow": 3.5,
+        "balanceSheet": 1.6,
+        "valuation": 3.7
       },
       "models": {
-        "dcf": 10.38,
-        "multiples": null,
-        "analysts": 15.44
+        "dcf": 45.99,
+        "multiples": 64.24,
+        "analysts": 59.86
       },
-      "pe": 7.5,
-      "evEbitda": 7.5,
+      "pe": 14.5,
+      "evEbitda": 11.9,
       "analystConsensus": "Conserver",
       "valueTrap": false
     },
     {
-      "ticker": "ERF.PA",
-      "name": "EUROFINS SCIENT.",
+      "ticker": "MC.PA",
+      "name": "LVMH",
       "market": "FR",
       "currency": "€",
-      "sector": "Santé",
-      "price": 85.3,
-      "fairValue": 81.17,
-      "upside": -4.8,
-      "marketCapB": 14.59,
-      "healthScore": 2.96,
+      "sector": "Conso. cyclique",
+      "price": 381.95,
+      "fairValue": 361.52,
+      "upside": -5.3,
+      "marketCapB": 187.4,
+      "healthScore": 3.24,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 3.7,
-        "profitability": 2.7,
-        "cashflow": 2.6,
-        "balanceSheet": 2.4,
-        "valuation": 3.4
+        "growth": 1.8,
+        "profitability": 4.1,
+        "cashflow": 4.3,
+        "balanceSheet": 3.6,
+        "valuation": 2.3
+      },
+      "models": {
+        "dcf": 271.92,
+        "multiples": 321.29,
+        "analysts": 491.36
+      },
+      "pe": 16.0,
+      "evEbitda": 10.7,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "market": "US",
+      "currency": "$",
+      "sector": "Conso. cyclique",
+      "price": 246.82,
+      "fairValue": 233.44,
+      "upside": -5.4,
+      "marketCapB": 2432.91,
+      "healthScore": 2.45,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 2.9,
+        "profitability": 4.2,
+        "cashflow": 1.0,
+        "balanceSheet": 2.8,
+        "valuation": 1.4
       },
       "models": {
         "dcf": null,
-        "multiples": 87.57,
-        "analysts": 74.78
+        "multiples": 140.37,
+        "analysts": 326.51
       },
-      "pe": 18.0,
-      "evEbitda": 12.2,
+      "pe": 22.6,
+      "evEbitda": 15.6,
+      "analystConsensus": "Achat fort",
+      "valueTrap": false
+    },
+    {
+      "ticker": "RI.PA",
+      "name": "PERNOD RICARD",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. défensive",
+      "price": 71.24,
+      "fairValue": 67.27,
+      "upside": -5.6,
+      "marketCapB": 17.94,
+      "healthScore": 3.2,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.0,
+        "profitability": 3.6,
+        "cashflow": 3.9,
+        "balanceSheet": 3.2,
+        "valuation": 4.3
+      },
+      "models": {
+        "dcf": 20.41,
+        "multiples": 100.75,
+        "analysts": 80.66
+      },
+      "pe": 12.0,
+      "evEbitda": 11.3,
       "analystConsensus": "Conserver",
       "valueTrap": false
     },
@@ -3054,21 +4337,21 @@
       "currency": "€",
       "sector": "Finance",
       "price": 82.0,
-      "fairValue": 77.98,
-      "upside": -4.9,
+      "fairValue": 77.27,
+      "upside": -5.8,
       "marketCapB": 3.17,
-      "healthScore": 1.96,
+      "healthScore": 1.94,
       "healthLabel": "Faible",
       "scores": {
         "growth": 3.7,
         "profitability": 1.9,
         "cashflow": 1.0,
         "balanceSheet": 2.1,
-        "valuation": 1.1
+        "valuation": 1.0
       },
       "models": {
         "dcf": null,
-        "multiples": 52.12,
+        "multiples": 50.7,
         "analysts": 103.83
       },
       "pe": 16.3,
@@ -3077,90 +4360,61 @@
       "valueTrap": false
     },
     {
-      "ticker": "SW.PA",
-      "name": "SODEXO",
-      "market": "FR",
-      "currency": "€",
+      "ticker": "6367.T",
+      "name": "DAIKIN INDUSTRIES",
+      "market": "JP",
+      "currency": "¥",
       "sector": "Industrie",
-      "price": 59.3,
-      "fairValue": 55.88,
+      "price": 23765.0,
+      "fairValue": 22394.44,
       "upside": -5.8,
-      "marketCapB": 8.63,
-      "healthScore": 2.34,
-      "healthLabel": "Passable",
+      "marketCapB": 37.74,
+      "healthScore": 3.37,
+      "healthLabel": "Bon",
       "scores": {
-        "growth": 1.7,
-        "profitability": 1.4,
-        "cashflow": 3.5,
-        "balanceSheet": 1.6,
-        "valuation": 3.5
+        "growth": 4.8,
+        "profitability": 2.1,
+        "cashflow": 2.8,
+        "balanceSheet": 4.3,
+        "valuation": 2.9
       },
       "models": {
-        "dcf": 45.99,
-        "multiples": 61.8,
-        "analysts": 59.86
+        "dcf": 17992.2,
+        "multiples": 24005.69,
+        "analysts": 25185.43
       },
-      "pe": 14.5,
-      "evEbitda": 11.9,
-      "analystConsensus": "Conserver",
+      "pe": 24.0,
+      "evEbitda": 9.3,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
-      "ticker": "MUV2.DE",
-      "name": "MUENCHENER RUECKVERS.-GES. AG N",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Finance",
-      "price": 580.0,
-      "fairValue": 546.47,
-      "upside": -5.8,
-      "marketCapB": 72.97,
-      "healthScore": 2.63,
+      "ticker": "MRK",
+      "name": "Merck & Company, Inc.",
+      "market": "US",
+      "currency": "$",
+      "sector": "Santé",
+      "price": 133.72,
+      "fairValue": 125.66,
+      "upside": -6.0,
+      "marketCapB": 300.5,
+      "healthScore": 3.31,
       "healthLabel": "Bon",
       "scores": {
-        "growth": 2.5,
-        "profitability": 3.6,
-        "cashflow": 3.0,
-        "balanceSheet": 1.0,
-        "valuation": 3.1
+        "growth": 1.8,
+        "profitability": 2.7,
+        "cashflow": 5.0,
+        "balanceSheet": 3.1,
+        "valuation": 3.9
       },
       "models": {
-        "dcf": null,
-        "multiples": 535.07,
-        "analysts": 557.88
+        "dcf": 60.13,
+        "multiples": 155.31,
+        "analysts": 161.53
       },
-      "pe": 11.2,
-      "evEbitda": null,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "BAS.DE",
-      "name": "BASF SE                       N",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Matériaux",
-      "price": 49.36,
-      "fairValue": 46.18,
-      "upside": -6.4,
-      "marketCapB": 42.5,
-      "healthScore": 3.04,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.9,
-        "profitability": 1.9,
-        "cashflow": 3.7,
-        "balanceSheet": 3.3,
-        "valuation": 3.4
-      },
-      "models": {
-        "dcf": 34.67,
-        "multiples": 49.94,
-        "analysts": 53.92
-      },
-      "pe": 15.6,
-      "evEbitda": 9.9,
-      "analystConsensus": "Conserver",
+      "pe": 14.9,
+      "evEbitda": 12.7,
+      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -3172,7 +4426,7 @@
       "price": 155.89,
       "fairValue": 145.47,
       "upside": -6.7,
-      "marketCapB": 123.54,
+      "marketCapB": 112.61,
       "healthScore": 1.85,
       "healthLabel": "Faible",
       "scores": {
@@ -3193,27 +4447,143 @@
       "valueTrap": false
     },
     {
+      "ticker": "MUV2.DE",
+      "name": "MUENCHENER RUECKVERS.-GES. AG N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Finance",
+      "price": 580.0,
+      "fairValue": 539.21,
+      "upside": -7.0,
+      "marketCapB": 72.97,
+      "healthScore": 2.6,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.5,
+        "profitability": 3.6,
+        "cashflow": 3.0,
+        "balanceSheet": 1.0,
+        "valuation": 2.9
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 520.54,
+        "analysts": 557.88
+      },
+      "pe": 11.2,
+      "evEbitda": null,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "BEI.DE",
+      "name": "BEIERSDORF AG                 I",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Conso. défensive",
+      "price": 79.18,
+      "fairValue": 73.06,
+      "upside": -7.7,
+      "marketCapB": 17.3,
+      "healthScore": 3.13,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 1.7,
+        "profitability": 2.9,
+        "cashflow": 2.4,
+        "balanceSheet": 4.7,
+        "valuation": 3.9
+      },
+      "models": {
+        "dcf": 47.66,
+        "multiples": 89.65,
+        "analysts": 81.86
+      },
+      "pe": 19.9,
+      "evEbitda": 9.2,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "LR.PA",
+      "name": "LEGRAND",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Industrie",
+      "price": 127.4,
+      "fairValue": 116.76,
+      "upside": -8.4,
+      "marketCapB": 33.39,
+      "healthScore": 3.63,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 4.0,
+        "cashflow": 3.4,
+        "balanceSheet": 3.2,
+        "valuation": 2.5
+      },
+      "models": {
+        "dcf": 75.38,
+        "multiples": 102.91,
+        "analysts": 172.0
+      },
+      "pe": 17.9,
+      "evEbitda": 16.2,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "AC.PA",
+      "name": "ACCOR",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. cyclique",
+      "price": 47.57,
+      "fairValue": 43.02,
+      "upside": -9.6,
+      "marketCapB": 10.8,
+      "healthScore": 1.74,
+      "healthLabel": "Faible",
+      "scores": {
+        "growth": 1.5,
+        "profitability": 2.5,
+        "cashflow": 1.0,
+        "balanceSheet": 2.2,
+        "valuation": 1.5
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 30.77,
+        "analysts": 55.27
+      },
+      "pe": 17.9,
+      "evEbitda": 14.6,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
       "ticker": "HEI.DE",
       "name": "Heidelberg Materials AG       I",
       "market": "DE",
       "currency": "€",
       "sector": "Matériaux",
       "price": 173.55,
-      "fairValue": 161.59,
-      "upside": -6.9,
+      "fairValue": 156.69,
+      "upside": -9.7,
       "marketCapB": 30.51,
-      "healthScore": 2.98,
+      "healthScore": 2.94,
       "healthLabel": "Bon",
       "scores": {
         "growth": 2.7,
         "profitability": 2.9,
         "cashflow": 2.5,
         "balanceSheet": 3.0,
-        "valuation": 3.9
+        "valuation": 3.7
       },
       "models": {
         "dcf": 71.39,
-        "multiples": 206.31,
+        "multiples": 191.62,
         "analysts": 207.06
       },
       "pe": 11.9,
@@ -3222,31 +4592,205 @@
       "valueTrap": false
     },
     {
-      "ticker": "DIS",
-      "name": "Walt Disney Company (The)",
-      "market": "US",
-      "currency": "$",
-      "sector": "Télécoms & Médias",
-      "price": 117.98,
-      "fairValue": 108.3,
-      "upside": -8.2,
-      "marketCapB": 201.51,
-      "healthScore": 3.27,
+      "ticker": "BAS.DE",
+      "name": "BASF SE                       N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Matériaux",
+      "price": 49.36,
+      "fairValue": 44.54,
+      "upside": -9.8,
+      "marketCapB": 43.65,
+      "healthScore": 2.99,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.9,
+        "profitability": 1.9,
+        "cashflow": 3.7,
+        "balanceSheet": 3.3,
+        "valuation": 3.1
+      },
+      "models": {
+        "dcf": 33.75,
+        "multiples": 45.96,
+        "analysts": 53.92
+      },
+      "pe": 15.6,
+      "evEbitda": 9.9,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "8411.T",
+      "name": "MIZUHO FINANCIAL GROUP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Finance",
+      "price": 7315.0,
+      "fairValue": 6593.3,
+      "upside": -9.9,
+      "marketCapB": 100.83,
+      "healthScore": 3.24,
       "healthLabel": "Bon",
       "scores": {
         "growth": 4.8,
-        "profitability": 2.9,
-        "cashflow": 2.9,
-        "balanceSheet": 2.2,
-        "valuation": 3.5
+        "profitability": 4.4,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 1.0
       },
       "models": {
-        "dcf": 70.74,
-        "multiples": 122.82,
-        "analysts": 131.34
+        "dcf": null,
+        "multiples": 3396.6,
+        "analysts": 9790.0
       },
-      "pe": 13.8,
-      "evEbitda": 11.1,
+      "pe": 21.7,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "8306.T",
+      "name": "MITSUBISHI UFJ FINANCIAL GROUP ",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Finance",
+      "price": 3024.0,
+      "fairValue": 2719.72,
+      "upside": -10.1,
+      "marketCapB": 194.36,
+      "healthScore": 3.08,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.2,
+        "profitability": 4.2,
+        "cashflow": 3.0,
+        "balanceSheet": 3.0,
+        "valuation": 1.0
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 1530.45,
+        "analysts": 3909.0
+      },
+      "pe": 19.9,
+      "evEbitda": null,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "EL.PA",
+      "name": "ESSILORLUXOTTICA",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Santé",
+      "price": 174.6,
+      "fairValue": 156.69,
+      "upside": -10.3,
+      "marketCapB": 80.03,
+      "healthScore": 2.94,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.2,
+        "profitability": 2.5,
+        "cashflow": 4.3,
+        "balanceSheet": 2.1,
+        "valuation": 2.6
+      },
+      "models": {
+        "dcf": 108.74,
+        "multiples": 144.77,
+        "analysts": 216.57
+      },
+      "pe": 22.1,
+      "evEbitda": 16.1,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "7741.T",
+      "name": "HOYA CORP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Santé",
+      "price": 22885.0,
+      "fairValue": 20344.81,
+      "upside": -11.1,
+      "marketCapB": 43.33,
+      "healthScore": 3.98,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 4.4,
+        "profitability": 5.0,
+        "cashflow": 3.9,
+        "balanceSheet": 5.0,
+        "valuation": 1.6
+      },
+      "models": {
+        "dcf": 15017.1,
+        "multiples": 15456.23,
+        "analysts": 30561.11
+      },
+      "pe": 33.5,
+      "evEbitda": 17.3,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "ALV.DE",
+      "name": "Allianz SE                    v",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Finance",
+      "price": 451.8,
+      "fairValue": 397.47,
+      "upside": -12.0,
+      "marketCapB": 168.97,
+      "healthScore": 3.28,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.7,
+        "profitability": 3.6,
+        "cashflow": 3.0,
+        "balanceSheet": 5.0,
+        "valuation": 2.1
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 339.45,
+        "analysts": 455.48
+      },
+      "pe": 13.4,
+      "evEbitda": 7.4,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "068270.KS",
+      "name": "Celltrion",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Santé",
+      "price": 213000.0,
+      "fairValue": 186710.64,
+      "upside": -12.3,
+      "marketCapB": 33.14,
+      "healthScore": 2.97,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 4.1,
+        "cashflow": 1.1,
+        "balanceSheet": 3.2,
+        "valuation": 1.4
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 94421.27,
+        "analysts": 279000.0
+      },
+      "pe": 26.9,
+      "evEbitda": 29.3,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -3257,21 +4801,21 @@
       "currency": "$",
       "sector": "Télécoms & Médias",
       "price": 560.84,
-      "fairValue": 513.7,
-      "upside": -8.4,
-      "marketCapB": 1433.64,
-      "healthScore": 3.86,
+      "fairValue": 491.16,
+      "upside": -12.4,
+      "marketCapB": 1306.88,
+      "healthScore": 3.73,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 5.0,
         "profitability": 5.0,
         "cashflow": 1.9,
         "balanceSheet": 4.5,
-        "valuation": 3.0
+        "valuation": 2.3
       },
       "models": {
         "dcf": 150.82,
-        "multiples": 542.04,
+        "multiples": 474.44,
         "analysts": 848.23
       },
       "pe": 15.7,
@@ -3280,147 +4824,60 @@
       "valueTrap": false
     },
     {
-      "ticker": "MRK",
-      "name": "Merck & Company, Inc.",
+      "ticker": "DIS",
+      "name": "Walt Disney Company (The)",
+      "market": "US",
+      "currency": "$",
+      "sector": "Télécoms & Médias",
+      "price": 117.98,
+      "fairValue": 102.72,
+      "upside": -12.9,
+      "marketCapB": 183.69,
+      "healthScore": 3.15,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.8,
+        "profitability": 2.9,
+        "cashflow": 2.9,
+        "balanceSheet": 2.2,
+        "valuation": 2.9
+      },
+      "models": {
+        "dcf": 70.74,
+        "multiples": 106.08,
+        "analysts": 131.34
+      },
+      "pe": 13.8,
+      "evEbitda": 11.1,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "ABBV",
+      "name": "AbbVie Inc.",
       "market": "US",
       "currency": "$",
       "sector": "Santé",
-      "price": 133.72,
-      "fairValue": 122.54,
-      "upside": -8.4,
-      "marketCapB": 329.65,
-      "healthScore": 3.27,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 1.8,
-        "profitability": 2.7,
-        "cashflow": 5.0,
-        "balanceSheet": 3.1,
-        "valuation": 3.7
-      },
-      "models": {
-        "dcf": 60.13,
-        "multiples": 145.97,
-        "analysts": 161.53
-      },
-      "pe": 14.9,
-      "evEbitda": 12.7,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "LR.PA",
-      "name": "LEGRAND",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Industrie",
-      "price": 127.4,
-      "fairValue": 115.35,
-      "upside": -9.5,
-      "marketCapB": 33.39,
-      "healthScore": 3.6,
+      "price": 286.2,
+      "fairValue": 249.05,
+      "upside": -13.0,
+      "marketCapB": 461.16,
+      "healthScore": 3.79,
       "healthLabel": "Très bon",
       "scores": {
-        "growth": 5.0,
-        "profitability": 4.0,
-        "cashflow": 3.4,
-        "balanceSheet": 3.2,
-        "valuation": 2.3
-      },
-      "models": {
-        "dcf": 75.38,
-        "multiples": 98.67,
-        "analysts": 172.0
-      },
-      "pe": 17.9,
-      "evEbitda": 16.2,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "RCO.PA",
-      "name": "REMY COINTREAU",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. défensive",
-      "price": 50.45,
-      "fairValue": 44.99,
-      "upside": -10.8,
-      "marketCapB": 2.65,
-      "healthScore": 2.59,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 1.3,
-        "profitability": 2.6,
-        "cashflow": 2.7,
-        "balanceSheet": 3.5,
+        "growth": 4.3,
+        "profitability": 4.7,
+        "cashflow": 5.0,
+        "balanceSheet": 2.1,
         "valuation": 2.8
       },
       "models": {
-        "dcf": null,
-        "multiples": 42.98,
-        "analysts": 47.01
+        "dcf": 177.76,
+        "multiples": 253.52,
+        "analysts": 315.88
       },
-      "pe": 24.6,
-      "evEbitda": 16.2,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "ALV.DE",
-      "name": "Allianz SE                    v",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Finance",
-      "price": 451.8,
-      "fairValue": 402.21,
-      "upside": -11.0,
-      "marketCapB": 168.97,
-      "healthScore": 3.31,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.7,
-        "profitability": 3.6,
-        "cashflow": 3.0,
-        "balanceSheet": 5.0,
-        "valuation": 2.2
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 348.93,
-        "analysts": 455.48
-      },
-      "pe": 13.4,
-      "evEbitda": 7.4,
-      "analystConsensus": "Conserver",
-      "valueTrap": false
-    },
-    {
-      "ticker": "EL.PA",
-      "name": "ESSILORLUXOTTICA",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Santé",
-      "price": 174.6,
-      "fairValue": 153.79,
-      "upside": -11.9,
-      "marketCapB": 80.03,
-      "healthScore": 2.89,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 3.2,
-        "profitability": 2.5,
-        "cashflow": 4.3,
-        "balanceSheet": 2.1,
-        "valuation": 2.4
-      },
-      "models": {
-        "dcf": 108.74,
-        "multiples": 136.07,
-        "analysts": 216.57
-      },
-      "pe": 22.1,
-      "evEbitda": 16.1,
+      "pe": 17.6,
+      "evEbitda": 18.1,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -3431,9 +4888,9 @@
       "currency": "$",
       "sector": "Finance",
       "price": 570.0,
-      "fairValue": 496.69,
-      "upside": -12.9,
-      "marketCapB": 1210.98,
+      "fairValue": 494.55,
+      "upside": -13.2,
+      "marketCapB": 1103.9,
       "healthScore": 3.2,
       "healthLabel": "Bon",
       "scores": {
@@ -3445,11 +4902,69 @@
       },
       "models": {
         "dcf": 688.76,
-        "multiples": 236.65,
+        "multiples": 230.22,
         "analysts": 564.67
       },
       "pe": 25.0,
       "evEbitda": null,
+      "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "market": "US",
+      "currency": "$",
+      "sector": "Santé",
+      "price": 1347.11,
+      "fairValue": 1137.23,
+      "upside": -15.6,
+      "marketCapB": 1093.83,
+      "healthScore": 3.34,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.5,
+        "profitability": 5.0,
+        "cashflow": 2.4,
+        "balanceSheet": 3.4,
+        "valuation": 1.4
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 804.4,
+        "analysts": 1470.06
+      },
+      "pe": 26.5,
+      "evEbitda": 26.8,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "RCO.PA",
+      "name": "REMY COINTREAU",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. défensive",
+      "price": 50.45,
+      "fairValue": 42.22,
+      "upside": -16.3,
+      "marketCapB": 2.65,
+      "healthScore": 2.48,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 1.3,
+        "profitability": 2.6,
+        "cashflow": 2.7,
+        "balanceSheet": 3.5,
+        "valuation": 2.2
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 37.44,
+        "analysts": 47.01
+      },
+      "pe": 24.6,
+      "evEbitda": 16.2,
       "analystConsensus": "Conserver",
       "valueTrap": false
     },
@@ -3460,10 +4975,10 @@
       "currency": "$",
       "sector": "Conso. cyclique",
       "price": 32.92,
-      "fairValue": 28.51,
-      "upside": -13.4,
-      "marketCapB": 48.9,
-      "healthScore": 2.73,
+      "fairValue": 27.56,
+      "upside": -16.3,
+      "marketCapB": 44.57,
+      "healthScore": 2.72,
       "healthLabel": "Bon",
       "scores": {
         "growth": 1.5,
@@ -3474,7 +4989,7 @@
       },
       "models": {
         "dcf": 17.85,
-        "multiples": 31.1,
+        "multiples": 28.27,
         "analysts": 36.57
       },
       "pe": 23.7,
@@ -3489,8 +5004,8 @@
       "currency": "€",
       "sector": "Télécoms & Médias",
       "price": 3.55,
-      "fairValue": 3.04,
-      "upside": -14.3,
+      "fairValue": 2.96,
+      "upside": -16.5,
       "marketCapB": 9.96,
       "healthScore": 2.1,
       "healthLabel": "Passable",
@@ -3503,7 +5018,7 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 1.95,
+        "multiples": 1.79,
         "analysts": 4.14
       },
       "pe": 27.4,
@@ -3512,60 +5027,31 @@
       "valueTrap": false
     },
     {
-      "ticker": "ABBV",
-      "name": "AbbVie Inc.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Santé",
-      "price": 286.2,
-      "fairValue": 243.68,
-      "upside": -14.9,
-      "marketCapB": 505.89,
-      "healthScore": 3.74,
+      "ticker": "ENX.PA",
+      "name": "EURONEXT",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Finance",
+      "price": 165.5,
+      "fairValue": 137.34,
+      "upside": -17.0,
+      "marketCapB": 16.51,
+      "healthScore": 3.57,
       "healthLabel": "Très bon",
       "scores": {
-        "growth": 4.3,
+        "growth": 5.0,
         "profitability": 4.7,
-        "cashflow": 5.0,
-        "balanceSheet": 2.1,
-        "valuation": 2.5
+        "cashflow": 4.4,
+        "balanceSheet": 2.8,
+        "valuation": 1.0
       },
       "models": {
-        "dcf": 177.76,
-        "multiples": 237.39,
-        "analysts": 315.88
+        "dcf": 137.58,
+        "multiples": 94.16,
+        "analysts": 180.29
       },
-      "pe": 17.6,
-      "evEbitda": 18.1,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "KO",
-      "name": "Coca-Cola Company (The)",
-      "market": "US",
-      "currency": "$",
-      "sector": "Conso. défensive",
-      "price": 96.99,
-      "fairValue": 81.53,
-      "upside": -15.9,
-      "marketCapB": 417.24,
-      "healthScore": 2.99,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 3.1,
-        "profitability": 5.0,
-        "cashflow": 2.1,
-        "balanceSheet": 3.2,
-        "valuation": 1.6
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 63.43,
-        "analysts": 99.64
-      },
-      "pe": 27.4,
-      "evEbitda": 25.5,
+      "pe": 17.7,
+      "evEbitda": 14.9,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -3576,25 +5062,170 @@
       "currency": "€",
       "sector": "Matériaux",
       "price": 94.52,
-      "fairValue": 79.41,
-      "upside": -16.0,
+      "fairValue": 77.21,
+      "upside": -18.3,
       "marketCapB": 12.97,
-      "healthScore": 2.5,
-      "healthLabel": "Bon",
+      "healthScore": 2.43,
+      "healthLabel": "Passable",
       "scores": {
         "growth": 1.9,
         "profitability": 2.1,
         "cashflow": 3.1,
         "balanceSheet": 3.9,
-        "valuation": 1.5
+        "valuation": 1.1
       },
       "models": {
         "dcf": null,
-        "multiples": 54.66,
+        "multiples": 50.26,
         "analysts": 104.17
       },
       "pe": 21.2,
       "evEbitda": 20.1,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "SHL.DE",
+      "name": "Siemens Healthineers AG       N",
+      "market": "DE",
+      "currency": "€",
+      "sector": "Santé",
+      "price": 42.96,
+      "fairValue": 34.83,
+      "upside": -18.9,
+      "marketCapB": 48.08,
+      "healthScore": 2.88,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.6,
+        "profitability": 2.9,
+        "cashflow": 3.0,
+        "balanceSheet": 2.3,
+        "valuation": 3.6
+      },
+      "models": {
+        "dcf": 12.33,
+        "multiples": 45.41,
+        "analysts": 46.74
+      },
+      "pe": 16.3,
+      "evEbitda": 13.7,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "8001.T",
+      "name": "ITOCHU CORP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Industrie",
+      "price": 2248.0,
+      "fairValue": 1813.98,
+      "upside": -19.3,
+      "marketCapB": 88.28,
+      "healthScore": 2.56,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 4.3,
+        "profitability": 2.3,
+        "cashflow": 1.4,
+        "balanceSheet": 1.8,
+        "valuation": 3.0
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 1085.96,
+        "analysts": 2542.0
+      },
+      "pe": 3.5,
+      "evEbitda": 21.4,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "4502.T",
+      "name": "TAKEDA PHARMACEUTICAL CO LTD",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Santé",
+      "price": 6973.0,
+      "fairValue": 5630.44,
+      "upside": -19.3,
+      "marketCapB": 63.59,
+      "healthScore": 2.76,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.0,
+        "profitability": 1.8,
+        "cashflow": 4.7,
+        "balanceSheet": 1.9,
+        "valuation": 2.4
+      },
+      "models": {
+        "dcf": 4369.88,
+        "multiples": 5402.5,
+        "analysts": 7118.94
+      },
+      "pe": 49.7,
+      "evEbitda": 11.8,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "KO",
+      "name": "Coca-Cola Company (The)",
+      "market": "US",
+      "currency": "$",
+      "sector": "Conso. défensive",
+      "price": 96.99,
+      "fairValue": 78.14,
+      "upside": -19.4,
+      "marketCapB": 380.35,
+      "healthScore": 2.96,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 3.1,
+        "profitability": 5.0,
+        "cashflow": 2.1,
+        "balanceSheet": 3.2,
+        "valuation": 1.4
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 56.64,
+        "analysts": 99.64
+      },
+      "pe": 27.4,
+      "evEbitda": 25.5,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "207940.KS",
+      "name": "SAMSUNG BIOLOGICS",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Santé",
+      "price": 1355000.0,
+      "fairValue": 1092228.48,
+      "upside": -19.4,
+      "marketCapB": 44.95,
+      "healthScore": 3.7,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 3.8,
+        "profitability": 4.6,
+        "cashflow": 4.1,
+        "balanceSheet": 4.7,
+        "valuation": 1.2
+      },
+      "models": {
+        "dcf": 637354.49,
+        "multiples": 774045.16,
+        "analysts": 1865285.8
+      },
+      "pe": 29.2,
+      "evEbitda": 22.2,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -3605,170 +5236,25 @@
       "currency": "€",
       "sector": "Conso. cyclique",
       "price": 1225.5,
-      "fairValue": 1020.34,
-      "upside": -16.7,
+      "fairValue": 983.8,
+      "upside": -19.7,
       "marketCapB": 128.19,
-      "healthScore": 3.59,
+      "healthScore": 3.6,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 2.1,
         "profitability": 5.0,
         "cashflow": 4.8,
         "balanceSheet": 5.0,
-        "valuation": 1.0
+        "valuation": 1.1
       },
       "models": {
         "dcf": 740.75,
-        "multiples": 773.17,
+        "multiples": 663.54,
         "analysts": 1547.1
       },
       "pe": 25.6,
       "evEbitda": 16.8,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "LLY",
-      "name": "Eli Lilly and Company",
-      "market": "US",
-      "currency": "$",
-      "sector": "Santé",
-      "price": 1347.11,
-      "fairValue": 1112.38,
-      "upside": -17.4,
-      "marketCapB": 1199.93,
-      "healthScore": 3.3,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 4.5,
-        "profitability": 5.0,
-        "cashflow": 2.4,
-        "balanceSheet": 3.4,
-        "valuation": 1.2
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 754.71,
-        "analysts": 1470.06
-      },
-      "pe": 26.5,
-      "evEbitda": 26.8,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "WMT",
-      "name": "Walmart Inc.",
-      "market": "US",
-      "currency": "$",
-      "sector": "Conso. défensive",
-      "price": 127.95,
-      "fairValue": 104.73,
-      "upside": -18.1,
-      "marketCapB": 1018.24,
-      "healthScore": 1.8,
-      "healthLabel": "Faible",
-      "scores": {
-        "growth": 1.9,
-        "profitability": 2.4,
-        "cashflow": 1.3,
-        "balanceSheet": 2.4,
-        "valuation": 1.0
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 73.55,
-        "analysts": 135.9
-      },
-      "pe": 39.6,
-      "evEbitda": 22.4,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "AI.PA",
-      "name": "AIR LIQUIDE",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Matériaux",
-      "price": 187.58,
-      "fairValue": 153.53,
-      "upside": -18.2,
-      "marketCapB": 119.71,
-      "healthScore": 2.07,
-      "healthLabel": "Passable",
-      "scores": {
-        "growth": 2.1,
-        "profitability": 3.7,
-        "cashflow": 1.3,
-        "balanceSheet": 2.2,
-        "valuation": 1.0
-      },
-      "models": {
-        "dcf": null,
-        "multiples": 103.43,
-        "analysts": 203.62
-      },
-      "pe": 26.1,
-      "evEbitda": 17.8,
-      "analystConsensus": "Achat fort",
-      "valueTrap": false
-    },
-    {
-      "ticker": "SHL.DE",
-      "name": "Siemens Healthineers AG       N",
-      "market": "DE",
-      "currency": "€",
-      "sector": "Santé",
-      "price": 42.96,
-      "fairValue": 33.88,
-      "upside": -21.1,
-      "marketCapB": 48.08,
-      "healthScore": 2.84,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.6,
-        "profitability": 2.9,
-        "cashflow": 3.0,
-        "balanceSheet": 2.3,
-        "valuation": 3.4
-      },
-      "models": {
-        "dcf": 12.33,
-        "multiples": 42.58,
-        "analysts": 46.74
-      },
-      "pe": 16.3,
-      "evEbitda": 13.7,
-      "analystConsensus": "Achat",
-      "valueTrap": false
-    },
-    {
-      "ticker": "TXN",
-      "name": "Texas Instruments Incorporated",
-      "market": "US",
-      "currency": "$",
-      "sector": "Technologie",
-      "price": 263.75,
-      "fairValue": 207.91,
-      "upside": -21.2,
-      "marketCapB": 241.01,
-      "healthScore": 4.02,
-      "healthLabel": "Très bon",
-      "scores": {
-        "growth": 5.0,
-        "profitability": 5.0,
-        "cashflow": 3.8,
-        "balanceSheet": 4.8,
-        "valuation": 1.5
-      },
-      "models": {
-        "dcf": 107.8,
-        "multiples": 177.14,
-        "analysts": 338.79
-      },
-      "pe": 22.7,
-      "evEbitda": 23.0,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -3779,8 +5265,8 @@
       "currency": "€",
       "sector": "Santé",
       "price": 220.6,
-      "fairValue": 173.45,
-      "upside": -21.4,
+      "fairValue": 176.66,
+      "upside": -19.9,
       "marketCapB": 21.47,
       "healthScore": 2.79,
       "healthLabel": "Bon",
@@ -3793,12 +5279,41 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 96.91,
+        "multiples": 103.32,
         "analysts": 250.0
       },
       "pe": 36.4,
       "evEbitda": 28.3,
       "analystConsensus": "Conserver",
+      "valueTrap": false
+    },
+    {
+      "ticker": "AI.PA",
+      "name": "AIR LIQUIDE",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Matériaux",
+      "price": 187.58,
+      "fairValue": 149.88,
+      "upside": -20.1,
+      "marketCapB": 119.71,
+      "healthScore": 2.07,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 2.1,
+        "profitability": 3.7,
+        "cashflow": 1.3,
+        "balanceSheet": 2.2,
+        "valuation": 1.0
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 96.13,
+        "analysts": 203.62
+      },
+      "pe": 26.1,
+      "evEbitda": 17.8,
+      "analystConsensus": "Achat fort",
       "valueTrap": false
     },
     {
@@ -3808,21 +5323,21 @@
       "currency": "€",
       "sector": "Santé",
       "price": 45.07,
-      "fairValue": 35.15,
-      "upside": -22.0,
+      "fairValue": 35.99,
+      "upside": -20.1,
       "marketCapB": 9.31,
-      "healthScore": 3.59,
+      "healthScore": 3.64,
       "healthLabel": "Très bon",
       "scores": {
         "growth": 1.7,
         "profitability": 4.3,
         "cashflow": 4.4,
         "balanceSheet": 4.5,
-        "valuation": 3.1
+        "valuation": 3.3
       },
       "models": {
         "dcf": 20.84,
-        "multiples": 41.5,
+        "multiples": 44.03,
         "analysts": 43.1
       },
       "pe": 19.5,
@@ -3831,31 +5346,89 @@
       "valueTrap": false
     },
     {
-      "ticker": "PG",
-      "name": "Procter & Gamble Company (The)",
+      "ticker": "4519.T",
+      "name": "CHUGAI PHARMACEUTICAL CO",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Santé",
+      "price": 7109.0,
+      "fairValue": 5663.51,
+      "upside": -20.3,
+      "marketCapB": 66.79,
+      "healthScore": 3.98,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 3.0,
+        "balanceSheet": 5.0,
+        "valuation": 1.9
+      },
+      "models": {
+        "dcf": 3338.78,
+        "multiples": 5351.76,
+        "analysts": 8300.0
+      },
+      "pe": 30.1,
+      "evEbitda": 15.2,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "TXN",
+      "name": "Texas Instruments Incorporated",
+      "market": "US",
+      "currency": "$",
+      "sector": "Technologie",
+      "price": 263.75,
+      "fairValue": 208.16,
+      "upside": -21.1,
+      "marketCapB": 219.7,
+      "healthScore": 4.02,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 5.0,
+        "cashflow": 3.8,
+        "balanceSheet": 4.8,
+        "valuation": 1.5
+      },
+      "models": {
+        "dcf": 107.8,
+        "multiples": 177.89,
+        "analysts": 338.79
+      },
+      "pe": 22.7,
+      "evEbitda": 23.0,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "WMT",
+      "name": "Walmart Inc.",
       "market": "US",
       "currency": "$",
       "sector": "Conso. défensive",
-      "price": 169.37,
-      "fairValue": 132.04,
-      "upside": -22.0,
-      "marketCapB": 392.56,
-      "healthScore": 3.33,
-      "healthLabel": "Bon",
+      "price": 127.95,
+      "fairValue": 100.43,
+      "upside": -21.5,
+      "marketCapB": 925.36,
+      "healthScore": 1.79,
+      "healthLabel": "Faible",
       "scores": {
-        "growth": 2.4,
-        "profitability": 5.0,
-        "cashflow": 3.8,
-        "balanceSheet": 2.6,
-        "valuation": 2.9
+        "growth": 1.9,
+        "profitability": 2.4,
+        "cashflow": 1.3,
+        "balanceSheet": 2.4,
+        "valuation": 1.0
       },
       "models": {
-        "dcf": 69.43,
-        "multiples": 150.86,
-        "analysts": 175.83
+        "dcf": null,
+        "multiples": 64.96,
+        "analysts": 135.9
       },
-      "pe": 22.8,
-      "evEbitda": 16.6,
+      "pe": 39.6,
+      "evEbitda": 22.4,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -3866,21 +5439,21 @@
       "currency": "€",
       "sector": "Industrie",
       "price": 254.65,
-      "fairValue": 194.76,
-      "upside": -23.5,
+      "fairValue": 197.76,
+      "upside": -22.3,
       "marketCapB": 194.61,
-      "healthScore": 2.96,
+      "healthScore": 3.0,
       "healthLabel": "Bon",
       "scores": {
         "growth": 4.3,
         "profitability": 3.0,
         "cashflow": 2.0,
         "balanceSheet": 2.9,
-        "valuation": 2.5
+        "valuation": 2.7
       },
       "models": {
         "dcf": 65.23,
-        "multiples": 208.39,
+        "multiples": 217.41,
         "analysts": 310.65
       },
       "pe": 16.8,
@@ -3895,25 +5468,54 @@
       "currency": "€",
       "sector": "Industrie",
       "price": 292.7,
-      "fairValue": 221.74,
-      "upside": -24.2,
+      "fairValue": 224.23,
+      "upside": -23.4,
       "marketCapB": 120.93,
-      "healthScore": 2.9,
+      "healthScore": 2.94,
       "healthLabel": "Bon",
       "scores": {
         "growth": 2.8,
         "profitability": 3.8,
         "cashflow": 3.6,
         "balanceSheet": 3.2,
-        "valuation": 1.1
+        "valuation": 1.3
       },
       "models": {
         "dcf": 122.14,
-        "multiples": 185.5,
+        "multiples": 192.95,
         "analysts": 357.59
       },
       "pe": 23.4,
       "evEbitda": 19.7,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "PG",
+      "name": "Procter & Gamble Company (The)",
+      "market": "US",
+      "currency": "$",
+      "sector": "Conso. défensive",
+      "price": 169.37,
+      "fairValue": 126.49,
+      "upside": -25.3,
+      "marketCapB": 357.85,
+      "healthScore": 3.22,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.4,
+        "profitability": 5.0,
+        "cashflow": 3.8,
+        "balanceSheet": 2.6,
+        "valuation": 2.4
+      },
+      "models": {
+        "dcf": 69.43,
+        "multiples": 134.22,
+        "analysts": 175.83
+      },
+      "pe": 22.8,
+      "evEbitda": 16.6,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -3924,9 +5526,9 @@
       "currency": "$",
       "sector": "Finance",
       "price": 401.87,
-      "fairValue": 296.07,
-      "upside": -26.3,
-      "marketCapB": 749.81,
+      "fairValue": 294.46,
+      "upside": -26.7,
+      "marketCapB": 683.51,
       "healthScore": 3.57,
       "healthLabel": "Très bon",
       "scores": {
@@ -3938,7 +5540,7 @@
       },
       "models": {
         "dcf": 259.46,
-        "multiples": 177.78,
+        "multiples": 172.95,
         "analysts": 450.96
       },
       "pe": 23.4,
@@ -3953,8 +5555,8 @@
       "currency": "€",
       "sector": "Finance",
       "price": 315.1,
-      "fairValue": 230.74,
-      "upside": -26.8,
+      "fairValue": 228.79,
+      "upside": -27.4,
       "marketCapB": 56.15,
       "healthScore": 3.14,
       "healthLabel": "Bon",
@@ -3967,12 +5569,41 @@
       },
       "models": {
         "dcf": null,
-        "multiples": 143.33,
+        "multiples": 139.43,
         "analysts": 318.14
       },
       "pe": 22.8,
       "evEbitda": null,
       "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "6098.T",
+      "name": "RECRUIT HOLDINGS CO LTD",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Télécoms & Médias",
+      "price": 16835.0,
+      "fairValue": 12181.37,
+      "upside": -27.6,
+      "marketCapB": 133.32,
+      "healthScore": 3.9,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 4.6,
+        "cashflow": 4.0,
+        "balanceSheet": 4.8,
+        "valuation": 1.0
+      },
+      "models": {
+        "dcf": 9786.35,
+        "multiples": 6312.13,
+        "analysts": 20445.62
+      },
+      "pe": 55.6,
+      "evEbitda": 25.2,
+      "analystConsensus": "Achat fort",
       "valueTrap": false
     },
     {
@@ -3982,9 +5613,9 @@
       "currency": "$",
       "sector": "Finance",
       "price": 625.59,
-      "fairValue": 454.51,
-      "upside": -27.3,
-      "marketCapB": 545.0,
+      "fairValue": 452.34,
+      "upside": -27.7,
+      "marketCapB": 496.81,
       "healthScore": 3.6,
       "healthLabel": "Très bon",
       "scores": {
@@ -3996,41 +5627,12 @@
       },
       "models": {
         "dcf": 402.63,
-        "multiples": 240.22,
+        "multiples": 233.69,
         "analysts": 720.69
       },
       "pe": 27.0,
       "evEbitda": 24.2,
       "analystConsensus": "Achat fort",
-      "valueTrap": false
-    },
-    {
-      "ticker": "HD",
-      "name": "Home Depot, Inc. (The)",
-      "market": "US",
-      "currency": "$",
-      "sector": "Conso. cyclique",
-      "price": 339.04,
-      "fairValue": 238.96,
-      "upside": -29.5,
-      "marketCapB": 338.26,
-      "healthScore": 2.57,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.6,
-        "profitability": 3.4,
-        "cashflow": 3.0,
-        "balanceSheet": 2.3,
-        "valuation": 1.6
-      },
-      "models": {
-        "dcf": 119.22,
-        "multiples": 222.06,
-        "analysts": 375.59
-      },
-      "pe": 21.5,
-      "evEbitda": 16.1,
-      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -4040,55 +5642,26 @@
       "currency": "$",
       "sector": "Santé",
       "price": 669.54,
-      "fairValue": 466.5,
-      "upside": -30.3,
-      "marketCapB": 248.08,
-      "healthScore": 3.13,
+      "fairValue": 475.84,
+      "upside": -28.9,
+      "marketCapB": 226.14,
+      "healthScore": 3.17,
       "healthLabel": "Bon",
       "scores": {
         "growth": 3.3,
         "profitability": 3.8,
         "cashflow": 3.9,
         "balanceSheet": 3.1,
-        "valuation": 1.5
+        "valuation": 1.7
       },
       "models": {
         "dcf": 237.89,
-        "multiples": 405.09,
+        "multiples": 433.12,
         "analysts": 756.52
       },
       "pe": 24.1,
       "evEbitda": 23.4,
       "analystConsensus": "Achat fort",
-      "valueTrap": false
-    },
-    {
-      "ticker": "OR.PA",
-      "name": "L'OREAL",
-      "market": "FR",
-      "currency": "€",
-      "sector": "Conso. défensive",
-      "price": 435.0,
-      "fairValue": 300.89,
-      "upside": -30.8,
-      "marketCapB": 231.99,
-      "healthScore": 3.09,
-      "healthLabel": "Bon",
-      "scores": {
-        "growth": 2.8,
-        "profitability": 4.2,
-        "cashflow": 4.2,
-        "balanceSheet": 2.7,
-        "valuation": 1.5
-      },
-      "models": {
-        "dcf": 176.67,
-        "multiples": 288.54,
-        "analysts": 437.46
-      },
-      "pe": 28.5,
-      "evEbitda": 23.6,
-      "analystConsensus": "Achat",
       "valueTrap": false
     },
     {
@@ -4098,25 +5671,54 @@
       "currency": "$",
       "sector": "Santé",
       "price": 270.47,
-      "fairValue": 187.19,
-      "upside": -30.8,
-      "marketCapB": 651.11,
-      "healthScore": 3.23,
+      "fairValue": 191.14,
+      "upside": -29.3,
+      "marketCapB": 593.53,
+      "healthScore": 3.3,
       "healthLabel": "Bon",
       "scores": {
         "growth": 1.9,
         "profitability": 4.7,
         "cashflow": 4.9,
         "balanceSheet": 3.0,
-        "valuation": 1.7
+        "valuation": 2.0
       },
       "models": {
         "dcf": 94.1,
-        "multiples": 187.63,
+        "multiples": 199.48,
         "analysts": 279.85
       },
       "pe": 23.3,
       "evEbitda": 19.7,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "8058.T",
+      "name": "MITSUBISHI CORP",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Industrie",
+      "price": 4840.0,
+      "fairValue": 3413.87,
+      "upside": -29.5,
+      "marketCapB": 101.22,
+      "healthScore": 2.46,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 1.9,
+        "cashflow": 2.1,
+        "balanceSheet": 2.0,
+        "valuation": 1.3
+      },
+      "models": {
+        "dcf": 2270.12,
+        "multiples": 2659.12,
+        "analysts": 5312.36
+      },
+      "pe": 22.8,
+      "evEbitda": 23.9,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -4127,9 +5729,9 @@
       "currency": "$",
       "sector": "Industrie",
       "price": 309.62,
-      "fairValue": 211.32,
-      "upside": -31.7,
-      "marketCapB": 319.95,
+      "fairValue": 213.16,
+      "upside": -31.2,
+      "marketCapB": 291.66,
       "healthScore": 3.13,
       "healthLabel": "Bon",
       "scores": {
@@ -4141,7 +5743,7 @@
       },
       "models": {
         "dcf": 122.82,
-        "multiples": 132.7,
+        "multiples": 138.24,
         "analysts": 378.43
       },
       "pe": 33.3,
@@ -4150,31 +5752,118 @@
       "valueTrap": false
     },
     {
-      "ticker": "SBUX",
-      "name": "Starbucks Corporation",
-      "market": "US",
-      "currency": "$",
-      "sector": "Conso. cyclique",
-      "price": 103.13,
-      "fairValue": 67.62,
-      "upside": -34.4,
-      "marketCapB": 117.58,
-      "healthScore": 2.39,
-      "healthLabel": "Passable",
+      "ticker": "7974.T",
+      "name": "NINTENDO CO LTD",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Télécoms & Médias",
+      "price": 8832.0,
+      "fairValue": 5997.7,
+      "upside": -32.1,
+      "marketCapB": 58.13,
+      "healthScore": 2.59,
+      "healthLabel": "Bon",
       "scores": {
-        "growth": 3.0,
-        "profitability": 2.3,
-        "cashflow": 4.0,
-        "balanceSheet": 1.6,
+        "growth": 1.0,
+        "profitability": 4.2,
+        "cashflow": 1.7,
+        "balanceSheet": 5.0,
         "valuation": 1.0
       },
       "models": {
-        "dcf": 44.63,
-        "multiples": 47.15,
-        "analysts": 111.07
+        "dcf": 3040.15,
+        "multiples": 4944.72,
+        "analysts": 10008.22
       },
-      "pe": 27.7,
-      "evEbitda": 23.7,
+      "pe": 26.0,
+      "evEbitda": 18.3,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "HD",
+      "name": "Home Depot, Inc. (The)",
+      "market": "US",
+      "currency": "$",
+      "sector": "Conso. cyclique",
+      "price": 339.04,
+      "fairValue": 227.05,
+      "upside": -33.0,
+      "marketCapB": 308.35,
+      "healthScore": 2.52,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.6,
+        "profitability": 3.4,
+        "cashflow": 3.0,
+        "balanceSheet": 2.3,
+        "valuation": 1.3
+      },
+      "models": {
+        "dcf": 119.22,
+        "multiples": 186.34,
+        "analysts": 375.59
+      },
+      "pe": 21.6,
+      "evEbitda": 16.1,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "OR.PA",
+      "name": "L'OREAL",
+      "market": "FR",
+      "currency": "€",
+      "sector": "Conso. défensive",
+      "price": 435.0,
+      "fairValue": 290.46,
+      "upside": -33.2,
+      "marketCapB": 231.99,
+      "healthScore": 3.05,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 2.8,
+        "profitability": 4.2,
+        "cashflow": 4.2,
+        "balanceSheet": 2.7,
+        "valuation": 1.3
+      },
+      "models": {
+        "dcf": 176.67,
+        "multiples": 257.26,
+        "analysts": 437.46
+      },
+      "pe": 28.5,
+      "evEbitda": 23.6,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "9983.T",
+      "name": "FAST RETAILING CO LTD",
+      "market": "JP",
+      "currency": "¥",
+      "sector": "Conso. cyclique",
+      "price": 82220.0,
+      "fairValue": 54382.03,
+      "upside": -33.9,
+      "marketCapB": 144.03,
+      "healthScore": 3.7,
+      "healthLabel": "Très bon",
+      "scores": {
+        "growth": 4.6,
+        "profitability": 4.2,
+        "cashflow": 3.6,
+        "balanceSheet": 5.0,
+        "valuation": 1.0
+      },
+      "models": {
+        "dcf": 37998.95,
+        "multiples": 39422.14,
+        "analysts": 85725.0
+      },
+      "pe": 60.1,
+      "evEbitda": 24.6,
       "analystConsensus": "Achat",
       "valueTrap": false
     },
@@ -4185,9 +5874,9 @@
       "currency": "$",
       "sector": "Technologie",
       "price": 342.56,
-      "fairValue": 224.16,
-      "upside": -34.6,
-      "marketCapB": 4978.14,
+      "fairValue": 224.41,
+      "upside": -34.5,
+      "marketCapB": 4537.96,
       "healthScore": 3.43,
       "healthLabel": "Bon",
       "scores": {
@@ -4199,12 +5888,70 @@
       },
       "models": {
         "dcf": 155.51,
-        "multiples": 171.35,
+        "multiples": 172.1,
         "analysts": 345.63
       },
       "pe": 32.4,
       "evEbitda": 29.2,
       "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "SBUX",
+      "name": "Starbucks Corporation",
+      "market": "US",
+      "currency": "$",
+      "sector": "Conso. cyclique",
+      "price": 103.13,
+      "fairValue": 64.76,
+      "upside": -37.2,
+      "marketCapB": 107.18,
+      "healthScore": 2.39,
+      "healthLabel": "Passable",
+      "scores": {
+        "growth": 3.0,
+        "profitability": 2.3,
+        "cashflow": 4.0,
+        "balanceSheet": 1.6,
+        "valuation": 1.0
+      },
+      "models": {
+        "dcf": 44.63,
+        "multiples": 38.59,
+        "analysts": 111.07
+      },
+      "pe": 27.7,
+      "evEbitda": 23.7,
+      "analystConsensus": "Achat",
+      "valueTrap": false
+    },
+    {
+      "ticker": "009150.KS",
+      "name": "SamsungElecMech",
+      "market": "KR",
+      "currency": "₩",
+      "sector": "Technologie",
+      "price": 774000.0,
+      "fairValue": 467802.81,
+      "upside": -39.6,
+      "marketCapB": 39.98,
+      "healthScore": 2.99,
+      "healthLabel": "Bon",
+      "scores": {
+        "growth": 5.0,
+        "profitability": 2.5,
+        "cashflow": 1.0,
+        "balanceSheet": 4.3,
+        "valuation": 2.2
+      },
+      "models": {
+        "dcf": null,
+        "multiples": 467802.81,
+        "analysts": null
+      },
+      "pe": 15.4,
+      "evEbitda": 27.3,
+      "analystConsensus": "Achat fort",
       "valueTrap": false
     },
     {
@@ -4214,9 +5961,9 @@
       "currency": "$",
       "sector": "Conso. défensive",
       "price": 1102.15,
-      "fairValue": 649.47,
-      "upside": -41.1,
-      "marketCapB": 488.4,
+      "fairValue": 632.3,
+      "upside": -42.6,
+      "marketCapB": 445.21,
       "healthScore": 2.61,
       "healthLabel": "Bon",
       "scores": {
@@ -4228,13 +5975,339 @@
       },
       "models": {
         "dcf": 356.47,
-        "multiples": 506.58,
+        "multiples": 455.09,
         "analysts": 1085.35
       },
       "pe": 44.0,
       "evEbitda": 33.6,
       "analystConsensus": "Achat",
       "valueTrap": false
+    }
+  ],
+  "macro": [
+    {
+      "ticker": "^FCHI",
+      "name": "CAC 40",
+      "category": "Indices",
+      "region": "France",
+      "unit": "pts",
+      "price": 7927.75,
+      "chg1d": -1.89,
+      "chg1w": -5.27,
+      "chg1m": 1.49,
+      "chgYtd": -3.26,
+      "low52w": 7665.62,
+      "high52w": 8726.03,
+      "pos52w": 24.7,
+      "sma200": 8204.33,
+      "distSma200": -3.37,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "^GDAXI",
+      "name": "DAX 40",
+      "category": "Indices",
+      "region": "Allemagne",
+      "unit": "pts",
+      "price": 24802.78,
+      "chg1d": -2.6,
+      "chg1w": -7.28,
+      "chg1m": -2.24,
+      "chgYtd": 1.07,
+      "low52w": 22300.75,
+      "high52w": 26771.88,
+      "pos52w": 56.0,
+      "sma200": 24996.96,
+      "distSma200": -0.78,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "^STOXX50E",
+      "name": "Euro Stoxx 50",
+      "category": "Indices",
+      "region": "Zone Euro",
+      "unit": "pts",
+      "price": 5941.95,
+      "chg1d": -2.81,
+      "chg1w": -6.97,
+      "chg1m": -2.38,
+      "chgYtd": 0.31,
+      "low52w": 5501.28,
+      "high52w": 6551.22,
+      "pos52w": 42.0,
+      "sma200": 6129.57,
+      "distSma200": -3.06,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "^GSPC",
+      "name": "S&P 500",
+      "category": "Indices",
+      "region": "États-Unis",
+      "unit": "pts",
+      "price": 6910.39,
+      "chg1d": -3.7,
+      "chg1w": -8.61,
+      "chg1m": -9.83,
+      "chgYtd": 0.76,
+      "low52w": 6343.72,
+      "high52w": 7818.93,
+      "pos52w": 38.4,
+      "sma200": 7348.58,
+      "distSma200": -5.96,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "^NDX",
+      "name": "Nasdaq 100",
+      "category": "Indices",
+      "region": "États-Unis",
+      "unit": "pts",
+      "price": 25028.98,
+      "chg1d": -5.61,
+      "chg1w": -10.43,
+      "chg1m": -13.57,
+      "chgYtd": -0.7,
+      "low52w": 22953.38,
+      "high52w": 31224.47,
+      "pos52w": 25.1,
+      "sma200": 28073.3,
+      "distSma200": -10.84,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "^N225",
+      "name": "Nikkei 225",
+      "category": "Indices",
+      "region": "Japon",
+      "unit": "pts",
+      "price": 56436.65,
+      "chg1d": -5.06,
+      "chg1w": -7.7,
+      "chg1m": -12.67,
+      "chgYtd": 8.88,
+      "low52w": 48625.88,
+      "high52w": 72366.34,
+      "pos52w": 32.9,
+      "sma200": 62264.97,
+      "distSma200": -9.36,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "^KS11",
+      "name": "KOSPI",
+      "category": "Indices",
+      "region": "Corée du Sud",
+      "unit": "pts",
+      "price": 4869.96,
+      "chg1d": -5.21,
+      "chg1w": -7.95,
+      "chg1m": -12.0,
+      "chgYtd": 13.0,
+      "low52w": 3846.06,
+      "high52w": 9114.55,
+      "pos52w": 19.4,
+      "sma200": 6524.91,
+      "distSma200": -25.36,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "ES=F",
+      "name": "Future S&P 500",
+      "category": "Futures",
+      "region": "États-Unis",
+      "unit": "pts",
+      "price": 6935.0,
+      "chg1d": -3.64,
+      "chg1w": -8.55,
+      "chg1m": -9.99,
+      "chgYtd": 0.5,
+      "low52w": 6388.25,
+      "high52w": 7874.0,
+      "pos52w": 36.8,
+      "sma200": 7377.65,
+      "distSma200": -6.0,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "NQ=F",
+      "name": "Future Nasdaq 100",
+      "category": "Futures",
+      "region": "États-Unis",
+      "unit": "pts",
+      "price": 25126.5,
+      "chg1d": -5.54,
+      "chg1w": -10.37,
+      "chg1m": -13.78,
+      "chgYtd": -1.02,
+      "low52w": 23139.75,
+      "high52w": 31483.25,
+      "pos52w": 23.8,
+      "sma200": 28200.87,
+      "distSma200": -10.9,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "YM=F",
+      "name": "Future Dow Jones",
+      "category": "Futures",
+      "region": "États-Unis",
+      "unit": "pts",
+      "price": 48216.0,
+      "chg1d": -1.96,
+      "chg1w": -8.02,
+      "chg1m": -9.14,
+      "chgYtd": -0.82,
+      "low52w": 45424.0,
+      "high52w": 54494.0,
+      "pos52w": 30.8,
+      "sma200": 50930.65,
+      "distSma200": -5.33,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "RTY=F",
+      "name": "Future Russell 2000",
+      "category": "Futures",
+      "region": "États-Unis",
+      "unit": "pts",
+      "price": 2587.4,
+      "chg1d": -2.85,
+      "chg1w": -7.51,
+      "chg1m": -7.46,
+      "chgYtd": 2.57,
+      "low52w": 2418.8,
+      "high52w": 3074.9,
+      "pos52w": 25.7,
+      "sma200": 2822.78,
+      "distSma200": -8.34,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "NKD=F",
+      "name": "Future Nikkei 225",
+      "category": "Futures",
+      "region": "Japon",
+      "unit": "pts",
+      "price": 54590.0,
+      "chg1d": -5.75,
+      "chg1w": -10.64,
+      "chg1m": -12.96,
+      "chgYtd": 6.65,
+      "low52w": 49110.0,
+      "high52w": 73205.0,
+      "pos52w": 22.7,
+      "sma200": 62710.28,
+      "distSma200": -12.95,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "GC=F",
+      "name": "Or (Gold)",
+      "category": "Matières premières",
+      "region": "Métaux précieux",
+      "unit": "$/oz",
+      "price": 3515.4,
+      "chg1d": -4.62,
+      "chg1w": -9.54,
+      "chg1m": -13.42,
+      "chgYtd": -18.81,
+      "low52w": 3515.4,
+      "high52w": 5318.4,
+      "pos52w": 0.0,
+      "sma200": 4444.68,
+      "distSma200": -20.91,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "SI=F",
+      "name": "Argent (Silver)",
+      "category": "Matières premières",
+      "region": "Métaux précieux",
+      "unit": "$/oz",
+      "price": 41.07,
+      "chg1d": -7.33,
+      "chg1w": -16.24,
+      "chg1m": -25.01,
+      "chgYtd": -41.79,
+      "low52w": 41.07,
+      "high52w": 115.08,
+      "pos52w": 0.0,
+      "sma200": 67.51,
+      "distSma200": -39.16,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "BZ=F",
+      "name": "Pétrole Brent",
+      "category": "Matières premières",
+      "region": "Énergie",
+      "unit": "$/bbl",
+      "price": 89.95,
+      "chg1d": -2.21,
+      "chg1w": -6.15,
+      "chg1m": -20.52,
+      "chgYtd": 48.07,
+      "low52w": 58.92,
+      "high52w": 118.35,
+      "pos52w": 52.2,
+      "sma200": 94.59,
+      "distSma200": -4.9,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "CL=F",
+      "name": "Pétrole WTI",
+      "category": "Matières premières",
+      "region": "Énergie",
+      "unit": "$/bbl",
+      "price": 83.41,
+      "chg1d": 0.24,
+      "chg1w": -5.82,
+      "chg1m": -16.15,
+      "chgYtd": 45.52,
+      "low52w": 55.27,
+      "high52w": 112.95,
+      "pos52w": 48.8,
+      "sma200": 88.29,
+      "distSma200": -5.53,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "HG=F",
+      "name": "Cuivre (Copper)",
+      "category": "Matières premières",
+      "region": "Métaux ind.",
+      "unit": "$/lb",
+      "price": 5.49,
+      "chg1d": -2.49,
+      "chg1w": -9.78,
+      "chg1m": -13.79,
+      "chgYtd": -2.75,
+      "low52w": 4.96,
+      "high52w": 6.8,
+      "pos52w": 28.4,
+      "sma200": 6.22,
+      "distSma200": -11.87,
+      "trend": "Baissière"
+    },
+    {
+      "ticker": "NG=F",
+      "name": "Gaz naturel",
+      "category": "Matières premières",
+      "region": "Énergie",
+      "unit": "$/MMBtu",
+      "price": 3.75,
+      "chg1d": 14.69,
+      "chg1w": 16.04,
+      "chg1m": 34.05,
+      "chgYtd": 3.59,
+      "low52w": 2.52,
+      "high52w": 7.46,
+      "pos52w": 24.8,
+      "sma200": 2.97,
+      "distSma200": 26.29,
+      "trend": "Haussière"
     }
   ],
   "winners": []

@@ -263,6 +263,150 @@
       "entryPrice": 295.2,
       "targetFairValue": 355.53,
       "healthScore": 3.51
+    },
+    "000660.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 1113000.0,
+      "targetFairValue": 3056126.8,
+      "healthScore": 4.6
+    },
+    "005930.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 183100.0,
+      "targetFairValue": 478326.35,
+      "healthScore": 4.71
+    },
+    "034730.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 462000.0,
+      "targetFairValue": 1075724.83,
+      "healthScore": 3.48
+    },
+    "005490.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 252000.0,
+      "targetFairValue": 549089.78,
+      "healthScore": 2.62
+    },
+    "017670.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 69700.0,
+      "targetFairValue": 145732.3,
+      "healthScore": 3.46
+    },
+    "000270.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 88200.0,
+      "targetFairValue": 175833.36,
+      "healthScore": 3.23
+    },
+    "035720.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 31000.0,
+      "targetFairValue": 58839.98,
+      "healthScore": 3.62
+    },
+    "006400.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 402500.0,
+      "targetFairValue": 752121.2,
+      "healthScore": 2.55
+    },
+    "7011.T": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 2722.0,
+      "targetFairValue": 4790.09,
+      "healthScore": 3.35
+    },
+    "051910.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 203000.0,
+      "targetFairValue": 349184.43,
+      "healthScore": 2.51
+    },
+    "012330.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 323000.0,
+      "targetFairValue": 539509.72,
+      "healthScore": 3.06
+    },
+    "066570.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 130600.0,
+      "targetFairValue": 207034.33,
+      "healthScore": 3.45
+    },
+    "032830.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 239000.0,
+      "targetFairValue": 377205.88,
+      "healthScore": 3.12
+    },
+    "CA.PA": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 13.5,
+      "targetFairValue": 20.55,
+      "healthScore": 2.63
+    },
+    "055550.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 86200.0,
+      "targetFairValue": 130122.73,
+      "healthScore": 3.59
+    },
+    "CON.DE": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 69.54,
+      "targetFairValue": 97.91,
+      "healthScore": 2.52
+    },
+    "105560.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 152400.0,
+      "targetFairValue": 214500.0,
+      "healthScore": 3.46
+    },
+    "6758.T": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 4312.0,
+      "targetFairValue": 6039.39,
+      "healthScore": 3.68
+    },
+    "028260.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 258000.0,
+      "targetFairValue": 354264.98,
+      "healthScore": 3.13
+    },
+    "8035.T": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 8309.0,
+      "targetFairValue": 11049.01,
+      "healthScore": 4.5
+    },
+    "086790.KS": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 123900.0,
+      "targetFairValue": 163804.34,
+      "healthScore": 3.79
+    },
+    "9433.T": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 2853.0,
+      "targetFairValue": 3700.43,
+      "healthScore": 2.95
+    },
+    "4568.T": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 2707.0,
+      "targetFairValue": 3369.71,
+      "healthScore": 3.6
+    },
+    "8316.T": {
+      "entryDate": "2026-11-22",
+      "entryPrice": 2936.0,
+      "targetFairValue": 3586.35,
+      "healthScore": 3.2
     }
   },
   "winners": []
