@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valoris — Screener d'Actions Sous-évaluées</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              900: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    /* Personnalisation des scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+    .dark ::-webkit-scrollbar-thumb { background: #334155; }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200">
+
+  <!-- ==================== HEADER / TOP BAR ==================== -->
+  <header class="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20">
+          V
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-lg leading-none tracking-tight">VALORIS</h1>
+            <span class="text-xs px-2 py-0.5 rounded-full font-medium bg-blue-100 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300">Pro</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">Valuation & Santé Financière des Titres</p>
+        </div>
+      </div>
+
+      <!-- Live Status Badge & Actions -->
+      <div class="flex items-center gap-3">
+        <div id="statusBadge" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+          <span id="statusText">Initialisation...</span>
+        </div>
+
+        <button onclick="refreshData()" title="Rafraîchir depuis ./data.json" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        </button>
+
+        <label title="Importer manuellement un fichier data.json" class="cursor-pointer p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center gap-1.5 text-xs font-medium">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          <span class="hidden md:inline">Importer JSON</span>
+          <input type="file" id="jsonInput" accept=".json" class="hidden" onchange="handleFileImport(event)">
+        </label>
+
+        <button onclick="toggleDarkMode()" id="themeToggle" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- TAB NAVIGATION & SUMMARY BANNER -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+      <div class="flex items-center gap-2 bg-slate-200/60 dark:bg-slate-900 p-1 rounded-xl w-fit">
+        <button id="tabStocksBtn" onclick="switchTab('stocks')" class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm">
+          Actions sous-évaluées <span id="stocksTabCount" class="ml-1.5 px-2 py-0.5 rounded-full text-xs bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">0</span>
+        </button>
+        <button id="tabWinnersBtn" onclick="switchTab('winners')" class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+          Précédents gagnants <span id="winnersTabCount" class="ml-1.5 px-2 py-0.5 rounded-full text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">0</span>
+        </button>
+      </div>
+
+      <!-- Quick Description -->
+      <p class="text-xs text-slate-500 dark:text-slate-400 max-w-md">
+        Calculé par moyenne pondérée DCF 5 ans + multiples sectoriels (PER & EV/EBITDA) + consensus d'analystes.
+      </p>
+    </div>
+
+    <!-- ==================== TAB 1: STOCKS SCREENER ==================== -->
+    <div id="tabStocks" class="space-y-6">
+
+      <!-- KPI METRICS BAR -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Actions filtrées</div>
+          <div class="text-2xl font-bold mt-1" id="kpiCount">0</div>
+          <div class="text-xs text-slate-400 mt-1" id="kpiTotal">Sur 0 univers</div>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Potentiel moyen</div>
+          <div class="text-2xl font-bold mt-1 text-emerald-600 dark:text-emerald-400" id="kpiAvgUpside">+0.0%</div>
+          <div class="text-xs text-slate-400 mt-1">Écart à la juste valeur</div>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Score de santé moyen</div>
+          <div class="text-2xl font-bold mt-1 text-blue-600 dark:text-blue-400" id="kpiAvgHealth">0.0 / 5</div>
+          <div class="text-xs text-slate-400 mt-1">Moyenne 5 piliers</div>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Pièges de valeur</div>
+          <div class="text-2xl font-bold mt-1 text-rose-600 dark:text-rose-400" id="kpiTrapsCount">0</div>
+          <div class="text-xs text-slate-400 mt-1" id="kpiTrapsStatus">Signalés / écartés</div>
+        </div>
+      </div>
+
+      <!-- FILTER CONTROLS PANEL -->
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+        
+        <!-- Filter Row 1: Search & Market Tabs & Quick Presets -->
+        <div class="flex flex-col lg:flex-row gap-4 justify-between lg:items-center">
+          
+          <!-- Search -->
+          <div class="relative flex-1 max-w-md">
+            <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Rechercher par nom ou ticker (ex: MC, LVMH, AAPL)..." class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <!-- Market Filter -->
+          <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+            <button onclick="setMarket('ALL')" id="marketBtnALL" class="px-3 py-1.5 rounded-lg transition bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs">Tous</button>
+            <button onclick="setMarket('FR')" id="marketBtnFR" class="px-3 py-1.5 rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">France (FR)</button>
+            <button onclick="setMarket('DE')" id="marketBtnDE" class="px-3 py-1.5 rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Allemagne (DE)</button>
+            <button onclick="setMarket('US')" id="marketBtnUS" class="px-3 py-1.5 rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">USA (US)</button>
+          </div>
+
+          <!-- Presets -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-medium text-slate-500">Filtres rapides :</span>
+            <button onclick="applyPreset('default')" class="px-2.5 py-1 rounded-lg text-xs font-medium bg-blue-50 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 hover:bg-blue-100 border border-blue-200 dark:border-blue-900 transition">Valoris (+20% / 1Md / 2.5)</button>
+            <button onclick="applyPreset('quality')" class="px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 hover:bg-emerald-100 border border-emerald-200 dark:border-emerald-900 transition">Haute Qualité (+20% / 5Md / 3.5)</button>
+            <button onclick="applyPreset('reset')" class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 transition">Tout réinitialiser</button>
+          </div>
+
+        </div>
+
+        <!-- Filter Row 2: Sliders & Dropdown -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 border-t border-slate-100 dark:border-slate-800">
+          
+          <!-- Slider 1: Min Upside -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <label class="font-medium text-slate-700 dark:text-slate-300">Potentiel min :</label>
+              <span id="minUpsideVal" class="font-bold text-blue-600 dark:text-blue-400">+20%</span>
+            </div>
+            <input type="range" id="minUpsideSlider" min="-10" max="60" step="5" value="20" oninput="updateSliderVal('minUpsideVal', '+' + this.value + '%'); applyFilters();" class="w-full accent-blue-600">
+          </div>
+
+          <!-- Slider 2: Min Market Cap -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <label class="font-medium text-slate-700 dark:text-slate-300">Cap. Boursière min :</label>
+              <span id="minCapVal" class="font-bold text-blue-600 dark:text-blue-400">1.0 Md</span>
+            </div>
+            <input type="range" id="minCapSlider" min="0" max="50" step="1" value="1" oninput="updateSliderVal('minCapVal', this.value + ' Md'); applyFilters();" class="w-full accent-blue-600">
+          </div>
+
+          <!-- Slider 3: Min Health Score -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <label class="font-medium text-slate-700 dark:text-slate-300">Santé min :</label>
+              <span id="minHealthVal" class="font-bold text-blue-600 dark:text-blue-400">2.5 / 5</span>
+            </div>
+            <input type="range" id="minHealthSlider" min="1.0" max="4.5" step="0.5" value="2.5" oninput="updateSliderVal('minHealthVal', parseFloat(this.value).toFixed(1) + ' / 5'); applyFilters();" class="w-full accent-blue-600">
+          </div>
+
+          <!-- Sector Select & Checkbox -->
+          <div class="space-y-2">
+            <select id="sectorSelect" onchange="applyFilters()" class="w-full px-3 py-1.5 bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="ALL">Tous les secteurs</option>
+            </select>
+            <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-600 dark:text-slate-400">
+              <input type="checkbox" id="hideTrapsCheckbox" onchange="applyFilters()" checked class="rounded accent-blue-600">
+              <span>Masquer les pièges de valeur potentiels</span>
+            </label>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- MAIN TABLE CONTAINER -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider select-none">
+                <th onclick="sortTable('name')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white">Action <span id="sort_name"></span></th>
+                <th onclick="sortTable('price')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white text-right">Cours <span id="sort_price"></span></th>
+                <th onclick="sortTable('fairValue')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white text-right">Juste Valeur <span id="sort_fairValue"></span></th>
+                <th onclick="sortTable('upside')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white text-right">Potentiel <span id="sort_upside"></span></th>
+                <th onclick="sortTable('marketCapB')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white text-right">Cap. (Md) <span id="sort_marketCapB"></span></th>
+                <th onclick="sortTable('healthScore')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white text-center">Santé (5) <span id="sort_healthScore"></span></th>
+                <th onclick="sortTable('pe')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white text-right">PER <span id="sort_pe"></span></th>
+                <th onclick="sortTable('evEbitda')" class="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white text-right">EV/EBITDA <span id="sort_evEbitda"></span></th>
+                <th class="py-3.5 px-4 text-center">Consensus</th>
+                <th class="py-3.5 px-4 text-center">Détail</th>
+              </tr>
+            </thead>
+            <tbody id="stocksTableBody" class="divide-y divide-slate-100 dark:divide-slate-800/60 font-medium">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty state -->
+        <div id="emptyState" class="hidden py-16 text-center space-y-3">
+          <div class="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mx-auto text-slate-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 9.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Aucune action ne correspond à vos filtres actuels</p>
+          <p class="text-xs text-slate-500">Essayez d'abaisser les exigences de potentiel ou de score de santé.</p>
+          <button onclick="applyPreset('reset')" class="inline-block mt-2 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700 transition">Réinitialiser les filtres</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 2: WINNERS ==================== -->
+    <div id="tabWinners" class="hidden space-y-6">
+
+      <!-- Winners Intro Banner -->
+      <div class="bg-gradient-to-r from-emerald-900/10 via-emerald-800/5 to-transparent p-5 rounded-2xl border border-emerald-500/20">
+        <div class="flex items-start gap-4">
+          <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <div class="space-y-1">
+            <h2 class="text-base font-bold text-slate-900 dark:text-white">Historique des Précédents Gagnants</h2>
+            <p class="text-xs text-slate-600 dark:text-slate-300 max-w-2xl">
+              Lorsqu'une action détectée comme sous-évaluée atteint avec succès son objectif de Juste Valeur, le script Python l'enregistre ici avec sa performance réelle réalisée.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Winners Table -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th class="py-3.5 px-4">Action</th>
+                <th class="py-3.5 px-4 text-center">Détecté le</th>
+                <th class="py-3.5 px-4 text-center">Objectif Atteint</th>
+                <th class="py-3.5 px-4 text-right">Prix Entrée</th>
+                <th class="py-3.5 px-4 text-right">Prix Cible</th>
+                <th class="py-3.5 px-4 text-right">Gain Réalisé</th>
+                <th class="py-3.5 px-4 text-center">Santé Entrée</th>
+              </tr>
+            </thead>
+            <tbody id="winnersTableBody" class="divide-y divide-slate-100 dark:divide-slate-800/60 font-medium">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+        <div id="winnersEmpty" class="hidden py-12 text-center text-sm text-slate-500">
+          Aucun gagnant enregistré pour le moment.
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== SLIDE-OVER DRAWER (STOCK DETAIL) ==================== -->
+  <div id="drawerBackdrop" onclick="closeDrawer()" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-40 hidden transition-opacity duration-300 opacity-0"></div>
+
+  <aside id="drawer" class="fixed inset-y-0 right-0 w-full sm:w-[540px] bg-white dark:bg-slate-900 z-50 shadow-2xl border-l border-slate-200 dark:border-slate-800 transform translate-x-full transition-transform duration-300 ease-out overflow-y-auto flex flex-col">
+    
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between sticky top-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-10">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span id="drawerTicker" class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200">SYMBOL</span>
+          <span id="drawerMarket" class="text-xs text-slate-400 font-semibold">FR</span>
+          <span id="drawerSector" class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">Secteur</span>
+        </div>
+        <h2 id="drawerName" class="text-xl font-bold text-slate-900 dark:text-white">Nom de l'entreprise</h2>
+      </div>
+      <button onclick="closeDrawer()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="p-6 space-y-6 flex-1">
+
+      <!-- Value Trap Warning Box -->
+      <div id="drawerTrapWarning" class="hidden p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300 text-xs space-y-1">
+        <div class="flex items-center gap-2 font-bold text-sm">
+          <svg class="w-5 h-5 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          <span>Alerte Piège de Valeur (Value Trap)</span>
+        </div>
+        <p>Même si ce titre paraît décoté, sa faible note sur les flux de trésorerie ou la dette indique un risque fondamental important. Prudence recommandée.</p>
+      </div>
+
+      <!-- Price & Valuation Summary Card -->
+      <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between">
+        <div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Cours Actuel</div>
+          <div class="text-2xl font-bold mt-0.5" id="drawerPrice">0.00 €</div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Juste Valeur</div>
+          <div class="text-2xl font-bold mt-0.5 text-blue-600 dark:text-blue-400" id="drawerFairValue">0.00 €</div>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Décote estimée</div>
+          <div class="text-xl font-extrabold mt-0.5 px-3 py-1 rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 inline-block" id="drawerUpside">+0.0%</div>
+        </div>
+      </div>
+
+      <!-- Valuation Models Breakdown -->
+      <div class="space-y-3">
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs text-slate-400">Modèles de Valorisation Individuels</h3>
+        <div class="space-y-2.5">
+          
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-semibold">DCF (Actualisation des Cash-Flows 5 ans)</div>
+              <div class="text-xs text-slate-400">Croissance prudente & taux d'actualisation 9.5%</div>
+            </div>
+            <div class="font-bold text-sm" id="drawerModelDCF">—</div>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-semibold">Multiples Sectoriels (PER & EV/EBITDA)</div>
+              <div class="text-xs text-slate-400">Comparaison aux médianes du secteur</div>
+            </div>
+            <div class="font-bold text-sm" id="drawerModelMultiples">—</div>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-semibold">Objectif Moyen des Analystes</div>
+              <div class="text-xs text-slate-400">Consensus moyen de Wall Street / Euronext</div>
+            </div>
+            <div class="font-bold text-sm" id="drawerModelAnalysts">—</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Health Pillars (5 Score Bars) -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs text-slate-400">Santé Financière (5 Piliers)</h3>
+          <span id="drawerOverallHealth" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300">4.0 / 5</span>
+        </div>
+
+        <div class="space-y-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800">
+          
+          <!-- Pillar 1 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">1. Rentabilité (ROE, Marges)</span>
+              <span id="scoreValProfitability" class="font-bold">0.0 / 5</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+              <div id="scoreBarProfitability" class="h-full bg-blue-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">2. Croissance (Chiffre d'affaires & Résultat)</span>
+              <span id="scoreValGrowth" class="font-bold">0.0 / 5</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+              <div id="scoreBarGrowth" class="h-full bg-blue-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">3. Flux de Trésorerie (Free Cash-Flow)</span>
+              <span id="scoreValCashflow" class="font-bold">0.0 / 5</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+              <div id="scoreBarCashflow" class="h-full bg-blue-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">4. Solidité du Bilan (Endettement & Ratio Liquidité)</span>
+              <span id="scoreValBalanceSheet" class="font-bold">0.0 / 5</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+              <div id="scoreBarBalanceSheet" class="h-full bg-blue-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 5 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">5. Valorisation Relative (Ratio vs Secteur)</span>
+              <span id="scoreValValuation" class="font-bold">0.0 / 5</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+              <div id="scoreBarValuation" class="h-full bg-blue-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Key Ratios Grid -->
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+          <div class="text-[11px] text-slate-400">PER Est.</div>
+          <div class="text-sm font-bold mt-0.5" id="drawerPE">—</div>
+        </div>
+        <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+          <div class="text-[11px] text-slate-400">EV / EBITDA</div>
+          <div class="text-sm font-bold mt-0.5" id="drawerEVEbitda">—</div>
+        </div>
+        <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+          <div class="text-[11px] text-slate-400">Consensus</div>
+          <div class="text-xs font-bold mt-1" id="drawerConsensus">—</div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // =========================================================================
+    // 1. JEU DE DONNÉES DE SECOURS (DEMO DATASET)
+    // =========================================================================
+    const DEMO_PAYLOAD = {
+      updatedAt: new Date().toISOString(),
+      count: 18,
+      stocks: [
+        {
+          ticker: "MC.PA", name: "LVMH", market: "FR", currency: "€", sector: "Conso. cyclique",
+          price: 620.5, fairValue: 780.0, upside: 25.7, marketCapB: 310.2, healthScore: 4.2, healthLabel: "Très bon",
+          scores: { growth: 3.8, profitability: 4.8, cashflow: 4.5, balanceSheet: 4.0, valuation: 3.9 },
+          models: { dcf: 790.0, multiples: 750.0, analysts: 800.0 }, pe: 21.3, evEbitda: 13.4, analystConsensus: "Achat fort", valueTrap: false
+        },
+        {
+          ticker: "TTE.PA", name: "TotalEnergies", market: "FR", currency: "€", sector: "Énergie",
+          price: 58.4, fairValue: 74.0, upside: 26.7, marketCapB: 138.5, healthScore: 4.1, healthLabel: "Très bon",
+          scores: { growth: 3.5, profitability: 4.6, cashflow: 4.8, balanceSheet: 4.2, valuation: 3.4 },
+          models: { dcf: 76.0, multiples: 72.0, analysts: 74.0 }, pe: 7.4, evEbitda: 3.8, analystConsensus: "Achat", valueTrap: false
+        },
+        {
+          ticker: "SAN.PA", name: "Sanofi", market: "FR", currency: "€", sector: "Santé",
+          price: 88.2, fairValue: 112.0, upside: 27.0, marketCapB: 111.0, healthScore: 3.9, healthLabel: "Bon",
+          scores: { growth: 3.2, profitability: 4.2, cashflow: 4.1, balanceSheet: 4.0, valuation: 4.0 },
+          models: { dcf: 115.0, multiples: 108.0, analysts: 113.0 }, pe: 12.8, evEbitda: 9.2, analystConsensus: "Achat", valueTrap: false
+        },
+        {
+          ticker: "AIR.PA", name: "Airbus", market: "FR", currency: "€", sector: "Industrie",
+          price: 138.6, fairValue: 175.0, upside: 26.3, marketCapB: 109.4, healthScore: 4.0, healthLabel: "Très bon",
+          scores: { growth: 4.1, profitability: 3.8, cashflow: 4.0, balanceSheet: 4.2, valuation: 3.9 },
+          models: { dcf: 178.0, multiples: 170.0, analysts: 177.0 }, pe: 22.1, evEbitda: 12.5, analystConsensus: "Achat fort", valueTrap: false
+        },
+        {
+          ticker: "OR.PA", name: "L'Oréal", market: "FR", currency: "€", sector: "Conso. défensive",
+          price: 345.0, fairValue: 425.0, upside: 23.2, marketCapB: 184.8, healthScore: 4.5, healthLabel: "Excellent",
+          scores: { growth: 4.0, profitability: 4.9, cashflow: 4.6, balanceSheet: 4.8, valuation: 4.2 },
+          models: { dcf: 430.0, multiples: 415.0, analysts: 430.0 }, pe: 26.4, evEbitda: 17.1, analystConsensus: "Achat", valueTrap: false
+        },
+        {
+          ticker: "RNO.PA", name: "Renault", market: "FR", currency: "€", sector: "Conso. cyclique",
+          price: 38.2, fairValue: 56.0, upside: 46.6, marketCapB: 11.2, healthScore: 2.2, healthLabel: "Passable",
+          scores: { growth: 2.1, profitability: 2.5, cashflow: 1.8, balanceSheet: 1.9, valuation: 2.7 },
+          models: { dcf: 58.0, multiples: 52.0, analysts: 58.0 }, pe: 4.2, evEbitda: 2.1, analystConsensus: "Conserver", valueTrap: true
+        },
+        {
+          ticker: "BNP.PA", name: "BNP Paribas", market: "FR", currency: "€", sector: "Finance",
+          price: 64.5, fairValue: 82.0, upside: 27.1, marketCapB: 73.1, healthScore: 3.6, healthLabel: "Bon",
+          scores: { growth: 3.0, profitability: 3.8, cashflow: 3.5, balanceSheet: 3.9, valuation: 3.8 },
+          models: { dcf: 84.0, multiples: 80.0, analysts: 82.0 }, pe: 6.8, evEbitda: null, analystConsensus: "Achat", valueTrap: false
+        },
+        {
+          ticker: "KER.PA", name: "Kering", market: "FR", currency: "€", sector: "Conso. cyclique",
+          price: 228.0, fairValue: 310.0, upside: 36.0, marketCapB: 28.1, healthScore: 2.8, healthLabel: "Bon",
+          scores: { growth: 1.8, profitability: 3.5, cashflow: 2.9, balanceSheet: 3.0, valuation: 2.8 },
+          models: { dcf: 320.0, multiples: 295.0, analysts: 315.0 }, pe: 14.2, evEbitda: 8.4, analystConsensus: "Conserver", valueTrap: false
+        },
+        {
+          ticker: "SAP.DE", name: "SAP SE", market: "DE", currency: "€", sector: "Technologie",
+          price: 205.0, fairValue: 248.0, upside: 21.0, marketCapB: 242.0, healthScore: 4.4, healthLabel: "Excellent",
+          scores: { growth: 4.3, profitability: 4.5, cashflow: 4.4, balanceSheet: 4.6, valuation: 4.2 },
+          models: { dcf: 252.0, multiples: 240.0, analysts: 252.0 }, pe: 32.5, evEbitda: 21.0, analystConsensus: "Achat fort", valueTrap: false
+        },
+        {
+          ticker: "SIE.DE", name: "Siemens AG", market: "DE", currency: "€", sector: "Industrie",
+          price: 178.4, fairValue: 220.0, upside: 23.3, marketCapB: 142.1, healthScore: 4.1, healthLabel: "Très bon",
+          scores: { growth: 3.8, profitability: 4.2, cashflow: 4.1, balanceSheet: 4.2, valuation: 4.2 },
+          models: { dcf: 225.0, multiples: 212.0, analysts: 223.0 }, pe: 16.5, evEbitda: 11.2, analystConsensus: "Achat", valueTrap: false
+        },
+        {
+          ticker: "MBG.DE", name: "Mercedes-Benz Group", market: "DE", currency: "€", sector: "Conso. cyclique",
+          price: 54.2, fairValue: 72.0, upside: 32.8, marketCapB: 56.4, healthScore: 3.5, healthLabel: "Bon",
+          scores: { growth: 2.8, profitability: 3.9, cashflow: 3.8, balanceSheet: 3.6, valuation: 3.4 },
+          models: { dcf: 75.0, multiples: 68.0, analysts: 73.0 }, pe: 5.6, evEbitda: 2.9, analystConsensus: "Achat", valueTrap: false
+        },
+        {
+          ticker: "BAYN.DE", name: "Bayer AG", market: "DE", currency: "€", sector: "Santé",
+          price: 20.8, fairValue: 34.0, upside: 63.5, marketCapB: 20.4, healthScore: 1.9, healthLabel: "Faible",
+          scores: { growth: 1.5, profitability: 2.2, cashflow: 1.6, balanceSheet: 1.5, valuation: 2.7 },
+          models: { dcf: 36.0, multiples: 30.0, analysts: 36.0 }, pe: 4.8, evEbitda: 5.2, analystConsensus: "Sous-performance", valueTrap: true
+        },
+        {
+          ticker: "AAPL", name: "Apple Inc.", market: "US", currency: "$", sector: "Technologie",
+          price: 224.0, fairValue: 270.0, upside: 20.5, marketCapB: 3410.0, healthScore: 4.6, healthLabel: "Excellent",
+          scores: { growth: 3.9, profitability: 4.9, cashflow: 4.8, balanceSheet: 4.6, valuation: 4.8 },
+          models: { dcf: 275.0, multiples: 260.0, analysts: 275.0 }, pe: 30.2, evEbitda: 23.1, analystConsensus: "Achat fort", valueTrap: false
+        },
+        {
+          ticker: "MSFT", name: "Microsoft Corp.", market: "US", currency: "$", sector: "Technologie",
+          price: 415.0, fairValue: 510.0, upside: 22.9, marketCapB: 3080.0, healthScore: 4.7, healthLabel: "Excellent",
+          scores: { growth: 4.6, profitability: 4.9, cashflow: 4.8, balanceSheet: 4.7, valuation: 4.5 },
+          models: { dcf: 520.0, multiples: 495.0, analysts: 515.0 }, pe: 31.8, evEbitda: 22.4, analystConsensus: "Achat fort", valueTrap: false
+        },
+        {
+          ticker: "GOOGL", name: "Alphabet Inc.", market: "US", currency: "$", sector: "Télécoms & Médias",
+          price: 172.0, fairValue: 215.0, upside: 25.0, marketCapB: 2130.0, healthScore: 4.5, healthLabel: "Excellent",
+          scores: { growth: 4.2, profitability: 4.7, cashflow: 4.6, balanceSheet: 4.8, valuation: 4.2 },
+          models: { dcf: 220.0, multiples: 208.0, analysts: 217.0 }, pe: 21.0, evEbitda: 14.2, analystConsensus: "Achat fort", valueTrap: false
+        },
+        {
+          ticker: "NVDA", name: "NVIDIA Corp.", market: "US", currency: "$", sector: "Technologie",
+          price: 135.0, fairValue: 170.0, upside: 25.9, marketCapB: 3320.0, healthScore: 4.8, healthLabel: "Excellent",
+          scores: { growth: 5.0, profitability: 5.0, cashflow: 4.8, balanceSheet: 4.6, valuation: 4.6 },
+          models: { dcf: 175.0, multiples: 162.0, analysts: 173.0 }, pe: 36.2, evEbitda: 28.5, analystConsensus: "Achat fort", valueTrap: false
+        },
+        {
+          ticker: "PFE", name: "Pfizer Inc.", market: "US", currency: "$", sector: "Santé",
+          price: 25.4, fairValue: 33.5, upside: 31.9, marketCapB: 144.2, healthScore: 3.2, healthLabel: "Bon",
+          scores: { growth: 2.2, profitability: 3.4, cashflow: 3.5, balanceSheet: 3.2, valuation: 3.7 },
+          models: { dcf: 35.0, multiples: 31.0, analysts: 34.5 }, pe: 9.8, evEbitda: 8.1, analystConsensus: "Conserver", valueTrap: false
+        },
+        {
+          ticker: "JPM", name: "JPMorgan Chase", market: "US", currency: "$", sector: "Finance",
+          price: 232.0, fairValue: 285.0, upside: 22.8, marketCapB: 658.0, healthScore: 4.2, healthLabel: "Très bon",
+          scores: { growth: 3.9, profitability: 4.4, cashflow: 4.0, balanceSheet: 4.3, valuation: 4.4 },
+          models: { dcf: 290.0, multiples: 278.0, analysts: 287.0 }, pe: 12.2, evEbitda: null, analystConsensus: "Achat", valueTrap: false
+        }
+      ],
+      winners: [
+        {
+          ticker: "SAF.PA", name: "Safran", market: "FR", currency: "€",
+          detectedDate: "2026-04-12", reachedDate: "2026-09-18",
+          entryPrice: 182.5, exitPrice: 228.4, gainPct: 25.2, healthScoreAtEntry: 4.1
+        },
+        {
+          ticker: "DBK.DE", name: "Deutsche Bank", market: "DE", currency: "€",
+          detectedDate: "2026-02-10", reachedDate: "2026-07-22",
+          entryPrice: 12.1, exitPrice: 15.8, gainPct: 30.5, healthScoreAtEntry: 3.5
+        },
+        {
+          ticker: "LLY", name: "Eli Lilly & Co", market: "US", currency: "$",
+          detectedDate: "2026-01-15", reachedDate: "2026-06-30",
+          entryPrice: 620.0, exitPrice: 840.0, gainPct: 35.5, healthScoreAtEntry: 4.5
+        },
+        {
+          ticker: "DTE.DE", name: "Deutsche Telekom", market: "DE", currency: "€",
+          detectedDate: "2026-03-01", reachedDate: "2026-08-14",
+          entryPrice: 21.4, exitPrice: 27.2, gainPct: 27.1, healthScoreAtEntry: 3.9
+        }
+      ]
+    };
+
+    // =========================================================================
+    // 2. ÉTAT GLOBAL DE L'APPLICATION
+    // =========================================================================
+    let appState = {
+      allStocks: [],
+      allWinners: [],
+      updatedAt: null,
+      isDemo: true,
+      currentTab: 'stocks',
+      filters: {
+        market: 'ALL',
+        search: '',
+        minUpside: 20,
+        minCap: 1,
+        minHealth: 2.5,
+        sector: 'ALL',
+        hideTraps: true
+      },
+      sort: {
+        field: 'upside',
+        dir: 'desc'
+      },
+      selectedStock: null
+    };
+
+    // =========================================================================
+    // 3. INITIALISATION ET CHARGEMENT DE DATA.JSON
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      initDarkMode();
+      fetchData();
+    });
+
+    async function fetchData() {
+      const badgeText = document.getElementById('statusText');
+      const badge = document.getElementById('statusBadge');
+
+      try {
+        // Tentative de chargement auto depuis ./data.json avec cache-busting
+        const response = await fetch('./data.json?t=' + Date.now());
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const data = await response.json();
+        if (!data || !Array.isArray(data.stocks)) throw new Error("Format JSON invalide");
+
+        // Succès : chargement des données en direct
+        appState.allStocks = data.stocks;
+        appState.allWinners = data.winners || [];
+        appState.updatedAt = data.updatedAt;
+        appState.isDemo = false;
+
+        // Badge Vert
+        badge.className = "hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50";
+        const dateStr = formatDateFR(data.updatedAt);
+        badgeText.textContent = `Données en direct • Mis à jour le ${dateStr}`;
+
+      } catch (err) {
+        console.warn("Utilisation du mode démo (data.json non détecté ou inaccessible):", err);
+        
+        // Fallback silencieux sur le dataset démo
+        appState.allStocks = DEMO_PAYLOAD.stocks;
+        appState.allWinners = DEMO_PAYLOAD.winners;
+        appState.updatedAt = DEMO_PAYLOAD.updatedAt;
+        appState.isDemo = true;
+
+        // Badge Ambre
+        badge.className = "hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50";
+        badgeText.textContent = "Mode démo • data.json non détecté";
+      }
+
+      populateSectors();
+      applyFilters();
+      renderWinnersTable();
+    }
+
+    function refreshData() {
+      fetchData();
+    }
+
+    function handleFileImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (!data || !Array.isArray(data.stocks)) throw new Error("JSON non conforme");
+
+          appState.allStocks = data.stocks;
+          appState.allWinners = data.winners || [];
+          appState.updatedAt = data.updatedAt || new Date().toISOString();
+          appState.isDemo = false;
+
+          const badgeText = document.getElementById('statusText');
+          const badge = document.getElementById('statusBadge');
+          badge.className = "hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-950/80 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50";
+          badgeText.textContent = `Fichier local chargé (${data.stocks.length} titres)`;
+
+          populateSectors();
+          applyFilters();
+          renderWinnersTable();
+        } catch (err) {
+          alert("Impossible de lire ce fichier JSON. Assurez-vous qu'il respecte le schéma Valoris.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // =========================================================================
+    // 4. GESTION DES FILTRES ET DES SECTEURS
+    // =========================================================================
+    function populateSectors() {
+      const select = document.getElementById('sectorSelect');
+      const sectors = new Set(appState.allStocks.map(s => s.sector).filter(Boolean));
+      
+      select.innerHTML = '<option value="ALL">Tous les secteurs</option>';
+      Array.from(sectors).sort().forEach(sec => {
+        const opt = document.createElement('option');
+        opt.value = sec;
+        opt.textContent = sec;
+        select.appendChild(opt);
+      });
+    }
+
+    function setMarket(m) {
+      appState.filters.market = m;
+      ['ALL', 'FR', 'DE', 'US'].forEach(mk => {
+        const btn = document.getElementById(`marketBtn${mk}`);
+        if (mk === m) {
+          btn.className = "px-3 py-1.5 rounded-lg transition bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+        }
+      });
+      applyFilters();
+    }
+
+    function updateSliderVal(id, text) {
+      document.getElementById(id).textContent = text;
+    }
+
+    function applyPreset(preset) {
+      const minUpside = document.getElementById('minUpsideSlider');
+      const minCap = document.getElementById('minCapSlider');
+      const minHealth = document.getElementById('minHealthSlider');
+      const search = document.getElementById('searchInput');
+      const sector = document.getElementById('sectorSelect');
+      const traps = document.getElementById('hideTrapsCheckbox');
+
+      if (preset === 'default') {
+        minUpside.value = 20;
+        minCap.value = 1;
+        minHealth.value = 2.5;
+        traps.checked = true;
+      } else if (preset === 'quality') {
+        minUpside.value = 20;
+        minCap.value = 5;
+        minHealth.value = 3.5;
+        traps.checked = true;
+      } else if (preset === 'reset') {
+        minUpside.value = -10;
+        minCap.value = 0;
+        minHealth.value = 1.0;
+        search.value = '';
+        sector.value = 'ALL';
+        traps.checked = false;
+        setMarket('ALL');
+      }
+
+      updateSliderVal('minUpsideVal', (minUpside.value >= 0 ? '+' : '') + minUpside.value + '%');
+      updateSliderVal('minCapVal', minCap.value + ' Md');
+      updateSliderVal('minHealthVal', parseFloat(minHealth.value).toFixed(1) + ' / 5');
+
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
+      const minUpside = parseFloat(document.getElementById('minUpsideSlider').value);
+      const minCap = parseFloat(document.getElementById('minCapSlider').value);
+      const minHealth = parseFloat(document.getElementById('minHealthSlider').value);
+      const sectorVal = document.getElementById('sectorSelect').value;
+      const hideTraps = document.getElementById('hideTrapsCheckbox').checked;
+
+      appState.filters.search = searchVal;
+      appState.filters.minUpside = minUpside;
+      appState.filters.minCap = minCap;
+      appState.filters.minHealth = minHealth;
+      appState.filters.sector = sectorVal;
+      appState.filters.hideTraps = hideTraps;
+
+      let filtered = appState.allStocks.filter(stock => {
+        // Marché
+        if (appState.filters.market !== 'ALL' && stock.market !== appState.filters.market) return false;
+        // Recherche
+        if (searchVal && !stock.name.toLowerCase().includes(searchVal) && !stock.ticker.toLowerCase().includes(searchVal)) return false;
+        // Sliders
+        if (stock.upside < minUpside) return false;
+        if (stock.marketCapB < minCap) return false;
+        if (stock.healthScore < minHealth) return false;
+        // Secteur
+        if (sectorVal !== 'ALL' && stock.sector !== sectorVal) return false;
+        // Pièges
+        if (hideTraps && stock.valueTrap) return false;
+
+        return true;
+      });
+
+      // Tri
+      const { field, dir } = appState.sort;
+      filtered.sort((a, b) => {
+        let valA = a[field];
+        let valB = b[field];
+
+        if (valA === null || valA === undefined) valA = -999999;
+        if (valB === null || valB === undefined) valB = -999999;
+
+        if (typeof valA === 'string') {
+          return dir === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        }
+        return dir === 'asc' ? valA - valB : valB - valA;
+      });
+
+      renderKPIs(filtered);
+      renderTable(filtered);
+    }
+
+    // =========================================================================
+    // 5. RENDU DU TABLEAU ET DES KPIS
+    // =========================================================================
+    function renderKPIs(filtered) {
+      document.getElementById('kpiCount').textContent = filtered.length;
+      document.getElementById('kpiTotal').textContent = `Sur ${appState.allStocks.length} univers`;
+
+      if (filtered.length > 0) {
+        const avgUpside = filtered.reduce((acc, s) => acc + s.upside, 0) / filtered.length;
+        const avgHealth = filtered.reduce((acc, s) => acc + s.healthScore, 0) / filtered.length;
+        
+        document.getElementById('kpiAvgUpside').textContent = (avgUpside >= 0 ? '+' : '') + avgUpside.toFixed(1) + '%';
+        document.getElementById('kpiAvgHealth').textContent = avgHealth.toFixed(1) + ' / 5';
+      } else {
+        document.getElementById('kpiAvgUpside').textContent = "0.0%";
+        document.getElementById('kpiAvgHealth').textContent = "0.0 / 5";
+      }
+
+      const totalTraps = appState.allStocks.filter(s => s.valueTrap).length;
+      const filteredTraps = filtered.filter(s => s.valueTrap).length;
+      document.getElementById('kpiTrapsCount').textContent = filteredTraps;
+      document.getElementById('kpiTrapsStatus').textContent = appState.filters.hideTraps ? `${totalTraps} écartés par filtre` : `${filteredTraps} signalés dans la liste`;
+
+      document.getElementById('stocksTabCount').textContent = filtered.length;
+      document.getElementById('winnersTabCount').textContent = appState.allWinners.length;
+    }
+
+    function sortTable(field) {
+      if (appState.sort.field === field) {
+        appState.sort.dir = appState.sort.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        appState.sort.field = field;
+        appState.sort.dir = 'desc';
+      }
+
+      // Mettre à jour les icônes de tri
+      ['name', 'price', 'fairValue', 'upside', 'marketCapB', 'healthScore', 'pe', 'evEbitda'].forEach(f => {
+        const el = document.getElementById(`sort_${f}`);
+        if (el) el.textContent = '';
+      });
+
+      const currentIcon = document.getElementById(`sort_${field}`);
+      if (currentIcon) {
+        currentIcon.textContent = appState.sort.dir === 'asc' ? '▲' : '▼';
+      }
+
+      applyFilters();
+    }
+
+    function renderTable(stocks) {
+      const tbody = document.getElementById('stocksTableBody');
+      const emptyState = document.getElementById('emptyState');
+
+      tbody.innerHTML = '';
+
+      if (stocks.length === 0) {
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      stocks.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors";
+        tr.onclick = () => openDrawer(s);
+
+        const curr = s.currency || '€';
+        const upsideClass = s.upside >= 20 ? 'text-emerald-600 dark:text-emerald-400 font-bold' : (s.upside >= 10 ? 'text-blue-600 dark:text-blue-400 font-semibold' : 'text-slate-500');
+
+        let healthPill = 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300';
+        if (s.healthScore >= 4.0) healthPill = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300';
+        else if (s.healthScore >= 3.0) healthPill = 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300';
+        else if (s.healthScore >= 2.0) healthPill = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300';
+        else healthPill = 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300';
+
+        tr.innerHTML = `
+          <td class="py-3.5 px-4">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-0.5 rounded font-mono text-xs font-bold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200">${s.ticker}</span>
+              <div>
+                <div class="font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  ${escapeHtml(s.name)}
+                  ${s.valueTrap ? `<span title="Piège de valeur potentiel" class="inline-block w-2 h-2 rounded-full bg-rose-500"></span>` : ''}
+                </div>
+                <div class="text-xs text-slate-400 font-normal">${s.sector || 'N/A'} • ${s.market}</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-right font-medium">${formatNum(s.price)} ${curr}</td>
+          <td class="py-3.5 px-4 text-right font-bold text-blue-600 dark:text-blue-400">${formatNum(s.fairValue)} ${curr}</td>
+          <td class="py-3.5 px-4 text-right ${upsideClass}">${s.upside >= 0 ? '+' : ''}${s.upside.toFixed(1)}%</td>
+          <td class="py-3.5 px-4 text-right text-slate-600 dark:text-slate-300">${formatNum(s.marketCapB)} Md</td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${healthPill}">
+              ${s.healthScore.toFixed(1)}
+            </span>
+          </td>
+          <td class="py-3.5 px-4 text-right text-slate-500">${s.pe ? s.pe.toFixed(1) : '—'}</td>
+          <td class="py-3.5 px-4 text-right text-slate-500">${s.evEbitda ? s.evEbitda.toFixed(1) : '—'}</td>
+          <td class="py-3.5 px-4 text-center text-xs">
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${escapeHtml(s.analystConsensus || '—')}</span>
+          </td>
+          <td class="py-3.5 px-4 text-center text-slate-400">
+            <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderWinnersTable() {
+      const tbody = document.getElementById('winnersTableBody');
+      const emptyMsg = document.getElementById('winnersEmpty');
+      tbody.innerHTML = '';
+
+      if (!appState.allWinners || appState.allWinners.length === 0) {
+        emptyMsg.classList.remove('hidden');
+        return;
+      }
+      emptyMsg.classList.add('hidden');
+
+      appState.allWinners.forEach(w => {
+        const tr = document.createElement('tr');
+        const curr = w.currency || '€';
+        tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors";
+        tr.innerHTML = `
+          <td class="py-3.5 px-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded font-mono text-xs font-bold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200">${w.ticker}</span>
+              <span class="font-semibold text-slate-900 dark:text-white">${escapeHtml(w.name)}</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-center text-xs text-slate-500">${w.detectedDate}</td>
+          <td class="py-3.5 px-4 text-center text-xs text-slate-500">${w.reachedDate}</td>
+          <td class="py-3.5 px-4 text-right font-medium">${formatNum(w.entryPrice)} ${curr}</td>
+          <td class="py-3.5 px-4 text-right font-medium">${formatNum(w.exitPrice)} ${curr}</td>
+          <td class="py-3.5 px-4 text-right font-extrabold text-emerald-600 dark:text-emerald-400">+${w.gainPct.toFixed(1)}%</td>
+          <td class="py-3.5 px-4 text-center font-bold text-xs">${w.healthScoreAtEntry ? w.healthScoreAtEntry.toFixed(1) : '—'} / 5</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // =========================================================================
+    // 6. SLIDE-OVER DRAWER (DÉTAILS D'UNE ACTION)
+    // =========================================================================
+    function openDrawer(stock) {
+      appState.selectedStock = stock;
+      const curr = stock.currency || '€';
+
+      document.getElementById('drawerTicker').textContent = stock.ticker;
+      document.getElementById('drawerMarket').textContent = stock.market;
+      document.getElementById('drawerSector').textContent = stock.sector || 'Général';
+      document.getElementById('drawerName').textContent = stock.name;
+
+      document.getElementById('drawerPrice').textContent = `${formatNum(stock.price)} ${curr}`;
+      document.getElementById('drawerFairValue').textContent = `${formatNum(stock.fairValue)} ${curr}`;
+      document.getElementById('drawerUpside').textContent = `${stock.upside >= 0 ? '+' : ''}${stock.upside.toFixed(1)}%`;
+
+      // Value trap warning
+      const trapBox = document.getElementById('drawerTrapWarning');
+      if (stock.valueTrap) trapBox.classList.remove('hidden');
+      else trapBox.classList.add('hidden');
+
+      // Models
+      document.getElementById('drawerModelDCF').textContent = stock.models && stock.models.dcf ? `${formatNum(stock.models.dcf)} ${curr}` : '—';
+      document.getElementById('drawerModelMultiples').textContent = stock.models && stock.models.multiples ? `${formatNum(stock.models.multiples)} ${curr}` : '—';
+      document.getElementById('drawerModelAnalysts').textContent = stock.models && stock.models.analysts ? `${formatNum(stock.models.analysts)} ${curr}` : '—';
+
+      // 5 Health Pillars
+      const sc = stock.scores || {};
+      document.getElementById('drawerOverallHealth').textContent = `${stock.healthScore.toFixed(1)} / 5 (${stock.healthLabel || 'Score'})`;
+
+      setScoreBar('Profitability', sc.profitability);
+      setScoreBar('Growth', sc.growth);
+      setScoreBar('Cashflow', sc.cashflow);
+      setScoreBar('BalanceSheet', sc.balanceSheet);
+      setScoreBar('Valuation', sc.valuation);
+
+      // Key Ratios
+      document.getElementById('drawerPE').textContent = stock.pe ? stock.pe.toFixed(1) : '—';
+      document.getElementById('drawerEVEbitda').textContent = stock.evEbitda ? stock.evEbitda.toFixed(1) : '—';
+      document.getElementById('drawerConsensus').textContent = stock.analystConsensus || '—';
+
+      // Open animations
+      const drawer = document.getElementById('drawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      backdrop.classList.remove('hidden');
+      setTimeout(() => {
+        backdrop.classList.remove('opacity-0');
+        drawer.classList.remove('translate-x-full');
+      }, 10);
+    }
+
+    function setScoreBar(name, val) {
+      const score = val !== undefined && val !== null ? val : 3.0;
+      const pct = Math.max(0, Math.min(100, (score / 5.0) * 100));
+      document.getElementById(`scoreVal${name}`).textContent = `${score.toFixed(1)} / 5`;
+      document.getElementById(`scoreBar${name}`).style.width = `${pct}%`;
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('drawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+      }, 300);
+    }
+
+    // =========================================================================
+    // 7. NAVEGATION D'ONGLETS
+    // =========================================================================
+    function switchTab(tab) {
+      appState.currentTab = tab;
+      const stocksTab = document.getElementById('tabStocks');
+      const winnersTab = document.getElementById('tabWinners');
+      const stocksBtn = document.getElementById('tabStocksBtn');
+      const winnersBtn = document.getElementById('tabWinnersBtn');
+
+      if (tab === 'stocks') {
+        stocksTab.classList.remove('hidden');
+        winnersTab.classList.add('hidden');
+        stocksBtn.className = "px-4 py-2 rounded-lg text-sm font-semibold transition bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm";
+        winnersBtn.className = "px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition";
+      } else {
+        stocksTab.classList.add('hidden');
+        winnersTab.classList.remove('hidden');
+        winnersBtn.className = "px-4 py-2 rounded-lg text-sm font-semibold transition bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm";
+        stocksBtn.className = "px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition";
+      }
+    }
+
+    // =========================================================================
+    // 8. MODE SOMBRE & UTILITAIRES
+    // =========================================================================
+    function initDarkMode() {
+      const saved = localStorage.getItem('valoris_theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('sunIcon').classList.remove('hidden');
+        document.getElementById('moonIcon').classList.add('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('sunIcon').classList.add('hidden');
+        document.getElementById('moonIcon').classList.remove('hidden');
+      }
+    }
+
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('valoris_theme', isDark ? 'dark' : 'light');
+      document.getElementById('sunIcon').classList.toggle('hidden', !isDark);
+      document.getElementById('moonIcon').classList.toggle('hidden', isDark);
+    }
+
+    function formatNum(num) {
+      if (num === null || num === undefined) return '—';
+      return num.toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+    }
+
+    function formatDateFR(isoStr) {
+      if (!isoStr) return 'Récemment';
+      try {
+        const d = new Date(isoStr);
+        return d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      } catch (e) {
+        return isoStr;
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      }[m]));
+    }
+  </script>
+</body>
+</html>
