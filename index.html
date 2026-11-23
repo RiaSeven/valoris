@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valoris V3 — Screener Actions Sous-Évaluées, Analyses Matin/Soir &amp; Macro</title>
+  <title>Valoris — Screener Actions Sous-Évaluées, Analyses Matin/Soir &amp; Macro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
@@ -12,14 +12,13 @@
       --bg: #f1f5f9;
       --surface: #ffffff;
       --surface-2: #f8fafc;
-      --glass: rgba(255, 255, 255, 0.82);
+      --glass: rgba(255, 255, 255, 0.84);
       --glass-strong: rgba(255, 255, 255, 0.94);
       --border: #dbe3ef;
       --border-glow: rgba(37, 99, 235, 0.34);
       --text: #0f172a;
       --muted: #475569;
       --accent: #2563eb;
-      --accent-2: #7c3aed;
       --accent-soft: rgba(37, 99, 235, 0.11);
       --green: #059669;
       --green-soft: rgba(5, 150, 105, 0.12);
@@ -29,23 +28,22 @@
       --red-soft: rgba(220, 38, 38, 0.12);
       --purple: #7c3aed;
       --purple-soft: rgba(124, 58, 237, 0.12);
-      --shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
-      --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.13);
-      --radius: 16px;
+      --shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
+      --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.12);
+      --radius: 15px;
     }
 
     [data-theme="dark"] {
-      --bg: #050914;
-      --surface: #0d1424;
-      --surface-2: #141e33;
-      --glass: rgba(13, 20, 36, 0.72);
-      --glass-strong: rgba(15, 23, 42, 0.88);
+      --bg: #070d1a;
+      --surface: #101828;
+      --surface-2: #182338;
+      --glass: rgba(16, 24, 40, 0.78);
+      --glass-strong: rgba(16, 24, 40, 0.92);
       --border: rgba(148, 163, 184, 0.17);
       --border-glow: rgba(59, 130, 246, 0.45);
       --text: #f8fafc;
       --muted: #94a3b8;
       --accent: #3b82f6;
-      --accent-2: #8b5cf6;
       --accent-soft: rgba(59, 130, 246, 0.18);
       --green: #10b981;
       --green-soft: rgba(16, 185, 129, 0.16);
@@ -56,7 +54,7 @@
       --purple: #a78bfa;
       --purple-soft: rgba(167, 139, 250, 0.16);
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.65);
+      --shadow-lg: 0 28px 75px rgba(0, 0, 0, 0.62);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,115 +63,30 @@
       font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.48;
       min-height: 100vh;
       overflow-x: hidden;
-      transition: background 0.25s ease, color 0.25s ease;
+      transition: background 0.22s ease, color 0.22s ease;
     }
     .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace; }
 
     /* ========================================================================
-       BOUTON JOUR / NUIT (VISIBLE PARTOUT)
+       BANDEAU TICKER + BARRE DE NAVIGATION FIXE (TOUJOURS ACCESSIBLE)
     ======================================================================== */
-    .theme-switch {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      border: 1px solid var(--border-glow);
-      background: var(--surface-2);
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.18s ease;
-      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.12);
-    }
-    .theme-switch:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    /* ========================================================================
-       PAGE D'ACCUEIL IMMERSIVE (EFFET WAOUH)
-    ======================================================================== */
-    #landing-screen {
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    #landing-screen.hidden { display: none; }
-    #landing-screen.leaving {
-      opacity: 0;
-      transform: scale(0.985) translateY(-10px);
-      pointer-events: none;
-    }
-
-    #ambientCanvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.72;
-    }
-    .aurora-layer {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(115px);
-      opacity: 0.34;
-      animation: drift 18s ease-in-out infinite alternate;
-    }
-    [data-theme="light"] .orb { opacity: 0.22; }
-    .orb-1 { width: 540px; height: 540px; top: -140px; left: -120px; background: radial-gradient(circle, #3b82f6, transparent 70%); }
-    .orb-2 { width: 620px; height: 620px; top: 8%; right: -180px; background: radial-gradient(circle, #8b5cf6, transparent 70%); animation-delay: -6s; }
-    .orb-3 { width: 480px; height: 480px; bottom: -160px; left: 30%; background: radial-gradient(circle, #10b981, transparent 70%); animation-delay: -11s; }
-    @keyframes drift {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(45px, 32px) scale(1.12); }
-    }
-
-    .grid-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse 80% 65% at 50% 20%, #000 35%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 20%, #000 35%, transparent 100%);
-    }
-
-    .landing-content { position: relative; z-index: 2; }
-
-    /* Ticker live */
     .ticker-wrap {
       width: 100%;
       overflow: hidden;
-      background: var(--glass);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 8px 0;
+      padding: 7px 0;
+      position: relative;
+      z-index: 30;
     }
     .ticker-track {
       display: flex;
       gap: 28px;
       width: max-content;
-      animation: marquee 42s linear infinite;
+      animation: marquee 44s linear infinite;
     }
     .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
     @keyframes marquee {
@@ -183,14 +96,14 @@
     .tick-item {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
+      gap: 7px;
+      font-size: 0.77rem;
       font-weight: 600;
       white-space: nowrap;
       color: var(--text);
     }
     .tick-tag {
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       font-weight: 800;
       padding: 2px 6px;
       border-radius: 5px;
@@ -199,39 +112,30 @@
       color: var(--muted);
     }
 
-    /* Navigation flottante */
-    .landing-nav {
-      max-width: 1340px;
-      margin: 18px auto 0;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 35;
+      background: var(--glass-strong);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1480px;
+      margin: 0 auto;
       padding: 11px 20px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      background: var(--glass);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
+      gap: 12px;
     }
-    @media (max-width: 720px) { .landing-nav { border-radius: 20px; margin: 12px 14px 0; } }
-    .nav-links { display: flex; align-items: center; gap: 22px; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.86rem;
-      font-weight: 600;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    @media (max-width: 960px) { .nav-links { display: none; } }
-
-    .brand-mark {
+    .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
+      text-decoration: none;
       color: var(--text);
       cursor: pointer;
     }
@@ -245,23 +149,137 @@
       color: #fff;
       font-weight: 900;
       font-size: 18px;
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+      box-shadow: 0 5px 18px rgba(59, 130, 246, 0.34);
       flex-shrink: 0;
     }
-    .brand-title { font-size: 1.12rem; font-weight: 900; letter-spacing: -0.03em; }
+    .brand-text h1 { font-size: 1.14rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.15; }
+    .brand-text p { font-size: 0.73rem; color: var(--muted); }
 
-    /* Hero */
-    .hero {
-      max-width: 1340px;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-link {
+      padding: 7px 12px;
+      border-radius: 9px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .nav-link:hover { background: var(--surface-2); color: var(--text); }
+    @media (max-width: 1080px) { .nav-links { display: none; } }
+
+    .topbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .dot.demo { background: var(--amber); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 13px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { filter: brightness(1.08); color: #fff; }
+    .btn.active-toggle { background: var(--amber-soft); border-color: var(--amber); color: var(--amber); }
+
+    .theme-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid var(--border-glow);
+      background: var(--surface-2);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+    .theme-switch:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ========================================================================
+       SECTION 1 : PAGE D'ACCUEIL SUBLIME (AU-DESSUS DU SCREENER, NON DESTRUCTIVE)
+    ======================================================================== */
+    .hero-shell {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse 65% 55% at 15% 15%, rgba(59, 130, 246, 0.16), transparent 65%),
+        radial-gradient(ellipse 60% 55% at 88% 20%, rgba(139, 92, 246, 0.16), transparent 65%),
+        radial-gradient(ellipse 50% 45% at 50% 95%, rgba(16, 185, 129, 0.11), transparent 70%);
+    }
+    .hero-shell.collapsed { display: none; }
+
+    #ambientCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.7;
+      z-index: 0;
+    }
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, #000 35%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, #000 35%, transparent 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1480px;
       margin: 0 auto;
-      padding: 58px 24px 40px;
+      padding: 46px 24px 44px;
       display: grid;
       grid-template-columns: 1.12fr 0.88fr;
-      gap: 42px;
+      gap: 38px;
       align-items: center;
     }
-    @media (max-width: 1020px) {
-      .hero { grid-template-columns: 1fr; padding-top: 34px; gap: 32px; }
+    @media (max-width: 1040px) {
+      .hero-inner { grid-template-columns: 1fr; padding: 30px 20px 34px; gap: 28px; }
     }
 
     .hero-eyebrow {
@@ -272,11 +290,10 @@
       border-radius: 999px;
       background: var(--glass);
       border: 1px solid var(--border-glow);
-      font-size: 0.78rem;
+      font-size: 0.77rem;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 20px;
-      box-shadow: 0 0 28px rgba(59, 130, 246, 0.14);
+      margin-bottom: 18px;
     }
     .pulse-dot {
       width: 8px;
@@ -292,12 +309,12 @@
       100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
 
-    .hero h1 {
-      font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+    .hero-left h2 {
+      font-size: clamp(2.1rem, 4.1vw, 3.4rem);
       font-weight: 900;
-      line-height: 1.07;
+      line-height: 1.08;
       letter-spacing: -0.04em;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .gradient-text {
       background: linear-gradient(120deg, #60a5fa 0%, #a78bfa 48%, #34d399 100%);
@@ -311,251 +328,195 @@
       background-clip: text;
     }
 
-    .hero-sub {
-      font-size: 1.04rem;
+    .hero-desc {
+      font-size: 1rem;
       color: var(--muted);
-      max-width: 585px;
-      margin-bottom: 26px;
-      line-height: 1.65;
+      max-width: 600px;
+      margin-bottom: 24px;
+      line-height: 1.6;
     }
 
     .hero-ctas {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 26px;
+      gap: 11px;
+      margin-bottom: 22px;
     }
     .cta-wow {
       position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 15px 28px;
-      border-radius: 14px;
-      font-size: 0.96rem;
+      gap: 9px;
+      padding: 13px 24px;
+      border-radius: 13px;
+      font-size: 0.94rem;
       font-weight: 800;
       color: #fff;
       border: none;
       cursor: pointer;
       background: linear-gradient(135deg, #2563eb, #7c3aed);
-      box-shadow: 0 12px 32px rgba(59, 130, 246, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 28px rgba(59, 130, 246, 0.36), inset 0 1px 0 rgba(255,255,255,0.22);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
       overflow: hidden;
     }
     .cta-wow::after {
       content: "";
       position: absolute;
       top: 0; left: -120%;
-      width: 80%; height: 100%;
-      background: linear-gradient(105deg, transparent, rgba(255,255,255,0.28), transparent);
+      width: 75%; height: 100%;
+      background: linear-gradient(105deg, transparent, rgba(255,255,255,0.26), transparent);
       transform: skewX(-22deg);
-      animation: sheen 4.2s infinite;
+      animation: sheen 4.4s infinite;
     }
     @keyframes sheen {
-      0%, 60% { left: -120%; }
+      0%, 62% { left: -120%; }
       100% { left: 160%; }
     }
-    .cta-wow:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 42px rgba(99, 102, 241, 0.48);
-    }
-    .cta-secondary {
+    .cta-wow:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(99, 102, 241, 0.45); }
+
+    .cta-sec {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 14px 20px;
-      border-radius: 14px;
-      font-size: 0.92rem;
+      gap: 7px;
+      padding: 12px 18px;
+      border-radius: 13px;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--text);
       background: var(--glass);
-      backdrop-filter: blur(12px);
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.18s ease;
     }
-    .cta-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
+    .cta-sec:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-    /* Quick Country Jump Bar on Hero */
     .hero-countries {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 26px;
+      gap: 7px;
+      margin-bottom: 22px;
     }
-    .hero-countries-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--muted);
-      margin-right: 4px;
-    }
-    .m-chip {
+    .hero-countries-lbl { font-size: 0.77rem; font-weight: 700; color: var(--muted); margin-right: 4px; }
+    .country-jump {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 12px;
+      padding: 6px 12px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 700;
       color: var(--text);
       background: var(--glass);
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: all 0.16s ease;
+      transition: all 0.15s ease;
     }
-    .m-chip:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
-      background: var(--accent-soft);
-    }
-    .chip-cnt {
-      font-size: 0.7rem;
-      padding: 1px 6px;
-      border-radius: 999px;
-      background: var(--surface-2);
-      color: var(--muted);
-    }
+    .country-jump:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
+    .chip-cnt { font-size: 0.69rem; padding: 1px 6px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
 
-    /* Hero Stats */
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
-      padding-top: 20px;
+      padding-top: 18px;
       border-top: 1px solid var(--border);
     }
-    @media (max-width: 600px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
-    .h-stat-val { font-size: 1.45rem; font-weight: 900; letter-spacing: -0.02em; }
-    .h-stat-lbl { font-size: 0.74rem; color: var(--muted); font-weight: 600; }
+    @media (max-width: 580px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
+    .h-stat-val { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.02em; }
+    .h-stat-lbl { font-size: 0.73rem; color: var(--muted); font-weight: 600; }
 
-    /* Showcase 3D */
-    .showcase-stage { perspective: 1200px; position: relative; }
+    /* Carte 3D Top Pépites Live */
+    .showcase-stage { perspective: 1200px; }
     .showcase-card {
       background: var(--glass-strong);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-glow);
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: var(--shadow-lg), 0 0 60px rgba(59, 130, 246, 0.14);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow-lg), 0 0 50px rgba(59, 130, 246, 0.12);
       transform-style: preserve-3d;
-      transition: transform 0.22s ease-out, box-shadow 0.25s ease;
+      transition: transform 0.22s ease-out;
     }
     .showcase-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
-      padding-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 11px;
       border-bottom: 1px solid var(--border);
     }
-    .showcase-title { font-size: 0.88rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-    .spotlight-list { display: grid; gap: 11px; }
+    .showcase-title { font-size: 0.87rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    .spotlight-list { display: grid; gap: 10px; }
     .spotlight-item {
       display: grid;
       grid-template-columns: 1.25fr auto auto;
       gap: 12px;
       align-items: center;
-      padding: 13px 14px;
-      border-radius: 14px;
+      padding: 12px 13px;
+      border-radius: 13px;
       background: var(--surface-2);
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: all 0.16s ease;
     }
-    .spotlight-item:hover {
-      border-color: var(--accent);
-      transform: translateX(4px);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.14);
-    }
-    .spot-name { font-weight: 800; font-size: 0.91rem; }
-    .spot-meta { font-size: 0.74rem; color: var(--muted); margin-top: 2px; }
+    .spotlight-item:hover { border-color: var(--accent); transform: translateX(4px); }
+    .spot-name { font-weight: 800; font-size: 0.9rem; }
+    .spot-meta { font-size: 0.73rem; color: var(--muted); margin-top: 2px; }
     .spot-right { text-align: right; }
 
-    /* Sections Landing */
-    .landing-section {
-      max-width: 1340px;
-      margin: 0 auto;
-      padding: 34px 24px 48px;
+    .method-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
-    .sec-head {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 30px;
-    }
-    .sec-head h2 {
-      font-size: clamp(1.6rem, 2.9vw, 2.25rem);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      margin-bottom: 9px;
-    }
-    .sec-head p { color: var(--muted); font-size: 0.95rem; }
-
-    /* Bento Grid */
-    .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .bento-card {
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+    .method-pill {
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: var(--surface-2);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      font-size: 0.73rem;
     }
-    .bento-card:hover { transform: translateY(-3px); border-color: var(--border-glow); }
-    .span-7 { grid-column: span 7; }
-    .span-5 { grid-column: span 5; }
-    .span-6 { grid-column: span 6; }
-    @media (max-width: 900px) { .span-7, .span-5, .span-6 { grid-column: span 12; } }
-
-    .bento-icon {
-      width: 42px; height: 42px; border-radius: 12px;
-      display: grid; place-items: center; font-size: 1.15rem;
-      margin-bottom: 14px; background: var(--accent-soft); color: var(--accent);
-    }
-    .bento-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
-    .bento-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
-
-    .model-bars { display: grid; gap: 10px; margin-top: 16px; }
-    .m-bar-row { display: grid; grid-template-columns: 150px 1fr 72px; gap: 10px; align-items: center; font-size: 0.8rem; font-weight: 600; }
-    .m-track { height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; border: 1px solid var(--border); }
-    .m-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #3b82f6, #10b981); }
-
-    .cta-banner {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(124, 58, 237, 0.18), rgba(16, 185, 129, 0.14));
-      border: 1px solid var(--border-glow);
-      border-radius: 24px;
-      padding: 40px 28px;
-      text-align: center;
-      box-shadow: var(--shadow-lg);
-    }
-    .cta-banner h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 900; margin-bottom: 10px; }
-    .cta-banner p { color: var(--muted); max-width: 560px; margin: 0 auto 24px; font-size: 0.94rem; }
-
-    .landing-footer { text-align: center; padding: 14px 20px 38px; font-size: 0.78rem; color: var(--muted); }
+    .method-pill strong { display: block; font-size: 0.78rem; color: var(--text); }
+    .method-pill span { color: var(--muted); }
 
     /* ========================================================================
-       CARTES ANALYSE MATIN (ASIE) & SOIR (EUROPE / US) — PARTAGÉES ACCUEIL + APP
+       CORPS PRINCIPAL DU SCREENER (STRUCTURE V2 + V3 INTACTE)
     ======================================================================== */
+    .container { max-width: 1480px; margin: 0 auto; padding: 22px 20px 64px; }
+
+    /* Section Analyses Matin (Asie) & Soir (Europe / US) */
+    .briefings-wrap { margin-bottom: 20px; }
+    .briefings-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 11px;
+    }
+    .briefings-bar h2 {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 800;
+    }
     .briefings-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 15px;
     }
     .briefing-card {
-      background: var(--glass-strong);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 18px 20px;
+      padding: 17px 19px;
       box-shadow: var(--shadow);
       border-top: 4px solid var(--accent);
       display: flex;
@@ -571,94 +532,43 @@
       align-items: center;
       gap: 8px;
     }
-    .briefing-title {
-      font-weight: 800;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .briefing-meta {
-      font-size: 0.74rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .briefing-title { font-weight: 800; font-size: 0.98rem; display: flex; align-items: center; gap: 8px; }
+    .briefing-meta { font-size: 0.73rem; color: var(--muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .briefing-headline {
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text);
       padding: 8px 11px;
       border-radius: 10px;
       background: var(--surface-2);
       border: 1px solid var(--border);
     }
-    .briefing-list {
-      list-style: none;
-      display: grid;
-      gap: 8px;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
+    .briefing-list { list-style: none; display: grid; gap: 7px; font-size: 0.83rem; color: var(--muted); }
     .briefing-list li strong { color: var(--text); }
     .briefings-grid.collapsed { display: none; }
 
-    /* ========================================================================
-       APPLICATION SCREENER V3
-    ======================================================================== */
-    #app-shell {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    /* Onglets principaux */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
     }
-    #app-shell.visible { display: block; opacity: 1; }
-
-    .container { max-width: 1480px; margin: 0 auto; padding: 18px 20px 64px; position: relative; z-index: 2; }
-
-    header.app-header {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      gap: 14px; padding: 15px 22px; background: var(--surface);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      box-shadow: var(--shadow); margin-bottom: 16px;
-    }
-    .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-    .brand h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
-    .brand p { font-size: 0.79rem; color: var(--muted); }
-    .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-
-    .status-pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 6px 12px; border-radius: 999px; font-size: 0.77rem; font-weight: 600;
-      background: var(--surface-2); border: 1px solid var(--border); color: var(--muted);
-    }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-    .dot.demo { background: var(--amber); }
-
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 13px; border-radius: 10px; font-size: 0.82rem; font-weight: 600;
-      border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
-      cursor: pointer; transition: all 0.15s; text-decoration: none;
-    }
-    .btn:hover { border-color: var(--accent); color: var(--accent); }
-    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .btn.primary:hover { filter: brightness(1.08); color: #fff; }
-    .btn.active-toggle { background: var(--amber-soft); border-color: var(--amber); color: var(--amber); }
-
-    .briefings-wrap { margin-bottom: 16px; }
-    .briefings-bar {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      gap: 10px; margin-bottom: 10px;
-    }
-    .briefings-bar h2 { font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
-
-    /* Tabs */
-    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
     .tab-btn {
-      padding: 9px 15px; border-radius: 10px; font-size: 0.88rem; font-weight: 700;
-      border: 1px solid transparent; background: transparent; color: var(--muted);
-      cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 15px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
     .tab-btn:hover { background: var(--surface); color: var(--text); }
     .tab-btn.active { background: var(--accent-soft); color: var(--accent); border-color: rgba(59,130,246,0.3); }
@@ -667,14 +577,14 @@
     .view { display: none; }
     .view.active { display: block; }
 
-    /* KPI Grid */
+    /* KPIs */
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 16px; }
     .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--shadow); }
     .kpi-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
     .kpi-value { font-size: 1.48rem; font-weight: 800; margin-top: 4px; }
     .kpi-sub { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
 
-    /* Panel & Filters */
+    /* Panneau de filtres */
     .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); margin-bottom: 16px; }
     .market-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; align-items: center; justify-content: space-between; }
     .pills { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
@@ -687,10 +597,7 @@
     .pill:hover { border-color: var(--accent); color: var(--accent); }
     .pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .pill.active .pill-cnt { background: rgba(255,255,255,0.22); color: #fff; }
-    .pill-cnt {
-      font-size: 0.71rem; padding: 1px 6px; border-radius: 999px;
-      background: var(--border); color: var(--muted); font-weight: 700;
-    }
+    .pill-cnt { font-size: 0.71rem; padding: 1px 6px; border-radius: 999px; background: var(--border); color: var(--muted); font-weight: 700; }
 
     .filters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 14px; align-items: end; }
     .field label { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
@@ -707,7 +614,7 @@
     .check-group { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
     .check-label { display: inline-flex; align-items: center; gap: 7px; font-size: 0.83rem; font-weight: 600; cursor: pointer; }
 
-    /* Tables */
+    /* Tableaux */
     .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
     thead th {
@@ -749,7 +656,7 @@
     .spark-cell { display: inline-flex; align-items: center; gap: 6px; }
     .spark-svg { width: 68px; height: 24px; overflow: visible; }
 
-    /* Scatter plot */
+    /* Carte Pépites */
     .scatter-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); position: relative; }
     .scatter-legend { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 0.81rem; color: var(--muted); }
     .legend-items { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -764,16 +671,16 @@
       font-size: 0.8rem; opacity: 0; transition: opacity 0.12s; max-width: 250px;
     }
 
+    /* Macro */
     .gauge-wrap { min-width: 130px; }
     .gauge-track { position: relative; height: 7px; border-radius: 999px; background: var(--border); margin: 4px 0; }
     .gauge-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 11px; height: 11px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
     .gauge-labels { display: flex; justify-content: space-between; font-size: 0.69rem; color: var(--muted); }
-
     .fx-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
     .fx-chip { background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; }
     .fx-chip span { color: var(--accent); font-weight: 800; margin-left: 6px; }
 
-    /* Drawer */
+    /* Panneau latéral de détail */
     .overlay { position: fixed; inset: 0; background: rgba(2, 6, 23, 0.55); opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 40; }
     .overlay.open { opacity: 1; pointer-events: auto; }
     .drawer {
@@ -797,435 +704,369 @@
     .neg { color: var(--red); font-weight: 700; }
     .muted { color: var(--muted); }
     .hidden-input { display: none; }
+    footer.site-footer {
+      text-align: center;
+      padding: 26px 20px 10px;
+      font-size: 0.77rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
-  <!-- =========================================================================
-       ÉCRAN D'ACCUEIL IMMERSIF (LANDING PAGE)
-  ========================================================================== -->
-  <div id="landing-screen">
-    <canvas id="ambientCanvas"></canvas>
-    <div class="aurora-layer">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-    </div>
-    <div class="grid-bg"></div>
+  <!-- Bandeau Ticker Live -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
 
-    <div class="landing-content">
-      <!-- Bandeau défilant live -->
-      <div class="ticker-wrap">
-        <div class="ticker-track" id="tickerTrack"></div>
+  <!-- Barre de navigation fixe (toujours visible : accueil + screener) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" id="brandTopBtn" title="Revenir en haut">
+        <div class="logo-badge">V</div>
+        <div class="brand-text">
+          <h1>Valoris <span style="font-size:0.71rem; padding:2px 7px; border-radius:999px; background:var(--accent-soft); color:var(--accent); vertical-align:middle;">V3</span></h1>
+          <p>Actions sous-évaluées · FR · DE · US · KR · JP</p>
+        </div>
       </div>
 
-      <!-- Barre de navigation flottante avec Mode Jour/Nuit -->
-      <nav class="landing-nav">
-        <div class="brand-mark" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-          <div class="logo-badge">V</div>
-          <span class="brand-title">Valoris <span style="font-size:0.72rem; color:var(--accent); font-weight:800;">V3</span></span>
-        </div>
-        <div class="nav-links">
-          <a href="#analyses-accueil">Analyses Matin / Soir</a>
-          <a href="#methode">Méthodologie</a>
-          <a href="#" id="navOpenScatter">Carte Pépites</a>
-          <a href="#" id="navOpenMacro">Macro &amp; Matières 1<sup>res</sup></a>
-        </div>
-        <div style="display:flex; align-items:center; gap:9px; flex-wrap:wrap;">
-          <button class="theme-switch" id="landingThemeBtn" type="button" aria-label="Changer de thème">☀️ Mode Jour</button>
-          <button class="btn primary" id="navEnterBtn" type="button" style="border-radius:999px; padding:8px 16px;">Ouvrir le Screener →</button>
-        </div>
+      <nav class="nav-links">
+        <a class="nav-link" id="navAccueil" href="#hero-accueil">Accueil</a>
+        <a class="nav-link" href="#analyses-section">Analyses Matin/Soir</a>
+        <a class="nav-link" id="navScreener" href="#screener-app">Screener</a>
+        <a class="nav-link" id="navScatter" href="#screener-app">Carte Pépites</a>
+        <a class="nav-link" id="navMacro" href="#screener-app">Macro</a>
       </nav>
 
-      <!-- Hero Section -->
-      <section class="hero">
-        <div>
-          <div class="hero-eyebrow">
-            <span class="pulse-dot"></span>
-            <span id="landingLiveBadge">Analyse automatisée · 2 sessions/jour (Asie &amp; Occident)</span>
-          </div>
-          <h1>
-            Détectez les actions <span class="gradient-text">sous-évaluées</span> avant le marché.
-          </h1>
-          <p class="hero-sub">
-            Valoris croise automatiquement trois modèles de <strong>Juste Valeur</strong> (DCF, multiples sectoriels, consensus) avec un <strong>score de santé financière sur 5 piliers</strong> pour isoler les opportunités solides et écarter les pièges de valeur.
-          </p>
-
-          <div class="hero-ctas">
-            <button class="cta-wow" id="heroEnterBtn" type="button">
-              <span>Accéder au Screener</span>
-              <span style="font-size:1.15rem;">→</span>
-            </button>
-            <button class="cta-secondary" id="heroScatterBtn" type="button">
-              Carte Pépites
-            </button>
-            <button class="cta-secondary" id="heroMacroBtn" type="button">
-              Macro &amp; Matières 1<sup>res</sup>
-            </button>
-          </div>
-
-          <!-- Filtres rapides par pays dès l'accueil -->
-          <div class="hero-countries" id="heroCountryBar">
-            <span class="hero-countries-label">Accès direct par pays :</span>
-            <button class="m-chip" data-jump-market="ALL">🌍 Tous <span class="chip-cnt" data-cnt="ALL">0</span></button>
-            <button class="m-chip" data-jump-market="FR">🇫🇷 France <span class="chip-cnt" data-cnt="FR">0</span></button>
-            <button class="m-chip" data-jump-market="DE">🇩🇪 Allemagne <span class="chip-cnt" data-cnt="DE">0</span></button>
-            <button class="m-chip" data-jump-market="US">🇺🇸 États-Unis <span class="chip-cnt" data-cnt="US">0</span></button>
-            <button class="m-chip" data-jump-market="KR">🇰🇷 Corée <span class="chip-cnt" data-cnt="KR">0</span></button>
-            <button class="m-chip" data-jump-market="JP">🇯🇵 Japon <span class="chip-cnt" data-cnt="JP">0</span></button>
-          </div>
-
-          <div class="hero-stats">
-            <div>
-              <div class="h-stat-val mono" id="heroStatTotal">0</div>
-              <div class="h-stat-lbl">Actions suivies</div>
-            </div>
-            <div>
-              <div class="h-stat-val mono pos" id="heroStatEligible">0</div>
-              <div class="h-stat-lbl">Pépites détectées</div>
-            </div>
-            <div>
-              <div class="h-stat-val mono" style="color:var(--accent);" id="heroStatUpside">+0 %</div>
-              <div class="h-stat-lbl">Potentiel moyen</div>
-            </div>
-            <div>
-              <div class="h-stat-val mono" style="color:var(--amber);" id="heroStatTraps">0</div>
-              <div class="h-stat-lbl">Pièges écartés</div>
-            </div>
-          </div>
+      <div class="topbar-actions">
+        <div class="status-pill" id="dataStatus">
+          <span class="dot demo" id="statusDot"></span>
+          <span id="statusText">Chargement…</span>
         </div>
-
-        <!-- Carte Glassmorphic Live 3D -->
-        <div class="showcase-stage">
-          <div class="showcase-card" id="tiltCard">
-            <div class="showcase-head">
-              <div class="showcase-title">
-                <span class="pulse-dot"></span>
-                <span>Top Opportunités · Coup d'œil Live</span>
-              </div>
-              <span class="badge blue">FR · DE · US · KR · JP</span>
-            </div>
-            <div class="spotlight-list" id="landingSpotlight"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION ANALYSES MATIN (ASIE) & SOIR (EUROPE / US) SUR L'ACCUEIL -->
-      <section class="landing-section" id="analyses-accueil">
-        <div class="sec-head">
-          <h2>Analyses automatisées · Matin (Asie) &amp; Soir (Europe / US)</h2>
-          <p>Deux rendez-vous quotidiens pilotés par GitHub Actions : synthèse de Tokyo et Séoul dès 08h30 UTC, puis Paris, Francfort et Wall Street à 20h30 UTC.</p>
-        </div>
-        <div class="briefings-grid" id="landingBriefingsGrid"></div>
-      </section>
-
-      <!-- Bento Grid : Méthodologie -->
-      <section class="landing-section" id="methode" style="padding-top:14px;">
-        <div class="sec-head">
-          <h2>Une discipline institutionnelle, 100 % transparente.</h2>
-          <p>Chaque estimation de Juste Valeur et chaque note sur 5 est calculée automatiquement par le moteur Python ouvert.</p>
-        </div>
-
-        <div class="bento-grid">
-          <div class="bento-card span-7">
-            <div class="bento-icon">⚖</div>
-            <h3>Triple Modèle de Juste Valeur</h3>
-            <p>La valeur intrinsèque moyenne trois approches complémentaires avec garde-fous anti-aberrations (plage 0,25× à 3,0× du cours).</p>
-            <div class="model-bars">
-              <div class="m-bar-row">
-                <span>Flux actualisés (DCF 5 ans)</span>
-                <div class="m-track"><div class="m-fill" style="width:86%;"></div></div>
-                <span class="mono pos" style="text-align:right;">WACC 9,5 %</span>
-              </div>
-              <div class="m-bar-row">
-                <span>Multiples sectoriels</span>
-                <div class="m-track"><div class="m-fill" style="width:78%; background:linear-gradient(90deg,#6366f1,#3b82f6);"></div></div>
-                <span class="mono" style="text-align:right; color:var(--accent);">PER &amp; EV</span>
-              </div>
-              <div class="m-bar-row">
-                <span>Consensus analystes</span>
-                <div class="m-track"><div class="m-fill" style="width:82%; background:linear-gradient(90deg,#8b5cf6,#ec4899);"></div></div>
-                <span class="mono" style="text-align:right; color:var(--purple);">Objectif moy.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="bento-card span-5">
-            <div class="bento-icon" style="background:var(--green-soft); color:var(--green);">🛡</div>
-            <h3>Bouclier Anti-Pièges de Valeur</h3>
-            <p>Le score sur 5 pondère <strong>Rentabilité</strong>, <strong>Croissance</strong>, <strong>Free Cash Flow</strong>, <strong>Solidité du bilan</strong> et <strong>Valorisation relative</strong>.</p>
-            <div style="display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;">
-              <span class="badge green">Potentiel ≥ +20 %</span>
-              <span class="badge blue">Cap. ≥ 1 Md €</span>
-              <span class="badge purple">Santé ≥ 2,5 / 5</span>
-              <span class="badge red">Alerte Cash / Dette</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Final CTA -->
-      <section class="landing-section" style="padding-top:6px;">
-        <div class="cta-banner">
-          <h2>Prêt à passer les 5 marchés au crible ?</h2>
-          <p>Ouvrez le tableau interactif complet avec filtres par pays, Carte Pépites, sparklines 3 mois, Watchlist et briefings automatisés.</p>
-          <button class="cta-wow" id="bottomEnterBtn" type="button">
-            <span>Entrer dans le Screener Valoris V3</span>
-            <span>→</span>
-          </button>
-        </div>
-      </section>
-
-      <footer class="landing-footer">
-        Valoris V3 · Outil personnel d'aide à l'analyse fondamentale alimenté par Yahoo Finance &amp; GitHub Actions · Ne constitue pas un conseil en investissement.
-      </footer>
+        <button class="btn" id="toggleHeroBtn" type="button" title="Afficher ou masquer le bandeau d'accueil">Masquer l'accueil</button>
+        <button class="btn" id="exportCsvBtn" type="button">CSV</button>
+        <label class="btn" for="jsonUpload">JSON</label>
+        <input id="jsonUpload" class="hidden-input" type="file" accept=".json" />
+        <button class="theme-switch" id="themeToggle" type="button" aria-label="Changer le thème">☀️ Mode Jour</button>
+      </div>
     </div>
-  </div>
+  </header>
 
   <!-- =========================================================================
-       APPLICATION SCREENER V3
+       SECTION 1 : PAGE D'ACCUEIL SUBLIME (AU-DESSUS DU VRAI SCREENER)
   ========================================================================== -->
-  <div id="app-shell">
-    <div class="container">
-      <header class="app-header">
-        <div class="brand" id="backToLandingBrand" title="Retourner à la page d'accueil">
-          <div class="logo-badge">V</div>
+  <section class="hero-shell" id="hero-accueil">
+    <canvas id="ambientCanvas"></canvas>
+    <div class="hero-grid-bg"></div>
+
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="pulse-dot"></span>
+          <span id="heroLiveBadge">Analyse automatisée · 2 sessions/jour (Asie matin &amp; Europe/US soir)</span>
+        </div>
+        <h2>
+          Détectez les actions <span class="gradient-text">sous-évaluées</span> avant le marché.
+        </h2>
+        <p class="hero-desc">
+          Valoris croise 3 modèles de <strong>Juste Valeur</strong> (DCF, multiples sectoriels, consensus) avec un <strong>score de santé financière sur 5 piliers</strong> pour isoler les sociétés solides et écarter les pièges de valeur — avec tous vos titres live accessibles juste ci-dessous.
+        </p>
+
+        <div class="hero-ctas">
+          <button class="cta-wow" id="heroGoScreener" type="button">
+            <span>Accéder au Screener complet</span>
+            <span>↓</span>
+          </button>
+          <button class="cta-sec" id="heroGoAnalyses" type="button">Analyses Matin &amp; Soir</button>
+          <button class="cta-sec" id="heroGoScatter" type="button">Carte Pépites</button>
+          <button class="cta-sec" id="heroGoMacro" type="button">Macro &amp; Matières 1<sup>res</sup></button>
+        </div>
+
+        <div class="hero-countries">
+          <span class="hero-countries-lbl">Filtrer directement par pays :</span>
+          <button class="country-jump" data-jump-market="ALL">🌍 Tous <span class="chip-cnt" data-cnt="ALL">0</span></button>
+          <button class="country-jump" data-jump-market="FR">🇫🇷 France <span class="chip-cnt" data-cnt="FR">0</span></button>
+          <button class="country-jump" data-jump-market="DE">🇩🇪 Allemagne <span class="chip-cnt" data-cnt="DE">0</span></button>
+          <button class="country-jump" data-jump-market="US">🇺🇸 États-Unis <span class="chip-cnt" data-cnt="US">0</span></button>
+          <button class="country-jump" data-jump-market="KR">🇰🇷 Corée <span class="chip-cnt" data-cnt="KR">0</span></button>
+          <button class="country-jump" data-jump-market="JP">🇯🇵 Japon <span class="chip-cnt" data-cnt="JP">0</span></button>
+        </div>
+
+        <div class="hero-stats">
           <div>
-            <h1>Valoris <span style="font-size:0.74rem; padding:2px 8px; border-radius:999px; background:var(--accent-soft); color:var(--accent); vertical-align:middle;">V3</span></h1>
-            <p>Screener Actions (FR · DE · US · KR · JP), Analyses Matin/Soir &amp; Macro</p>
+            <div class="h-stat-val mono" id="heroStatTotal">0</div>
+            <div class="h-stat-lbl">Actions suivies</div>
+          </div>
+          <div>
+            <div class="h-stat-val mono pos" id="heroStatEligible">0</div>
+            <div class="h-stat-lbl">Pépites (≥20 %, ≥2,5/5)</div>
+          </div>
+          <div>
+            <div class="h-stat-val mono" style="color:var(--accent);" id="heroStatUpside">+0 %</div>
+            <div class="h-stat-lbl">Potentiel moyen</div>
+          </div>
+          <div>
+            <div class="h-stat-val mono" style="color:var(--amber);" id="heroStatTraps">0</div>
+            <div class="h-stat-lbl">Pièges écartés</div>
           </div>
         </div>
-        <div class="header-actions">
-          <div class="status-pill" id="dataStatus">
-            <span class="dot demo" id="statusDot"></span>
-            <span id="statusText">Chargement…</span>
-          </div>
-          <button class="btn" id="backHomeBtn" type="button">← Accueil</button>
-          <button class="btn" id="exportCsvBtn" type="button">Exporter CSV</button>
-          <label class="btn" for="jsonUpload">Importer JSON</label>
-          <input id="jsonUpload" class="hidden-input" type="file" accept=".json" />
-          <button class="theme-switch" id="themeToggle" type="button" aria-label="Changer de thème">☀️ Mode Jour</button>
-        </div>
-      </header>
+      </div>
 
-      <!-- SECTION ANALYSE MATIN (ASIE) & SOIR (EUROPE / US) -->
-      <section class="briefings-wrap" id="briefingsSection">
-        <div class="briefings-bar">
-          <h2>Analyses automatisées · Matin (Asie) &amp; Soir (Europe / US)</h2>
-          <button class="btn" id="toggleBriefings" type="button" style="padding:5px 11px; font-size:0.77rem;">Masquer les analyses</button>
-        </div>
-        <div class="briefings-grid" id="briefingsGrid"></div>
-      </section>
-
-      <nav class="tabs">
-        <button class="tab-btn active" data-tab="screener">
-          Screener Actions <span class="tab-count" id="countScreener">0</span>
-        </button>
-        <button class="tab-btn" data-tab="scatter">
-          Carte Pépites <span class="tab-count" id="countScatter">0</span>
-        </button>
-        <button class="tab-btn" data-tab="macro">
-          Macro &amp; Marchés <span class="tab-count" id="countMacro">0</span>
-        </button>
-        <button class="tab-btn" data-tab="winners">
-          Précédents gagnants <span class="tab-count" id="countWinners">0</span>
-        </button>
-      </nav>
-
-      <!-- VUE 1 : SCREENER ACTIONS -->
-      <section id="view-screener" class="view active">
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <div class="kpi-label">Actions sélectionnées</div>
-            <div class="kpi-value" id="kpiCount">0</div>
-            <div class="kpi-sub" id="kpiTotalSub">sur 0 analysées</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Potentiel moyen</div>
-            <div class="kpi-value pos" id="kpiUpside">+0 %</div>
-            <div class="kpi-sub">Écart cours / Juste Valeur</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Santé moyenne</div>
-            <div class="kpi-value" id="kpiHealth">0,0 / 5</div>
-            <div class="kpi-sub">Score composite sur 5 piliers</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Nouvelles entrées</div>
-            <div class="kpi-value" style="color:var(--purple);" id="kpiNew">0</div>
-            <div class="kpi-sub">Fraîchement sous-évaluées</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Pièges écartés</div>
-            <div class="kpi-value" style="color:var(--amber);" id="kpiTraps">0</div>
-            <div class="kpi-sub">Décote ≥ 20 % mais bilan faible</div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <!-- FILTRES PAR PAYS + PRESETS -->
-          <div class="market-bar">
-            <div class="pills" id="marketPills">
-              <button class="pill active" data-market="ALL">🌍 Tous <span class="pill-cnt" data-pcnt="ALL">0</span></button>
-              <button class="pill" data-market="FR">🇫🇷 France <span class="pill-cnt" data-pcnt="FR">0</span></button>
-              <button class="pill" data-market="DE">🇩🇪 Allemagne <span class="pill-cnt" data-pcnt="DE">0</span></button>
-              <button class="pill" data-market="US">🇺🇸 États-Unis <span class="pill-cnt" data-pcnt="US">0</span></button>
-              <button class="pill" data-market="KR">🇰🇷 Corée du Sud <span class="pill-cnt" data-pcnt="KR">0</span></button>
-              <button class="pill" data-market="JP">🇯🇵 Japon <span class="pill-cnt" data-pcnt="JP">0</span></button>
+      <!-- Carte 3D Live Top 3 Pépites -->
+      <div class="showcase-stage">
+        <div class="showcase-card" id="tiltCard">
+          <div class="showcase-head">
+            <div class="showcase-title">
+              <span class="pulse-dot"></span>
+              <span>Top 3 Pépites · Coup d'œil Live</span>
             </div>
-            <div class="pills">
-              <button class="btn" id="watchlistFilterBtn" type="button">★ Watchlist (<span id="watchCount">0</span>)</button>
-              <button class="btn" id="presetValoris" type="button">Critères Valoris</button>
-              <button class="btn" id="presetQuality" type="button">Qualité ≥ 3,5</button>
-              <button class="btn" id="presetDividend" type="button">Rendement ≥ 3 %</button>
-              <button class="btn" id="presetAll" type="button">Tout afficher</button>
+            <span class="badge blue" id="showcaseCountBadge">Live</span>
+          </div>
+          <div class="spotlight-list" id="heroSpotlight"></div>
+          <div class="method-strip">
+            <div class="method-pill">
+              <strong>Juste Valeur</strong>
+              <span>DCF + Multiples + Analystes</span>
+            </div>
+            <div class="method-pill">
+              <strong>Santé / 5</strong>
+              <span>5 piliers anti-piège</span>
+            </div>
+            <div class="method-pill">
+              <strong>Devises FX</strong>
+              <span>Cap. unifiée en Md €</span>
             </div>
           </div>
-
-          <div class="filters-grid">
-            <div class="field">
-              <label for="searchInput">Recherche (nom / ticker)</label>
-              <input id="searchInput" type="text" placeholder="Ex. Capgemini, Samsung, NVDA..." />
-            </div>
-            <div class="field">
-              <label for="sectorSelect">Secteur</label>
-              <select id="sectorSelect"><option value="ALL">Tous les secteurs</option></select>
-            </div>
-            <div class="field">
-              <label for="upsideRange">Potentiel min. <span id="upsideVal">20 %</span></label>
-              <input id="upsideRange" type="range" min="-20" max="80" step="5" value="20" />
-            </div>
-            <div class="field">
-              <label for="mcapRange">Cap. min. (Md €) <span id="mcapVal">1 Md €</span></label>
-              <input id="mcapRange" type="range" min="0" max="100" step="1" value="1" />
-            </div>
-            <div class="field">
-              <label for="healthRange">Santé min. <span id="healthVal">2,5 / 5</span></label>
-              <input id="healthRange" type="range" min="1" max="4.5" step="0.1" value="2.5" />
-            </div>
-            <div class="field">
-              <label for="divRange">Dividende min. <span id="divVal">0 %</span></label>
-              <input id="divRange" type="range" min="0" max="8" step="0.5" value="0" />
-            </div>
-          </div>
-
-          <div class="checkbox-row">
-            <div class="check-group">
-              <label class="check-label">
-                <input type="checkbox" id="hideTraps" checked />
-                Masquer les pièges de valeur
-              </label>
-              <label class="check-label">
-                <input type="checkbox" id="onlyNew" />
-                Nouvelles entrées uniquement
-              </label>
-            </div>
-            <span class="muted" style="font-size:0.79rem;">Cliquez sur ★ pour suivre un titre · Cliquez sur une ligne pour ouvrir la fiche détaillée.</span>
-          </div>
         </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th style="width:34px; cursor:default;">★</th>
-                <th data-sort="name">Société</th>
-                <th>Tendance 3M</th>
-                <th class="num" data-sort="price">Cours</th>
-                <th class="num" data-sort="fairValue">Juste Valeur</th>
-                <th class="num" data-sort="upside">Potentiel</th>
-                <th data-sort="healthScore">Santé (/5)</th>
-                <th>Sous-notes</th>
-                <th class="num" data-sort="marketCapB">Cap. (Md €)</th>
-                <th class="num" data-sort="dividendYield">Div.</th>
-                <th class="num" data-sort="pe">PER</th>
-                <th class="num" data-sort="evEbitda">EV/EBITDA</th>
-                <th data-sort="analystConsensus">Analystes</th>
-              </tr>
-            </thead>
-            <tbody id="stocksBody"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- VUE 2 : CARTE PÉPITES -->
-      <section id="view-scatter" class="view">
-        <div class="scatter-card">
-          <div class="scatter-legend">
-            <div class="legend-items">
-              <span class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span>France</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span>Allemagne</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#10b981;"></span>États-Unis</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#a78bfa;"></span>Corée du Sud</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#f43f5e;"></span>Japon</span>
-            </div>
-            <span>Zone verte = <strong>Zone Pépites</strong> (Santé ≥ 2,5/5 et Potentiel ≥ 20 %) · Taille = Capitalisation · Cliquez sur une bulle pour ouvrir sa fiche.</span>
-          </div>
-          <div class="scatter-wrap">
-            <svg id="scatterSvg" class="scatter-svg" viewBox="0 0 960 470"></svg>
-          </div>
-        </div>
-      </section>
-
-      <!-- VUE 3 : MACRO & MARCHÉS -->
-      <section id="view-macro" class="view">
-        <div class="fx-strip" id="fxStrip"></div>
-        <div class="panel" style="padding:13px 18px;">
-          <div class="pills" id="macroCategoryPills">
-            <button class="pill active" data-cat="ALL">Tout</button>
-            <button class="pill" data-cat="Indices">Indices</button>
-            <button class="pill" data-cat="Futures">Futures</button>
-            <button class="pill" data-cat="Matières premières">Matières premières</button>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Actif</th>
-                <th>Catégorie</th>
-                <th>Courbe 3M</th>
-                <th class="num">Cours</th>
-                <th class="num">1 Jour</th>
-                <th class="num">1 Sem.</th>
-                <th class="num">1 Mois</th>
-                <th class="num">YTD</th>
-                <th>Fourchette 52 sem.</th>
-                <th class="num">MM 200</th>
-                <th>Tendance</th>
-              </tr>
-            </thead>
-            <tbody id="macroBody"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- VUE 4 : PRÉCÉDENTS GAGNANTS -->
-      <section id="view-winners" class="view">
-        <div class="panel" style="padding:14px 18px;">
-          <p class="muted" style="font-size:0.87rem;">
-            Chaque titre détecté avec un potentiel ≥ 20 %, une capitalisation ≥ 1 Md € et une santé ≥ 2,5/5 est suivi automatiquement dans <code>history.json</code>. Dès que son cours atteint sa Juste Valeur cible, il intègre cet historique de performance.
-          </p>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Société</th>
-                <th>Marché</th>
-                <th>Détectée le</th>
-                <th>Objectif atteint le</th>
-                <th class="num">Cours entrée</th>
-                <th class="num">Cours sortie</th>
-                <th class="num">Gain réalisé</th>
-                <th class="num">Santé à l'entrée</th>
-              </tr>
-            </thead>
-            <tbody id="winnersBody"></tbody>
-          </table>
-        </div>
-      </section>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 2 & 3 : ANALYSES MATIN/SOIR + SCREENER COMPLET INTACT
+  ========================================================================== -->
+  <main class="container" id="screener-app">
+    <!-- Analyses Matin (Asie) & Soir (Europe / US) -->
+    <section class="briefings-wrap" id="analyses-section">
+      <div class="briefings-bar">
+        <h2>Analyses automatisées · Matin (Asie) &amp; Soir (Europe / US)</h2>
+        <button class="btn" id="toggleBriefings" type="button" style="padding:5px 11px; font-size:0.77rem;">Masquer les analyses</button>
+      </div>
+      <div class="briefings-grid" id="briefingsGrid"></div>
+    </section>
+
+    <!-- Onglets V2 + V3 -->
+    <nav class="tabs" id="mainTabs">
+      <button class="tab-btn active" data-tab="screener">
+        Screener Actions <span class="tab-count" id="countScreener">0</span>
+      </button>
+      <button class="tab-btn" data-tab="scatter">
+        Carte Pépites <span class="tab-count" id="countScatter">0</span>
+      </button>
+      <button class="tab-btn" data-tab="macro">
+        Macro &amp; Marchés <span class="tab-count" id="countMacro">0</span>
+      </button>
+      <button class="tab-btn" data-tab="winners">
+        Précédents gagnants <span class="tab-count" id="countWinners">0</span>
+      </button>
+    </nav>
+
+    <!-- VUE 1 : SCREENER ACTIONS -->
+    <section id="view-screener" class="view active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Actions sélectionnées</div>
+          <div class="kpi-value" id="kpiCount">0</div>
+          <div class="kpi-sub" id="kpiTotalSub">sur 0 analysées</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Potentiel moyen</div>
+          <div class="kpi-value pos" id="kpiUpside">+0 %</div>
+          <div class="kpi-sub">Écart cours / Juste Valeur</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Santé moyenne</div>
+          <div class="kpi-value" id="kpiHealth">0,0 / 5</div>
+          <div class="kpi-sub">Score composite sur 5 piliers</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Nouvelles entrées</div>
+          <div class="kpi-value" style="color:var(--purple);" id="kpiNew">0</div>
+          <div class="kpi-sub">Fraîchement sous-évaluées</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pièges écartés</div>
+          <div class="kpi-value" style="color:var(--amber);" id="kpiTraps">0</div>
+          <div class="kpi-sub">Décote ≥ 20 % mais bilan faible</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="market-bar">
+          <div class="pills" id="marketPills">
+            <button class="pill active" data-market="ALL">🌍 Tous <span class="pill-cnt" data-pcnt="ALL">0</span></button>
+            <button class="pill" data-market="FR">🇫🇷 France <span class="pill-cnt" data-pcnt="FR">0</span></button>
+            <button class="pill" data-market="DE">🇩🇪 Allemagne <span class="pill-cnt" data-pcnt="DE">0</span></button>
+            <button class="pill" data-market="US">🇺🇸 États-Unis <span class="pill-cnt" data-pcnt="US">0</span></button>
+            <button class="pill" data-market="KR">🇰🇷 Corée du Sud <span class="pill-cnt" data-pcnt="KR">0</span></button>
+            <button class="pill" data-market="JP">🇯🇵 Japon <span class="pill-cnt" data-pcnt="JP">0</span></button>
+          </div>
+          <div class="pills">
+            <button class="btn" id="watchlistFilterBtn" type="button">★ Watchlist (<span id="watchCount">0</span>)</button>
+            <button class="btn" id="presetValoris" type="button">Critères Valoris</button>
+            <button class="btn" id="presetQuality" type="button">Qualité ≥ 3,5</button>
+            <button class="btn" id="presetDividend" type="button">Rendement ≥ 3 %</button>
+            <button class="btn" id="presetAll" type="button">Tout afficher</button>
+          </div>
+        </div>
+
+        <div class="filters-grid">
+          <div class="field">
+            <label for="searchInput">Recherche (nom / ticker)</label>
+            <input id="searchInput" type="text" placeholder="Ex. Capgemini, Samsung, NVDA..." />
+          </div>
+          <div class="field">
+            <label for="sectorSelect">Secteur</label>
+            <select id="sectorSelect"><option value="ALL">Tous les secteurs</option></select>
+          </div>
+          <div class="field">
+            <label for="upsideRange">Potentiel min. <span id="upsideVal">20 %</span></label>
+            <input id="upsideRange" type="range" min="-20" max="80" step="5" value="20" />
+          </div>
+          <div class="field">
+            <label for="mcapRange">Cap. min. (Md €) <span id="mcapVal">1 Md €</span></label>
+            <input id="mcapRange" type="range" min="0" max="100" step="1" value="1" />
+          </div>
+          <div class="field">
+            <label for="healthRange">Santé min. <span id="healthVal">2,5 / 5</span></label>
+            <input id="healthRange" type="range" min="1" max="4.5" step="0.1" value="2.5" />
+          </div>
+          <div class="field">
+            <label for="divRange">Dividende min. <span id="divVal">0 %</span></label>
+            <input id="divRange" type="range" min="0" max="8" step="0.5" value="0" />
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <div class="check-group">
+            <label class="check-label">
+              <input type="checkbox" id="hideTraps" checked />
+              Masquer les pièges de valeur
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="onlyNew" />
+              Nouvelles entrées uniquement
+            </label>
+          </div>
+          <span class="muted" style="font-size:0.79rem;">Cliquez sur ★ pour suivre un titre · Cliquez sur une ligne pour ouvrir la fiche détaillée.</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:34px; cursor:default;">★</th>
+              <th data-sort="name">Société</th>
+              <th>Tendance 3M</th>
+              <th class="num" data-sort="price">Cours</th>
+              <th class="num" data-sort="fairValue">Juste Valeur</th>
+              <th class="num" data-sort="upside">Potentiel</th>
+              <th data-sort="healthScore">Santé (/5)</th>
+              <th>Sous-notes</th>
+              <th class="num" data-sort="marketCapB">Cap. (Md €)</th>
+              <th class="num" data-sort="dividendYield">Div.</th>
+              <th class="num" data-sort="pe">PER</th>
+              <th class="num" data-sort="evEbitda">EV/EBITDA</th>
+              <th data-sort="analystConsensus">Analystes</th>
+            </tr>
+          </thead>
+          <tbody id="stocksBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VUE 2 : CARTE PÉPITES -->
+    <section id="view-scatter" class="view">
+      <div class="scatter-card">
+        <div class="scatter-legend">
+          <div class="legend-items">
+            <span class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span>France</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span>Allemagne</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#10b981;"></span>États-Unis</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#a78bfa;"></span>Corée du Sud</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f43f5e;"></span>Japon</span>
+          </div>
+          <span>Zone verte = <strong>Zone Pépites</strong> (Santé ≥ 2,5/5 et Potentiel ≥ 20 %) · Taille = Capitalisation · Cliquez sur une bulle pour ouvrir sa fiche.</span>
+        </div>
+        <div class="scatter-wrap">
+          <svg id="scatterSvg" class="scatter-svg" viewBox="0 0 960 470"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- VUE 3 : MACRO & MARCHÉS -->
+    <section id="view-macro" class="view">
+      <div class="fx-strip" id="fxStrip"></div>
+      <div class="panel" style="padding:13px 18px;">
+        <div class="pills" id="macroCategoryPills">
+          <button class="pill active" data-cat="ALL">Tout</button>
+          <button class="pill" data-cat="Indices">Indices</button>
+          <button class="pill" data-cat="Futures">Futures</button>
+          <button class="pill" data-cat="Matières premières">Matières premières</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Actif</th>
+              <th>Catégorie</th>
+              <th>Courbe 3M</th>
+              <th class="num">Cours</th>
+              <th class="num">1 Jour</th>
+              <th class="num">1 Sem.</th>
+              <th class="num">1 Mois</th>
+              <th class="num">YTD</th>
+              <th>Fourchette 52 sem.</th>
+              <th class="num">MM 200</th>
+              <th>Tendance</th>
+            </tr>
+          </thead>
+          <tbody id="macroBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VUE 4 : PRÉCÉDENTS GAGNANTS -->
+    <section id="view-winners" class="view">
+      <div class="panel" style="padding:14px 18px;">
+        <p class="muted" style="font-size:0.87rem;">
+          Chaque titre détecté avec un potentiel ≥ 20 %, une capitalisation ≥ 1 Md € et une santé ≥ 2,5/5 est suivi automatiquement dans <code>history.json</code>. Dès que son cours atteint sa Juste Valeur cible, il intègre cet historique de performance.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Société</th>
+              <th>Marché</th>
+              <th>Détectée le</th>
+              <th>Objectif atteint le</th>
+              <th class="num">Cours entrée</th>
+              <th class="num">Cours sortie</th>
+              <th class="num">Gain réalisé</th>
+              <th class="num">Santé à l'entrée</th>
+            </tr>
+          </thead>
+          <tbody id="winnersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      Valoris V3 · Données collectées automatiquement via Yahoo Finance &amp; GitHub Actions · Outil d'aide à l'analyse fondamentale, ne constitue pas un conseil en investissement.
+    </footer>
+  </main>
 
   <!-- Tooltip Carte Pépites -->
   <div class="scatter-tooltip" id="scatterTooltip"></div>
@@ -1255,51 +1096,18 @@
 
   <script>
     // =========================================================================
-    // DONNÉES DE DÉMONSTRATION V3 (secours si ./data.json indisponible)
+    // DONNÉES DE SECOURS (affichées uniquement si ./data.json ET GitHub Pages inaccessibles)
     // =========================================================================
     const DEMO_DATA = {
       version: "3.0-demo",
-      lastSession: "all",
       updatedAt: new Date().toISOString(),
       fxRates: { EUR: 1.0, USD: 1.08, JPY: 165.4, KRW: 1502.0 },
-      briefings: {
-        asia: {
-          title: "Briefing Asie (Matin)",
-          updatedAt: new Date().toISOString(),
-          engine: "Algo Python (démo)",
-          headline: "5 opportunités saines (+32,6 % moy.) sur KR, JP",
-          sections: {
-            macro: "Nikkei 225 (+0,91 %, tendance haussière), KOSPI (+1,15 %, tendance baissière). Côté changes : EUR/JPY à 165,4, EUR/KRW à 1502.",
-            sectors: "Secteurs les plus décotés : Technologie (3 titres, +34,1 % moy.), Conso. cyclique (2 titres, +30,4 % moy.).",
-            opportunities: "Meilleurs couples décote/qualité : Tokyo Electron (+33,3 %, santé 4,28/5) · SK Hynix (+32,6 %, santé 4,12/5) · Samsung Electronics (+36,3 %, santé 3,84/5).",
-            vigilance: "Indice sous MM200 : KOSPI. Publications proches : Toyota Motor (J-9)."
-          }
-        },
-        west: {
-          title: "Briefing Europe & US (Soir)",
-          updatedAt: new Date().toISOString(),
-          engine: "Algo Python (démo)",
-          headline: "7 opportunités saines (+32,1 % moy.) sur FR, DE, US",
-          sections: {
-            macro: "CAC 40 (+0,48 %, baissière), DAX 40 (+0,62 %, haussière), S&P 500 (+0,35 %, haussière). Côté changes : EUR/USD à 1,08.",
-            sectors: "Secteurs les plus décotés : Technologie (4 titres, +35,5 % moy.), Énergie (1 titre, +28,5 % moy.).",
-            opportunities: "Meilleurs couples décote/qualité : TotalEnergies (+28,5 %, santé 3,92/5) · Capgemini (+35,2 %, santé 3,74/5) · Micron (+35,8 %, santé 3,58/5). Nouvelle entrée : STMicroelectronics.",
-            vigilance: "1 piège de valeur filtré automatiquement (Worldline) ; indice sous MM200 : CAC 40 ; publications proches : Micron Technology (J-6)."
-          }
-        }
-      },
       stocks: [
         { ticker: "CAP.PA", name: "Capgemini SE", market: "FR", currency: "€", sector: "Technologie", price: 158.4, fairValue: 214.2, upside: 35.2, upsideDelta5d: 2.1, marketCapB: 27.1, healthScore: 3.74, healthLabel: "Très bon", scores: { growth: 3.1, profitability: 3.8, cashflow: 4.2, balanceSheet: 3.6, valuation: 4.0 }, models: { dcf: 221.5, multiples: 206.1, analysts: 215.0 }, pe: 13.4, evEbitda: 9.2, dividendYield: 2.15, payoutRatio: 35.2, earningsDate: "2026-12-14", daysToEarnings: 22, sparkline: [176,174,171,169,165,163,166,162,159,157,155,156,158.4], chg3m: -10.0, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
         { ticker: "TTE.PA", name: "TotalEnergies SE", market: "FR", currency: "€", sector: "Énergie", price: 58.2, fairValue: 74.8, upside: 28.5, upsideDelta5d: 0.8, marketCapB: 134.5, healthScore: 3.92, healthLabel: "Très bon", scores: { growth: 2.9, profitability: 4.1, cashflow: 4.5, balanceSheet: 4.0, valuation: 4.1 }, models: { dcf: 78.4, multiples: 72.0, analysts: 74.0 }, pe: 7.9, evEbitda: 4.3, dividendYield: 5.45, payoutRatio: 41.0, earningsDate: "2027-02-05", daysToEarnings: 75, sparkline: [62,61.5,60.2,61.0,59.8,58.5,57.9,58.8,59.1,57.6,58.0,58.2], chg3m: -6.1, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
-        { ticker: "STMPA.PA", name: "STMicroelectronics", market: "FR", currency: "€", sector: "Technologie", price: 24.6, fairValue: 33.9, upside: 37.8, upsideDelta5d: 4.3, marketCapB: 22.1, healthScore: 3.38, healthLabel: "Bon", scores: { growth: 2.4, profitability: 3.6, cashflow: 3.5, balanceSheet: 4.2, valuation: 3.2 }, models: { dcf: 34.8, multiples: 32.9, analysts: 34.0 }, pe: 14.8, evEbitda: 6.9, dividendYield: 1.4, payoutRatio: 18.0, earningsDate: "2027-01-28", daysToEarnings: 67, sparkline: [29,28.2,27.5,26.8,25.9,25.2,24.8,24.1,23.9,24.3,24.6], chg3m: -15.2, analystConsensus: "Achat", valueTrap: false, isNewEntry: true },
         { ticker: "IFX.DE", name: "Infineon Technologies", market: "DE", currency: "€", sector: "Technologie", price: 31.2, fairValue: 41.5, upside: 33.0, upsideDelta5d: -1.2, marketCapB: 40.7, healthScore: 3.62, healthLabel: "Très bon", scores: { growth: 3.3, profitability: 3.8, cashflow: 3.5, balanceSheet: 3.7, valuation: 3.8 }, models: { dcf: 42.1, multiples: 40.4, analysts: 42.0 }, pe: 16.5, evEbitda: 9.8, dividendYield: 1.12, payoutRatio: 21.5, earningsDate: "2027-02-02", daysToEarnings: 72, sparkline: [29.5,30.1,29.8,30.4,31.0,30.2,29.9,30.5,31.4,31.2], chg3m: 5.8, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "MBG.DE", name: "Mercedes-Benz Group", market: "DE", currency: "€", sector: "Conso. cyclique", price: 54.8, fairValue: 71.2, upside: 29.9, upsideDelta5d: 1.4, marketCapB: 53.2, healthScore: 3.05, healthLabel: "Bon", scores: { growth: 2.2, profitability: 3.3, cashflow: 3.4, balanceSheet: 2.5, valuation: 3.9 }, models: { dcf: 73.0, multiples: 69.5, analysts: 71.0 }, pe: 5.8, evEbitda: 6.1, dividendYield: 7.8, payoutRatio: 44.0, earningsDate: "2027-02-19", daysToEarnings: 89, sparkline: [61,60,58.5,57.2,56.8,55.4,54.9,55.1,54.2,54.8], chg3m: -10.2, analystConsensus: "Conserver", valueTrap: false, isNewEntry: false },
         { ticker: "GOOGL", name: "Alphabet Inc.", market: "US", currency: "$", sector: "Télécoms & Médias", price: 174.5, fairValue: 218.0, upside: 24.9, upsideDelta5d: -0.9, marketCapB: 1980.0, healthScore: 4.52, healthLabel: "Excellent", scores: { growth: 4.3, profitability: 4.8, cashflow: 4.7, balanceSheet: 4.8, valuation: 4.0 }, models: { dcf: 224.0, multiples: 212.0, analysts: 218.0 }, pe: 20.4, evEbitda: 14.1, dividendYield: 0.46, payoutRatio: 10.2, earningsDate: "2027-02-03", daysToEarnings: 73, sparkline: [161,163,165,164,167,170,169,172,175,174.5], chg3m: 8.4, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "MU", name: "Micron Technology", market: "US", currency: "$", sector: "Technologie", price: 102.0, fairValue: 138.5, upside: 35.8, upsideDelta5d: 3.0, marketCapB: 104.5, healthScore: 3.58, healthLabel: "Très bon", scores: { growth: 4.6, profitability: 3.2, cashflow: 3.1, balanceSheet: 3.4, valuation: 3.6 }, models: { dcf: 136.0, multiples: 134.5, analysts: 145.0 }, pe: 12.6, evEbitda: 7.4, dividendYield: 0.45, payoutRatio: 14.0, earningsDate: "2026-11-28", daysToEarnings: 6, sparkline: [94,96,99,105,108,104,101,99,100.5,102], chg3m: 8.5, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: true },
         { ticker: "005930.KS", name: "Samsung Electronics", market: "KR", currency: "₩", sector: "Technologie", price: 59800, fairValue: 81500, upside: 36.3, upsideDelta5d: 1.9, marketCapB: 237.6, healthScore: 3.84, healthLabel: "Très bon", scores: { growth: 3.6, profitability: 3.5, cashflow: 3.9, balanceSheet: 4.4, valuation: 3.8 }, models: { dcf: 82400, multiples: 79100, analysts: 83000 }, pe: 10.4, evEbitda: 5.2, dividendYield: 2.42, payoutRatio: 26.0, earningsDate: "2027-01-30", daysToEarnings: 69, sparkline: [68000,66500,64000,62500,61000,59500,58200,59100,59800], chg3m: -12.1, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "000660.KS", name: "SK Hynix Inc.", market: "KR", currency: "₩", sector: "Technologie", price: 194500, fairValue: 258000, upside: 32.6, upsideDelta5d: -1.5, marketCapB: 94.3, healthScore: 4.12, healthLabel: "Très bon", scores: { growth: 4.8, profitability: 4.3, cashflow: 4.0, balanceSheet: 3.5, valuation: 4.0 }, models: { dcf: 262000, multiples: 247000, analysts: 265000 }, pe: 7.8, evEbitda: 4.9, dividendYield: 0.72, payoutRatio: 11.5, earningsDate: "2027-01-24", daysToEarnings: 63, sparkline: [172000,175000,180000,178000,184000,189000,192000,194500], chg3m: 13.1, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "005380.KS", name: "Hyundai Motor", market: "KR", currency: "₩", sector: "Conso. cyclique", price: 218000, fairValue: 294000, upside: 34.9, upsideDelta5d: 0.5, marketCapB: 30.4, healthScore: 3.46, healthLabel: "Bon", scores: { growth: 3.4, profitability: 3.5, cashflow: 3.2, balanceSheet: 2.9, valuation: 4.3 }, models: { dcf: 298000, multiples: 284000, analysts: 300000 }, pe: 4.9, evEbitda: 5.8, dividendYield: 5.2, payoutRatio: 25.0, earningsDate: "2027-01-25", daysToEarnings: 64, sparkline: [232000,229000,225000,222000,219000,216000,218000], chg3m: -6.0, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
-        { ticker: "7203.T", name: "Toyota Motor Corp.", market: "JP", currency: "¥", sector: "Conso. cyclique", price: 2685, fairValue: 3380, upside: 25.9, upsideDelta5d: -0.4, marketCapB: 219.8, healthScore: 3.66, healthLabel: "Très bon", scores: { growth: 3.5, profitability: 3.7, cashflow: 3.6, balanceSheet: 3.3, valuation: 4.2 }, models: { dcf: 3410, multiples: 3290, analysts: 3440 }, pe: 8.6, evEbitda: 7.9, dividendYield: 3.15, payoutRatio: 27.0, earningsDate: "2026-12-01", daysToEarnings: 9, sparkline: [2540,2580,2610,2590,2630,2660,2675,2685], chg3m: 5.7, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
         { ticker: "8035.T", name: "Tokyo Electron", market: "JP", currency: "¥", sector: "Technologie", price: 23400, fairValue: 31200, upside: 33.3, upsideDelta5d: 1.1, marketCapB: 65.4, healthScore: 4.28, healthLabel: "Très bon", scores: { growth: 4.2, profitability: 4.6, cashflow: 4.3, balanceSheet: 4.7, valuation: 3.6 }, models: { dcf: 30800, multiples: 30200, analysts: 32600 }, pe: 19.2, evEbitda: 13.5, dividendYield: 2.35, payoutRatio: 48.0, earningsDate: "2027-02-07", daysToEarnings: 77, sparkline: [24800,24200,23900,23100,22800,23200,23400], chg3m: -5.6, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
         { ticker: "WLN.PA", name: "Worldline SA", market: "FR", currency: "€", sector: "Technologie", price: 7.4, fairValue: 11.2, upside: 51.4, upsideDelta5d: 5.2, marketCapB: 2.1, healthScore: 2.12, healthLabel: "Passable", scores: { growth: 1.6, profitability: 2.1, cashflow: 1.8, balanceSheet: 1.9, valuation: 3.2 }, models: { dcf: 11.5, multiples: 10.9, analysts: 11.2 }, pe: 6.2, evEbitda: 4.1, dividendYield: null, payoutRatio: null, earningsDate: "2027-02-26", daysToEarnings: 96, sparkline: [9.8,9.4,8.9,8.5,8.1,7.9,7.6,7.4], chg3m: -24.5, analystConsensus: "Conserver", valueTrap: true, isNewEntry: false }
       ],
@@ -1309,15 +1117,12 @@
         { ticker: "^GSPC", name: "S&P 500", category: "Indices", region: "États-Unis", unit: "pts", price: 5985.4, chg1d: 0.35, chg1w: 1.82, chg1m: 3.12, chgYtd: 25.4, low52w: 4682, high52w: 6017, pos52w: 97.6, sma200: 5412, distSma200: 10.59, trend: "Haussière", sparkline: [5550,5640,5710,5780,5840,5920,5985.4] },
         { ticker: "^N225", name: "Nikkei 225", category: "Indices", region: "Japon", unit: "pts", price: 38950.0, chg1d: 0.91, chg1w: 0.74, chg1m: 1.65, chgYtd: 16.4, low52w: 31156, high52w: 42426, pos52w: 69.2, sma200: 38120, distSma200: 2.18, trend: "Haussière", sparkline: [37200,37800,38100,37900,38400,38700,38950] },
         { ticker: "^KS11", name: "KOSPI", category: "Indices", region: "Corée du Sud", unit: "pts", price: 2512.8, chg1d: 1.15, chg1w: 2.04, chg1m: -1.42, chgYtd: -5.2, low52w: 2386, high52w: 2896, pos52w: 24.9, sma200: 2635, distSma200: -4.64, trend: "Baissière", sparkline: [2640,2610,2580,2540,2490,2480,2512.8] },
-        { ticker: "GC=F", name: "Or (Gold)", category: "Matières premières", region: "Métaux précieux", unit: "$/oz", price: 2692.4, chg1d: 0.85, chg1w: 2.10, chg1m: 1.95, chgYtd: 30.1, low52w: 1985, high52w: 2790, pos52w: 87.9, sma200: 2410, distSma200: 11.72, trend: "Haussière", sparkline: [2480,2520,2560,2610,2650,2670,2692.4] },
-        { ticker: "BZ=F", name: "Pétrole Brent", category: "Matières premières", region: "Énergie", unit: "$/bbl", price: 74.2, chg1d: -0.65, chg1w: 1.40, chg1m: -2.30, chgYtd: -3.6, low52w: 68.7, high52w: 92.1, pos52w: 23.5, sma200: 80.4, distSma200: -7.71, trend: "Baissière", sparkline: [79.5,78.1,76.4,75.0,73.8,74.6,74.2] }
+        { ticker: "GC=F", name: "Or (Gold)", category: "Matières premières", region: "Métaux précieux", unit: "$/oz", price: 2692.4, chg1d: 0.85, chg1w: 2.10, chg1m: 1.95, chgYtd: 30.1, low52w: 1985, high52w: 2790, pos52w: 87.9, sma200: 2410, distSma200: 11.72, trend: "Haussière", sparkline: [2480,2520,2560,2610,2650,2670,2692.4] }
       ],
-      winners: [
-        { ticker: "SAF.PA", name: "Safran SA", market: "FR", currency: "€", detectedDate: "2026-04-12", reachedDate: "2026-09-18", entryPrice: 178.4, exitPrice: 221.6, gainPct: 24.2, healthScoreAtEntry: 3.9 },
-        { ticker: "RHM.DE", name: "Rheinmetall AG", market: "DE", currency: "€", detectedDate: "2026-03-04", reachedDate: "2026-08-29", entryPrice: 445.0, exitPrice: 562.0, gainPct: 26.3, healthScoreAtEntry: 4.1 }
-      ]
+      winners: []
     };
 
+    const REMOTE_DATA_FALLBACK = "https://riaseven.github.io/valoris/data.json";
     const MARKET_LABELS = { FR: "France", DE: "Allemagne", US: "États-Unis", KR: "Corée du Sud", JP: "Japon" };
     const MARKET_COLORS = { FR: "#3b82f6", DE: "#f59e0b", US: "#10b981", KR: "#a78bfa", JP: "#f43f5e" };
 
@@ -1332,6 +1137,7 @@
     const state = {
       data: DEMO_DATA,
       isLive: false,
+      sourceLabel: "Mode démo",
       market: "ALL",
       macroCat: "ALL",
       search: "",
@@ -1350,18 +1156,18 @@
       lastFiltered: []
     };
 
-    const fmtNum = (n, dec = 2) => (n === null || n === undefined || Number.isNaN(n))
+    const fmtNum = (n, dec = 2) => (n === null || n === undefined || Number.isNaN(Number(n)))
       ? "—"
       : Number(n).toLocaleString("fr-FR", { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
     const fmtPrice = (val, cur) => {
-      if (val === null || val === undefined) return "—";
+      if (val === null || val === undefined || Number.isNaN(Number(val))) return "—";
       const dec = (cur === "₩" || cur === "¥") && val >= 100 ? 0 : 2;
-      return `${fmtNum(val, dec)} ${cur}`;
+      return `${fmtNum(val, dec)} ${cur || ""}`.trim();
     };
 
     const fmtPct = (v, dec = 2) => {
-      if (v === null || v === undefined) return `<span class="muted">—</span>`;
+      if (v === null || v === undefined || Number.isNaN(Number(v))) return `<span class="muted">—</span>`;
       const cls = v >= 0 ? "pos" : "neg";
       const sign = v > 0 ? "+" : "";
       return `<span class="${cls}">${sign}${fmtNum(v, dec)} %</span>`;
@@ -1388,11 +1194,13 @@
       </svg>`;
     }
 
-    // Synthèse client de secours si data.json provient encore de la V2 (sans champ briefings)
+    // =========================================================================
+    // SYNTHÈSE MATIN (ASIE) & SOIR (EUROPE / US) — COMPATIBLE V1 / V2 / V3
+    // =========================================================================
     function synthesizeClientBriefing(zone) {
       const markets = zone === "asia" ? ["KR", "JP"] : ["FR", "DE", "US"];
       const all = (state.data.stocks || []).filter(s => markets.includes(s.market));
-      const eligible = all.filter(s => s.upside >= 20 && s.marketCapB >= 1 && s.healthScore >= 2.5 && !s.valueTrap);
+      const eligible = all.filter(s => (s.upside ?? -999) >= 20 && (s.marketCapB ?? 0) >= 1 && (s.healthScore ?? 0) >= 2.5 && !s.valueTrap);
       const traps = all.filter(s => s.valueTrap);
       const avgUp = eligible.length ? eligible.reduce((a, s) => a + s.upside, 0) / eligible.length : 0;
       const avgH = eligible.length ? eligible.reduce((a, s) => a + s.healthScore, 0) / eligible.length : 0;
@@ -1402,12 +1210,12 @@
       const fx = state.data.fxRates || {};
 
       const macroTxt = mList.length
-        ? mList.map(m => `${m.name} (${m.chg1d >= 0 ? "+" : ""}${fmtNum(m.chg1d, 2)} %, ${m.trend.toLowerCase()})`).join(", ") +
+        ? mList.map(m => `${m.name} (${m.chg1d !== null && m.chg1d !== undefined ? (m.chg1d >= 0 ? "+" : "") + fmtNum(m.chg1d, 2) + " %" : "—"}, ${(m.trend || "neutre").toLowerCase()})`).join(", ") +
           (zone === "asia" && fx.JPY ? `. Changes : EUR/JPY ${fmtNum(fx.JPY, 1)}, EUR/KRW ${fmtNum(fx.KRW, 0)}.` : fx.USD ? `. Change : EUR/USD ${fmtNum(fx.USD, 4)}.` : ".")
-        : `Synthèse calculée localement sur ${all.length} titres (${markets.join(", ")}).`;
+        : `Synthèse calculée sur ${all.length} titres (${markets.join(", ")}).`;
 
       const secMap = {};
-      eligible.forEach(s => { (secMap[s.sector] = secMap[s.sector] || []).push(s.upside); });
+      eligible.forEach(s => { const k = s.sector || "Autre"; (secMap[k] = secMap[k] || []).push(s.upside); });
       const topSec = Object.entries(secMap)
         .map(([k, v]) => [k, v.length, v.reduce((a, b) => a + b, 0) / v.length])
         .sort((a, b) => b[1] - a[1] || b[2] - a[2]).slice(0, 3);
@@ -1415,7 +1223,7 @@
       return {
         title: zone === "asia" ? "Briefing Asie (Matin)" : "Briefing Europe & US (Soir)",
         updatedAt: state.data.updatedAt || new Date().toISOString(),
-        engine: "Synthèse auto",
+        engine: "Synthèse live",
         headline: `${eligible.length} opportunités saines (+${fmtNum(avgUp, 1)} % moy.) sur ${markets.join(", ")}`,
         sections: {
           macro: macroTxt,
@@ -1432,26 +1240,27 @@
       };
     }
 
-    function buildBriefingsHtml() {
+    function renderBriefings() {
       const b = state.data.briefings || {};
       const cards = [
         { key: "asia", cls: "asia", icon: "☀️", badge: "Matin · 08h30 UTC" },
         { key: "west", cls: "west", icon: "🌙", badge: "Soir · 20h30 UTC" }
       ];
 
-      return cards.map(c => {
+      document.getElementById("briefingsGrid").innerHTML = cards.map(c => {
         const item = b[c.key] || synthesizeClientBriefing(c.key);
         const dt = item.updatedAt
           ? new Date(item.updatedAt).toLocaleString("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })
           : "";
         const sec = item.sections || {};
+        const eng = item.engine || "Algo";
         return `
           <article class="briefing-card ${c.cls}">
             <div class="briefing-top">
               <div class="briefing-title"><span>${c.icon}</span><span>${item.title}</span></div>
               <div class="briefing-meta">
                 <span class="badge ${c.key === "asia" ? "amber" : "purple"}">${c.badge}</span>
-                <span class="badge ${item.engine?.includes("Gemini") ? "purple" : "blue"}">${item.engine || "Algo"}</span>
+                <span class="badge ${eng.includes("Gemini") ? "purple" : "blue"}">${eng}</span>
                 <span>${dt}</span>
               </div>
             </div>
@@ -1467,14 +1276,8 @@
       }).join("");
     }
 
-    function renderBriefings() {
-      const html = buildBriefingsHtml();
-      document.getElementById("briefingsGrid").innerHTML = html;
-      document.getElementById("landingBriefingsGrid").innerHTML = html;
-    }
-
     // =========================================================================
-    // NAVIGATION LANDING <-> APPLICATION
+    // NAVIGATION & RENDU DU HERO D'ACCUEIL
     // =========================================================================
     function switchTab(tabName) {
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tabName));
@@ -1488,59 +1291,16 @@
       });
     }
 
-    function enterApp(options = {}) {
-      const landing = document.getElementById("landing-screen");
-      const app = document.getElementById("app-shell");
-
-      if (options.market) {
-        setMarketFilter(options.market);
-        renderScreener();
-      }
-      if (options.tab) {
-        switchTab(options.tab);
-      }
-
-      if (!landing.classList.contains("hidden")) {
-        landing.classList.add("leaving");
-        setTimeout(() => {
-          landing.classList.add("hidden");
-          landing.classList.remove("leaving");
-          app.classList.add("visible");
-          window.scrollTo({ top: 0, behavior: "instant" });
-          if (options.openTicker) {
-            const stock = (state.data.stocks || []).find(s => s.ticker === options.openTicker);
-            if (stock) setTimeout(() => openDrawer(stock), 120);
-          }
-        }, 260);
-      } else {
-        app.classList.add("visible");
-        if (options.openTicker) {
-          const stock = (state.data.stocks || []).find(s => s.ticker === options.openTicker);
-          if (stock) openDrawer(stock);
-        }
-      }
-      history.replaceState(null, "", "#app");
+    function scrollToEl(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    function backToLanding() {
-      const landing = document.getElementById("landing-screen");
-      const app = document.getElementById("app-shell");
-      closeDrawer();
-      app.classList.remove("visible");
-      landing.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      history.replaceState(null, "", "#");
-    }
-
-    // =========================================================================
-    // RENDU DYNAMIQUE DE LA PAGE D'ACCUEIL & COMPTEURS PAR PAYS
-    // =========================================================================
     function updateCountryCounts() {
       const stocks = state.data.stocks || [];
-      const markets = ["ALL", "FR", "DE", "US", "KR", "JP"];
-      markets.forEach(mkt => {
+      ["ALL", "FR", "DE", "US", "KR", "JP"].forEach(mkt => {
         const subset = mkt === "ALL" ? stocks : stocks.filter(s => s.market === mkt);
-        const eligibleCount = subset.filter(s => s.upside >= 20 && s.marketCapB >= 1 && s.healthScore >= 2.5 && !s.valueTrap).length;
+        const eligibleCount = subset.filter(s => (s.upside ?? -999) >= 20 && (s.marketCapB ?? 0) >= 1 && (s.healthScore ?? 0) >= 2.5 && !s.valueTrap).length;
         const heroEl = document.querySelector(`[data-cnt="${mkt}"]`);
         if (heroEl) heroEl.textContent = eligibleCount;
         const pillEl = document.querySelector(`[data-pcnt="${mkt}"]`);
@@ -1548,18 +1308,19 @@
       });
     }
 
-    function renderLanding() {
+    function renderHero() {
       const stocks = state.data.stocks || [];
       const macro = state.data.macro || [];
-      const eligible = stocks.filter(s => s.upside >= 20 && s.marketCapB >= 1 && s.healthScore >= 2.5 && !s.valueTrap);
+      const eligible = stocks.filter(s => (s.upside ?? -999) >= 20 && (s.marketCapB ?? 0) >= 1 && (s.healthScore ?? 0) >= 2.5 && !s.valueTrap);
       const traps = stocks.filter(s => s.valueTrap);
       const avgUp = eligible.length ? eligible.reduce((a, b) => a + b.upside, 0) / eligible.length : 0;
 
       const d = state.data.updatedAt ? new Date(state.data.updatedAt) : new Date();
       const dtStr = d.toLocaleString("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
-      document.getElementById("landingLiveBadge").textContent = state.isLive
-        ? `Flux Live synchronisé · Dernière MAJ ${dtStr}`
-        : `Aperçu Valoris V3 · 2 sessions/jour (Asie & Occident)`;
+      document.getElementById("heroLiveBadge").textContent = state.isLive
+        ? `Données live synchronisées (${stocks.length} titres) · MAJ ${dtStr}`
+        : `Mode aperçu · Connectez data.json pour vos 208 titres live`;
+      document.getElementById("showcaseCountBadge").textContent = `${eligible.length} pépites`;
 
       document.getElementById("heroStatTotal").textContent = stocks.length;
       document.getElementById("heroStatEligible").textContent = eligible.length;
@@ -1568,19 +1329,25 @@
 
       updateCountryCounts();
 
+      // Ticker défilant live
       const tickerItems = [];
       macro.slice(0, 7).forEach(m => {
         tickerItems.push(`<span class="tick-item"><span class="tick-tag">${m.name}</span><span class="mono">${fmtNum(m.price, m.price >= 100 ? 0 : 2)}</span>${fmtPct(m.chg1d, 2)}</span>`);
       });
-      const top5 = [...eligible].sort((a, b) => (b.upside * b.healthScore) - (a.upside * a.healthScore)).slice(0, 6);
-      top5.forEach(s => {
+      const topRanked = [...eligible].sort((a, b) => (b.upside * b.healthScore) - (a.upside * a.healthScore));
+      topRanked.slice(0, 6).forEach(s => {
         tickerItems.push(`<span class="tick-item"><span class="tick-tag">${s.ticker}</span><span>${s.name}</span><span class="badge green">+${fmtNum(s.upside, 1)} %</span></span>`);
       });
       const joined = tickerItems.join("");
       document.getElementById("tickerTrack").innerHTML = joined + joined;
 
-      const top3 = top5.slice(0, 3);
-      const spotWrap = document.getElementById("landingSpotlight");
+      // Top 3 Spotlight Cards
+      const spotWrap = document.getElementById("heroSpotlight");
+      const top3 = topRanked.slice(0, 3);
+      if (!top3.length) {
+        spotWrap.innerHTML = `<div class="muted" style="font-size:0.84rem; padding:14px 0;">Aucune pépite ne cumule les 3 critères sur cette collecte.</div>`;
+        return;
+      }
       spotWrap.innerHTML = top3.map(s => `
         <div class="spotlight-item" data-spot-ticker="${s.ticker}">
           <div>
@@ -1596,50 +1363,54 @@
       `).join("");
 
       spotWrap.querySelectorAll(".spotlight-item").forEach(el => {
-        el.addEventListener("click", () => enterApp({ tab: "screener", openTicker: el.dataset.spotTicker }));
+        el.addEventListener("click", () => {
+          const stock = stocks.find(x => x.ticker === el.dataset.spotTicker);
+          if (stock) openDrawer(stock);
+        });
       });
     }
 
-    // Effet 3D sur la carte Hero
+    // Effet 3D léger sur la carte Hero
     const tiltCard = document.getElementById("tiltCard");
     if (tiltCard) {
       tiltCard.addEventListener("mousemove", e => {
         const rect = tiltCard.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        tiltCard.style.transform = `rotateY(${(x * 8).toFixed(2)}deg) rotateX(${(-y * 8).toFixed(2)}deg)`;
+        tiltCard.style.transform = `rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 7).toFixed(2)}deg)`;
       });
       tiltCard.addEventListener("mouseleave", () => {
         tiltCard.style.transform = "rotateY(0deg) rotateX(0deg)";
       });
     }
 
-    // Fond animé constellation
+    // Constellation animée uniquement dans le Hero
     (function initCanvas() {
       const canvas = document.getElementById("ambientCanvas");
+      const heroEl = document.getElementById("hero-accueil");
       const ctx = canvas.getContext("2d");
       let w = 0, h = 0, pts = [];
 
       function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        const count = Math.min(52, Math.floor((w * h) / 28000));
+        w = canvas.width = heroEl.clientWidth || window.innerWidth;
+        h = canvas.height = heroEl.clientHeight || 520;
+        const count = Math.min(44, Math.max(18, Math.floor((w * h) / 22000)));
         pts = Array.from({ length: count }, () => ({
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.35,
-          r: Math.random() * 1.8 + 0.8
+          vx: (Math.random() - 0.5) * 0.32,
+          vy: (Math.random() - 0.5) * 0.32,
+          r: Math.random() * 1.7 + 0.8
         }));
       }
       window.addEventListener("resize", resize);
-      resize();
+      setTimeout(resize, 60);
 
       function tick() {
-        if (!document.getElementById("landing-screen").classList.contains("hidden")) {
+        if (!heroEl.classList.contains("collapsed") && w > 0 && h > 0) {
           ctx.clearRect(0, 0, w, h);
           const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-          const dotColor = isDark ? "rgba(147, 197, 253, 0.45)" : "rgba(37, 99, 235, 0.25)";
+          const dotColor = isDark ? "rgba(147, 197, 253, 0.45)" : "rgba(37, 99, 235, 0.26)";
           const lineBase = isDark ? "147, 197, 253" : "37, 99, 235";
 
           for (let i = 0; i < pts.length; i++) {
@@ -1656,11 +1427,11 @@
             for (let j = i + 1; j < pts.length; j++) {
               const q = pts[j];
               const dist = Math.hypot(p.x - q.x, p.y - q.y);
-              if (dist < 145) {
+              if (dist < 135) {
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(q.x, q.y);
-                ctx.strokeStyle = `rgba(${lineBase}, ${((1 - dist / 145) * 0.16).toFixed(3)})`;
+                ctx.strokeStyle = `rgba(${lineBase}, ${((1 - dist / 135) * 0.16).toFixed(3)})`;
                 ctx.lineWidth = 1;
                 ctx.stroke();
               }
@@ -1673,7 +1444,7 @@
     })();
 
     // =========================================================================
-    // RENDU DU SCREENER V3
+    // RENDU DU SCREENER COMPLET (V2 + V3)
     // =========================================================================
     function populateSectors() {
       const select = document.getElementById("sectorSelect");
@@ -1691,10 +1462,10 @@
       const dateStr = d.toLocaleString("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
       if (state.isLive) {
         dot.classList.remove("demo");
-        text.textContent = `Données live · MAJ ${dateStr}`;
+        text.textContent = `${state.sourceLabel} · MAJ ${dateStr}`;
       } else {
         dot.classList.add("demo");
-        text.textContent = `Mode démo V3 · ${dateStr}`;
+        text.textContent = `Mode démo · ${dateStr}`;
       }
       document.getElementById("watchCount").textContent = state.watchlist.size;
       document.getElementById("watchlistFilterBtn").classList.toggle("active-toggle", state.onlyWatchlist);
@@ -1707,10 +1478,10 @@
       return allStocks.filter(s => {
         if (state.market !== "ALL" && s.market !== state.market) return false;
         if (state.sector !== "ALL" && s.sector !== state.sector) return false;
-        if (q && !s.name.toLowerCase().includes(q) && !s.ticker.toLowerCase().includes(q)) return false;
-        if (s.upside < state.minUpside) return false;
-        if (s.marketCapB < state.minCap) return false;
-        if (s.healthScore < state.minHealth) return false;
+        if (q && !(s.name || "").toLowerCase().includes(q) && !(s.ticker || "").toLowerCase().includes(q)) return false;
+        if ((s.upside ?? -999) < state.minUpside) return false;
+        if ((s.marketCapB ?? 0) < state.minCap) return false;
+        if ((s.healthScore ?? 0) < state.minHealth) return false;
         if (state.minDiv > 0 && ((s.dividendYield ?? 0) < state.minDiv)) return false;
         if (state.hideTraps && s.valueTrap) return false;
         if (state.onlyNew && !s.isNewEntry) return false;
@@ -1734,8 +1505,8 @@
 
       const trapsInMarket = allStocks.filter(s => (state.market === "ALL" || s.market === state.market) && s.valueTrap).length;
       const newCount = filtered.filter(s => s.isNewEntry).length;
-      const avgUpside = filtered.length ? filtered.reduce((acc, s) => acc + s.upside, 0) / filtered.length : 0;
-      const avgHealth = filtered.length ? filtered.reduce((acc, s) => acc + s.healthScore, 0) / filtered.length : 0;
+      const avgUpside = filtered.length ? filtered.reduce((acc, s) => acc + (s.upside || 0), 0) / filtered.length : 0;
+      const avgHealth = filtered.length ? filtered.reduce((acc, s) => acc + (s.healthScore || 0), 0) / filtered.length : 0;
 
       document.getElementById("countScreener").textContent = filtered.length;
       document.getElementById("kpiCount").textContent = filtered.length;
@@ -1747,16 +1518,17 @@
 
       const tbody = document.getElementById("stocksBody");
       if (!filtered.length) {
-        tbody.innerHTML = `<tr><td colspan="13" class="empty-state">Aucune action ne correspond à ces filtres. Essayez d'assouplir vos seuils ou changez de pays.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="13" class="empty-state">Aucune action ne correspond à ces filtres. Cliquez sur <strong>Tout afficher</strong> ou assouplissez les curseurs.</td></tr>`;
         renderScatter(filtered);
         return;
       }
 
       tbody.innerHTML = filtered.map(s => {
         const upClass = s.upside >= 20 ? "green" : s.upside >= 0 ? "blue" : "red";
-        const hc = healthColor(s.healthScore);
-        const pctWidth = Math.min(100, Math.max(10, (s.healthScore / 5) * 100));
+        const hc = healthColor(s.healthScore || 0);
+        const pctWidth = Math.min(100, Math.max(10, ((s.healthScore || 0) / 5) * 100));
         const starred = state.watchlist.has(s.ticker);
+        const consensus = s.analystConsensus || "Conserver";
 
         const trapBadge = s.valueTrap ? `<span class="badge red">Piège</span>` : "";
         const newBadge = s.isNewEntry ? `<span class="badge purple">Nouveau</span>` : "";
@@ -1775,7 +1547,7 @@
             <td>
               <div class="stock-name">${s.name}</div>
               <div class="stock-meta">
-                <span>${s.ticker}</span> · <span>${s.market}</span> · <span>${s.sector}</span>
+                <span>${s.ticker}</span> · <span>${s.market}</span> · <span>${s.sector || "—"}</span>
                 ${newBadge}${earnBadge}${trapBadge}
               </div>
             </td>
@@ -1792,7 +1564,7 @@
               ${deltaHtml}
             </td>
             <td>
-              <div style="font-weight:700; color:${hc};">${fmtNum(s.healthScore, 2)} <span class="muted" style="font-weight:500; font-size:0.74rem;">(${s.healthLabel})</span></div>
+              <div style="font-weight:700; color:${hc};">${fmtNum(s.healthScore, 2)} <span class="muted" style="font-weight:500; font-size:0.74rem;">(${s.healthLabel || ""})</span></div>
               <div class="health-bar"><div class="health-fill" style="width:${pctWidth}%; background:${hc};"></div></div>
             </td>
             <td>
@@ -1806,7 +1578,7 @@
             <td class="num">${s.dividendYield ? `<span class="pos">${fmtNum(s.dividendYield, 2)} %</span>` : `<span class="muted">—</span>`}</td>
             <td class="num">${s.pe ? fmtNum(s.pe, 1) + "×" : "—"}</td>
             <td class="num">${s.evEbitda ? fmtNum(s.evEbitda, 1) + "×" : "—"}</td>
-            <td><span class="badge ${s.analystConsensus.includes("Achat") ? "green" : s.analystConsensus === "Conserver" ? "amber" : "red"}">${s.analystConsensus}</span></td>
+            <td><span class="badge ${consensus.includes("Achat") ? "green" : consensus === "Conserver" ? "amber" : "red"}">${consensus}</span></td>
           </tr>
         `;
       }).join("");
@@ -1865,15 +1637,15 @@
 
       const sortedForDraw = [...list].sort((a, b) => (b.marketCapB || 0) - (a.marketCapB || 0));
       for (const s of sortedForDraw) {
-        const cx = xScale(s.healthScore);
-        const cy = yScale(s.upside);
+        const cx = xScale(s.healthScore || 1);
+        const cy = yScale(s.upside || 0);
         const r = Math.max(5.5, Math.min(20, 4 + Math.sqrt(s.marketCapB || 1) * 0.55));
         const color = MARKET_COLORS[s.market] || "#3b82f6";
         const stroke = state.watchlist.has(s.ticker) ? "#f59e0b" : "var(--surface)";
         const sw = state.watchlist.has(s.ticker) ? 2.5 : 1.5;
         out += `<circle class="bubble" data-ticker="${s.ticker}" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="${color}" fill-opacity="0.78" stroke="${stroke}" stroke-width="${sw}" style="cursor:pointer;" />`;
-        if (r >= 9 || (s.healthScore >= 3.5 && s.upside >= 25)) {
-          out += `<text x="${cx.toFixed(1)}" y="${(cy - r - 4).toFixed(1)}" text-anchor="middle" fill="var(--text)" font-size="10" font-weight="600" style="pointer-events:none;">${s.ticker.split(".")[0]}</text>`;
+        if (r >= 9 || ((s.healthScore || 0) >= 3.5 && (s.upside || 0) >= 25)) {
+          out += `<text x="${cx.toFixed(1)}" y="${(cy - r - 4).toFixed(1)}" text-anchor="middle" fill="var(--text)" font-size="10" font-weight="600" style="pointer-events:none;">${(s.ticker || "").split(".")[0]}</text>`;
         }
       }
 
@@ -1884,7 +1656,7 @@
         el.addEventListener("mouseenter", ev => {
           tooltip.innerHTML = `
             <div style="font-weight:800; margin-bottom:3px;">${stock.name} (${stock.ticker})</div>
-            <div>Marché : <strong>${MARKET_LABELS[stock.market] || stock.market}</strong> · ${stock.sector}</div>
+            <div>Marché : <strong>${MARKET_LABELS[stock.market] || stock.market}</strong> · ${stock.sector || "—"}</div>
             <div>Potentiel : <strong class="pos">+${fmtNum(stock.upside, 1)} %</strong> · Santé : <strong>${fmtNum(stock.healthScore, 2)}/5</strong></div>
             <div>Cap. : <strong>${fmtNum(stock.marketCapB, 1)} Md €</strong> · PER : <strong>${stock.pe ? fmtNum(stock.pe, 1) + "×" : "—"}</strong></div>
           `;
@@ -1915,7 +1687,7 @@
       const tbody = document.getElementById("macroBody");
 
       if (!items.length) {
-        tbody.innerHTML = `<tr><td colspan="11" class="empty-state">Aucune donnée macro disponible.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" class="empty-state">Aucune donnée macro disponible. Lancez la collecte sur GitHub Actions.</td></tr>`;
         return;
       }
 
@@ -1923,11 +1695,11 @@
         <tr style="cursor:default;">
           <td>
             <div class="stock-name">${m.name}</div>
-            <div class="stock-meta">${m.ticker} · ${m.region}</div>
+            <div class="stock-meta">${m.ticker} · ${m.region || ""}</div>
           </td>
           <td><span class="badge blue">${m.category}</span></td>
           <td>${buildSparklineSvg(m.sparkline)}</td>
-          <td class="num" style="font-weight:700;">${fmtNum(m.price, m.price >= 100 ? 1 : 2)} <span class="muted" style="font-size:0.74rem;">${m.unit}</span></td>
+          <td class="num" style="font-weight:700;">${fmtNum(m.price, m.price >= 100 ? 1 : 2)} <span class="muted" style="font-size:0.74rem;">${m.unit || ""}</span></td>
           <td class="num">${fmtPct(m.chg1d)}</td>
           <td class="num">${fmtPct(m.chg1w)}</td>
           <td class="num">${fmtPct(m.chg1m)}</td>
@@ -1939,7 +1711,7 @@
             </div>
           </td>
           <td class="num">${m.sma200 ? fmtNum(m.sma200, m.sma200 >= 100 ? 0 : 2) : "—"} <div style="font-size:0.72rem;">${fmtPct(m.distSma200)}</div></td>
-          <td><span class="badge ${m.trend === "Haussière" ? "green" : "red"}">${m.trend}</span></td>
+          <td><span class="badge ${m.trend === "Haussière" ? "green" : "red"}">${m.trend || "—"}</span></td>
         </tr>
       `).join("");
     }
@@ -1980,7 +1752,7 @@
     function openDrawer(s) {
       state.currentDrawerTicker = s.ticker;
       document.getElementById("dName").textContent = s.name;
-      document.getElementById("dSub").textContent = `${s.ticker} · ${MARKET_LABELS[s.market] || s.market} · ${s.sector} · Cap. ${fmtNum(s.marketCapB, 1)} Md €`;
+      document.getElementById("dSub").textContent = `${s.ticker} · ${MARKET_LABELS[s.market] || s.market} · ${s.sector || "—"} · Cap. ${fmtNum(s.marketCapB, 1)} Md €`;
       document.getElementById("dStarBtn").classList.toggle("active-toggle", state.watchlist.has(s.ticker));
 
       document.getElementById("dTrapBanner").innerHTML = s.valueTrap
@@ -2017,7 +1789,7 @@
         ["Valorisation relative (vs secteur)", s.scores?.valuation]
       ];
       document.getElementById("dHealth").innerHTML = `
-        <h3>Santé financière : ${fmtNum(s.healthScore, 2)} / 5 (${s.healthLabel})</h3>
+        <h3>Santé financière : ${fmtNum(s.healthScore, 2)} / 5 (${s.healthLabel || ""})</h3>
         ${pillars.map(([label, val]) => {
           const c = healthColor(val || 0);
           return `
@@ -2035,7 +1807,7 @@
         <div class="row-kv"><span>EV / EBITDA</span><strong>${s.evEbitda ? fmtNum(s.evEbitda, 1) + "×" : "—"}</strong></div>
         <div class="row-kv"><span>Rendement du dividende</span><strong>${s.dividendYield ? fmtNum(s.dividendYield, 2) + " %" : "—"}</strong></div>
         <div class="row-kv"><span>Payout Ratio</span><strong>${s.payoutRatio ? fmtNum(s.payoutRatio, 1) + " %" : "—"}</strong></div>
-        <div class="row-kv"><span>Avis des analystes</span><strong>${s.analystConsensus}</strong></div>
+        <div class="row-kv"><span>Avis des analystes</span><strong>${s.analystConsensus || "—"}</strong></div>
       `;
 
       document.getElementById("dYahooLink").href = `https://finance.yahoo.com/quote/${encodeURIComponent(s.ticker)}`;
@@ -2071,8 +1843,8 @@
     }
 
     function renderAll() {
-      renderLanding();
       updateStatus();
+      renderHero();
       renderBriefings();
       populateSectors();
       renderScreener();
@@ -2081,39 +1853,62 @@
     }
 
     // =========================================================================
-    // ÉVÉNEMENTS & THÈME JOUR / NUIT
+    // ÉVÉNEMENTS : THÈME, ACCUEIL, FILTRES, TRI & IMPORT
     // =========================================================================
     function applyTheme(theme) {
       document.documentElement.setAttribute("data-theme", theme);
       localStorage.setItem("valoris-theme", theme);
-      const label = theme === "dark" ? "☀️ Mode Jour" : "🌙 Mode Nuit";
-      document.getElementById("themeToggle").textContent = label;
-      document.getElementById("landingThemeBtn").textContent = label;
+      document.getElementById("themeToggle").textContent = theme === "dark" ? "☀️ Mode Jour" : "🌙 Mode Nuit";
     }
     applyTheme(localStorage.getItem("valoris-theme") || "dark");
-
-    function toggleTheme() {
+    document.getElementById("themeToggle").addEventListener("click", () => {
       const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
       applyTheme(next);
-    }
-    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
-    document.getElementById("landingThemeBtn").addEventListener("click", toggleTheme);
-
-    // Landing CTAs
-    document.getElementById("navEnterBtn").addEventListener("click", () => enterApp({ tab: "screener" }));
-    document.getElementById("heroEnterBtn").addEventListener("click", () => enterApp({ tab: "screener" }));
-    document.getElementById("bottomEnterBtn").addEventListener("click", () => enterApp({ tab: "screener" }));
-    document.getElementById("heroScatterBtn").addEventListener("click", () => enterApp({ tab: "scatter" }));
-    document.getElementById("heroMacroBtn").addEventListener("click", () => enterApp({ tab: "macro" }));
-    document.getElementById("navOpenScatter").addEventListener("click", e => { e.preventDefault(); enterApp({ tab: "scatter" }); });
-    document.getElementById("navOpenMacro").addEventListener("click", e => { e.preventDefault(); enterApp({ tab: "macro" }); });
-    document.querySelectorAll("[data-jump-market]").forEach(btn => {
-      btn.addEventListener("click", () => enterApp({ tab: "screener", market: btn.dataset.jumpMarket }));
     });
-    document.getElementById("backHomeBtn").addEventListener("click", backToLanding);
-    document.getElementById("backToLandingBrand").addEventListener("click", backToLanding);
 
-    // App Events
+    // Afficher / Masquer le bandeau d'accueil (mémorisé)
+    function applyHeroCollapsed(collapsed) {
+      const hero = document.getElementById("hero-accueil");
+      hero.classList.toggle("collapsed", collapsed);
+      document.getElementById("toggleHeroBtn").textContent = collapsed ? "Afficher l'accueil" : "Masquer l'accueil";
+      localStorage.setItem("valoris-hero-collapsed", collapsed ? "1" : "0");
+    }
+    applyHeroCollapsed(localStorage.getItem("valoris-hero-collapsed") === "1");
+    document.getElementById("toggleHeroBtn").addEventListener("click", () => {
+      const isCol = document.getElementById("hero-accueil").classList.contains("collapsed");
+      applyHeroCollapsed(!isCol);
+      if (isCol) window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Navigation fluide
+    document.getElementById("brandTopBtn").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.getElementById("navAccueil").addEventListener("click", e => {
+      e.preventDefault();
+      applyHeroCollapsed(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    document.getElementById("navScreener").addEventListener("click", e => { e.preventDefault(); switchTab("screener"); scrollToEl("mainTabs"); });
+    document.getElementById("navScatter").addEventListener("click", e => { e.preventDefault(); switchTab("scatter"); scrollToEl("mainTabs"); });
+    document.getElementById("navMacro").addEventListener("click", e => { e.preventDefault(); switchTab("macro"); scrollToEl("mainTabs"); });
+
+    document.getElementById("heroGoScreener").addEventListener("click", () => { switchTab("screener"); scrollToEl("mainTabs"); });
+    document.getElementById("heroGoAnalyses").addEventListener("click", () => {
+      document.getElementById("briefingsGrid").classList.remove("collapsed");
+      document.getElementById("toggleBriefings").textContent = "Masquer les analyses";
+      scrollToEl("analyses-section");
+    });
+    document.getElementById("heroGoScatter").addEventListener("click", () => { switchTab("scatter"); scrollToEl("mainTabs"); });
+    document.getElementById("heroGoMacro").addEventListener("click", () => { switchTab("macro"); scrollToEl("mainTabs"); });
+
+    document.querySelectorAll("[data-jump-market]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        setMarketFilter(btn.dataset.jumpMarket);
+        switchTab("screener");
+        renderScreener();
+        scrollToEl("mainTabs");
+      });
+    });
+
     document.getElementById("toggleBriefings").addEventListener("click", e => {
       const g = document.getElementById("briefingsGrid");
       const collapsed = g.classList.toggle("collapsed");
@@ -2217,6 +2012,7 @@
           if (Array.isArray(parsed.stocks)) {
             state.data = parsed;
             state.isLive = true;
+            state.sourceLabel = "JSON importé";
             renderAll();
           }
         } catch (err) {
@@ -2226,21 +2022,32 @@
       reader.readAsText(file);
     });
 
+    // Chargement intelligent : ./data.json en priorité, puis fallback automatique sur GitHub Pages si ouvert en local (file://)
+    async function tryFetchJson(url) {
+      const res = await fetch(`${url}?t=${Date.now()}`, { cache: "no-store" });
+      if (!res.ok) return null;
+      const json = await res.json();
+      return (Array.isArray(json.stocks) && json.stocks.length > 0) ? json : null;
+    }
+
     async function boot() {
-      if (window.location.hash === "#app") {
-        document.getElementById("landing-screen").classList.add("hidden");
-        document.getElementById("app-shell").classList.add("visible");
-      }
+      let loaded = null;
       try {
-        const res = await fetch(`./data.json?t=${Date.now()}`, { cache: "no-store" });
-        if (res.ok) {
-          const json = await res.json();
-          if (Array.isArray(json.stocks) && json.stocks.length > 0) {
-            state.data = json;
-            state.isLive = true;
-          }
-        }
+        loaded = await tryFetchJson("./data.json");
+        if (loaded) state.sourceLabel = "Données live";
       } catch (_) {}
+
+      if (!loaded) {
+        try {
+          loaded = await tryFetchJson(REMOTE_DATA_FALLBACK);
+          if (loaded) state.sourceLabel = "Live GitHub";
+        } catch (_) {}
+      }
+
+      if (loaded) {
+        state.data = loaded;
+        state.isLive = true;
+      }
       renderAll();
     }
     boot();
