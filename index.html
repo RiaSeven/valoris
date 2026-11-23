@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valoris V2 — Screener Actions Sous-Évaluées & Macro</title>
+  <title>Valoris V3 — Screener Actions, Briefings IA &amp; Macro</title>
   <style>
     :root {
       --bg: #f4f6fb;
@@ -21,6 +21,8 @@
       --red: #dc2626;
       --red-soft: rgba(220, 38, 38, 0.12);
       --purple: #7c3aed;
+      --purple-soft: rgba(124, 58, 237, 0.12);
+      --cyan: #0891b2;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
       --radius: 14px;
     }
@@ -41,6 +43,8 @@
       --red: #ef4444;
       --red-soft: rgba(239, 68, 68, 0.16);
       --purple: #a78bfa;
+      --purple-soft: rgba(167, 139, 250, 0.16);
+      --cyan: #22d3ee;
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
@@ -54,13 +58,14 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    .container { max-width: 1420px; margin: 0 auto; padding: 18px 20px 60px; }
+    .container { max-width: 1480px; margin: 0 auto; padding: 18px 20px 64px; }
 
+    /* Header */
     header {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
       gap: 14px; padding: 16px 22px; background: var(--surface);
       border: 1px solid var(--border); border-radius: var(--radius);
-      box-shadow: var(--shadow); margin-bottom: 18px;
+      box-shadow: var(--shadow); margin-bottom: 16px;
     }
     .brand { display: flex; align-items: center; gap: 12px; }
     .logo {
@@ -70,7 +75,7 @@
     }
     .brand h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
     .brand p { font-size: 0.82rem; color: var(--muted); }
-    .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
 
     .status-pill {
       display: inline-flex; align-items: center; gap: 7px;
@@ -82,20 +87,50 @@
 
     .btn {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 13px; border-radius: 10px; font-size: 0.84rem; font-weight: 600;
+      padding: 8px 13px; border-radius: 10px; font-size: 0.83rem; font-weight: 600;
       border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
-      cursor: pointer; transition: all 0.15s;
+      cursor: pointer; transition: all 0.15s; text-decoration: none;
     }
     .btn:hover { border-color: var(--accent); color: var(--accent); }
     .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
     .btn.primary:hover { filter: brightness(1.08); color: #fff; }
+    .btn.active-toggle { background: var(--amber-soft); border-color: var(--amber); color: var(--amber); }
 
+    /* Briefings Section */
+    .briefings-wrap {
+      margin-bottom: 16px;
+    }
+    .briefings-bar {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
+    }
+    .briefings-bar h2 { font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .briefings-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 14px;
+    }
+    .briefing-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow);
+      border-top: 3px solid var(--accent);
+    }
+    .briefing-card.asia { border-top-color: var(--purple); }
+    .briefing-top {
+      display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px;
+    }
+    .briefing-title { font-weight: 800; font-size: 0.98rem; display: flex; align-items: center; gap: 8px; }
+    .briefing-meta { font-size: 0.74rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .briefing-headline { font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; color: var(--text); }
+    .briefing-list { list-style: none; display: grid; gap: 7px; font-size: 0.83rem; color: var(--muted); }
+    .briefing-list li strong { color: var(--text); }
+    .briefings-grid.collapsed { display: none; }
+
+    /* Tabs */
     .tabs {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
       border-bottom: 1px solid var(--border); padding-bottom: 10px;
     }
     .tab-btn {
-      padding: 9px 16px; border-radius: 10px; font-size: 0.9rem; font-weight: 700;
+      padding: 9px 15px; border-radius: 10px; font-size: 0.89rem; font-weight: 700;
       border: 1px solid transparent; background: transparent; color: var(--muted);
       cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px;
     }
@@ -104,69 +139,73 @@
       background: var(--accent-soft); color: var(--accent); border-color: rgba(59,130,246,0.3);
     }
     .tab-count {
-      font-size: 0.75rem; padding: 2px 7px; border-radius: 999px;
+      font-size: 0.74rem; padding: 2px 7px; border-radius: 999px;
       background: var(--surface-2); color: var(--text);
     }
 
     .view { display: none; }
     .view.active { display: block; }
 
+    /* KPI Grid */
     .kpi-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 14px; margin-bottom: 18px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px; margin-bottom: 16px;
     }
     .kpi-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 15px 18px; box-shadow: var(--shadow);
+      border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--shadow);
     }
-    .kpi-label { font-size: 0.78rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-    .kpi-value { font-size: 1.55rem; font-weight: 800; margin-top: 5px; }
-    .kpi-sub { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+    .kpi-label { font-size: 0.76rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .kpi-value { font-size: 1.5rem; font-weight: 800; margin-top: 4px; }
+    .kpi-sub { font-size: 0.76rem; color: var(--muted); margin-top: 3px; }
 
+    /* Panel & Filters */
     .panel {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
-      margin-bottom: 18px;
+      border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow);
+      margin-bottom: 16px;
     }
     .market-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; align-items: center; justify-content: space-between; }
-    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
     .pill {
-      padding: 7px 13px; border-radius: 999px; font-size: 0.83rem; font-weight: 600;
+      padding: 7px 13px; border-radius: 999px; font-size: 0.82rem; font-weight: 600;
       border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
       cursor: pointer; transition: all 0.15s;
     }
     .pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
     .filters-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
       gap: 14px; align-items: end;
     }
     .field label {
       display: flex; justify-content: space-between;
-      font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 6px;
+      font-size: 0.79rem; font-weight: 600; color: var(--muted); margin-bottom: 6px;
     }
     .field label span { color: var(--accent); font-weight: 700; }
     input[type="text"], select {
       width: 100%; padding: 9px 11px; border-radius: 9px;
       border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
-      font-size: 0.88rem; outline: none;
+      font-size: 0.86rem; outline: none;
     }
     input[type="text"]:focus, select:focus { border-color: var(--accent); }
     input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
 
     .checkbox-row {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
+      gap: 12px; margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--border);
     }
-    .check-label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .check-group { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .check-label { display: inline-flex; align-items: center; gap: 7px; font-size: 0.84rem; font-weight: 600; cursor: pointer; }
 
+    /* Tables */
     .table-wrap {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); box-shadow: var(--shadow); overflow-x: auto;
     }
-    table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     thead th {
-      text-align: left; padding: 13px 12px; font-size: 0.75rem; text-transform: uppercase;
+      text-align: left; padding: 12px 10px; font-size: 0.73rem; text-transform: uppercase;
       letter-spacing: 0.04em; color: var(--muted); background: var(--surface-2);
       border-bottom: 1px solid var(--border); white-space: nowrap; cursor: pointer; user-select: none;
     }
@@ -174,45 +213,83 @@
     tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; cursor: pointer; }
     tbody tr:hover { background: var(--surface-2); }
     tbody tr:last-child { border-bottom: none; }
-    td { padding: 12px; vertical-align: middle; white-space: nowrap; }
+    td { padding: 11px 10px; vertical-align: middle; white-space: nowrap; }
     .num { text-align: right; font-variant-numeric: tabular-nums; }
 
-    .stock-name { font-weight: 700; max-width: 210px; overflow: hidden; text-overflow: ellipsis; }
-    .stock-meta { font-size: 0.76rem; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+    .star-btn {
+      background: transparent; border: none; cursor: pointer; font-size: 1.05rem;
+      color: var(--muted); padding: 2px 4px; line-height: 1; transition: transform 0.12s, color 0.12s;
+    }
+    .star-btn:hover { transform: scale(1.18); color: var(--amber); }
+    .star-btn.starred { color: var(--amber); }
+
+    .stock-name { font-weight: 700; max-width: 195px; overflow: hidden; text-overflow: ellipsis; }
+    .stock-meta { font-size: 0.74rem; color: var(--muted); display: flex; align-items: center; gap: 5px; margin-top: 2px; flex-wrap: wrap; }
 
     .badge {
       display: inline-flex; align-items: center; gap: 4px;
-      padding: 4px 9px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px; font-size: 0.73rem; font-weight: 700;
     }
     .badge.green { background: var(--green-soft); color: var(--green); }
     .badge.amber { background: var(--amber-soft); color: var(--amber); }
     .badge.red { background: var(--red-soft); color: var(--red); }
     .badge.blue { background: var(--accent-soft); color: var(--accent); }
+    .badge.purple { background: var(--purple-soft); color: var(--purple); }
 
-    .health-bar { width: 78px; height: 6px; border-radius: 999px; background: var(--border); overflow: hidden; margin-top: 4px; }
+    .delta-sub { font-size: 0.7rem; margin-top: 2px; font-weight: 600; }
+
+    .health-bar { width: 72px; height: 5px; border-radius: 999px; background: var(--border); overflow: hidden; margin-top: 4px; }
     .health-fill { height: 100%; border-radius: 999px; }
 
-    .mini-scores { display: flex; gap: 5px; }
+    .mini-scores { display: flex; gap: 4px; }
     .mini-chip {
-      font-size: 0.73rem; font-weight: 700; padding: 2px 6px; border-radius: 6px;
+      font-size: 0.71rem; font-weight: 700; padding: 2px 5px; border-radius: 6px;
       background: var(--surface-2); border: 1px solid var(--border);
     }
 
-    .gauge-wrap { min-width: 135px; }
+    /* Sparklines */
+    .spark-cell { display: inline-flex; align-items: center; gap: 6px; }
+    .spark-svg { width: 68px; height: 24px; overflow: visible; }
+
+    /* Scatter plot (Carte Pépites) */
+    .scatter-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+      position: relative;
+    }
+    .scatter-legend {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; font-size: 0.82rem; color: var(--muted);
+    }
+    .legend-items { display: flex; flex-wrap: wrap; gap: 12px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--text); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .scatter-wrap { width: 100%; overflow-x: auto; position: relative; }
+    .scatter-svg { width: 100%; min-width: 680px; height: 470px; display: block; }
+    .scatter-tooltip {
+      position: fixed; pointer-events: none; z-index: 60;
+      background: var(--surface); border: 1px solid var(--accent);
+      border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow);
+      font-size: 0.8rem; opacity: 0; transition: opacity 0.12s; max-width: 250px;
+    }
+
+    /* 52w Gauge */
+    .gauge-wrap { min-width: 130px; }
     .gauge-track { position: relative; height: 7px; border-radius: 999px; background: var(--border); margin: 4px 0; }
     .gauge-dot {
       position: absolute; top: 50%; transform: translate(-50%, -50%);
       width: 11px; height: 11px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface);
     }
-    .gauge-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); }
+    .gauge-labels { display: flex; justify-content: space-between; font-size: 0.69rem; color: var(--muted); }
 
-    .fx-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .fx-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
     .fx-chip {
       background: var(--surface); border: 1px solid var(--border);
-      padding: 8px 14px; border-radius: 10px; font-size: 0.83rem; font-weight: 600;
+      padding: 8px 14px; border-radius: 10px; font-size: 0.82rem; font-weight: 600;
     }
     .fx-chip span { color: var(--accent); font-weight: 800; margin-left: 6px; }
 
+    /* Drawer */
     .overlay {
       position: fixed; inset: 0; background: rgba(2, 6, 23, 0.55);
       opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 40;
@@ -225,19 +302,19 @@
       transition: right 0.24s ease; z-index: 50; padding: 22px; overflow-y: auto;
     }
     .drawer.open { right: 0; }
-    .drawer-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 18px; }
+    .drawer-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 16px; }
     .drawer-section {
       background: var(--surface-2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px; margin-bottom: 14px;
+      border-radius: 12px; padding: 14px; margin-bottom: 13px;
     }
-    .drawer-section h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 10px; }
-    .row-kv { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 0.88rem; }
+    .drawer-section h3 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 10px; }
+    .row-kv { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 0.86rem; }
     .row-kv:last-child { border-bottom: none; }
-    .pillar-row { margin-bottom: 10px; }
-    .pillar-head { display: flex; justify-content: space-between; font-size: 0.84rem; font-weight: 600; margin-bottom: 4px; }
-    .pillar-bar { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .pillar-row { margin-bottom: 9px; }
+    .pillar-head { display: flex; justify-content: space-between; font-size: 0.83rem; font-weight: 600; margin-bottom: 4px; }
+    .pillar-bar { height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; }
 
-    .empty-state { text-align: center; padding: 42px 20px; color: var(--muted); }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
     .pos { color: var(--green); font-weight: 700; }
     .neg { color: var(--red); font-weight: 700; }
     .muted { color: var(--muted); }
@@ -250,8 +327,8 @@
       <div class="brand">
         <div class="logo">V</div>
         <div>
-          <h1>Valoris <span style="font-size:0.78rem; padding:2px 8px; border-radius:999px; background:var(--accent-soft); color:var(--accent); vertical-align:middle;">V2</span></h1>
-          <p>Actions sous-évaluées (FR · DE · US · KR · JP) &amp; Marchés Macro</p>
+          <h1>Valoris <span style="font-size:0.75rem; padding:2px 8px; border-radius:999px; background:var(--accent-soft); color:var(--accent); vertical-align:middle;">V3</span></h1>
+          <p>Actions sous-évaluées (FR · DE · US · KR · JP), Briefings Matin/Soir &amp; Macro</p>
         </div>
       </div>
       <div class="header-actions">
@@ -259,15 +336,28 @@
           <span class="dot demo" id="statusDot"></span>
           <span id="statusText">Chargement…</span>
         </div>
+        <button class="btn" id="exportCsvBtn" type="button">Exporter CSV</button>
         <label class="btn" for="jsonUpload">Importer JSON</label>
         <input id="jsonUpload" class="hidden-input" type="file" accept=".json" />
         <button class="btn" id="themeToggle" type="button">Mode Jour</button>
       </div>
     </header>
 
+    <!-- ==================== SYNTHÈSE DES MARCHÉS (MATIN / SOIR) ==================== -->
+    <section class="briefings-wrap">
+      <div class="briefings-bar">
+        <h2>Synthèse des marchés · Briefings automatisés</h2>
+        <button class="btn" id="toggleBriefings" type="button" style="padding:5px 10px; font-size:0.77rem;">Masquer</button>
+      </div>
+      <div class="briefings-grid" id="briefingsGrid"></div>
+    </section>
+
     <nav class="tabs">
       <button class="tab-btn active" data-tab="screener">
         Screener Actions <span class="tab-count" id="countScreener">0</span>
+      </button>
+      <button class="tab-btn" data-tab="scatter">
+        Carte Pépites <span class="tab-count" id="countScatter">0</span>
       </button>
       <button class="tab-btn" data-tab="macro">
         Macro &amp; Marchés <span class="tab-count" id="countMacro">0</span>
@@ -277,6 +367,7 @@
       </button>
     </nav>
 
+    <!-- ==================== VUE 1 : SCREENER ACTIONS ==================== -->
     <section id="view-screener" class="view active">
       <div class="kpi-grid">
         <div class="kpi-card">
@@ -295,9 +386,14 @@
           <div class="kpi-sub">Score composite sur 5 piliers</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Pièges de valeur écartés</div>
+          <div class="kpi-label">Nouvelles entrées</div>
+          <div class="kpi-value" style="color:var(--purple);" id="kpiNew">0</div>
+          <div class="kpi-sub">Fraîchement sous-évaluées</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pièges écartés</div>
           <div class="kpi-value" style="color:var(--amber);" id="kpiTraps">0</div>
-          <div class="kpi-sub">Décote ≥ 20 % mais bilan/cash faible</div>
+          <div class="kpi-sub">Décote ≥ 20 % mais bilan faible</div>
         </div>
       </div>
 
@@ -312,8 +408,10 @@
             <button class="pill" data-market="JP">Japon</button>
           </div>
           <div class="pills">
+            <button class="btn" id="watchlistFilterBtn" type="button">★ Watchlist (<span id="watchCount">0</span>)</button>
             <button class="btn" id="presetValoris" type="button">Critères Valoris</button>
             <button class="btn" id="presetQuality" type="button">Qualité ≥ 3,5</button>
+            <button class="btn" id="presetDividend" type="button">Rendement ≥ 3 %</button>
             <button class="btn" id="presetAll" type="button">Tout afficher</button>
           </div>
         </div>
@@ -321,7 +419,7 @@
         <div class="filters-grid">
           <div class="field">
             <label for="searchInput">Recherche (nom / ticker)</label>
-            <input id="searchInput" type="text" placeholder="Ex. LVMH, Samsung, NVDA, 7203..." />
+            <input id="searchInput" type="text" placeholder="Ex. Capgemini, Samsung, NVDA..." />
           </div>
           <div class="field">
             <label for="sectorSelect">Secteur</label>
@@ -339,14 +437,24 @@
             <label for="healthRange">Santé min. <span id="healthVal">2,5 / 5</span></label>
             <input id="healthRange" type="range" min="1" max="4.5" step="0.1" value="2.5" />
           </div>
+          <div class="field">
+            <label for="divRange">Dividende min. <span id="divVal">0 %</span></label>
+            <input id="divRange" type="range" min="0" max="8" step="0.5" value="0" />
+          </div>
         </div>
 
         <div class="checkbox-row">
-          <label class="check-label">
-            <input type="checkbox" id="hideTraps" checked />
-            Masquer les alertes « Piège de valeur »
-          </label>
-          <span class="muted" style="font-size:0.8rem;">Cliquez sur une ligne pour ouvrir l'analyse complète (DCF, Multiples, Analystes &amp; 5 piliers).</span>
+          <div class="check-group">
+            <label class="check-label">
+              <input type="checkbox" id="hideTraps" checked />
+              Masquer les pièges de valeur
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="onlyNew" />
+              Nouvelles entrées uniquement
+            </label>
+          </div>
+          <span class="muted" style="font-size:0.79rem;">Cliquez sur ★ pour suivre un titre · Cliquez sur une ligne pour ouvrir la fiche détaillée.</span>
         </div>
       </div>
 
@@ -354,13 +462,16 @@
         <table>
           <thead>
             <tr>
+              <th style="width:34px; cursor:default;">★</th>
               <th data-sort="name">Société</th>
+              <th>Tendance 3M</th>
               <th class="num" data-sort="price">Cours</th>
               <th class="num" data-sort="fairValue">Juste Valeur</th>
               <th class="num" data-sort="upside">Potentiel</th>
               <th data-sort="healthScore">Santé (/5)</th>
-              <th>Sous-notes (Cr · Re · Tr)</th>
+              <th>Sous-notes</th>
               <th class="num" data-sort="marketCapB">Cap. (Md €)</th>
+              <th class="num" data-sort="dividendYield">Div.</th>
               <th class="num" data-sort="pe">PER</th>
               <th class="num" data-sort="evEbitda">EV/EBITDA</th>
               <th data-sort="analystConsensus">Analystes</th>
@@ -371,10 +482,29 @@
       </div>
     </section>
 
+    <!-- ==================== VUE 2 : CARTE PÉPITES ==================== -->
+    <section id="view-scatter" class="view">
+      <div class="scatter-card">
+        <div class="scatter-legend">
+          <div class="legend-items">
+            <span class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span>France</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span>Allemagne</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#10b981;"></span>États-Unis</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#a78bfa;"></span>Corée du Sud</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f43f5e;"></span>Japon</span>
+          </div>
+          <span>Zone verte = <strong>Zone Pépites</strong> (Santé ≥ 2,5/5 et Potentiel ≥ 20 %) · Taille = Capitalisation · Cliquez sur une bulle pour ouvrir sa fiche.</span>
+        </div>
+        <div class="scatter-wrap">
+          <svg id="scatterSvg" class="scatter-svg" viewBox="0 0 960 470"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VUE 3 : MACRO & MARCHÉS ==================== -->
     <section id="view-macro" class="view">
       <div class="fx-strip" id="fxStrip"></div>
-
-      <div class="panel" style="padding:14px 18px;">
+      <div class="panel" style="padding:13px 18px;">
         <div class="pills" id="macroCategoryPills">
           <button class="pill active" data-cat="ALL">Tout</button>
           <button class="pill" data-cat="Indices">Indices</button>
@@ -382,13 +512,13 @@
           <button class="pill" data-cat="Matières premières">Matières premières</button>
         </div>
       </div>
-
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th>Actif</th>
               <th>Catégorie</th>
+              <th>Courbe 3M</th>
               <th class="num">Cours</th>
               <th class="num">1 Jour</th>
               <th class="num">1 Sem.</th>
@@ -404,9 +534,10 @@
       </div>
     </section>
 
+    <!-- ==================== VUE 4 : PRÉCÉDENTS GAGNANTS ==================== -->
     <section id="view-winners" class="view">
       <div class="panel" style="padding:14px 18px;">
-        <p class="muted" style="font-size:0.88rem;">
+        <p class="muted" style="font-size:0.87rem;">
           Chaque titre détecté avec un potentiel ≥ 20 %, une capitalisation ≥ 1 Md € et une santé ≥ 2,5/5 est suivi automatiquement dans <code>history.json</code>. Dès que son cours atteint sa Juste Valeur cible, il intègre cet historique de performance.
         </p>
       </div>
@@ -430,16 +561,24 @@
     </section>
   </div>
 
+  <!-- Tooltip pour la Carte Pépites -->
+  <div class="scatter-tooltip" id="scatterTooltip"></div>
+
+  <!-- Panneau latéral de détail -->
   <div class="overlay" id="drawerOverlay"></div>
   <aside class="drawer" id="detailDrawer" aria-hidden="true">
     <div class="drawer-head">
       <div>
-        <h2 id="dName" style="font-size:1.25rem;"></h2>
-        <div class="muted" id="dSub" style="font-size:0.84rem;"></div>
+        <h2 id="dName" style="font-size:1.22rem;"></h2>
+        <div class="muted" id="dSub" style="font-size:0.82rem;"></div>
       </div>
-      <button class="btn" id="closeDrawer" type="button">Fermer</button>
+      <div style="display:flex; gap:6px;">
+        <button class="btn" id="dStarBtn" type="button" title="Ajouter/retirer de ma Watchlist">★</button>
+        <button class="btn" id="closeDrawer" type="button">Fermer</button>
+      </div>
     </div>
     <div id="dTrapBanner"></div>
+    <div class="drawer-section" id="dSparkSection"></div>
     <div class="drawer-section" id="dValuation"></div>
     <div class="drawer-section" id="dHealth"></div>
     <div class="drawer-section" id="dMultiples"></div>
@@ -449,36 +588,63 @@
   </aside>
 
   <script>
+    // =========================================================================
+    // DONNÉES DE DÉMONSTRATION V3 (secours si ./data.json n'est pas encore chargé)
+    // =========================================================================
     const DEMO_DATA = {
-      version: "2.0-demo",
+      version: "3.0-demo",
+      lastSession: "all",
       updatedAt: new Date().toISOString(),
       fxRates: { EUR: 1.0, USD: 1.08, JPY: 165.4, KRW: 1502.0 },
+      briefings: {
+        asia: {
+          title: "Briefing Asie (Matin)",
+          updatedAt: new Date().toISOString(),
+          engine: "Algo Python (démo)",
+          headline: "5 opportunités saines (+32,6 % moy.) sur KR, JP",
+          sections: {
+            macro: "Nikkei 225 (+0,91 %, tendance haussière), KOSPI (+1,15 %, tendance baissière). Côté changes : EUR/JPY à 165,4, EUR/KRW à 1502.",
+            sectors: "Secteurs les plus décotés : Technologie (3 titres, +34,1 % moy.), Conso. cyclique (2 titres, +30,4 % moy.).",
+            opportunities: "Meilleurs couples décote/qualité : Tokyo Electron (+33,3 %, santé 4,28/5) · SK Hynix (+32,6 %, santé 4,12/5) · Samsung Electronics (+36,3 %, santé 3,84/5).",
+            vigilance: "Indice sous MM200 : KOSPI. Publications proches : Toyota Motor (J-9)."
+          }
+        },
+        west: {
+          title: "Briefing Europe & US (Soir)",
+          updatedAt: new Date().toISOString(),
+          engine: "Algo Python (démo)",
+          headline: "7 opportunités saines (+32,1 % moy.) sur FR, DE, US",
+          sections: {
+            macro: "CAC 40 (+0,48 %, baissière), DAX 40 (+0,62 %, haussière), S&P 500 (+0,35 %, haussière). Côté changes : EUR/USD à 1,08.",
+            sectors: "Secteurs les plus décotés : Technologie (4 titres, +35,5 % moy.), Énergie (1 titre, +28,5 % moy.).",
+            opportunities: "Meilleurs couples décote/qualité : TotalEnergies (+28,5 %, santé 3,92/5) · Capgemini (+35,2 %, santé 3,74/5) · Micron (+35,8 %, santé 3,58/5). Nouvelle entrée : STMicroelectronics.",
+            vigilance: "1 piège de valeur filtré automatiquement (Worldline) ; indice sous MM200 : CAC 40 ; publications proches : Micron Technology (J-6)."
+          }
+        }
+      },
       stocks: [
-        { ticker: "CAP.PA", name: "Capgemini SE", market: "FR", currency: "€", sector: "Technologie", price: 158.4, fairValue: 214.2, upside: 35.2, marketCapB: 27.1, healthScore: 3.74, healthLabel: "Très bon", scores: { growth: 3.1, profitability: 3.8, cashflow: 4.2, balanceSheet: 3.6, valuation: 4.0 }, models: { dcf: 221.5, multiples: 206.1, analysts: 215.0 }, pe: 13.4, evEbitda: 9.2, analystConsensus: "Achat", valueTrap: false },
-        { ticker: "TTE.PA", name: "TotalEnergies SE", market: "FR", currency: "€", sector: "Énergie", price: 58.2, fairValue: 74.8, upside: 28.5, marketCapB: 134.5, healthScore: 3.92, healthLabel: "Très bon", scores: { growth: 2.9, profitability: 4.1, cashflow: 4.5, balanceSheet: 4.0, valuation: 4.1 }, models: { dcf: 78.4, multiples: 72.0, analysts: 74.0 }, pe: 7.9, evEbitda: 4.3, analystConsensus: "Achat", valueTrap: false },
-        { ticker: "STMPA.PA", name: "STMicroelectronics", market: "FR", currency: "€", sector: "Technologie", price: 24.6, fairValue: 33.9, upside: 37.8, marketCapB: 22.1, healthScore: 3.38, healthLabel: "Bon", scores: { growth: 2.4, profitability: 3.6, cashflow: 3.5, balanceSheet: 4.2, valuation: 3.2 }, models: { dcf: 34.8, multiples: 32.9, analysts: 34.0 }, pe: 14.8, evEbitda: 6.9, analystConsensus: "Achat", valueTrap: false },
-        { ticker: "IFX.DE", name: "Infineon Technologies", market: "DE", currency: "€", sector: "Technologie", price: 31.2, fairValue: 41.5, upside: 33.0, marketCapB: 40.7, healthScore: 3.62, healthLabel: "Très bon", scores: { growth: 3.3, profitability: 3.8, cashflow: 3.5, balanceSheet: 3.7, valuation: 3.8 }, models: { dcf: 42.1, multiples: 40.4, analysts: 42.0 }, pe: 16.5, evEbitda: 9.8, analystConsensus: "Achat fort", valueTrap: false },
-        { ticker: "MBG.DE", name: "Mercedes-Benz Group", market: "DE", currency: "€", sector: "Conso. cyclique", price: 54.8, fairValue: 71.2, upside: 29.9, marketCapB: 53.2, healthScore: 3.05, healthLabel: "Bon", scores: { growth: 2.2, profitability: 3.3, cashflow: 3.4, balanceSheet: 2.5, valuation: 3.9 }, models: { dcf: 73.0, multiples: 69.5, analysts: 71.0 }, pe: 5.8, evEbitda: 6.1, analystConsensus: "Conserver", valueTrap: false },
-        { ticker: "GOOGL", name: "Alphabet Inc.", market: "US", currency: "$", sector: "Télécoms & Médias", price: 174.5, fairValue: 218.0, upside: 24.9, marketCapB: 1980.0, healthScore: 4.52, healthLabel: "Excellent", scores: { growth: 4.3, profitability: 4.8, cashflow: 4.7, balanceSheet: 4.8, valuation: 4.0 }, models: { dcf: 224.0, multiples: 212.0, analysts: 218.0 }, pe: 20.4, evEbitda: 14.1, analystConsensus: "Achat fort", valueTrap: false },
-        { ticker: "MU", name: "Micron Technology", market: "US", currency: "$", sector: "Technologie", price: 102.0, fairValue: 138.5, upside: 35.8, marketCapB: 104.5, healthScore: 3.58, healthLabel: "Très bon", scores: { growth: 4.6, profitability: 3.2, cashflow: 3.1, balanceSheet: 3.4, valuation: 3.6 }, models: { dcf: 136.0, multiples: 134.5, analysts: 145.0 }, pe: 12.6, evEbitda: 7.4, analystConsensus: "Achat fort", valueTrap: false },
-        { ticker: "005930.KS", name: "Samsung Electronics", market: "KR", currency: "₩", sector: "Technologie", price: 59800, fairValue: 81500, upside: 36.3, marketCapB: 237.6, healthScore: 3.84, healthLabel: "Très bon", scores: { growth: 3.6, profitability: 3.5, cashflow: 3.9, balanceSheet: 4.4, valuation: 3.8 }, models: { dcf: 82400, multiples: 79100, analysts: 83000 }, pe: 10.4, evEbitda: 5.2, analystConsensus: "Achat fort", valueTrap: false },
-        { ticker: "000660.KS", name: "SK Hynix Inc.", market: "KR", currency: "₩", sector: "Technologie", price: 194500, fairValue: 258000, upside: 32.6, marketCapB: 94.3, healthScore: 4.12, healthLabel: "Très bon", scores: { growth: 4.8, profitability: 4.3, cashflow: 4.0, balanceSheet: 3.5, valuation: 4.0 }, models: { dcf: 262000, multiples: 247000, analysts: 265000 }, pe: 7.8, evEbitda: 4.9, analystConsensus: "Achat fort", valueTrap: false },
-        { ticker: "005380.KS", name: "Hyundai Motor", market: "KR", currency: "₩", sector: "Conso. cyclique", price: 218000, fairValue: 294000, upside: 34.9, marketCapB: 30.4, healthScore: 3.46, healthLabel: "Bon", scores: { growth: 3.4, profitability: 3.5, cashflow: 3.2, balanceSheet: 2.9, valuation: 4.3 }, models: { dcf: 298000, multiples: 284000, analysts: 300000 }, pe: 4.9, evEbitda: 5.8, analystConsensus: "Achat", valueTrap: false },
-        { ticker: "7203.T", name: "Toyota Motor Corp.", market: "JP", currency: "¥", sector: "Conso. cyclique", price: 2685, fairValue: 3380, upside: 25.9, marketCapB: 219.8, healthScore: 3.66, healthLabel: "Très bon", scores: { growth: 3.5, profitability: 3.7, cashflow: 3.6, balanceSheet: 3.3, valuation: 4.2 }, models: { dcf: 3410, multiples: 3290, analysts: 3440 }, pe: 8.6, evEbitda: 7.9, analystConsensus: "Achat", valueTrap: false },
-        { ticker: "8035.T", name: "Tokyo Electron", market: "JP", currency: "¥", sector: "Technologie", price: 23400, fairValue: 31200, upside: 33.3, marketCapB: 65.4, healthScore: 4.28, healthLabel: "Très bon", scores: { growth: 4.2, profitability: 4.6, cashflow: 4.3, balanceSheet: 4.7, valuation: 3.6 }, models: { dcf: 30800, multiples: 30200, analysts: 32600 }, pe: 19.2, evEbitda: 13.5, analystConsensus: "Achat fort", valueTrap: false },
-        { ticker: "WLN.PA", name: "Worldline SA", market: "FR", currency: "€", sector: "Technologie", price: 7.4, fairValue: 11.2, upside: 51.4, marketCapB: 2.1, healthScore: 2.12, healthLabel: "Passable", scores: { growth: 1.6, profitability: 2.1, cashflow: 1.8, balanceSheet: 1.9, valuation: 3.2 }, models: { dcf: 11.5, multiples: 10.9, analysts: 11.2 }, pe: 6.2, evEbitda: 4.1, analystConsensus: "Conserver", valueTrap: true }
+        { ticker: "CAP.PA", name: "Capgemini SE", market: "FR", currency: "€", sector: "Technologie", price: 158.4, fairValue: 214.2, upside: 35.2, upsideDelta5d: 2.1, marketCapB: 27.1, healthScore: 3.74, healthLabel: "Très bon", scores: { growth: 3.1, profitability: 3.8, cashflow: 4.2, balanceSheet: 3.6, valuation: 4.0 }, models: { dcf: 221.5, multiples: 206.1, analysts: 215.0 }, pe: 13.4, evEbitda: 9.2, dividendYield: 2.15, payoutRatio: 35.2, earningsDate: "2026-12-14", daysToEarnings: 22, sparkline: [176,174,171,169,165,163,166,162,159,157,155,156,158.4], chg3m: -10.0, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
+        { ticker: "TTE.PA", name: "TotalEnergies SE", market: "FR", currency: "€", sector: "Énergie", price: 58.2, fairValue: 74.8, upside: 28.5, upsideDelta5d: 0.8, marketCapB: 134.5, healthScore: 3.92, healthLabel: "Très bon", scores: { growth: 2.9, profitability: 4.1, cashflow: 4.5, balanceSheet: 4.0, valuation: 4.1 }, models: { dcf: 78.4, multiples: 72.0, analysts: 74.0 }, pe: 7.9, evEbitda: 4.3, dividendYield: 5.45, payoutRatio: 41.0, earningsDate: "2027-02-05", daysToEarnings: 75, sparkline: [62,61.5,60.2,61.0,59.8,58.5,57.9,58.8,59.1,57.6,58.0,58.2], chg3m: -6.1, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
+        { ticker: "STMPA.PA", name: "STMicroelectronics", market: "FR", currency: "€", sector: "Technologie", price: 24.6, fairValue: 33.9, upside: 37.8, upsideDelta5d: 4.3, marketCapB: 22.1, healthScore: 3.38, healthLabel: "Bon", scores: { growth: 2.4, profitability: 3.6, cashflow: 3.5, balanceSheet: 4.2, valuation: 3.2 }, models: { dcf: 34.8, multiples: 32.9, analysts: 34.0 }, pe: 14.8, evEbitda: 6.9, dividendYield: 1.4, payoutRatio: 18.0, earningsDate: "2027-01-28", daysToEarnings: 67, sparkline: [29,28.2,27.5,26.8,25.9,25.2,24.8,24.1,23.9,24.3,24.6], chg3m: -15.2, analystConsensus: "Achat", valueTrap: false, isNewEntry: true },
+        { ticker: "IFX.DE", name: "Infineon Technologies", market: "DE", currency: "€", sector: "Technologie", price: 31.2, fairValue: 41.5, upside: 33.0, upsideDelta5d: -1.2, marketCapB: 40.7, healthScore: 3.62, healthLabel: "Très bon", scores: { growth: 3.3, profitability: 3.8, cashflow: 3.5, balanceSheet: 3.7, valuation: 3.8 }, models: { dcf: 42.1, multiples: 40.4, analysts: 42.0 }, pe: 16.5, evEbitda: 9.8, dividendYield: 1.12, payoutRatio: 21.5, earningsDate: "2027-02-02", daysToEarnings: 72, sparkline: [29.5,30.1,29.8,30.4,31.0,30.2,29.9,30.5,31.4,31.2], chg3m: 5.8, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
+        { ticker: "MBG.DE", name: "Mercedes-Benz Group", market: "DE", currency: "€", sector: "Conso. cyclique", price: 54.8, fairValue: 71.2, upside: 29.9, upsideDelta5d: 1.4, marketCapB: 53.2, healthScore: 3.05, healthLabel: "Bon", scores: { growth: 2.2, profitability: 3.3, cashflow: 3.4, balanceSheet: 2.5, valuation: 3.9 }, models: { dcf: 73.0, multiples: 69.5, analysts: 71.0 }, pe: 5.8, evEbitda: 6.1, dividendYield: 7.8, payoutRatio: 44.0, earningsDate: "2027-02-19", daysToEarnings: 89, sparkline: [61,60,58.5,57.2,56.8,55.4,54.9,55.1,54.2,54.8], chg3m: -10.2, analystConsensus: "Conserver", valueTrap: false, isNewEntry: false },
+        { ticker: "GOOGL", name: "Alphabet Inc.", market: "US", currency: "$", sector: "Télécoms & Médias", price: 174.5, fairValue: 218.0, upside: 24.9, upsideDelta5d: -0.9, marketCapB: 1980.0, healthScore: 4.52, healthLabel: "Excellent", scores: { growth: 4.3, profitability: 4.8, cashflow: 4.7, balanceSheet: 4.8, valuation: 4.0 }, models: { dcf: 224.0, multiples: 212.0, analysts: 218.0 }, pe: 20.4, evEbitda: 14.1, dividendYield: 0.46, payoutRatio: 10.2, earningsDate: "2027-02-03", daysToEarnings: 73, sparkline: [161,163,165,164,167,170,169,172,175,174.5], chg3m: 8.4, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
+        { ticker: "MU", name: "Micron Technology", market: "US", currency: "$", sector: "Technologie", price: 102.0, fairValue: 138.5, upside: 35.8, upsideDelta5d: 3.0, marketCapB: 104.5, healthScore: 3.58, healthLabel: "Très bon", scores: { growth: 4.6, profitability: 3.2, cashflow: 3.1, balanceSheet: 3.4, valuation: 3.6 }, models: { dcf: 136.0, multiples: 134.5, analysts: 145.0 }, pe: 12.6, evEbitda: 7.4, dividendYield: 0.45, payoutRatio: 14.0, earningsDate: "2026-11-28", daysToEarnings: 6, sparkline: [94,96,99,105,108,104,101,99,100.5,102], chg3m: 8.5, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: true },
+        { ticker: "005930.KS", name: "Samsung Electronics", market: "KR", currency: "₩", sector: "Technologie", price: 59800, fairValue: 81500, upside: 36.3, upsideDelta5d: 1.9, marketCapB: 237.6, healthScore: 3.84, healthLabel: "Très bon", scores: { growth: 3.6, profitability: 3.5, cashflow: 3.9, balanceSheet: 4.4, valuation: 3.8 }, models: { dcf: 82400, multiples: 79100, analysts: 83000 }, pe: 10.4, evEbitda: 5.2, dividendYield: 2.42, payoutRatio: 26.0, earningsDate: "2027-01-30", daysToEarnings: 69, sparkline: [68000,66500,64000,62500,61000,59500,58200,59100,59800], chg3m: -12.1, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
+        { ticker: "000660.KS", name: "SK Hynix Inc.", market: "KR", currency: "₩", sector: "Technologie", price: 194500, fairValue: 258000, upside: 32.6, upsideDelta5d: -1.5, marketCapB: 94.3, healthScore: 4.12, healthLabel: "Très bon", scores: { growth: 4.8, profitability: 4.3, cashflow: 4.0, balanceSheet: 3.5, valuation: 4.0 }, models: { dcf: 262000, multiples: 247000, analysts: 265000 }, pe: 7.8, evEbitda: 4.9, dividendYield: 0.72, payoutRatio: 11.5, earningsDate: "2027-01-24", daysToEarnings: 63, sparkline: [172000,175000,180000,178000,184000,189000,192000,194500], chg3m: 13.1, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
+        { ticker: "005380.KS", name: "Hyundai Motor", market: "KR", currency: "₩", sector: "Conso. cyclique", price: 218000, fairValue: 294000, upside: 34.9, upsideDelta5d: 0.5, marketCapB: 30.4, healthScore: 3.46, healthLabel: "Bon", scores: { growth: 3.4, profitability: 3.5, cashflow: 3.2, balanceSheet: 2.9, valuation: 4.3 }, models: { dcf: 298000, multiples: 284000, analysts: 300000 }, pe: 4.9, evEbitda: 5.8, dividendYield: 5.2, payoutRatio: 25.0, earningsDate: "2027-01-25", daysToEarnings: 64, sparkline: [232000,229000,225000,222000,219000,216000,218000], chg3m: -6.0, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
+        { ticker: "7203.T", name: "Toyota Motor Corp.", market: "JP", currency: "¥", sector: "Conso. cyclique", price: 2685, fairValue: 3380, upside: 25.9, upsideDelta5d: -0.4, marketCapB: 219.8, healthScore: 3.66, healthLabel: "Très bon", scores: { growth: 3.5, profitability: 3.7, cashflow: 3.6, balanceSheet: 3.3, valuation: 4.2 }, models: { dcf: 3410, multiples: 3290, analysts: 3440 }, pe: 8.6, evEbitda: 7.9, dividendYield: 3.15, payoutRatio: 27.0, earningsDate: "2026-12-01", daysToEarnings: 9, sparkline: [2540,2580,2610,2590,2630,2660,2675,2685], chg3m: 5.7, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
+        { ticker: "8035.T", name: "Tokyo Electron", market: "JP", currency: "¥", sector: "Technologie", price: 23400, fairValue: 31200, upside: 33.3, upsideDelta5d: 1.1, marketCapB: 65.4, healthScore: 4.28, healthLabel: "Très bon", scores: { growth: 4.2, profitability: 4.6, cashflow: 4.3, balanceSheet: 4.7, valuation: 3.6 }, models: { dcf: 30800, multiples: 30200, analysts: 32600 }, pe: 19.2, evEbitda: 13.5, dividendYield: 2.35, payoutRatio: 48.0, earningsDate: "2027-02-07", daysToEarnings: 77, sparkline: [24800,24200,23900,23100,22800,23200,23400], chg3m: -5.6, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
+        { ticker: "WLN.PA", name: "Worldline SA", market: "FR", currency: "€", sector: "Technologie", price: 7.4, fairValue: 11.2, upside: 51.4, upsideDelta5d: 5.2, marketCapB: 2.1, healthScore: 2.12, healthLabel: "Passable", scores: { growth: 1.6, profitability: 2.1, cashflow: 1.8, balanceSheet: 1.9, valuation: 3.2 }, models: { dcf: 11.5, multiples: 10.9, analysts: 11.2 }, pe: 6.2, evEbitda: 4.1, dividendYield: null, payoutRatio: null, earningsDate: "2027-02-26", daysToEarnings: 96, sparkline: [9.8,9.4,8.9,8.5,8.1,7.9,7.6,7.4], chg3m: -24.5, analystConsensus: "Conserver", valueTrap: true, isNewEntry: false }
       ],
       macro: [
-        { ticker: "^FCHI", name: "CAC 40", category: "Indices", region: "France", unit: "pts", price: 7420.5, chg1d: 0.48, chg1w: 1.12, chg1m: -0.85, chgYtd: 3.4, low52w: 7030, high52w: 8259, pos52w: 31.8, sma200: 7610, distSma200: -2.49, trend: "Baissière" },
-        { ticker: "^GDAXI", name: "DAX 40", category: "Indices", region: "Allemagne", unit: "pts", price: 19410.2, chg1d: 0.62, chg1w: 1.45, chg1m: 2.10, chgYtd: 15.8, low52w: 16345, high52w: 19675, pos52w: 92.0, sma200: 18290, distSma200: 6.12, trend: "Haussière" },
-        { ticker: "^GSPC", name: "S&P 500", category: "Indices", region: "États-Unis", unit: "pts", price: 5985.4, chg1d: 0.35, chg1w: 1.82, chg1m: 3.12, chgYtd: 25.4, low52w: 4682, high52w: 6017, pos52w: 97.6, sma200: 5412, distSma200: 10.59, trend: "Haussière" },
-        { ticker: "^N225", name: "Nikkei 225", category: "Indices", region: "Japon", unit: "pts", price: 38950.0, chg1d: 0.91, chg1w: 0.74, chg1m: 1.65, chgYtd: 16.4, low52w: 31156, high52w: 42426, pos52w: 69.2, sma200: 38120, distSma200: 2.18, trend: "Haussière" },
-        { ticker: "^KS11", name: "KOSPI", category: "Indices", region: "Corée du Sud", unit: "pts", price: 2512.8, chg1d: 1.15, chg1w: 2.04, chg1m: -1.42, chgYtd: -5.2, low52w: 2386, high52w: 2896, pos52w: 24.9, sma200: 2635, distSma200: -4.64, trend: "Baissière" },
-        { ticker: "ES=F", name: "Future S&P 500", category: "Futures", region: "États-Unis", unit: "pts", price: 6008.25, chg1d: 0.40, chg1w: 1.90, chg1m: 3.20, chgYtd: 25.1, low52w: 4720, high52w: 6040, pos52w: 97.6, sma200: 5435, distSma200: 10.55, trend: "Haussière" },
-        { ticker: "NQ=F", name: "Future Nasdaq 100", category: "Futures", region: "États-Unis", unit: "pts", price: 21045.5, chg1d: 0.72, chg1w: 2.35, chg1m: 4.10, chgYtd: 24.8, low52w: 16300, high52w: 21250, pos52w: 95.9, sma200: 19240, distSma200: 9.38, trend: "Haussière" },
-        { ticker: "GC=F", name: "Or (Gold)", category: "Matières premières", region: "Métaux précieux", unit: "$/oz", price: 2692.4, chg1d: 0.85, chg1w: 2.10, chg1m: 1.95, chgYtd: 30.1, low52w: 1985, high52w: 2790, pos52w: 87.9, sma200: 2410, distSma200: 11.72, trend: "Haussière" },
-        { ticker: "BZ=F", name: "Pétrole Brent", category: "Matières premières", region: "Énergie", unit: "$/bbl", price: 74.2, chg1d: -0.65, chg1w: 1.40, chg1m: -2.30, chgYtd: -3.6, low52w: 68.7, high52w: 92.1, pos52w: 23.5, sma200: 80.4, distSma200: -7.71, trend: "Baissière" },
-        { ticker: "HG=F", name: "Cuivre (Copper)", category: "Matières premières", region: "Métaux ind.", unit: "$/lb", price: 4.18, chg1d: 0.55, chg1w: 0.92, chg1m: -3.10, chgYtd: 7.4, low52w: 3.68, high52w: 5.19, pos52w: 33.1, sma200: 4.24, distSma200: -1.42, trend: "Baissière" }
+        { ticker: "^FCHI", name: "CAC 40", category: "Indices", region: "France", unit: "pts", price: 7420.5, chg1d: 0.48, chg1w: 1.12, chg1m: -0.85, chgYtd: 3.4, low52w: 7030, high52w: 8259, pos52w: 31.8, sma200: 7610, distSma200: -2.49, trend: "Baissière", sparkline: [7550,7520,7490,7440,7460,7380,7400,7420.5] },
+        { ticker: "^GDAXI", name: "DAX 40", category: "Indices", region: "Allemagne", unit: "pts", price: 19410.2, chg1d: 0.62, chg1w: 1.45, chg1m: 2.10, chgYtd: 15.8, low52w: 16345, high52w: 19675, pos52w: 92.0, sma200: 18290, distSma200: 6.12, trend: "Haussière", sparkline: [18500,18700,18900,19050,19150,19280,19410.2] },
+        { ticker: "^GSPC", name: "S&P 500", category: "Indices", region: "États-Unis", unit: "pts", price: 5985.4, chg1d: 0.35, chg1w: 1.82, chg1m: 3.12, chgYtd: 25.4, low52w: 4682, high52w: 6017, pos52w: 97.6, sma200: 5412, distSma200: 10.59, trend: "Haussière", sparkline: [5550,5640,5710,5780,5840,5920,5985.4] },
+        { ticker: "^N225", name: "Nikkei 225", category: "Indices", region: "Japon", unit: "pts", price: 38950.0, chg1d: 0.91, chg1w: 0.74, chg1m: 1.65, chgYtd: 16.4, low52w: 31156, high52w: 42426, pos52w: 69.2, sma200: 38120, distSma200: 2.18, trend: "Haussière", sparkline: [37200,37800,38100,37900,38400,38700,38950] },
+        { ticker: "^KS11", name: "KOSPI", category: "Indices", region: "Corée du Sud", unit: "pts", price: 2512.8, chg1d: 1.15, chg1w: 2.04, chg1m: -1.42, chgYtd: -5.2, low52w: 2386, high52w: 2896, pos52w: 24.9, sma200: 2635, distSma200: -4.64, trend: "Baissière", sparkline: [2640,2610,2580,2540,2490,2480,2512.8] },
+        { ticker: "GC=F", name: "Or (Gold)", category: "Matières premières", region: "Métaux précieux", unit: "$/oz", price: 2692.4, chg1d: 0.85, chg1w: 2.10, chg1m: 1.95, chgYtd: 30.1, low52w: 1985, high52w: 2790, pos52w: 87.9, sma200: 2410, distSma200: 11.72, trend: "Haussière", sparkline: [2480,2520,2560,2610,2650,2670,2692.4] },
+        { ticker: "BZ=F", name: "Pétrole Brent", category: "Matières premières", region: "Énergie", unit: "$/bbl", price: 74.2, chg1d: -0.65, chg1w: 1.40, chg1m: -2.30, chgYtd: -3.6, low52w: 68.7, high52w: 92.1, pos52w: 23.5, sma200: 80.4, distSma200: -7.71, trend: "Baissière", sparkline: [79.5,78.1,76.4,75.0,73.8,74.6,74.2] }
       ],
       winners: [
         { ticker: "SAF.PA", name: "Safran SA", market: "FR", currency: "€", detectedDate: "2026-04-12", reachedDate: "2026-09-18", entryPrice: 178.4, exitPrice: 221.6, gainPct: 24.2, healthScoreAtEntry: 3.9 },
@@ -487,6 +653,15 @@
     };
 
     const MARKET_LABELS = { FR: "France", DE: "Allemagne", US: "États-Unis", KR: "Corée du Sud", JP: "Japon" };
+    const MARKET_COLORS = { FR: "#3b82f6", DE: "#f59e0b", US: "#10b981", KR: "#a78bfa", JP: "#f43f5e" };
+
+    function loadWatchlist() {
+      try { return new Set(JSON.parse(localStorage.getItem("valoris-watchlist") || "[]")); }
+      catch (_) { return new Set(); }
+    }
+    function saveWatchlist(set) {
+      localStorage.setItem("valoris-watchlist", JSON.stringify([...set]));
+    }
 
     const state = {
       data: DEMO_DATA,
@@ -498,9 +673,15 @@
       minUpside: 20,
       minCap: 1,
       minHealth: 2.5,
+      minDiv: 0,
       hideTraps: true,
+      onlyNew: false,
+      onlyWatchlist: false,
+      watchlist: loadWatchlist(),
       sortKey: "upside",
-      sortDir: "desc"
+      sortDir: "desc",
+      currentDrawerTicker: null,
+      lastFiltered: []
     };
 
     const fmtNum = (n, dec = 2) => (n === null || n === undefined || Number.isNaN(n))
@@ -513,14 +694,72 @@
       return `${fmtNum(val, dec)} ${cur}`;
     };
 
-    const fmtPct = (v) => {
+    const fmtPct = (v, dec = 2) => {
       if (v === null || v === undefined) return `<span class="muted">—</span>`;
       const cls = v >= 0 ? "pos" : "neg";
       const sign = v > 0 ? "+" : "";
-      return `<span class="${cls}">${sign}${fmtNum(v, 2)} %</span>`;
+      return `<span class="${cls}">${sign}${fmtNum(v, dec)} %</span>`;
     };
 
     const healthColor = (score) => score >= 3.5 ? "var(--green)" : score >= 2.5 ? "var(--accent)" : score >= 2.0 ? "var(--amber)" : "var(--red)";
+
+    function buildSparklineSvg(points, width = 68, height = 24) {
+      if (!Array.isArray(points) || points.length < 2) {
+        return `<span class="muted" style="font-size:0.75rem;">—</span>`;
+      }
+      const min = Math.min(...points);
+      const max = Math.max(...points);
+      const span = max - min || 1;
+      const coords = points.map((v, idx) => {
+        const x = (idx / (points.length - 1)) * width;
+        const y = height - 2 - ((v - min) / span) * (height - 4);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(" ");
+      const isUp = points[points.length - 1] >= points[0];
+      const color = isUp ? "var(--green)" : "var(--red)";
+      return `<svg class="spark-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+        <polyline fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" points="${coords}" />
+      </svg>`;
+    }
+
+    function renderBriefings() {
+      const grid = document.getElementById("briefingsGrid");
+      const b = state.data.briefings || {};
+      const cards = [
+        { key: "asia", cls: "asia", fallbackTitle: "Briefing Asie (Matin)" },
+        { key: "west", cls: "west", fallbackTitle: "Briefing Europe & US (Soir)" }
+      ];
+
+      grid.innerHTML = cards.map(c => {
+        const item = b[c.key];
+        if (!item) {
+          return `<div class="briefing-card ${c.cls}">
+            <div class="briefing-title">${c.fallbackTitle}</div>
+            <p class="muted" style="font-size:0.83rem; margin-top:6px;">En attente de la première exécution V3 sur GitHub Actions.</p>
+          </div>`;
+        }
+        const dt = item.updatedAt ? new Date(item.updatedAt).toLocaleString("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : "";
+        const sec = item.sections || {};
+        return `
+          <article class="briefing-card ${c.cls}">
+            <div class="briefing-top">
+              <div class="briefing-title">${item.title}</div>
+              <div class="briefing-meta">
+                <span class="badge ${item.engine?.includes("Gemini") ? "purple" : "blue"}">${item.engine || "Algo"}</span>
+                <span>${dt}</span>
+              </div>
+            </div>
+            <div class="briefing-headline">${item.headline || ""}</div>
+            <ul class="briefing-list">
+              <li><strong>Macro &amp; Devises :</strong> ${sec.macro || "—"}</li>
+              <li><strong>Secteurs :</strong> ${sec.sectors || "—"}</li>
+              <li><strong>Opportunités :</strong> ${sec.opportunities || "—"}</li>
+              <li><strong>Vigilance :</strong> ${sec.vigilance || "—"}</li>
+            </ul>
+          </article>
+        `;
+      }).join("");
+    }
 
     function populateSectors() {
       const select = document.getElementById("sectorSelect");
@@ -541,24 +780,35 @@
         text.textContent = `Données live · MAJ ${dateStr}`;
       } else {
         dot.classList.add("demo");
-        text.textContent = `Mode démo V2 · ${dateStr}`;
+        text.textContent = `Mode démo V3 · ${dateStr}`;
       }
+      document.getElementById("watchCount").textContent = state.watchlist.size;
+      const wBtn = document.getElementById("watchlistFilterBtn");
+      wBtn.classList.toggle("active-toggle", state.onlyWatchlist);
     }
 
-    function renderScreener() {
+    function getFilteredStocks() {
       const allStocks = state.data.stocks || [];
       const q = state.search.trim().toLowerCase();
 
-      let filtered = allStocks.filter(s => {
+      return allStocks.filter(s => {
         if (state.market !== "ALL" && s.market !== state.market) return false;
         if (state.sector !== "ALL" && s.sector !== state.sector) return false;
         if (q && !s.name.toLowerCase().includes(q) && !s.ticker.toLowerCase().includes(q)) return false;
         if (s.upside < state.minUpside) return false;
         if (s.marketCapB < state.minCap) return false;
         if (s.healthScore < state.minHealth) return false;
+        if (state.minDiv > 0 && ((s.dividendYield ?? 0) < state.minDiv)) return false;
         if (state.hideTraps && s.valueTrap) return false;
+        if (state.onlyNew && !s.isNewEntry) return false;
+        if (state.onlyWatchlist && !state.watchlist.has(s.ticker)) return false;
         return true;
       });
+    }
+
+    function renderScreener() {
+      const allStocks = state.data.stocks || [];
+      let filtered = getFilteredStocks();
 
       const dir = state.sortDir === "asc" ? 1 : -1;
       filtered.sort((a, b) => {
@@ -567,8 +817,10 @@
         if (typeof va === "string") return va.localeCompare(vb, "fr") * dir;
         return (va - vb) * dir;
       });
+      state.lastFiltered = filtered;
 
       const trapsInMarket = allStocks.filter(s => (state.market === "ALL" || s.market === state.market) && s.valueTrap).length;
+      const newCount = filtered.filter(s => s.isNewEntry).length;
       const avgUpside = filtered.length ? filtered.reduce((acc, s) => acc + s.upside, 0) / filtered.length : 0;
       const avgHealth = filtered.length ? filtered.reduce((acc, s) => acc + s.healthScore, 0) / filtered.length : 0;
 
@@ -577,11 +829,13 @@
       document.getElementById("kpiTotalSub").textContent = `sur ${allStocks.length} actions suivies`;
       document.getElementById("kpiUpside").textContent = `${avgUpside >= 0 ? "+" : ""}${fmtNum(avgUpside, 1)} %`;
       document.getElementById("kpiHealth").textContent = `${fmtNum(avgHealth, 2)} / 5`;
+      document.getElementById("kpiNew").textContent = newCount;
       document.getElementById("kpiTraps").textContent = trapsInMarket;
 
       const tbody = document.getElementById("stocksBody");
       if (!filtered.length) {
-        tbody.innerHTML = `<tr><td colspan="10" class="empty-state">Aucune action ne correspond à ces filtres. Essayez d'assouplir vos seuils.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="13" class="empty-state">Aucune action ne correspond à ces filtres. Essayez d'assouplir vos seuils.</td></tr>`;
+        renderScatter(filtered);
         return;
       }
 
@@ -589,20 +843,43 @@
         const upClass = s.upside >= 20 ? "green" : s.upside >= 0 ? "blue" : "red";
         const hc = healthColor(s.healthScore);
         const pctWidth = Math.min(100, Math.max(10, (s.healthScore / 5) * 100));
-        const trapBadge = s.valueTrap ? `<span class="badge red" title="Décote forte mais santé/trésorerie fragile">Piège</span>` : "";
+        const starred = state.watchlist.has(s.ticker);
+
+        const trapBadge = s.valueTrap ? `<span class="badge red">Piège</span>` : "";
+        const newBadge = s.isNewEntry ? `<span class="badge purple">Nouveau</span>` : "";
+        const earnBadge = (s.daysToEarnings !== null && s.daysToEarnings !== undefined && s.daysToEarnings >= 0 && s.daysToEarnings <= 21)
+          ? `<span class="badge amber" title="Publication prévue le ${s.earningsDate}">Résultats J-${s.daysToEarnings}</span>` : "";
+
+        const deltaHtml = (s.upsideDelta5d !== null && s.upsideDelta5d !== undefined && s.upsideDelta5d !== 0)
+          ? `<div class="delta-sub ${s.upsideDelta5d > 0 ? "pos" : "neg"}" title="Variation du potentiel sur 5 séances">${s.upsideDelta5d > 0 ? "▲ +" : "▼ "}${fmtNum(s.upsideDelta5d, 1)} pts</div>`
+          : "";
+
         return `
           <tr data-ticker="${s.ticker}">
+            <td onclick="event.stopPropagation();">
+              <button class="star-btn ${starred ? "starred" : ""}" data-star="${s.ticker}" title="Suivre dans ma Watchlist">${starred ? "★" : "☆"}</button>
+            </td>
             <td>
               <div class="stock-name">${s.name}</div>
               <div class="stock-meta">
-                <span>${s.ticker}</span> · <span>${s.market}</span> · <span>${s.sector}</span> ${trapBadge}
+                <span>${s.ticker}</span> · <span>${s.market}</span> · <span>${s.sector}</span>
+                ${newBadge}${earnBadge}${trapBadge}
+              </div>
+            </td>
+            <td>
+              <div class="spark-cell">
+                ${buildSparklineSvg(s.sparkline)}
+                <span style="font-size:0.74rem;">${fmtPct(s.chg3m, 1)}</span>
               </div>
             </td>
             <td class="num">${fmtPrice(s.price, s.currency)}</td>
             <td class="num" style="font-weight:700;">${fmtPrice(s.fairValue, s.currency)}</td>
-            <td class="num"><span class="badge ${upClass}">${s.upside >= 0 ? "+" : ""}${fmtNum(s.upside, 1)} %</span></td>
+            <td class="num">
+              <span class="badge ${upClass}">${s.upside >= 0 ? "+" : ""}${fmtNum(s.upside, 1)} %</span>
+              ${deltaHtml}
+            </td>
             <td>
-              <div style="font-weight:700; color:${hc};">${fmtNum(s.healthScore, 2)} <span class="muted" style="font-weight:500; font-size:0.76rem;">(${s.healthLabel})</span></div>
+              <div style="font-weight:700; color:${hc};">${fmtNum(s.healthScore, 2)} <span class="muted" style="font-weight:500; font-size:0.74rem;">(${s.healthLabel})</span></div>
               <div class="health-bar"><div class="health-fill" style="width:${pctWidth}%; background:${hc};"></div></div>
             </td>
             <td>
@@ -612,7 +889,8 @@
                 <span class="mini-chip">Tr ${fmtNum(s.scores?.cashflow, 1)}</span>
               </div>
             </td>
-            <td class="num">${fmtNum(s.marketCapB, 1)} Md €</td>
+            <td class="num">${fmtNum(s.marketCapB, 1)} Md</td>
+            <td class="num">${s.dividendYield ? `<span class="pos">${fmtNum(s.dividendYield, 2)} %</span>` : `<span class="muted">—</span>`}</td>
             <td class="num">${s.pe ? fmtNum(s.pe, 1) + "×" : "—"}</td>
             <td class="num">${s.evEbitda ? fmtNum(s.evEbitda, 1) + "×" : "—"}</td>
             <td><span class="badge ${s.analystConsensus.includes("Achat") ? "green" : s.analystConsensus === "Conserver" ? "amber" : "red"}">${s.analystConsensus}</span></td>
@@ -620,18 +898,106 @@
         `;
       }).join("");
 
+      tbody.querySelectorAll("button[data-star]").forEach(btn => {
+        btn.addEventListener("click", () => toggleWatchlist(btn.dataset.star));
+      });
       tbody.querySelectorAll("tr[data-ticker]").forEach(row => {
         row.addEventListener("click", () => {
           const stock = allStocks.find(x => x.ticker === row.dataset.ticker);
           if (stock) openDrawer(stock);
         });
       });
+
+      renderScatter(filtered);
+    }
+
+    // ==================== CARTE PÉPITES (NUAGE DE POINTS SVG) ====================
+    function renderScatter(filteredList) {
+      const svg = document.getElementById("scatterSvg");
+      const tooltip = document.getElementById("scatterTooltip");
+      const allStocks = state.data.stocks || [];
+      // Sur la carte Pépites, on affiche les titres filtrés (ou tous ceux du marché si le filtre est vide)
+      const list = filteredList.length ? filteredList : allStocks.filter(s => state.market === "ALL" || s.market === state.market);
+      document.getElementById("countScatter").textContent = list.length;
+
+      const W = 960, H = 470, padL = 62, padR = 26, padT = 24, padB = 46;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+
+      const minX = 1.0, maxX = 5.0;
+      const maxUp = Math.max(55, ...list.map(s => s.upside || 0)) + 5;
+      const minUp = Math.min(-10, ...list.map(s => s.upside || 0));
+
+      const xScale = v => padL + ((Math.max(minX, Math.min(maxX, v)) - minX) / (maxX - minX)) * plotW;
+      const yScale = v => padT + plotH - ((Math.max(minUp, Math.min(maxUp, v)) - minUp) / (maxUp - minUp)) * plotH;
+
+      const gx25 = xScale(2.5);
+      const gy20 = yScale(20);
+
+      let out = "";
+      // Zone Pépites (coin supérieur droit : Santé >= 2.5 et Potentiel >= 20%)
+      out += `<rect x="${gx25}" y="${padT}" width="${W - padR - gx25}" height="${Math.max(0, gy20 - padT)}" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.35)" stroke-dasharray="5,5" rx="6" />`;
+      out += `<text x="${W - padR - 10}" y="${padT + 18}" text-anchor="end" fill="#10b981" font-size="11.5" font-weight="700">ZONE PÉPITES (Santé ≥ 2,5 · Potentiel ≥ 20 %)</text>`;
+
+      // Grille horizontale
+      for (let u = Math.ceil(minUp / 10) * 10; u <= maxUp; u += 10) {
+        const y = yScale(u);
+        out += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="var(--border)" stroke-width="1" />`;
+        out += `<text x="${padL - 10}" y="${y + 4}" text-anchor="end" fill="var(--muted)" font-size="11">${u > 0 ? "+" : ""}${u} %</text>`;
+      }
+      // Grille verticale
+      for (let h = 1.0; h <= 5.0; h += 0.5) {
+        const x = xScale(h);
+        out += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${H - padB}" stroke="var(--border)" stroke-width="1" />`;
+        out += `<text x="${x}" y="${H - padB + 18}" text-anchor="middle" fill="var(--muted)" font-size="11">${h.toFixed(1)}</text>`;
+      }
+
+      // Labels axes
+      out += `<text x="${padL + plotW / 2}" y="${H - 8}" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Score de Santé Financière (/5)</text>`;
+      out += `<text x="16" y="${padT + plotH / 2}" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700" transform="rotate(-90 16 ${padT + plotH / 2})">Potentiel de hausse (%)</text>`;
+
+      // Bulles
+      const sortedForDraw = [...list].sort((a, b) => (b.marketCapB || 0) - (a.marketCapB || 0));
+      for (const s of sortedForDraw) {
+        const cx = xScale(s.healthScore);
+        const cy = yScale(s.upside);
+        const r = Math.max(5.5, Math.min(20, 4 + Math.sqrt(s.marketCapB || 1) * 0.55));
+        const color = MARKET_COLORS[s.market] || "#3b82f6";
+        const stroke = state.watchlist.has(s.ticker) ? "#f59e0b" : "var(--surface)";
+        const sw = state.watchlist.has(s.ticker) ? 2.5 : 1.5;
+        out += `<circle class="bubble" data-ticker="${s.ticker}" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="${color}" fill-opacity="0.78" stroke="${stroke}" stroke-width="${sw}" style="cursor:pointer;" />`;
+        if (r >= 9 || (s.healthScore >= 3.5 && s.upside >= 25)) {
+          out += `<text x="${cx.toFixed(1)}" y="${(cy - r - 4).toFixed(1)}" text-anchor="middle" fill="var(--text)" font-size="10" font-weight="600" style="pointer-events:none;">${s.ticker.split(".")[0]}</text>`;
+        }
+      }
+
+      svg.innerHTML = out;
+      svg.querySelectorAll(".bubble").forEach(el => {
+        const stock = allStocks.find(x => x.ticker === el.dataset.ticker);
+        if (!stock) return;
+        el.addEventListener("mouseenter", ev => {
+          tooltip.innerHTML = `
+            <div style="font-weight:800; margin-bottom:3px;">${stock.name} (${stock.ticker})</div>
+            <div>Marché : <strong>${MARKET_LABELS[stock.market] || stock.market}</strong> · ${stock.sector}</div>
+            <div>Potentiel : <strong class="pos">+${fmtNum(stock.upside, 1)} %</strong> · Santé : <strong>${fmtNum(stock.healthScore, 2)}/5</strong></div>
+            <div>Cap. : <strong>${fmtNum(stock.marketCapB, 1)} Md €</strong> · PER : <strong>${stock.pe ? fmtNum(stock.pe, 1) + "×" : "—"}</strong></div>
+          `;
+          tooltip.style.opacity = "1";
+          tooltip.style.left = Math.min(window.innerWidth - 260, ev.clientX + 14) + "px";
+          tooltip.style.top = Math.max(10, ev.clientY - 20) + "px";
+        });
+        el.addEventListener("mousemove", ev => {
+          tooltip.style.left = Math.min(window.innerWidth - 260, ev.clientX + 14) + "px";
+          tooltip.style.top = Math.max(10, ev.clientY - 20) + "px";
+        });
+        el.addEventListener("mouseleave", () => { tooltip.style.opacity = "0"; });
+        el.addEventListener("click", () => openDrawer(stock));
+      });
     }
 
     function renderMacro() {
       const fx = state.data.fxRates || {};
-      const fxStrip = document.getElementById("fxStrip");
-      fxStrip.innerHTML = [
+      document.getElementById("fxStrip").innerHTML = [
         ["EUR / USD", fx.USD ? fmtNum(fx.USD, 4) : "—"],
         ["EUR / JPY", fx.JPY ? fmtNum(fx.JPY, 2) : "—"],
         ["EUR / KRW", fx.KRW ? fmtNum(fx.KRW, 1) : "—"]
@@ -643,7 +1009,7 @@
       const tbody = document.getElementById("macroBody");
 
       if (!items.length) {
-        tbody.innerHTML = `<tr><td colspan="10" class="empty-state">Aucune donnée macro disponible. Lancez la collecte V2 sur GitHub Actions.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" class="empty-state">Aucune donnée macro disponible.</td></tr>`;
         return;
       }
 
@@ -654,7 +1020,8 @@
             <div class="stock-meta">${m.ticker} · ${m.region}</div>
           </td>
           <td><span class="badge blue">${m.category}</span></td>
-          <td class="num" style="font-weight:700;">${fmtNum(m.price, m.price >= 100 ? 1 : 2)} <span class="muted" style="font-size:0.75rem;">${m.unit}</span></td>
+          <td>${buildSparklineSvg(m.sparkline)}</td>
+          <td class="num" style="font-weight:700;">${fmtNum(m.price, m.price >= 100 ? 1 : 2)} <span class="muted" style="font-size:0.74rem;">${m.unit}</span></td>
           <td class="num">${fmtPct(m.chg1d)}</td>
           <td class="num">${fmtPct(m.chg1w)}</td>
           <td class="num">${fmtPct(m.chg1m)}</td>
@@ -665,7 +1032,7 @@
               <div class="gauge-labels"><span>${fmtNum(m.low52w, 0)}</span><span>${fmtNum(m.pos52w, 0)} %</span><span>${fmtNum(m.high52w, 0)}</span></div>
             </div>
           </td>
-          <td class="num">${m.sma200 ? fmtNum(m.sma200, m.sma200 >= 100 ? 0 : 2) : "—"} <div style="font-size:0.74rem;">${fmtPct(m.distSma200)}</div></td>
+          <td class="num">${m.sma200 ? fmtNum(m.sma200, m.sma200 >= 100 ? 0 : 2) : "—"} <div style="font-size:0.72rem;">${fmtPct(m.distSma200)}</div></td>
           <td><span class="badge ${m.trend === "Haussière" ? "green" : "red"}">${m.trend}</span></td>
         </tr>
       `).join("");
@@ -693,13 +1060,41 @@
       `).join("");
     }
 
+    function toggleWatchlist(ticker) {
+      if (state.watchlist.has(ticker)) state.watchlist.delete(ticker);
+      else state.watchlist.add(ticker);
+      saveWatchlist(state.watchlist);
+      updateStatus();
+      renderScreener();
+      if (state.currentDrawerTicker === ticker) {
+        const starBtn = document.getElementById("dStarBtn");
+        starBtn.classList.toggle("active-toggle", state.watchlist.has(ticker));
+      }
+    }
+
     function openDrawer(s) {
+      state.currentDrawerTicker = s.ticker;
       document.getElementById("dName").textContent = s.name;
       document.getElementById("dSub").textContent = `${s.ticker} · ${MARKET_LABELS[s.market] || s.market} · ${s.sector} · Cap. ${fmtNum(s.marketCapB, 1)} Md €`;
+      const dStarBtn = document.getElementById("dStarBtn");
+      dStarBtn.classList.toggle("active-toggle", state.watchlist.has(s.ticker));
 
       document.getElementById("dTrapBanner").innerHTML = s.valueTrap
-        ? `<div style="background:var(--red-soft); border:1px solid var(--red); color:var(--red); padding:11px 13px; border-radius:10px; font-size:0.84rem; font-weight:600; margin-bottom:14px;">Alerte Piège de valeur : décote ≥ 20 % mais fragilité sur la santé globale, la trésorerie ou le bilan.</div>`
+        ? `<div style="background:var(--red-soft); border:1px solid var(--red); color:var(--red); padding:11px 13px; border-radius:10px; font-size:0.83rem; font-weight:600; margin-bottom:13px;">Alerte Piège de valeur : décote ≥ 20 % mais fragilité sur la santé globale, la trésorerie ou le bilan.</div>`
         : "";
+
+      document.getElementById("dSparkSection").innerHTML = `
+        <h3>Dynamique 3 mois &amp; Calendrier</h3>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px;">
+          <div>${buildSparklineSvg(s.sparkline, 210, 48)}</div>
+          <div style="text-align:right;">
+            <div class="muted" style="font-size:0.75rem;">Variation 3M</div>
+            <div style="font-size:1.05rem;">${fmtPct(s.chg3m, 1)}</div>
+          </div>
+        </div>
+        <div class="row-kv"><span>Prochains résultats</span><strong>${s.earningsDate ? `${s.earningsDate} (J-${s.daysToEarnings})` : "Non communiqué"}</strong></div>
+        <div class="row-kv"><span>Variation du potentiel (5 séances)</span><strong>${s.upsideDelta5d !== null && s.upsideDelta5d !== undefined ? (s.upsideDelta5d > 0 ? "+" : "") + fmtNum(s.upsideDelta5d, 1) + " pts" : "—"}</strong></div>
+      `;
 
       document.getElementById("dValuation").innerHTML = `
         <h3>Décomposition de la Juste Valeur</h3>
@@ -731,9 +1126,11 @@
       `;
 
       document.getElementById("dMultiples").innerHTML = `
-        <h3>Multiples &amp; Consensus</h3>
+        <h3>Multiples, Dividende &amp; Consensus</h3>
         <div class="row-kv"><span>PER (Forward / Trailing)</span><strong>${s.pe ? fmtNum(s.pe, 1) + "×" : "—"}</strong></div>
         <div class="row-kv"><span>EV / EBITDA</span><strong>${s.evEbitda ? fmtNum(s.evEbitda, 1) + "×" : "—"}</strong></div>
+        <div class="row-kv"><span>Rendement du dividende</span><strong>${s.dividendYield ? fmtNum(s.dividendYield, 2) + " %" : "—"}</strong></div>
+        <div class="row-kv"><span>Payout Ratio</span><strong>${s.payoutRatio ? fmtNum(s.payoutRatio, 1) + " %" : "—"}</strong></div>
         <div class="row-kv"><span>Avis des analystes</span><strong>${s.analystConsensus}</strong></div>
       `;
 
@@ -747,13 +1144,43 @@
       document.getElementById("detailDrawer").classList.remove("open");
     }
 
+    function exportFilteredCsv() {
+      const rows = state.lastFiltered || [];
+      if (!rows.length) return alert("Aucune ligne à exporter.");
+      const headers = ["Ticker","Société","Marché","Secteur","Devise","Cours","Juste Valeur","Potentiel (%)","Santé (/5)","Label Santé","Cap (Md EUR)","Dividende (%)","PER","EV/EBITDA","Analystes","Prochains résultats"];
+      const esc = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+      const lines = [
+        headers.join(";"),
+        ...rows.map(s => [
+          s.ticker, s.name, s.market, s.sector, s.currency, s.price, s.fairValue,
+          s.upside, s.healthScore, s.healthLabel, s.marketCapB, s.dividendYield ?? "",
+          s.pe ?? "", s.evEbitda ?? "", s.analystConsensus, s.earningsDate ?? ""
+        ].map(esc).join(";"))
+      ];
+      const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `valoris_selection_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
     function renderAll() {
       updateStatus();
+      renderBriefings();
       populateSectors();
       renderScreener();
       renderMacro();
       renderWinners();
     }
+
+    // Events
+    document.getElementById("toggleBriefings").addEventListener("click", e => {
+      const g = document.getElementById("briefingsGrid");
+      const collapsed = g.classList.toggle("collapsed");
+      e.target.textContent = collapsed ? "Afficher" : "Masquer";
+    });
 
     document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -799,22 +1226,39 @@
       document.getElementById("healthVal").textContent = `${fmtNum(state.minHealth, 1)} / 5`;
       renderScreener();
     });
+    document.getElementById("divRange").addEventListener("input", e => {
+      state.minDiv = Number(e.target.value);
+      document.getElementById("divVal").textContent = `${fmtNum(state.minDiv, 1)} %`;
+      renderScreener();
+    });
     document.getElementById("hideTraps").addEventListener("change", e => { state.hideTraps = e.target.checked; renderScreener(); });
+    document.getElementById("onlyNew").addEventListener("change", e => { state.onlyNew = e.target.checked; renderScreener(); });
+    document.getElementById("watchlistFilterBtn").addEventListener("click", () => {
+      state.onlyWatchlist = !state.onlyWatchlist;
+      updateStatus();
+      renderScreener();
+    });
 
-    function applyPreset(upside, cap, health, hideTraps) {
-      state.minUpside = upside; state.minCap = cap; state.minHealth = health; state.hideTraps = hideTraps;
+    function applyPreset(upside, cap, health, divMin, hideTraps) {
+      state.minUpside = upside; state.minCap = cap; state.minHealth = health;
+      state.minDiv = divMin; state.hideTraps = hideTraps; state.onlyNew = false; state.onlyWatchlist = false;
       document.getElementById("upsideRange").value = upside;
       document.getElementById("upsideVal").textContent = `${upside} %`;
       document.getElementById("mcapRange").value = cap;
       document.getElementById("mcapVal").textContent = `${cap} Md €`;
       document.getElementById("healthRange").value = health;
       document.getElementById("healthVal").textContent = `${fmtNum(health, 1)} / 5`;
+      document.getElementById("divRange").value = divMin;
+      document.getElementById("divVal").textContent = `${fmtNum(divMin, 1)} %`;
       document.getElementById("hideTraps").checked = hideTraps;
+      document.getElementById("onlyNew").checked = false;
+      updateStatus();
       renderScreener();
     }
-    document.getElementById("presetValoris").addEventListener("click", () => applyPreset(20, 1, 2.5, true));
-    document.getElementById("presetQuality").addEventListener("click", () => applyPreset(15, 5, 3.5, true));
-    document.getElementById("presetAll").addEventListener("click", () => applyPreset(-20, 0, 1.0, false));
+    document.getElementById("presetValoris").addEventListener("click", () => applyPreset(20, 1, 2.5, 0, true));
+    document.getElementById("presetQuality").addEventListener("click", () => applyPreset(15, 5, 3.5, 0, true));
+    document.getElementById("presetDividend").addEventListener("click", () => applyPreset(15, 1, 2.5, 3, true));
+    document.getElementById("presetAll").addEventListener("click", () => applyPreset(-20, 0, 1.0, 0, false));
 
     document.querySelectorAll("thead th[data-sort]").forEach(th => {
       th.addEventListener("click", () => {
@@ -825,8 +1269,12 @@
       });
     });
 
+    document.getElementById("dStarBtn").addEventListener("click", () => {
+      if (state.currentDrawerTicker) toggleWatchlist(state.currentDrawerTicker);
+    });
     document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
     document.getElementById("drawerOverlay").addEventListener("click", closeDrawer);
+    document.getElementById("exportCsvBtn").addEventListener("click", exportFilteredCsv);
 
     const savedTheme = localStorage.getItem("valoris-theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);

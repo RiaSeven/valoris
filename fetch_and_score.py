@@ -1,17 +1,27 @@
 #!/usr/bin/env python3
 """
-Valoris V2 — Moteur de collecte, valorisation (Juste Valeur), scoring de santé
-financière et suivi macroéconomique (Indices, Futures, Matières premières).
+Valoris V3 — Moteur de collecte, valorisation (Juste Valeur), scoring de santé
+financière, suivi macroéconomique et briefings automatisés Asie (matin) / Europe-US (soir).
 
-Marchés actions couverts : FR (SBF/CAC), DE (DAX), US (S&P 500), KR (KOSPI), JP (Nikkei/TOPIX).
-Génère `data.json` et met à jour `history.json` (suivi des précédents gagnants).
+Nouveautés V3 :
+- Collecte par session (`asia`, `west`, `all`) avec fusion incrémentale dans `data.json`.
+- Briefings automatisés Matin (Asie) et Soir (Europe & US) : hybride API Gemini
+  (si `GEMINI_API_KEY` est défini) avec repli automatique sur moteur algorithmique Python.
+- Sparklines 3 mois (actions et actifs macro) via téléchargement groupé.
+- Radar "Nouvelles entrées", variation du potentiel sur 5 séances, dates de résultats (Earnings),
+  rendement du dividende et Payout Ratio.
+- Notifications push optionnelles (Telegram / Discord) via secrets GitHub.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
+import os
 import time
+import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from statistics import median
@@ -26,6 +36,7 @@ UNIVERSES: dict[str, dict[str, Any]] = {
     "FR": {
         "currency": "€",
         "fx": "EUR",
+        "region": "west",
         "tickers": [
             "MC.PA", "OR.PA", "RMS.PA", "TTE.PA", "SAN.PA", "AIR.PA", "SU.PA", "AI.PA",
             "EL.PA", "BNP.PA", "CS.PA", "DG.PA", "SAF.PA", "SGO.PA", "BN.PA", "DSY.PA",
@@ -41,6 +52,7 @@ UNIVERSES: dict[str, dict[str, Any]] = {
     "DE": {
         "currency": "€",
         "fx": "EUR",
+        "region": "west",
         "tickers": [
             "SAP.DE", "SIE.DE", "ALV.DE", "DTE.DE", "MBG.DE", "BMW.DE", "VOW3.DE", "BAS.DE",
             "BAYN.DE", "IFX.DE", "ADS.DE", "DHL.DE", "MUV2.DE", "RWE.DE", "EOAN.DE", "DB1.DE",
@@ -52,6 +64,7 @@ UNIVERSES: dict[str, dict[str, Any]] = {
     "US": {
         "currency": "$",
         "fx": "USD",
+        "region": "west",
         "tickers": [
             "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "BRK-B", "LLY", "AVGO", "JPM",
             "V", "UNH", "XOM", "MA", "JNJ", "PG", "HD", "COST", "ABBV", "MRK", "CRM", "CVX",
@@ -63,6 +76,7 @@ UNIVERSES: dict[str, dict[str, Any]] = {
     "KR": {
         "currency": "₩",
         "fx": "KRW",
+        "region": "asia",
         "tickers": [
             "005930.KS", "000660.KS", "373220.KS", "207940.KS", "005380.KS", "000270.KS",
             "068270.KS", "105560.KS", "055550.KS", "035420.KS", "005490.KS", "051910.KS",
@@ -74,6 +88,7 @@ UNIVERSES: dict[str, dict[str, Any]] = {
     "JP": {
         "currency": "¥",
         "fx": "JPY",
+        "region": "asia",
         "tickers": [
             "7203.T", "6758.T", "8306.T", "6501.T", "6861.T", "9983.T", "8035.T", "9984.T",
             "6098.T", "4063.T", "8058.T", "8001.T", "8031.T", "8316.T", "8411.T", "9432.T",
@@ -87,24 +102,24 @@ UNIVERSES: dict[str, dict[str, Any]] = {
 # 2. UNIVERS MACRO (INDICES, FUTURES, MATIÈRES PREMIÈRES)
 # =============================================================================
 MACRO_ASSETS: list[dict[str, str]] = [
-    {"ticker": "^FCHI", "name": "CAC 40", "category": "Indices", "region": "France", "unit": "pts"},
-    {"ticker": "^GDAXI", "name": "DAX 40", "category": "Indices", "region": "Allemagne", "unit": "pts"},
-    {"ticker": "^STOXX50E", "name": "Euro Stoxx 50", "category": "Indices", "region": "Zone Euro", "unit": "pts"},
-    {"ticker": "^GSPC", "name": "S&P 500", "category": "Indices", "region": "États-Unis", "unit": "pts"},
-    {"ticker": "^NDX", "name": "Nasdaq 100", "category": "Indices", "region": "États-Unis", "unit": "pts"},
-    {"ticker": "^N225", "name": "Nikkei 225", "category": "Indices", "region": "Japon", "unit": "pts"},
-    {"ticker": "^KS11", "name": "KOSPI", "category": "Indices", "region": "Corée du Sud", "unit": "pts"},
-    {"ticker": "ES=F", "name": "Future S&P 500", "category": "Futures", "region": "États-Unis", "unit": "pts"},
-    {"ticker": "NQ=F", "name": "Future Nasdaq 100", "category": "Futures", "region": "États-Unis", "unit": "pts"},
-    {"ticker": "YM=F", "name": "Future Dow Jones", "category": "Futures", "region": "États-Unis", "unit": "pts"},
-    {"ticker": "RTY=F", "name": "Future Russell 2000", "category": "Futures", "region": "États-Unis", "unit": "pts"},
-    {"ticker": "NKD=F", "name": "Future Nikkei 225", "category": "Futures", "region": "Japon", "unit": "pts"},
-    {"ticker": "GC=F", "name": "Or (Gold)", "category": "Matières premières", "region": "Métaux précieux", "unit": "$/oz"},
-    {"ticker": "SI=F", "name": "Argent (Silver)", "category": "Matières premières", "region": "Métaux précieux", "unit": "$/oz"},
-    {"ticker": "BZ=F", "name": "Pétrole Brent", "category": "Matières premières", "region": "Énergie", "unit": "$/bbl"},
-    {"ticker": "CL=F", "name": "Pétrole WTI", "category": "Matières premières", "region": "Énergie", "unit": "$/bbl"},
-    {"ticker": "HG=F", "name": "Cuivre (Copper)", "category": "Matières premières", "region": "Métaux ind.", "unit": "$/lb"},
-    {"ticker": "NG=F", "name": "Gaz naturel", "category": "Matières premières", "region": "Énergie", "unit": "$/MMBtu"},
+    {"ticker": "^FCHI", "name": "CAC 40", "category": "Indices", "region": "France", "session": "west", "unit": "pts"},
+    {"ticker": "^GDAXI", "name": "DAX 40", "category": "Indices", "region": "Allemagne", "session": "west", "unit": "pts"},
+    {"ticker": "^STOXX50E", "name": "Euro Stoxx 50", "category": "Indices", "region": "Zone Euro", "session": "west", "unit": "pts"},
+    {"ticker": "^GSPC", "name": "S&P 500", "category": "Indices", "region": "États-Unis", "session": "west", "unit": "pts"},
+    {"ticker": "^NDX", "name": "Nasdaq 100", "category": "Indices", "region": "États-Unis", "session": "west", "unit": "pts"},
+    {"ticker": "^N225", "name": "Nikkei 225", "category": "Indices", "region": "Japon", "session": "asia", "unit": "pts"},
+    {"ticker": "^KS11", "name": "KOSPI", "category": "Indices", "region": "Corée du Sud", "session": "asia", "unit": "pts"},
+    {"ticker": "ES=F", "name": "Future S&P 500", "category": "Futures", "region": "États-Unis", "session": "both", "unit": "pts"},
+    {"ticker": "NQ=F", "name": "Future Nasdaq 100", "category": "Futures", "region": "États-Unis", "session": "both", "unit": "pts"},
+    {"ticker": "YM=F", "name": "Future Dow Jones", "category": "Futures", "region": "États-Unis", "session": "west", "unit": "pts"},
+    {"ticker": "RTY=F", "name": "Future Russell 2000", "category": "Futures", "region": "États-Unis", "session": "west", "unit": "pts"},
+    {"ticker": "NKD=F", "name": "Future Nikkei 225", "category": "Futures", "region": "Japon", "session": "asia", "unit": "pts"},
+    {"ticker": "GC=F", "name": "Or (Gold)", "category": "Matières premières", "region": "Métaux précieux", "session": "both", "unit": "$/oz"},
+    {"ticker": "SI=F", "name": "Argent (Silver)", "category": "Matières premières", "region": "Métaux précieux", "session": "both", "unit": "$/oz"},
+    {"ticker": "BZ=F", "name": "Pétrole Brent", "category": "Matières premières", "region": "Énergie", "session": "both", "unit": "$/bbl"},
+    {"ticker": "CL=F", "name": "Pétrole WTI", "category": "Matières premières", "region": "Énergie", "session": "both", "unit": "$/bbl"},
+    {"ticker": "HG=F", "name": "Cuivre (Copper)", "category": "Matières premières", "region": "Métaux ind.", "session": "both", "unit": "$/lb"},
+    {"ticker": "NG=F", "name": "Gaz naturel", "category": "Matières premières", "region": "Énergie", "session": "both", "unit": "$/MMBtu"},
 ]
 
 FX_PAIRS: dict[str, tuple[str, float]] = {
@@ -150,6 +165,9 @@ RECOMMENDATION_FR: dict[str, str] = {
 }
 
 
+# =============================================================================
+# 3. OUTILS MATHÉMATIQUES, VALORISATION & SCORING
+# =============================================================================
 def safe_float(val: Any) -> float | None:
     if val is None:
         return None
@@ -193,23 +211,54 @@ def health_label(score: float) -> str:
     return "Faible"
 
 
-def fetch_fx_rates() -> dict[str, float]:
-    """Récupère les taux de change 1 EUR -> devise locale pour homogénéiser les capitalisations."""
-    rates: dict[str, float] = {"EUR": 1.0}
-    print("--- Collecte des taux de change (base EUR) ---")
-    for code, (pair, fallback) in FX_PAIRS.items():
-        try:
-            hist = yf.Ticker(pair).history(period="5d")
-            if not hist.empty:
-                val = safe_float(hist["Close"].dropna().iloc[-1])
-                if val and val > 0:
-                    rates[code] = round(val, 4)
-                    print(f"  1 EUR = {rates[code]} {code}")
-                    continue
-        except Exception as exc:
-            print(f"  [!] FX fallback pour {code}: {exc}")
-        rates[code] = fallback
-    return rates
+def extract_dividend_yield_pct(info: dict[str, Any], price: float) -> float | None:
+    """Calcule un rendement du dividende fiable en pourcentage."""
+    rate = safe_float(info.get("dividendRate"))
+    if rate is not None and rate > 0 and price > 0:
+        pct = (rate / price) * 100.0
+        if 0.0 < pct <= 25.0:
+            return round(pct, 2)
+    raw_y = safe_float(info.get("dividendYield"))
+    if raw_y is not None and raw_y > 0:
+        # yfinance renvoie parfois 0.045 (4.5 %) ou 4.5 selon les versions
+        pct = raw_y if raw_y > 0.35 else raw_y * 100.0
+        if 0.0 < pct <= 25.0:
+            return round(pct, 2)
+    return None
+
+
+def extract_payout_ratio_pct(info: dict[str, Any]) -> float | None:
+    pr = safe_float(info.get("payoutRatio"))
+    if pr is None or pr < 0:
+        return None
+    pct = pr * 100.0 if pr <= 3.0 else pr
+    return round(pct, 1) if pct <= 300.0 else None
+
+
+def extract_earnings_info(info: dict[str, Any], now_utc: datetime) -> tuple[str | None, int | None]:
+    """Extrait la prochaine date de résultats (YYYY-MM-DD) et le nombre de jours restants."""
+    ts = safe_float(info.get("earningsTimestampStart")) or safe_float(info.get("earningsTimestamp"))
+    if not ts or ts <= 0:
+        return None, None
+    try:
+        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
+        days = (dt.date() - now_utc.date()).days
+        if -1 <= days <= 180:
+            return dt.strftime("%Y-%m-%d"), days
+    except (OverflowError, OSError, ValueError):
+        pass
+    return None, None
+
+
+def sample_sparkline(values: list[float], max_points: int = 16) -> list[float]:
+    """Réduit une série de cours à max_points valeurs arrondies pour le rendu SVG."""
+    clean = [float(v) for v in values if v is not None and not math.isnan(float(v))]
+    if len(clean) < 2:
+        return []
+    if len(clean) <= max_points:
+        return [round(v, 2) for v in clean]
+    step = (len(clean) - 1) / (max_points - 1)
+    return [round(clean[round(i * step)], 2) for i in range(max_points)]
 
 
 def estimate_dcf(info: dict[str, Any], price: float) -> float | None:
@@ -345,9 +394,78 @@ def compute_health_scores(
     }
 
 
-def fetch_raw_universe() -> list[dict[str, Any]]:
+# =============================================================================
+# 4. COLLECTE FX, SPARKLINES, ACTIONS & MACRO
+# =============================================================================
+def fetch_fx_rates(existing_fx: dict[str, float] | None = None) -> dict[str, float]:
+    rates: dict[str, float] = dict(existing_fx or {})
+    rates["EUR"] = 1.0
+    print("--- Collecte des taux de change (base EUR) ---")
+    for code, (pair, fallback) in FX_PAIRS.items():
+        try:
+            hist = yf.Ticker(pair).history(period="5d")
+            if not hist.empty:
+                val = safe_float(hist["Close"].dropna().iloc[-1])
+                if val and val > 0:
+                    rates[code] = round(val, 4)
+                    print(f"  1 EUR = {rates[code]} {code}")
+                    continue
+        except Exception as exc:
+            print(f"  [!] FX fallback pour {code}: {exc}")
+        rates.setdefault(code, fallback)
+    return rates
+
+
+def fetch_sparklines_batch(tickers: list[str]) -> dict[str, tuple[list[float], float | None]]:
+    """Télécharge en un bloc l'historique 3 mois pour construire les sparklines et variations 3M."""
+    result: dict[str, tuple[list[float], float | None]] = {}
+    if not tickers:
+        return result
+    print(f"--- Téléchargement groupé des sparklines 3M ({len(tickers)} titres) ---")
+    chunk_size = 60
+    for i in range(0, len(tickers), chunk_size):
+        chunk = tickers[i : i + chunk_size]
+        try:
+            df = yf.download(
+                chunk,
+                period="3mo",
+                interval="1d",
+                auto_adjust=True,
+                progress=False,
+                threads=True,
+            )
+            if df is None or df.empty:
+                continue
+            close_df = df["Close"] if "Close" in df else df
+            if hasattr(close_df, "columns"):
+                for sym in chunk:
+                    if sym in close_df.columns:
+                        vals = close_df[sym].dropna().tolist()
+                        pts = sample_sparkline(vals, max_points=16)
+                        chg3m = (
+                            round(((pts[-1] - pts[0]) / pts[0]) * 100.0, 1)
+                            if (len(pts) >= 2 and pts[0] > 0)
+                            else None
+                        )
+                        result[sym] = (pts, chg3m)
+            elif len(chunk) == 1:
+                vals = close_df.dropna().tolist()
+                pts = sample_sparkline(vals, max_points=16)
+                chg3m = (
+                    round(((pts[-1] - pts[0]) / pts[0]) * 100.0, 1)
+                    if (len(pts) >= 2 and pts[0] > 0)
+                    else None
+                )
+                result[chunk[0]] = (pts, chg3m)
+        except Exception as exc:
+            print(f"  [!] Sparklines lot {i} ignoré : {exc}")
+    return result
+
+
+def fetch_raw_universe(markets: list[str]) -> list[dict[str, Any]]:
     raw_items: list[dict[str, Any]] = []
-    for market, cfg in UNIVERSES.items():
+    for market in markets:
+        cfg = UNIVERSES[market]
         print(f"--- Collecte marché {market} ({len(cfg['tickers'])} titres) ---")
         for symbol in cfg["tickers"]:
             try:
@@ -367,17 +485,21 @@ def fetch_raw_universe() -> list[dict[str, Any]]:
                 })
             except Exception as exc:
                 print(f"  [!] Ignoré {symbol}: {exc}")
-            time.sleep(0.12)
+            time.sleep(0.10)
     return raw_items
 
 
-def fetch_macro() -> list[dict[str, Any]]:
-    """Collecte les indices, futures et matières premières avec performances et MM200."""
-    print(f"--- Collecte Macro ({len(MACRO_ASSETS)} actifs) ---")
-    results: list[dict[str, Any]] = []
+def fetch_macro(session: str, existing_macro: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
+    """Collecte les indices, futures et matières premières pertinents pour la session."""
+    by_ticker = {m["ticker"]: m for m in (existing_macro or [])}
+    targets = [
+        a for a in MACRO_ASSETS
+        if session == "all" or a["session"] in (session, "both") or a["ticker"] not in by_ticker
+    ]
+    print(f"--- Collecte Macro session={session} ({len(targets)} actifs) ---")
     current_year = datetime.now(timezone.utc).year
 
-    for asset in MACRO_ASSETS:
+    for asset in targets:
         sym = asset["ticker"]
         try:
             hist = yf.Ticker(sym).history(period="1y", interval="1d")
@@ -417,8 +539,9 @@ def fetch_macro() -> list[dict[str, Any]]:
                 else None
             )
             trend = "Haussière" if (dist_sma200 is not None and dist_sma200 >= 0) else "Baissière"
+            spark = sample_sparkline(closes.tail(63).tolist(), max_points=16)
 
-            results.append({
+            by_ticker[sym] = {
                 "ticker": sym,
                 "name": asset["name"],
                 "category": asset["category"],
@@ -435,12 +558,14 @@ def fetch_macro() -> list[dict[str, Any]]:
                 "sma200": round(sma200, 2) if sma200 else None,
                 "distSma200": dist_sma200,
                 "trend": trend,
-            })
+                "sparkline": spark,
+            }
         except Exception as exc:
             print(f"  [!] Macro ignoré {sym}: {exc}")
-        time.sleep(0.10)
+        time.sleep(0.08)
 
-    return results
+    order = [a["ticker"] for a in MACRO_ASSETS]
+    return [by_ticker[t] for t in order if t in by_ticker]
 
 
 def compute_sector_medians(raw_items: list[dict[str, Any]]) -> dict[str, dict[str, float]]:
@@ -468,65 +593,400 @@ def compute_sector_medians(raw_items: list[dict[str, Any]]) -> dict[str, dict[st
     return medians
 
 
-def update_history(stocks: list[dict[str, Any]], history_path: Path) -> list[dict[str, Any]]:
-    """Suit les candidats éligibles et promeut ceux qui atteignent leur Juste Valeur."""
+# =============================================================================
+# 5. HISTORIQUE : PRÉCÉDENTS GAGNANTS, NOUVELLES ENTRÉES & DELTA 5J
+# =============================================================================
+def is_valoris_candidate(stock: dict[str, Any]) -> bool:
+    return (
+        stock["upside"] >= 20.0
+        and stock["marketCapB"] >= 1.0
+        and stock["healthScore"] >= 2.5
+        and not stock.get("valueTrap", False)
+    )
+
+
+def update_history_and_signals(
+    stocks: list[dict[str, Any]],
+    refreshed_markets: set[str],
+    history_path: Path,
+) -> list[dict[str, Any]]:
+    """
+    Met à jour `history.json` et enrichit chaque action avec :
+    - `isNewEntry`: True si le titre vient de franchir les 3 critères Valoris aujourd'hui
+    - `upsideDelta5d`: évolution du potentiel de hausse par rapport à il y a ~5 séances
+    """
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if history_path.exists():
         history = json.loads(history_path.read_text(encoding="utf-8"))
     else:
-        history = {"tracked": {}, "winners": []}
+        history = {"tracked": {}, "winners": [], "upsideHistory": {}, "lastEligible": {}}
 
     tracked: dict[str, Any] = history.setdefault("tracked", {})
     winners: list[dict[str, Any]] = history.setdefault("winners", [])
+    upside_hist: dict[str, list[dict[str, Any]]] = history.setdefault("upsideHistory", {})
+    last_eligible: dict[str, list[str]] = history.setdefault("lastEligible", {})
+
+    new_eligible_by_market: dict[str, list[str]] = {}
 
     for s in stocks:
         sym = s["ticker"]
+        mkt = s["market"]
         price = s["price"]
         fv = s["fairValue"]
+        eligible = is_valoris_candidate(s)
 
-        if sym in tracked:
-            entry = tracked[sym]
-            if price >= entry["targetFairValue"]:
-                perf = round(((price - entry["entryPrice"]) / entry["entryPrice"]) * 100.0, 1)
-                winners.insert(0, {
-                    "ticker": sym,
-                    "name": s["name"],
-                    "market": s["market"],
-                    "currency": s["currency"],
-                    "detectedDate": entry["entryDate"],
-                    "reachedDate": today,
-                    "entryPrice": entry["entryPrice"],
-                    "exitPrice": price,
-                    "gainPct": perf,
-                    "healthScoreAtEntry": entry["healthScore"],
-                })
-                del tracked[sym]
-                continue
+        if mkt in refreshed_markets:
+            # 1. Historique du potentiel (pour delta 5 séances)
+            series = upside_hist.setdefault(sym, [])
+            if series and series[-1].get("d") == today:
+                series[-1]["u"] = s["upside"]
+            else:
+                series.append({"d": today, "u": s["upside"]})
+            upside_hist[sym] = series[-6:]
 
-        if (
-            sym not in tracked
-            and s["upside"] >= 20.0
-            and s["marketCapB"] >= 1.0
-            and s["healthScore"] >= 2.5
-        ):
-            tracked[sym] = {
-                "entryDate": today,
-                "entryPrice": price,
-                "targetFairValue": fv,
-                "healthScore": s["healthScore"],
-            }
+            # 2. Badge "Nouveau"
+            prev_set = set(last_eligible.get(mkt, []))
+            s["isNewEntry"] = bool(eligible and prev_set and sym not in prev_set)
+            if eligible:
+                new_eligible_by_market.setdefault(mkt, []).append(sym)
+
+            # 3. Suivi des précédents gagnants
+            if sym in tracked:
+                entry = tracked[sym]
+                if price >= entry["targetFairValue"]:
+                    perf = round(((price - entry["entryPrice"]) / entry["entryPrice"]) * 100.0, 1)
+                    winners.insert(0, {
+                        "ticker": sym,
+                        "name": s["name"],
+                        "market": mkt,
+                        "currency": s["currency"],
+                        "detectedDate": entry["entryDate"],
+                        "reachedDate": today,
+                        "entryPrice": entry["entryPrice"],
+                        "exitPrice": price,
+                        "gainPct": perf,
+                        "healthScoreAtEntry": entry["healthScore"],
+                    })
+                    del tracked[sym]
+            elif eligible:
+                tracked[sym] = {
+                    "entryDate": today,
+                    "entryPrice": price,
+                    "targetFairValue": fv,
+                    "healthScore": s["healthScore"],
+                }
+
+        # Calcul du delta 5 séances à partir de l'historique stocké
+        series = upside_hist.get(sym, [])
+        if len(series) >= 2:
+            ref_u = series[0]["u"]
+            s["upsideDelta5d"] = round(s["upside"] - ref_u, 1)
+        else:
+            s["upsideDelta5d"] = None
+
+    for mkt in refreshed_markets:
+        last_eligible[mkt] = new_eligible_by_market.get(mkt, [])
 
     history["winners"] = winners[:40]
     history_path.write_text(json.dumps(history, ensure_ascii=False, indent=2), encoding="utf-8")
     return history["winners"]
 
 
-def main() -> None:
-    fx_rates = fetch_fx_rates()
-    raw_items = fetch_raw_universe()
-    sector_medians = compute_sector_medians(raw_items)
-    stocks: list[dict[str, Any]] = []
+# =============================================================================
+# 6. BRIEFINGS AUTOMATISÉS (HYBRIDE GEMINI API + REPLI ALGORITHMIQUE)
+# =============================================================================
+def build_session_metrics(
+    zone: str,
+    stocks: list[dict[str, Any]],
+    macro: list[dict[str, Any]],
+    fx_rates: dict[str, float],
+) -> dict[str, Any]:
+    """Synthétise les chiffres clés de la zone (asia ou west) pour le briefing."""
+    zone_markets = ["KR", "JP"] if zone == "asia" else ["FR", "DE", "US"]
+    zone_stocks = [s for s in stocks if s["market"] in zone_markets]
+    eligible = [s for s in zone_stocks if is_valoris_candidate(s)]
+    traps = [s for s in zone_stocks if s.get("valueTrap")]
+    new_entries = [s for s in eligible if s.get("isNewEntry")]
 
+    # Classement composite (potentiel * santé) pour le Top 3
+    top3 = sorted(
+        eligible,
+        key=lambda x: (x["upside"] * x["healthScore"]),
+        reverse=True,
+    )[:3]
+
+    # Secteurs les plus représentés parmi les décotes saines
+    sector_upside: dict[str, list[float]] = {}
+    for s in eligible:
+        sector_upside.setdefault(s["sector"], []).append(s["upside"])
+    top_sectors = sorted(
+        [(sec, len(vals), round(sum(vals) / len(vals), 1)) for sec, vals in sector_upside.items()],
+        key=lambda x: (x[1], x[2]),
+        reverse=True,
+    )[:3]
+
+    # Indices & macro pertinents
+    macro_tickers = (
+        {"^N225", "^KS11", "NKD=F", "GC=F", "BZ=F", "HG=F"}
+        if zone == "asia"
+        else {"^FCHI", "^GDAXI", "^STOXX50E", "^GSPC", "^NDX", "ES=F", "GC=F", "BZ=F"}
+    )
+    zone_macro = [m for m in macro if m["ticker"] in macro_tickers]
+    bearish_indices = [m["name"] for m in zone_macro if m["category"] == "Indices" and m["trend"] == "Baissière"]
+    upcoming_earnings = [
+        f"{s['name']} (J-{s['daysToEarnings']})"
+        for s in eligible
+        if s.get("daysToEarnings") is not None and 0 <= s["daysToEarnings"] <= 14
+    ][:4]
+
+    fx_summary = (
+        {"EUR/JPY": fx_rates.get("JPY"), "EUR/KRW": fx_rates.get("KRW")}
+        if zone == "asia"
+        else {"EUR/USD": fx_rates.get("USD")}
+    )
+
+    return {
+        "zone": zone,
+        "title": "Briefing Asie (Matin)" if zone == "asia" else "Briefing Europe & US (Soir)",
+        "markets": zone_markets,
+        "totalCount": len(zone_stocks),
+        "eligibleCount": len(eligible),
+        "trapCount": len(traps),
+        "newEntries": [s["name"] for s in new_entries[:5]],
+        "avgUpside": round(sum(s["upside"] for s in eligible) / len(eligible), 1) if eligible else 0.0,
+        "avgHealth": round(sum(s["healthScore"] for s in eligible) / len(eligible), 2) if eligible else 0.0,
+        "top3": [
+            {
+                "name": s["name"],
+                "ticker": s["ticker"],
+                "market": s["market"],
+                "upside": s["upside"],
+                "health": s["healthScore"],
+                "pe": s["pe"],
+                "divYield": s.get("dividendYield"),
+            }
+            for s in top3
+        ],
+        "topSectors": top_sectors,
+        "macro": [
+            {
+                "name": m["name"],
+                "price": m["price"],
+                "chg1d": m["chg1d"],
+                "chgYtd": m["chgYtd"],
+                "trend": m["trend"],
+            }
+            for m in zone_macro
+        ],
+        "bearishIndices": bearish_indices,
+        "upcomingEarnings": upcoming_earnings,
+        "fx": fx_summary,
+    }
+
+
+def generate_algorithmic_briefing(metrics: dict[str, Any], now_iso: str) -> dict[str, Any]:
+    """Générateur 100 % Python (gratuit, sans API externe) au format structuré."""
+    macro_parts = []
+    for m in metrics["macro"][:4]:
+        if m["chg1d"] is not None:
+            sign = "+" if m["chg1d"] >= 0 else ""
+            macro_parts.append(f"{m['name']} ({sign}{m['chg1d']:.2f} % sur la séance, tendance {m['trend'].lower()})")
+    fx_parts = [f"{k} à {v}" for k, v in metrics["fx"].items() if v]
+    macro_text = (
+        (", ".join(macro_parts) if macro_parts else "Données indices en cours d'actualisation")
+        + (f". Côté changes : {', '.join(fx_parts)}." if fx_parts else ".")
+    )
+
+    if metrics["topSectors"]:
+        sec_str = ", ".join(f"{sec} ({n} titres, +{u} % moy.)" for sec, n, u in metrics["topSectors"])
+        sectors_text = f"{metrics['eligibleCount']} valeurs remplissent les critères Valoris (potentiel moyen +{metrics['avgUpside']} %, santé {metrics['avgHealth']}/5). Secteurs les plus décotés : {sec_str}."
+    else:
+        sectors_text = f"{metrics['eligibleCount']} valeurs sélectionnées sur {metrics['totalCount']} suivies dans la zone."
+
+    if metrics["top3"]:
+        top_str = " · ".join(
+            f"{t['name']} (+{t['upside']} %, santé {t['health']}/5)"
+            for t in metrics["top3"]
+        )
+        opp_text = f"Meilleurs couples décote/qualité : {top_str}."
+        if metrics["newEntries"]:
+            opp_text += f" Nouvelles entrées du jour : {', '.join(metrics['newEntries'])}."
+    else:
+        opp_text = "Aucune opportunité ne cumule aujourd'hui les trois seuils de sélection."
+
+    vigilance_parts = []
+    if metrics["trapCount"] > 0:
+        vigilance_parts.append(f"{metrics['trapCount']} piège(s) de valeur filtré(s) automatiquement")
+    if metrics["bearishIndices"]:
+        vigilance_parts.append(f"indices sous MM200 : {', '.join(metrics['bearishIndices'])}")
+    if metrics["upcomingEarnings"]:
+        vigilance_parts.append(f"publications proches : {', '.join(metrics['upcomingEarnings'])}")
+    vigilance_text = (
+        " ; ".join(vigilance_parts).capitalize() + "."
+        if vigilance_parts
+        else "Aucune alerte majeure détectée sur la zone."
+    )
+
+    return {
+        "title": metrics["title"],
+        "updatedAt": now_iso,
+        "engine": "Algo Python",
+        "headline": f"{metrics['eligibleCount']} opportunités saines (+{metrics['avgUpside']} % moy.) sur {', '.join(metrics['markets'])}",
+        "sections": {
+            "macro": macro_text,
+            "sectors": sectors_text,
+            "opportunities": opp_text,
+            "vigilance": vigilance_text,
+        },
+    }
+
+
+def generate_gemini_briefing(metrics: dict[str, Any], now_iso: str, api_key: str) -> dict[str, Any] | None:
+    """Appelle l'API REST Gemini (Flash) pour rédiger un briefing concis et structuré en JSON."""
+    prompt = (
+        "Tu es un analyste financier factuel et concis rédigeant en français pour un investisseur particulier. "
+        "À partir des données JSON ci-dessous, produis UNIQUEMENT un objet JSON valide (sans bloc markdown) "
+        "contenant exactement les clés suivantes : "
+        '"headline" (titre synthétique <= 95 caractères), '
+        '"macro" (2 phrases max sur indices, matières premières et devises), '
+        '"sectors" (1 à 2 phrases sur les secteurs les plus décotés), '
+        '"opportunities" (2 phrases max commentant le Top 3 et les nouvelles entrées), '
+        '"vigilance" (1 à 2 phrases sur les pièges de valeur, indices sous MM200 et résultats proches). '
+        "Ne donne aucun conseil d'achat personnalisé et appuie-toi uniquement sur les chiffres fournis.\n\n"
+        f"Données : {json.dumps(metrics, ensure_ascii=False)}"
+    )
+
+    body = json.dumps({
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "temperature": 0.3,
+            "maxOutputTokens": 550,
+            "responseMimeType": "application/json",
+        },
+    }).encode("utf-8")
+
+    for model in ("gemini-2.5-flash", "gemini-2.0-flash"):
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+        req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"}, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                raw = json.loads(resp.read().decode("utf-8"))
+            text = raw["candidates"][0]["content"]["parts"][0]["text"].strip()
+            if text.startswith("```"):
+                text = text.strip("`").replace("json\n", "", 1).strip()
+            parsed = json.loads(text)
+            if all(k in parsed for k in ("headline", "macro", "sectors", "opportunities", "vigilance")):
+                return {
+                    "title": metrics["title"],
+                    "updatedAt": now_iso,
+                    "engine": f"Gemini ({model})",
+                    "headline": str(parsed["headline"]),
+                    "sections": {
+                        "macro": str(parsed["macro"]),
+                        "sectors": str(parsed["sectors"]),
+                        "opportunities": str(parsed["opportunities"]),
+                        "vigilance": str(parsed["vigilance"]),
+                    },
+                }
+        except Exception as exc:
+            print(f"  [!] Gemini {model} indisponible, fallback : {exc}")
+    return None
+
+
+def build_briefing(
+    zone: str,
+    stocks: list[dict[str, Any]],
+    macro: list[dict[str, Any]],
+    fx_rates: dict[str, float],
+    now_iso: str,
+) -> dict[str, Any]:
+    metrics = build_session_metrics(zone, stocks, macro, fx_rates)
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    if api_key:
+        ai_res = generate_gemini_briefing(metrics, now_iso, api_key)
+        if ai_res:
+            print(f"  Briefing {zone} rédigé via {ai_res['engine']}.")
+            return ai_res
+    print(f"  Briefing {zone} rédigé via moteur algorithmique Python.")
+    return generate_algorithmic_briefing(metrics, now_iso)
+
+
+# =============================================================================
+# 7. NOTIFICATIONS OPTIONNELLES (TELEGRAM / DISCORD)
+# =============================================================================
+def send_notifications(briefing: dict[str, Any]) -> None:
+    s = briefing["sections"]
+    msg = (
+        f"*{briefing['title']}* ({briefing['engine']})\n"
+        f"{briefing['headline']}\n\n"
+        f"• *Macro* : {s['macro']}\n"
+        f"• *Secteurs* : {s['sectors']}\n"
+        f"• *Opportunités* : {s['opportunities']}\n"
+        f"• *Vigilance* : {s['vigilance']}"
+    )
+
+    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+    tg_chat = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+    if tg_token and tg_chat:
+        try:
+            url = f"https://api.telegram.org/bot{tg_token}/sendMessage"
+            data = json.dumps({"chat_id": tg_chat, "text": msg, "parse_mode": "Markdown"}).encode("utf-8")
+            req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"}, method="POST")
+            urllib.request.urlopen(req, timeout=15).read()
+            print("  Notification Telegram envoyée.")
+        except Exception as exc:
+            print(f"  [!] Échec notification Telegram : {exc}")
+
+    discord_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
+    if discord_url:
+        try:
+            data = json.dumps({"content": msg.replace("*", "**")[:1950]}).encode("utf-8")
+            req = urllib.request.Request(discord_url, data=data, headers={"Content-Type": "application/json"}, method="POST")
+            urllib.request.urlopen(req, timeout=15).read()
+            print("  Notification Discord envoyée.")
+        except Exception as exc:
+            print(f"  [!] Échec notification Discord : {exc}")
+
+
+# =============================================================================
+# 8. ORCHESTRATION PRINCIPALE
+# =============================================================================
+def resolve_session(arg_session: str, existing_data: dict[str, Any] | None) -> str:
+    if not existing_data or not existing_data.get("stocks"):
+        return "all"
+    if arg_session in ("asia", "west", "all"):
+        return arg_session
+    # Mode auto selon l'heure UTC : matin (< 14h UTC) -> Asie, soir (>= 14h UTC) -> Occident
+    hour_utc = datetime.now(timezone.utc).hour
+    return "asia" if hour_utc < 14 else "west"
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Valoris V3 — Collecte, Scoring & Briefings")
+    parser.add_argument("--session", choices=["auto", "all", "asia", "west"], default="auto")
+    args = parser.parse_args()
+
+    now_utc = datetime.now(timezone.utc)
+    now_iso = now_utc.isoformat()
+    data_path = Path("data.json")
+    existing = json.loads(data_path.read_text(encoding="utf-8")) if data_path.exists() else None
+
+    session = resolve_session(args.session, existing)
+    target_markets = (
+        list(UNIVERSES.keys())
+        if session == "all"
+        else [m for m, cfg in UNIVERSES.items() if cfg["region"] == session]
+    )
+    print(f"=== Lancement Valoris V3 | session={session} | marchés={target_markets} ===")
+
+    fx_rates = fetch_fx_rates(existing.get("fxRates") if existing else None)
+    raw_items = fetch_raw_universe(target_markets)
+
+    # Sparklines 3 mois en batch pour les titres rafraîchis
+    spark_map = fetch_sparklines_batch([item["symbol"] for item in raw_items])
+    sector_medians = compute_sector_medians(raw_items)
+
+    refreshed_stocks: list[dict[str, Any]] = []
     for item in raw_items:
         info = item["info"]
         price = item["price"]
@@ -559,7 +1019,12 @@ def main() -> None:
             and (scores["overall"] < 2.5 or scores["cashflow"] < 2.0 or scores["balanceSheet"] < 2.0)
         )
 
-        stocks.append({
+        div_yield = extract_dividend_yield_pct(info, price)
+        payout_ratio = extract_payout_ratio_pct(info)
+        earnings_date, days_to_earnings = extract_earnings_info(info, now_utc)
+        spark_pts, chg_3m = spark_map.get(item["symbol"], ([], None))
+
+        refreshed_stocks.append({
             "ticker": item["symbol"],
             "name": info.get("shortName") or info.get("longName") or item["symbol"],
             "market": item["market"],
@@ -585,25 +1050,51 @@ def main() -> None:
             },
             "pe": round(pe, 1) if pe and pe > 0 else None,
             "evEbitda": round(ev_ebitda, 1) if ev_ebitda and ev_ebitda > 0 else None,
+            "dividendYield": div_yield,
+            "payoutRatio": payout_ratio,
+            "earningsDate": earnings_date,
+            "daysToEarnings": days_to_earnings,
+            "sparkline": spark_pts,
+            "chg3m": chg_3m,
             "analystConsensus": RECOMMENDATION_FR.get(rec_key, "Conserver"),
             "valueTrap": is_value_trap,
+            "isNewEntry": False,
+            "upsideDelta5d": None,
         })
 
-    stocks.sort(key=lambda x: x["upside"], reverse=True)
-    winners = update_history(stocks, Path("history.json"))
-    macro = fetch_macro()
+    # Fusion incrémentale : on conserve les marchés non rafraîchis sur cette session
+    refreshed_set = set(target_markets)
+    kept_stocks = [
+        s for s in (existing.get("stocks", []) if existing else [])
+        if s.get("market") not in refreshed_set
+    ]
+    all_stocks = refreshed_stocks + kept_stocks
+    all_stocks.sort(key=lambda x: x["upside"], reverse=True)
+
+    winners = update_history_and_signals(all_stocks, refreshed_set, Path("history.json"))
+    macro = fetch_macro(session, existing.get("macro") if existing else None)
+
+    # Génération des briefings (conserve l'autre zone intacte si session partielle)
+    briefings = dict((existing.get("briefings") or {}) if existing else {})
+    zones_to_brief = ["asia", "west"] if session == "all" else [session]
+    for z in zones_to_brief:
+        briefings[z] = build_briefing(z, all_stocks, macro, fx_rates, now_iso)
+        if session != "all":
+            send_notifications(briefings[z])
 
     payload = {
-        "version": "2.0",
-        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "version": "3.0",
+        "lastSession": session,
+        "updatedAt": now_iso,
         "fxRates": fx_rates,
-        "count": len(stocks),
-        "stocks": stocks,
+        "count": len(all_stocks),
+        "briefings": briefings,
+        "stocks": all_stocks,
         "macro": macro,
         "winners": winners,
     }
-    Path("data.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Terminé V2 : {len(stocks)} actions et {len(macro)} actifs macro enregistrés dans data.json.")
+    data_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Terminé V3 ({session}) : {len(all_stocks)} actions, {len(macro)} actifs macro et briefings enregistrés.")
 
 
 if __name__ == "__main__":
