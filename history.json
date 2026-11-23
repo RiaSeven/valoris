@@ -407,6 +407,18 @@
       "entryPrice": 2936.0,
       "targetFairValue": 3586.35,
       "healthScore": 3.2
+    },
+    "IFX.DE": {
+      "entryDate": "2026-11-23",
+      "entryPrice": 48.42,
+      "targetFairValue": 66.91,
+      "healthScore": 3.51
+    },
+    "CVX": {
+      "entryDate": "2026-11-23",
+      "entryPrice": 205.55,
+      "targetFairValue": 248.03,
+      "healthScore": 3.88
     }
   },
   "winners": []
