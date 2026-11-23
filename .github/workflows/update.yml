@@ -1,12 +1,22 @@
-name: Mise à jour Valoris V2 (Asie & Occident)
+name: Mise à jour Valoris V3 (Asie matin & Occident soir)
 
 on:
   schedule:
-    # 08h30 UTC : après la clôture de Tokyo (Nikkei) et Séoul (KOSPI)
+    # 08h30 UTC : clôture Asie (Tokyo & Séoul) -> Briefing Asie
     - cron: '30 8 * * 1-5'
-    # 20h30 UTC : après la clôture de Paris, Francfort et Wall Street
+    # 20h30 UTC : clôture Europe & Wall Street -> Briefing Europe & US
     - cron: '30 20 * * 1-5'
   workflow_dispatch:
+    inputs:
+      session:
+        description: 'Session à collecter (all = tout, asia = KR/JP, west = FR/DE/US)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - asia
+          - west
 
 permissions:
   contents: write
@@ -27,8 +37,24 @@ jobs:
       - name: Installer les dépendances
         run: pip install --upgrade pip && pip install -r requirements.txt
 
-      - name: Collecter actions (FR/DE/US/KR/JP) et macro
-        run: python fetch_and_score.py
+      - name: Collecter données, scores et briefing de session
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            SESSION="${{ inputs.session }}"
+          elif [ "${{ github.event.schedule }}" = "30 8 * * 1-5" ]; then
+            SESSION="asia"
+          elif [ "${{ github.event.schedule }}" = "30 20 * * 1-5" ]; then
+            SESSION="west"
+          else
+            SESSION="auto"
+          fi
+          echo "Session sélectionnée : $SESSION"
+          python fetch_and_score.py --session "$SESSION"
 
       - name: Publier les données mises à jour
         run: |
@@ -38,7 +64,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "Aucun changement détecté."
           else
-            git commit -m "chore: mise à jour Valoris V2 ($(date +'%Y-%m-%d %H:%M UTC'))"
+            git commit -m "chore: mise à jour Valoris V3 ($(date +'%Y-%m-%d %H:%M UTC'))"
             git pull --rebase origin main
             git push
           fi
