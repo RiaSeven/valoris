@@ -1,56 +1,77 @@
-# 📈 Valoris — Screener Boursier & Macro-Économique (V2)
+# 🚀 Valoris V3 — Quantitative Market Engine
 
-**Valoris** est une application d'analyse fondamentale autonome et automatisée. Elle permet de détecter les actions sous-évaluées (modèle DCF) et de suivre les grandes tendances macroéconomiques (bourses US, Europe, Japon, Corée du Sud, indices et matières premières).
+![GitHub Actions Workflow Status](https://img.shields.io/badge/GitHub%20Actions-Automated-emerald?style=for-the-badge&logo=githubactions)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Frontend](https://img.shields.io/badge/Interface-Tailwind%20%2B%20HTML5-06B6D4?style=for-the-badge&logo=tailwindcss)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
----
-
-## 🔬 Critères de Sélection & Système de Notation
-
-### 1. Univers d'investissement
-
-- **Actions éligibles** : Entreprises cotées aux USA, en Europe, au Japon (`.T`) et en Corée du Sud (`.KS`).
-- **Filtre de taille** : Capitalisation boursière **> 1,0 milliard d'Euros** (convertie automatiquement selon les taux `EURUSD`, `EURJPY` et `EURKRW`).
-- **Macroéconomie** : Suivi des indices majeurs (`^FCHI`, `^GSPC`, `^N225`, `^KS11`), des futures (`ES=F`, `NQ=F`) et des matières premières (`GC=F` Or, `BZ=F` Brent, `CL=F` WTI).
-
-### 2. Calcul de la Décote (Discount)
-
-La valeur intrinsèque ($V_i$) est calculée selon le modèle **Discounted Cash Flow (DCF)** à 2 phases :
-
-- **Taux d'actualisation ($r$)** : 8,5% (WACC standard).
-- **Taux de croissance perpétuel ($g_n$)** : 2,0%.
-- **Décote (\%)** : $\frac{\text{Cours actuel} - V_i}{V_i} \times 100$.
-- *Une sous-évaluation d'au moins 20% est ciblée.*
-
-### 3. Grille du Score de Santé (Note sur 10)
-
-| Critère | Indicateur | Condition de validation | Points |
-| --- | --- | --- | --- |
-| **Piotroski F-Score** | ROA / Cash-Flow / Marges | 4 sous-critères (ROA positif, Cash opérationnel > Résultat net, expansion des marges, rotation des actifs) | 4,0 pts |
-| **Solvabilité** | Altman Z-Score | Score Z > 2,99 (+2 pts) ou entre 1,81 et 2,99 (+1 pt) | 2,0 pts |
-| **Endettement** | Dette Nette / EBITDA | Dette/EBITDA < 2,5x ou Dette/Kapital < 0,8 | 1,0 pt |
-| **Rentabilité** | ROIC & Marge FCF | ROIC > 12% (+1 pt) et Marge FCF > 10% (+1 pt) | 2,0 pts |
-| **Croissance** | CAGR Chiffre d'affaires | Croissance des ventes sur 3 ans > 5% | 1,0 pt |
-| **TOTAL** |     |     | **10,0 pts** |
+**Valoris V3** est une plateforme d'analyse quantitative boursière multi-marchés conçue pour scanner, filtrer et évaluer en continu les opportunités d'investissement sur les marchés internationaux (**Session Asie Matin** et **Session Occident Soir**).
 
 ---
 
-## 🛠️ Architecture V2 & Déploiement
+## ✨ Fonctionnalités Clés
 
-```
+- 🌏 **Analyse Bi-Quotidienne Synchronisée** :
+  - **Session Asie (Matin)** : Analyse ciblée sur les bourses de Tokyo (Nikkei 225), Hong Kong (Hang Seng) et Taïwan (TWSE).
+  - **Session Occident (Soir)** : Analyse des marchés américains (S&P 500, Nasdaq) et européens (EuroStoxx 50, CAC 40).
+- 📊 **Scoring Multi-Facteurs (0 à 100 pts)** :
+  - Valorisation (P/E relatif, P/B, FCF Yield)
+  - Momentum & RSI (Divergences, Trend Alignment)
+  - Santé Financière & Rentabilité (ROE, Debt/Equity)
+- 🖥️ **Page d'Accueil Sublime avec Effet "Waouh"** :
+  - Visualisation des données sous forme de terminal financier interactif.
+  - Fond animé réactif, widgets de statuts de marché en direct.
+  - Screener dynamique avec filtres instantanés par recherche, secteur et session.
+- ⚙️ **Automation Serverless** : Exécution automatique des pipelines de données via GitHub Actions (`update.yml`).
+
+---
+
+## 🛠️ Architecture du Projet
+
+```text
 valoris/
-├── .github/
-│   └── workflows/
-│       └── update.yml          # Automation GitHub Actions (2 exécutions/jour)
-├── fetch_and_score.py          # Script Python V2 (DCF, multi-devises, Macro)
-├── index.html                  # Dashboard web V2 (Screener + Onglet Macro)
-├── requirements.txt            # Dependances (yfinance, pandas, numpy)
-├── data.json                   # Données générées automatiquement
-└── history.json                # Historique des performances
+├── index.html                # Interface Web UI V3 (Hero Landing + Screener)
+├── README.md                 # Documentation du projet
+├── data/                     # Fichiers de données générés par les pipelines
+│   ├── asia_session.json     # Résultats d'analyse Asie
+│   └── west_session.json     # Résultats d'analyse Occident
+└── .github/
+    └── workflows/
+        └── update.yml        # Automation CI/CD GitHub Actions (Run workflow)
 ```
 
-### Déclenchement automatique (`update.yml`)
+---
 
-Le workflow s'exécute automatiquement **deux fois par jour** du lundi au vendredi :
+## ⚡ Exécution Manuelle via GitHub Actions
 
-- **08:30 UTC** (clôture des bourses asiatiques).
-- **20:30 UTC** (clôture des bourses occidentales).
+Pour déclencher le rebalancement et la mise à jour des données du Screener :
+
+1. Naviguez dans l'onglet **Actions** de votre dépôt GitHub.
+2. Dans le menu latéral de gauche, sélectionnez le workflow :  
+   `Mise à jour Valoris V3 (Asie matin & Occident soir)` *(ou `Mise à jour quotidienne Valoris`)*.
+3. Cliquez sur le bouton dropdown **`Run workflow ▾`** situé en haut à droite de la liste des exécutions.
+4. Sélectionnez la branche **`main`**, choisissez la session souhaitée (`all`, `asia` ou `west`), puis validez avec le bouton vert **Run workflow**.
+
+---
+
+## 💻 Visualisation Locale
+
+Pour exécuter l'interface web localement sans installation lourde :
+
+```bash
+# Clonez le dépôt
+git clone https://github.com/RiaSeven/valoris.git
+cd valoris
+
+# Ouvrez simplement index.html dans votre navigateur
+# Ou lancez un serveur local rapide avec Python :
+python -m http.server 8000
+```
+
+Rendez-vous ensuite sur `http://localhost:8000` pour profiter de l'expérience interactive.
+
+---
+
+## 🛡️ Licence & Contribution
+
+Projet distribué sous licence MIT. Les contributions pour étendre les facteurs quantitatifs ou ajouter de nouveaux indices boursiers sont les bienvenues !
