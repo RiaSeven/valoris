@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
 """
-Valoris V3 — Moteur de collecte, valorisation (Juste Valeur), scoring de santé
-financière, suivi macroéconomique et briefings automatisés Asie (matin) / Europe-US (soir).
+Valoris V4 — Moteur de collecte, valorisation (Juste Valeur + inputs DCF),
+scoring de santé financière (5 piliers), analyse technique (RSI 14, MACD, EMA 50,
+MM 200, Fibonacci 52 sem.), suivi macroéconomique et briefings Matin/Soir.
 
-Nouveautés V3 :
-- Collecte par session (`asia`, `west`, `all`) avec fusion incrémentale dans `data.json`.
-- Briefings automatisés Matin (Asie) et Soir (Europe & US) : hybride API Gemini
-  (si `GEMINI_API_KEY` est défini) avec repli automatique sur moteur algorithmique Python.
-- Sparklines 3 mois (actions et actifs macro) via téléchargement groupé.
-- Radar "Nouvelles entrées", variation du potentiel sur 5 séances, dates de résultats (Earnings),
-  rendement du dividende et Payout Ratio.
-- Notifications push optionnelles (Telegram / Discord) via secrets GitHub.
+Marchés actions : FR (SBF/CAC), DE (DAX), US (S&P 500), KR (KOSPI), JP (Nikkei/TOPIX).
+Génère `data.json` et met à jour `history.json`.
 """
 
 from __future__ import annotations
@@ -166,7 +161,7 @@ RECOMMENDATION_FR: dict[str, str] = {
 
 
 # =============================================================================
-# 3. OUTILS MATHÉMATIQUES, VALORISATION & SCORING
+# 3. OUTILS MATHÉMATIQUES, VALORISATION, DCF & SCORING
 # =============================================================================
 def safe_float(val: Any) -> float | None:
     if val is None:
@@ -183,7 +178,6 @@ def clamp(val: float, low: float = 1.0, high: float = 5.0) -> float:
 
 
 def linear_score(val: float | None, low: float, high: float, invert: bool = False) -> float | None:
-    """Projette linéairement une métrique sur l'intervalle [1.0 ; 5.0]."""
     if val is None:
         return None
     if high == low:
@@ -212,7 +206,6 @@ def health_label(score: float) -> str:
 
 
 def extract_dividend_yield_pct(info: dict[str, Any], price: float) -> float | None:
-    """Calcule un rendement du dividende fiable en pourcentage."""
     rate = safe_float(info.get("dividendRate"))
     if rate is not None and rate > 0 and price > 0:
         pct = (rate / price) * 100.0
@@ -220,7 +213,6 @@ def extract_dividend_yield_pct(info: dict[str, Any], price: float) -> float | No
             return round(pct, 2)
     raw_y = safe_float(info.get("dividendYield"))
     if raw_y is not None and raw_y > 0:
-        # yfinance renvoie parfois 0.045 (4.5 %) ou 4.5 selon les versions
         pct = raw_y if raw_y > 0.35 else raw_y * 100.0
         if 0.0 < pct <= 25.0:
             return round(pct, 2)
@@ -236,7 +228,6 @@ def extract_payout_ratio_pct(info: dict[str, Any]) -> float | None:
 
 
 def extract_earnings_info(info: dict[str, Any], now_utc: datetime) -> tuple[str | None, int | None]:
-    """Extrait la prochaine date de résultats (YYYY-MM-DD) et le nombre de jours restants."""
     ts = safe_float(info.get("earningsTimestampStart")) or safe_float(info.get("earningsTimestamp"))
     if not ts or ts <= 0:
         return None, None
@@ -251,7 +242,6 @@ def extract_earnings_info(info: dict[str, Any], now_utc: datetime) -> tuple[str 
 
 
 def sample_sparkline(values: list[float], max_points: int = 16) -> list[float]:
-    """Réduit une série de cours à max_points valeurs arrondies pour le rendu SVG."""
     clean = [float(v) for v in values if v is not None and not math.isnan(float(v))]
     if len(clean) < 2:
         return []
@@ -261,12 +251,158 @@ def sample_sparkline(values: list[float], max_points: int = 16) -> list[float]:
     return [round(clean[round(i * step)], 2) for i in range(max_points)]
 
 
-def estimate_dcf(info: dict[str, Any], price: float) -> float | None:
-    """Modèle DCF conservateur sur 5 ans + valeur terminale (WACC=9,5 %, g_inf=2,5 %)."""
+# =============================================================================
+# 4. MOTEUR D'ANALYSE TECHNIQUE (RSI 14, MACD, EMA 50, MM 200, FIBONACCI 52W)
+# =============================================================================
+def compute_ema_series(values: list[float], period: int) -> list[float]:
+    if not values:
+        return []
+    alpha = 2.0 / (period + 1.0)
+    ema = [values[0]]
+    for v in values[1:]:
+        ema.append(alpha * v + (1.0 - alpha) * ema[-1])
+    return ema
+
+
+def compute_rsi_14(values: list[float], period: int = 14) -> float | None:
+    if len(values) < period + 2:
+        return None
+    deltas = [values[i] - values[i - 1] for i in range(1, len(values))]
+    gains = [max(d, 0.0) for d in deltas]
+    losses = [max(-d, 0.0) for d in deltas]
+
+    avg_gain = sum(gains[:period]) / period
+    avg_loss = sum(losses[:period]) / period
+    for i in range(period, len(deltas)):
+        avg_gain = (avg_gain * (period - 1) + gains[i]) / period
+        avg_loss = (avg_loss * (period - 1) + losses[i]) / period
+
+    if avg_loss == 0:
+        return 100.0
+    rs = avg_gain / avg_loss
+    return round(100.0 - (100.0 / (1.0 + rs)), 1)
+
+
+def compute_technical_profile(closes: list[float]) -> dict[str, Any]:
+    """Calcule RSI(14), MACD(12,26,9), EMA50, MM200, retracements Fibonacci 52 sem. et signal."""
+    clean = [float(v) for v in closes if v is not None and not math.isnan(float(v)) and float(v) > 0]
+    if len(clean) < 15:
+        return {
+            "sparkline": sample_sparkline(clean, 16),
+            "chg3m": None,
+            "rsi14": None,
+            "macd": None,
+            "macdSignal": None,
+            "macdHist": None,
+            "ema50": None,
+            "sma200": None,
+            "distEma50": None,
+            "distSma200": None,
+            "low52w": None,
+            "high52w": None,
+            "pos52w": None,
+            "fib382": None,
+            "fib500": None,
+            "fib618": None,
+            "signal": "Neutre",
+            "signalTone": "blue",
+        }
+
+    last = clean[-1]
+    # Sparkline sur ~63 séances (3 mois)
+    tail_3m = clean[-63:]
+    spark = sample_sparkline(tail_3m, 16)
+    chg_3m = round(((tail_3m[-1] - tail_3m[0]) / tail_3m[0]) * 100.0, 1) if tail_3m[0] > 0 else None
+
+    rsi14 = compute_rsi_14(clean, 14)
+
+    # MACD (12, 26, 9)
+    macd_val = macd_sig = macd_hist = None
+    if len(clean) >= 35:
+        ema12 = compute_ema_series(clean, 12)
+        ema26 = compute_ema_series(clean, 26)
+        macd_line = [a - b for a, b in zip(ema12, ema26)]
+        sig_line = compute_ema_series(macd_line, 9)
+        macd_val = round(macd_line[-1], 3)
+        macd_sig = round(sig_line[-1], 3)
+        macd_hist = round(macd_line[-1] - sig_line[-1], 3)
+
+    # EMA 50 & MM 200
+    ema50 = round(compute_ema_series(clean, 50)[-1], 2) if len(clean) >= 50 else None
+    sma200 = round(sum(clean[-200:]) / 200.0, 2) if len(clean) >= 180 else None
+    dist_ema50 = round(((last - ema50) / ema50) * 100.0, 1) if ema50 else None
+    dist_sma200 = round(((last - sma200) / sma200) * 100.0, 1) if sma200 else None
+
+    # Fourchette 52 semaines & Retracements de Fibonacci (depuis le sommet 52 sem.)
+    low_52w = round(min(clean), 2)
+    high_52w = round(max(clean), 2)
+    span = high_52w - low_52w
+    pos_52w = round(((last - low_52w) / span) * 100.0, 1) if span > 0 else 50.0
+    fib382 = round(high_52w - 0.382 * span, 2) if span > 0 else None
+    fib500 = round(high_52w - 0.500 * span, 2) if span > 0 else None
+    fib618 = round(high_52w - 0.618 * span, 2) if span > 0 else None
+
+    # Classification synthétique du timing technique
+    signal = "Neutre"
+    tone = "blue"
+    if rsi14 is not None and rsi14 <= 32.0:
+        if macd_hist is not None and macd_hist >= 0:
+            signal = "Rebond survente"
+            tone = "green"
+        else:
+            signal = "Survente RSI"
+            tone = "amber"
+    elif (
+        dist_ema50 is not None
+        and dist_ema50 > 0
+        and (dist_sma200 is None or dist_sma200 > 0)
+        and (macd_hist is None or macd_hist >= 0)
+    ):
+        signal = "Tendance haussière"
+        tone = "green"
+    elif (
+        dist_ema50 is not None
+        and dist_ema50 < -5.0
+        and (dist_sma200 is not None and dist_sma200 < -8.0)
+        and (macd_hist is not None and macd_hist < 0)
+    ):
+        signal = "Couteau qui tombe"
+        tone = "red"
+    elif rsi14 is not None and rsi14 >= 70.0:
+        signal = "Surachat RSI"
+        tone = "amber"
+    elif pos_52w <= 35.0 and (macd_hist is not None and macd_hist > 0):
+        signal = "Rebond support"
+        tone = "green"
+
+    return {
+        "sparkline": spark,
+        "chg3m": chg_3m,
+        "rsi14": rsi14,
+        "macd": macd_val,
+        "macdSignal": macd_sig,
+        "macdHist": macd_hist,
+        "ema50": ema50,
+        "sma200": sma200,
+        "distEma50": dist_ema50,
+        "distSma200": dist_sma200,
+        "low52w": low_52w,
+        "high52w": high_52w,
+        "pos52w": pos_52w,
+        "fib382": fib382,
+        "fib500": fib500,
+        "fib618": fib618,
+        "signal": signal,
+        "signalTone": tone,
+    }
+
+
+def extract_dcf_and_inputs(info: dict[str, Any], price: float) -> tuple[float | None, dict[str, Any] | None]:
+    """Calcule la valorisation DCF 5 ans + renvoie les intrants pour le simulateur interactif."""
     fcf = safe_float(info.get("freeCashflow"))
     shares = safe_float(info.get("sharesOutstanding"))
     if not fcf or fcf <= 0 or not shares or shares <= 0:
-        return None
+        return None, None
 
     rev_g = safe_float(info.get("revenueGrowth"))
     earn_g = safe_float(info.get("earningsGrowth"))
@@ -283,6 +419,10 @@ def estimate_dcf(info: dict[str, Any], price: float) -> float | None:
     wacc = 0.095
     terminal_g = 0.025
 
+    beta = safe_float(info.get("beta"))
+    # Suggestion de WACC ajusté au bêta (CAPM indicatif : 3,5 % + beta * 5,5 %)
+    suggested_wacc = round(max(7.0, min(14.0, (0.035 + (beta if beta and 0.3 <= beta <= 2.5 else 1.0) * 0.055) * 100.0)), 1)
+
     pv_fcf = 0.0
     projected = fcf
     for year in range(1, 6):
@@ -295,19 +435,29 @@ def estimate_dcf(info: dict[str, Any], price: float) -> float | None:
     cash = safe_float(info.get("totalCash")) or 0.0
     debt = safe_float(info.get("totalDebt")) or 0.0
     equity_value = pv_fcf + pv_terminal + cash - debt
+
+    dcf_inputs = {
+        "fcfPerShare": round(fcf / shares, 4),
+        "netCashPerShare": round((cash - debt) / shares, 4),
+        "baseGrowthPct": round(growth * 100.0, 1),
+        "baseWaccPct": round(wacc * 100.0, 1),
+        "suggestedWaccPct": suggested_wacc,
+        "terminalGrowthPct": round(terminal_g * 100.0, 1),
+        "beta": round(beta, 2) if beta and 0.1 <= beta <= 4.0 else None,
+    }
+
     if equity_value <= 0:
-        return None
+        return None, dcf_inputs
 
     fair = equity_value / shares
     if fair < price * 0.25 or fair > price * 3.0:
-        return None
-    return round(fair, 2)
+        return None, dcf_inputs
+    return round(fair, 2), dcf_inputs
 
 
 def estimate_multiples(
     info: dict[str, Any], price: float, sector_pe: float, sector_ev_ebitda: float
 ) -> float | None:
-    """Valorisation par multiples sectoriels médians (PER + EV/EBITDA)."""
     estimates: list[float] = []
 
     eps = safe_float(info.get("forwardEps")) or safe_float(info.get("trailingEps"))
@@ -333,7 +483,6 @@ def estimate_multiples(
 def compute_health_scores(
     info: dict[str, Any], sector_pe: float, sector_ev_ebitda: float
 ) -> dict[str, float]:
-    """Calcule les 5 piliers (1 à 5) et la note globale de santé financière."""
     roe = safe_float(info.get("returnOnEquity"))
     op_margin = safe_float(info.get("operatingMargins"))
     net_margin = safe_float(info.get("profitMargins"))
@@ -395,7 +544,7 @@ def compute_health_scores(
 
 
 # =============================================================================
-# 4. COLLECTE FX, SPARKLINES, ACTIONS & MACRO
+# 5. COLLECTE FX, HISTORIQUE TECHNIQUE 1 AN, ACTIONS & MACRO
 # =============================================================================
 def fetch_fx_rates(existing_fx: dict[str, float] | None = None) -> dict[str, float]:
     rates: dict[str, float] = dict(existing_fx or {})
@@ -416,19 +565,19 @@ def fetch_fx_rates(existing_fx: dict[str, float] | None = None) -> dict[str, flo
     return rates
 
 
-def fetch_sparklines_batch(tickers: list[str]) -> dict[str, tuple[list[float], float | None]]:
-    """Télécharge en un bloc l'historique 3 mois pour construire les sparklines et variations 3M."""
-    result: dict[str, tuple[list[float], float | None]] = {}
+def fetch_technicals_batch(tickers: list[str]) -> dict[str, dict[str, Any]]:
+    """Télécharge en bloc l'historique 1 an pour calculer sparklines 3M + indicateurs techniques."""
+    result: dict[str, dict[str, Any]] = {}
     if not tickers:
         return result
-    print(f"--- Téléchargement groupé des sparklines 3M ({len(tickers)} titres) ---")
-    chunk_size = 60
+    print(f"--- Téléchargement groupé 1 an (RSI, MACD, EMA50, MM200, Fibo) pour {len(tickers)} titres ---")
+    chunk_size = 55
     for i in range(0, len(tickers), chunk_size):
         chunk = tickers[i : i + chunk_size]
         try:
             df = yf.download(
                 chunk,
-                period="3mo",
+                period="1y",
                 interval="1d",
                 auto_adjust=True,
                 progress=False,
@@ -441,24 +590,12 @@ def fetch_sparklines_batch(tickers: list[str]) -> dict[str, tuple[list[float], f
                 for sym in chunk:
                     if sym in close_df.columns:
                         vals = close_df[sym].dropna().tolist()
-                        pts = sample_sparkline(vals, max_points=16)
-                        chg3m = (
-                            round(((pts[-1] - pts[0]) / pts[0]) * 100.0, 1)
-                            if (len(pts) >= 2 and pts[0] > 0)
-                            else None
-                        )
-                        result[sym] = (pts, chg3m)
+                        result[sym] = compute_technical_profile(vals)
             elif len(chunk) == 1:
                 vals = close_df.dropna().tolist()
-                pts = sample_sparkline(vals, max_points=16)
-                chg3m = (
-                    round(((pts[-1] - pts[0]) / pts[0]) * 100.0, 1)
-                    if (len(pts) >= 2 and pts[0] > 0)
-                    else None
-                )
-                result[chunk[0]] = (pts, chg3m)
+                result[chunk[0]] = compute_technical_profile(vals)
         except Exception as exc:
-            print(f"  [!] Sparklines lot {i} ignoré : {exc}")
+            print(f"  [!] Lot technique {i} ignoré : {exc}")
     return result
 
 
@@ -490,7 +627,6 @@ def fetch_raw_universe(markets: list[str]) -> list[dict[str, Any]]:
 
 
 def fetch_macro(session: str, existing_macro: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
-    """Collecte les indices, futures et matières premières pertinents pour la session."""
     by_ticker = {m["ticker"]: m for m in (existing_macro or [])}
     targets = [
         a for a in MACRO_ASSETS
@@ -594,7 +730,7 @@ def compute_sector_medians(raw_items: list[dict[str, Any]]) -> dict[str, dict[st
 
 
 # =============================================================================
-# 5. HISTORIQUE : PRÉCÉDENTS GAGNANTS, NOUVELLES ENTRÉES & DELTA 5J
+# 6. HISTORIQUE : PRÉCÉDENTS GAGNANTS, NOUVELLES ENTRÉES & DELTA 5J
 # =============================================================================
 def is_valoris_candidate(stock: dict[str, Any]) -> bool:
     return (
@@ -610,11 +746,6 @@ def update_history_and_signals(
     refreshed_markets: set[str],
     history_path: Path,
 ) -> list[dict[str, Any]]:
-    """
-    Met à jour `history.json` et enrichit chaque action avec :
-    - `isNewEntry`: True si le titre vient de franchir les 3 critères Valoris aujourd'hui
-    - `upsideDelta5d`: évolution du potentiel de hausse par rapport à il y a ~5 séances
-    """
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if history_path.exists():
         history = json.loads(history_path.read_text(encoding="utf-8"))
@@ -636,7 +767,6 @@ def update_history_and_signals(
         eligible = is_valoris_candidate(s)
 
         if mkt in refreshed_markets:
-            # 1. Historique du potentiel (pour delta 5 séances)
             series = upside_hist.setdefault(sym, [])
             if series and series[-1].get("d") == today:
                 series[-1]["u"] = s["upside"]
@@ -644,13 +774,11 @@ def update_history_and_signals(
                 series.append({"d": today, "u": s["upside"]})
             upside_hist[sym] = series[-6:]
 
-            # 2. Badge "Nouveau"
             prev_set = set(last_eligible.get(mkt, []))
             s["isNewEntry"] = bool(eligible and prev_set and sym not in prev_set)
             if eligible:
                 new_eligible_by_market.setdefault(mkt, []).append(sym)
 
-            # 3. Suivi des précédents gagnants
             if sym in tracked:
                 entry = tracked[sym]
                 if price >= entry["targetFairValue"]:
@@ -676,11 +804,9 @@ def update_history_and_signals(
                     "healthScore": s["healthScore"],
                 }
 
-        # Calcul du delta 5 séances à partir de l'historique stocké
         series = upside_hist.get(sym, [])
         if len(series) >= 2:
-            ref_u = series[0]["u"]
-            s["upsideDelta5d"] = round(s["upside"] - ref_u, 1)
+            s["upsideDelta5d"] = round(s["upside"] - series[0]["u"], 1)
         else:
             s["upsideDelta5d"] = None
 
@@ -693,7 +819,7 @@ def update_history_and_signals(
 
 
 # =============================================================================
-# 6. BRIEFINGS AUTOMATISÉS (HYBRIDE GEMINI API + REPLI ALGORITHMIQUE)
+# 7. BRIEFINGS AUTOMATISÉS (HYBRIDE GEMINI API + REPLI ALGORITHMIQUE)
 # =============================================================================
 def build_session_metrics(
     zone: str,
@@ -701,21 +827,19 @@ def build_session_metrics(
     macro: list[dict[str, Any]],
     fx_rates: dict[str, float],
 ) -> dict[str, Any]:
-    """Synthétise les chiffres clés de la zone (asia ou west) pour le briefing."""
     zone_markets = ["KR", "JP"] if zone == "asia" else ["FR", "DE", "US"]
     zone_stocks = [s for s in stocks if s["market"] in zone_markets]
     eligible = [s for s in zone_stocks if is_valoris_candidate(s)]
     traps = [s for s in zone_stocks if s.get("valueTrap")]
     new_entries = [s for s in eligible if s.get("isNewEntry")]
+    oversold = [
+        f"{s['name']} (RSI {s['technicals']['rsi14']})"
+        for s in eligible
+        if s.get("technicals", {}).get("rsi14") is not None and s["technicals"]["rsi14"] <= 35
+    ][:4]
 
-    # Classement composite (potentiel * santé) pour le Top 3
-    top3 = sorted(
-        eligible,
-        key=lambda x: (x["upside"] * x["healthScore"]),
-        reverse=True,
-    )[:3]
+    top3 = sorted(eligible, key=lambda x: (x["upside"] * x["healthScore"]), reverse=True)[:3]
 
-    # Secteurs les plus représentés parmi les décotes saines
     sector_upside: dict[str, list[float]] = {}
     for s in eligible:
         sector_upside.setdefault(s["sector"], []).append(s["upside"])
@@ -725,7 +849,6 @@ def build_session_metrics(
         reverse=True,
     )[:3]
 
-    # Indices & macro pertinents
     macro_tickers = (
         {"^N225", "^KS11", "NKD=F", "GC=F", "BZ=F", "HG=F"}
         if zone == "asia"
@@ -753,6 +876,7 @@ def build_session_metrics(
         "eligibleCount": len(eligible),
         "trapCount": len(traps),
         "newEntries": [s["name"] for s in new_entries[:5]],
+        "oversoldOpportunities": oversold,
         "avgUpside": round(sum(s["upside"] for s in eligible) / len(eligible), 1) if eligible else 0.0,
         "avgHealth": round(sum(s["healthScore"] for s in eligible) / len(eligible), 2) if eligible else 0.0,
         "top3": [
@@ -762,8 +886,8 @@ def build_session_metrics(
                 "market": s["market"],
                 "upside": s["upside"],
                 "health": s["healthScore"],
-                "pe": s["pe"],
-                "divYield": s.get("dividendYield"),
+                "rsi14": s.get("technicals", {}).get("rsi14"),
+                "techSignal": s.get("technicals", {}).get("signal"),
             }
             for s in top3
         ],
@@ -785,12 +909,11 @@ def build_session_metrics(
 
 
 def generate_algorithmic_briefing(metrics: dict[str, Any], now_iso: str) -> dict[str, Any]:
-    """Générateur 100 % Python (gratuit, sans API externe) au format structuré."""
     macro_parts = []
     for m in metrics["macro"][:4]:
         if m["chg1d"] is not None:
             sign = "+" if m["chg1d"] >= 0 else ""
-            macro_parts.append(f"{m['name']} ({sign}{m['chg1d']:.2f} % sur la séance, tendance {m['trend'].lower()})")
+            macro_parts.append(f"{m['name']} ({sign}{m['chg1d']:.2f} %, tendance {m['trend'].lower()})")
     fx_parts = [f"{k} à {v}" for k, v in metrics["fx"].items() if v]
     macro_text = (
         (", ".join(macro_parts) if macro_parts else "Données indices en cours d'actualisation")
@@ -799,24 +922,27 @@ def generate_algorithmic_briefing(metrics: dict[str, Any], now_iso: str) -> dict
 
     if metrics["topSectors"]:
         sec_str = ", ".join(f"{sec} ({n} titres, +{u} % moy.)" for sec, n, u in metrics["topSectors"])
-        sectors_text = f"{metrics['eligibleCount']} valeurs remplissent les critères Valoris (potentiel moyen +{metrics['avgUpside']} %, santé {metrics['avgHealth']}/5). Secteurs les plus décotés : {sec_str}."
+        sectors_text = f"{metrics['eligibleCount']} valeurs remplissent les critères Valoris (potentiel moyen +{metrics['avgUpside']} %, santé {metrics['avgHealth']}/5). Secteurs moteurs : {sec_str}."
     else:
-        sectors_text = f"{metrics['eligibleCount']} valeurs sélectionnées sur {metrics['totalCount']} suivies dans la zone."
+        sectors_text = f"{metrics['eligibleCount']} valeurs sélectionnées sur {metrics['totalCount']} suivies."
 
     if metrics["top3"]:
         top_str = " · ".join(
-            f"{t['name']} (+{t['upside']} %, santé {t['health']}/5)"
+            f"{t['name']} (+{t['upside']} %, santé {t['health']}/5"
+            + (f", RSI {t['rsi14']}" if t.get("rsi14") is not None else "") + ")"
             for t in metrics["top3"]
         )
         opp_text = f"Meilleurs couples décote/qualité : {top_str}."
-        if metrics["newEntries"]:
-            opp_text += f" Nouvelles entrées du jour : {', '.join(metrics['newEntries'])}."
+        if metrics["oversoldOpportunities"]:
+            opp_text += f" Zones de survente technique : {', '.join(metrics['oversoldOpportunities'])}."
+        elif metrics["newEntries"]:
+            opp_text += f" Nouvelles entrées : {', '.join(metrics['newEntries'])}."
     else:
-        opp_text = "Aucune opportunité ne cumule aujourd'hui les trois seuils de sélection."
+        opp_text = "Aucune opportunité ne cumule aujourd'hui les trois seuils."
 
     vigilance_parts = []
     if metrics["trapCount"] > 0:
-        vigilance_parts.append(f"{metrics['trapCount']} piège(s) de valeur filtré(s) automatiquement")
+        vigilance_parts.append(f"{metrics['trapCount']} piège(s) de valeur filtré(s)")
     if metrics["bearishIndices"]:
         vigilance_parts.append(f"indices sous MM200 : {', '.join(metrics['bearishIndices'])}")
     if metrics["upcomingEarnings"]:
@@ -842,17 +968,16 @@ def generate_algorithmic_briefing(metrics: dict[str, Any], now_iso: str) -> dict
 
 
 def generate_gemini_briefing(metrics: dict[str, Any], now_iso: str, api_key: str) -> dict[str, Any] | None:
-    """Appelle l'API REST Gemini (Flash) pour rédiger un briefing concis et structuré en JSON."""
     prompt = (
         "Tu es un analyste financier factuel et concis rédigeant en français pour un investisseur particulier. "
         "À partir des données JSON ci-dessous, produis UNIQUEMENT un objet JSON valide (sans bloc markdown) "
-        "contenant exactement les clés suivantes : "
-        '"headline" (titre synthétique <= 95 caractères), '
+        "contenant exactement les clés : "
+        '"headline" (<= 95 caractères), '
         '"macro" (2 phrases max sur indices, matières premières et devises), '
         '"sectors" (1 à 2 phrases sur les secteurs les plus décotés), '
-        '"opportunities" (2 phrases max commentant le Top 3 et les nouvelles entrées), '
+        '"opportunities" (2 phrases max commentant le Top 3, les signaux techniques RSI et nouvelles entrées), '
         '"vigilance" (1 à 2 phrases sur les pièges de valeur, indices sous MM200 et résultats proches). '
-        "Ne donne aucun conseil d'achat personnalisé et appuie-toi uniquement sur les chiffres fournis.\n\n"
+        "Ne donne aucun conseil personnalisé et appuie-toi uniquement sur les chiffres fournis.\n\n"
         f"Données : {json.dumps(metrics, ensure_ascii=False)}"
     )
 
@@ -911,9 +1036,6 @@ def build_briefing(
     return generate_algorithmic_briefing(metrics, now_iso)
 
 
-# =============================================================================
-# 7. NOTIFICATIONS OPTIONNELLES (TELEGRAM / DISCORD)
-# =============================================================================
 def send_notifications(briefing: dict[str, Any]) -> None:
     s = briefing["sections"]
     msg = (
@@ -935,7 +1057,7 @@ def send_notifications(briefing: dict[str, Any]) -> None:
             urllib.request.urlopen(req, timeout=15).read()
             print("  Notification Telegram envoyée.")
         except Exception as exc:
-            print(f"  [!] Échec notification Telegram : {exc}")
+            print(f"  [!] Échec Telegram : {exc}")
 
     discord_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
     if discord_url:
@@ -945,7 +1067,7 @@ def send_notifications(briefing: dict[str, Any]) -> None:
             urllib.request.urlopen(req, timeout=15).read()
             print("  Notification Discord envoyée.")
         except Exception as exc:
-            print(f"  [!] Échec notification Discord : {exc}")
+            print(f"  [!] Échec Discord : {exc}")
 
 
 # =============================================================================
@@ -956,13 +1078,12 @@ def resolve_session(arg_session: str, existing_data: dict[str, Any] | None) -> s
         return "all"
     if arg_session in ("asia", "west", "all"):
         return arg_session
-    # Mode auto selon l'heure UTC : matin (< 14h UTC) -> Asie, soir (>= 14h UTC) -> Occident
     hour_utc = datetime.now(timezone.utc).hour
     return "asia" if hour_utc < 14 else "west"
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Valoris V3 — Collecte, Scoring & Briefings")
+    parser = argparse.ArgumentParser(description="Valoris V4 — Collecte, Scoring, Technique & Briefings")
     parser.add_argument("--session", choices=["auto", "all", "asia", "west"], default="auto")
     args = parser.parse_args()
 
@@ -977,13 +1098,12 @@ def main() -> None:
         if session == "all"
         else [m for m, cfg in UNIVERSES.items() if cfg["region"] == session]
     )
-    print(f"=== Lancement Valoris V3 | session={session} | marchés={target_markets} ===")
+    print(f"=== Lancement Valoris V4 | session={session} | marchés={target_markets} ===")
 
     fx_rates = fetch_fx_rates(existing.get("fxRates") if existing else None)
     raw_items = fetch_raw_universe(target_markets)
 
-    # Sparklines 3 mois en batch pour les titres rafraîchis
-    spark_map = fetch_sparklines_batch([item["symbol"] for item in raw_items])
+    tech_map = fetch_technicals_batch([item["symbol"] for item in raw_items])
     sector_medians = compute_sector_medians(raw_items)
 
     refreshed_stocks: list[dict[str, Any]] = []
@@ -996,7 +1116,7 @@ def main() -> None:
         sector_en = info.get("sector") or "Industrials"
         sec_mult = sector_medians.get(sector_en, {"pe": 16.0, "ev_ebitda": 10.0})
 
-        dcf_val = estimate_dcf(info, price)
+        dcf_val, dcf_inputs = extract_dcf_and_inputs(info, price)
         mult_val = estimate_multiples(info, price, sec_mult["pe"], sec_mult["ev_ebitda"])
         analyst_val = safe_float(info.get("targetMeanPrice"))
         if analyst_val and (analyst_val < price * 0.3 or analyst_val > price * 3.0):
@@ -1022,7 +1142,7 @@ def main() -> None:
         div_yield = extract_dividend_yield_pct(info, price)
         payout_ratio = extract_payout_ratio_pct(info)
         earnings_date, days_to_earnings = extract_earnings_info(info, now_utc)
-        spark_pts, chg_3m = spark_map.get(item["symbol"], ([], None))
+        tech = tech_map.get(item["symbol"], compute_technical_profile([]))
 
         refreshed_stocks.append({
             "ticker": item["symbol"],
@@ -1048,21 +1168,39 @@ def main() -> None:
                 "multiples": mult_val,
                 "analysts": round(analyst_val, 2) if analyst_val else None,
             },
+            "dcfInputs": dcf_inputs,
+            "technicals": {
+                "rsi14": tech["rsi14"],
+                "macd": tech["macd"],
+                "macdSignal": tech["macdSignal"],
+                "macdHist": tech["macdHist"],
+                "ema50": tech["ema50"],
+                "sma200": tech["sma200"],
+                "distEma50": tech["distEma50"],
+                "distSma200": tech["distSma200"],
+                "low52w": tech["low52w"],
+                "high52w": tech["high52w"],
+                "pos52w": tech["pos52w"],
+                "fib382": tech["fib382"],
+                "fib500": tech["fib500"],
+                "fib618": tech["fib618"],
+                "signal": tech["signal"],
+                "signalTone": tech["signalTone"],
+            },
             "pe": round(pe, 1) if pe and pe > 0 else None,
             "evEbitda": round(ev_ebitda, 1) if ev_ebitda and ev_ebitda > 0 else None,
             "dividendYield": div_yield,
             "payoutRatio": payout_ratio,
             "earningsDate": earnings_date,
             "daysToEarnings": days_to_earnings,
-            "sparkline": spark_pts,
-            "chg3m": chg_3m,
+            "sparkline": tech["sparkline"],
+            "chg3m": tech["chg3m"],
             "analystConsensus": RECOMMENDATION_FR.get(rec_key, "Conserver"),
             "valueTrap": is_value_trap,
             "isNewEntry": False,
             "upsideDelta5d": None,
         })
 
-    # Fusion incrémentale : on conserve les marchés non rafraîchis sur cette session
     refreshed_set = set(target_markets)
     kept_stocks = [
         s for s in (existing.get("stocks", []) if existing else [])
@@ -1074,7 +1212,6 @@ def main() -> None:
     winners = update_history_and_signals(all_stocks, refreshed_set, Path("history.json"))
     macro = fetch_macro(session, existing.get("macro") if existing else None)
 
-    # Génération des briefings (conserve l'autre zone intacte si session partielle)
     briefings = dict((existing.get("briefings") or {}) if existing else {})
     zones_to_brief = ["asia", "west"] if session == "all" else [session]
     for z in zones_to_brief:
@@ -1083,7 +1220,7 @@ def main() -> None:
             send_notifications(briefings[z])
 
     payload = {
-        "version": "3.0",
+        "version": "4.0",
         "lastSession": session,
         "updatedAt": now_iso,
         "fxRates": fx_rates,
@@ -1094,7 +1231,7 @@ def main() -> None:
         "winners": winners,
     }
     data_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Terminé V3 ({session}) : {len(all_stocks)} actions, {len(macro)} actifs macro et briefings enregistrés.")
+    print(f"Terminé V4 ({session}) : {len(all_stocks)} actions (avec technique + DCF) et {len(macro)} actifs macro enregistrés.")
 
 
 if __name__ == "__main__":

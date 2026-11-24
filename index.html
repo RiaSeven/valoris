@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valoris V3 — L'Intelligence des Marchés · Screener &amp; Analyses</title>
+  <title>Valoris V4 — L'Intelligence des Marchés · Screener, Technique, DCF &amp; Comparateur</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
@@ -73,7 +73,6 @@
     }
     .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace; }
 
-    /* Compensation native CSS pour les ancres (synchronisée dynamiquement par JS) */
     [data-scroll-target] {
       scroll-margin-top: calc(var(--topbar-h) + 18px);
     }
@@ -130,7 +129,7 @@
       border-bottom: 1px solid var(--border);
     }
     .topbar-inner {
-      max-width: 1480px;
+      max-width: 1520px;
       margin: 0 auto;
       padding: 11px 20px;
       display: flex;
@@ -163,84 +162,51 @@
     .brand-text h1 { font-size: 1.12rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.15; }
     .brand-text p { font-size: 0.72rem; color: var(--muted); }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
     .nav-link {
-      padding: 7px 12px;
+      padding: 7px 11px;
       border-radius: 9px;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--muted);
       text-decoration: none;
       cursor: pointer;
       transition: all 0.15s;
     }
-    .nav-link:hover, .nav-link.active-nav { background: var(--surface-2); color: var(--text); }
-    @media (max-width: 1080px) { .nav-links { display: none; } }
+    .nav-link:hover { background: var(--surface-2); color: var(--text); }
+    @media (max-width: 1160px) { .nav-links { display: none; } }
 
-    .topbar-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .topbar-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--muted);
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 600;
+      background: var(--surface-2); border: 1px solid var(--border); color: var(--muted);
     }
     .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
     .dot.demo { background: var(--amber); }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 13px;
-      border-radius: 10px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.15s;
-      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 12px; border-radius: 10px; font-size: 0.81rem; font-weight: 600;
+      border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+      cursor: pointer; transition: all 0.15s; text-decoration: none;
     }
     .btn:hover { border-color: var(--accent); color: var(--accent); }
     .btn.primary { background: linear-gradient(135deg, #2563eb, #7c3aed); border-color: transparent; color: #fff; }
     .btn.primary:hover { filter: brightness(1.08); color: #fff; }
     .btn.active-toggle { background: var(--amber-soft); border-color: var(--amber); color: var(--amber); }
+    .btn.compare-on { background: var(--purple-soft); border-color: var(--purple); color: var(--purple); }
 
     .theme-switch {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      border: 1px solid var(--border-glow);
-      background: var(--surface-2);
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.16s ease;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+      border: 1px solid var(--border-glow); background: var(--surface-2); color: var(--text);
+      cursor: pointer; transition: all 0.16s ease;
     }
     .theme-switch:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ========================================================================
-       HAUT DE PAGE CENTRÉ (STYLE PRÉCÉDENT : L'INTELLIGENCE DES MARCHÉS)
+       HAUT DE PAGE CENTRÉ (L'INTELLIGENCE DES MARCHÉS)
     ======================================================================== */
     .hero-shell {
       position: relative;
@@ -258,220 +224,109 @@
     .hero-shell.collapsed { display: none; }
 
     #ambientCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      opacity: 0.75;
-      z-index: 0;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; opacity: 0.75; z-index: 0;
     }
 
     .hero-centered {
-      position: relative;
-      z-index: 2;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 58px 24px 48px;
-      text-align: center;
+      position: relative; z-index: 2; max-width: 1180px;
+      margin: 0 auto; padding: 54px 24px 44px; text-align: center;
     }
 
-    /* Pilule haute exacte du haut de page précédent */
     .hero-eyebrow {
-      display: inline-flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      font-size: 0.74rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 26px;
+      display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 9px; padding: 8px 18px; border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72); border: 1px solid rgba(148, 163, 184, 0.22);
+      font-size: 0.74rem; letter-spacing: 0.05em; margin-bottom: 24px;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
     }
     [data-theme="light"] .hero-eyebrow {
-      background: rgba(255, 255, 255, 0.88);
-      border-color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.88); border-color: #cbd5e1;
       box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
     }
     .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #2dd4bf;
-      box-shadow: 0 0 10px rgba(45, 212, 191, 0.85);
-      animation: pulse 2.2s infinite;
+      width: 8px; height: 8px; border-radius: 50%; background: #2dd4bf;
+      box-shadow: 0 0 10px rgba(45, 212, 191, 0.85); animation: pulse 2.2s infinite;
     }
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); }
       70% { box-shadow: 0 0 0 9px rgba(45, 212, 191, 0); }
       100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
     }
-    .eyebrow-strong {
-      color: #38bdf8;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
+    .eyebrow-strong { color: #38bdf8; font-weight: 800; text-transform: uppercase; }
     [data-theme="light"] .eyebrow-strong { color: #0284c7; }
     .eyebrow-sep { color: var(--border); opacity: 0.9; }
     .eyebrow-sub { color: var(--muted); font-weight: 500; letter-spacing: 0.01em; }
 
-    /* Grand titre 2 lignes centré */
     .hero-title {
-      font-size: clamp(2.25rem, 5.2vw, 4.15rem);
-      font-weight: 900;
-      line-height: 1.08;
-      letter-spacing: -0.038em;
-      margin-bottom: 22px;
+      font-size: clamp(2.2rem, 5.1vw, 4.1rem);
+      font-weight: 900; line-height: 1.08; letter-spacing: -0.038em; margin-bottom: 20px;
     }
-    .hero-title-main {
-      display: block;
-      color: var(--text);
-    }
+    .hero-title-main { display: block; color: var(--text); }
     .hero-title-grad {
       display: block;
       background: linear-gradient(95deg, #38bdf8 0%, #818cf8 52%, #a855f7 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     [data-theme="light"] .hero-title-grad {
       background: linear-gradient(95deg, #0284c7 0%, #4f46e5 52%, #7c3aed 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
+      -webkit-background-clip: text; background-clip: text;
     }
 
     .hero-desc {
-      font-size: clamp(0.96rem, 1.45vw, 1.09rem);
-      color: var(--muted);
-      max-width: 720px;
-      margin: 0 auto 30px;
-      line-height: 1.65;
+      font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+      color: var(--muted); max-width: 730px; margin: 0 auto 28px; line-height: 1.65;
     }
 
-    /* Boutons d'action centrés */
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
+    .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; margin-bottom: 22px; }
     .cta-wow {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 13px 26px;
-      border-radius: 13px;
-      font-size: 0.94rem;
-      font-weight: 800;
-      color: #fff;
-      border: none;
-      cursor: pointer;
+      position: relative; display: inline-flex; align-items: center; gap: 9px;
+      padding: 13px 26px; border-radius: 13px; font-size: 0.94rem; font-weight: 800;
+      color: #fff; border: none; cursor: pointer;
       background: linear-gradient(135deg, #2563eb, #7c3aed);
       box-shadow: 0 10px 30px rgba(79, 70, 229, 0.36), inset 0 1px 0 rgba(255,255,255,0.22);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease; overflow: hidden;
     }
     .cta-wow::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -120%;
-      width: 75%; height: 100%;
+      content: ""; position: absolute; top: 0; left: -120%; width: 75%; height: 100%;
       background: linear-gradient(105deg, transparent, rgba(255,255,255,0.26), transparent);
-      transform: skewX(-22deg);
-      animation: sheen 4.5s infinite;
+      transform: skewX(-22deg); animation: sheen 4.5s infinite;
     }
-    @keyframes sheen {
-      0%, 62% { left: -120%; }
-      100% { left: 160%; }
-    }
+    @keyframes sheen { 0%, 62% { left: -120%; } 100% { left: 160%; } }
     .cta-wow:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(99, 102, 241, 0.48); }
 
     .cta-sec {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 12px 19px;
-      border-radius: 13px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text);
-      background: var(--glass);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all 0.18s ease;
+      display: inline-flex; align-items: center; gap: 7px; padding: 12px 18px;
+      border-radius: 13px; font-size: 0.89rem; font-weight: 700; color: var(--text);
+      background: var(--glass); border: 1px solid var(--border); cursor: pointer; transition: all 0.18s ease;
     }
     .cta-sec:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-    /* Barre d'accès rapide par pays centrée */
-    .hero-countries {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 30px;
-    }
+    .hero-countries { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin-bottom: 28px; }
     .country-jump {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 13px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text);
-      background: var(--glass);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px;
+      border-radius: 999px; font-size: 0.8rem; font-weight: 700; color: var(--text);
+      background: var(--glass); border: 1px solid var(--border); cursor: pointer; transition: all 0.15s ease;
     }
     .country-jump:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
     .chip-cnt { font-size: 0.69rem; padding: 1px 6px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
 
-    /* Bandeau KPI + Top 3 Live sous le hero */
     .hero-live-strip {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      max-width: 920px;
-      margin: 0 auto 24px;
-      padding: 16px 20px;
-      border-radius: 16px;
-      background: var(--glass);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
+      max-width: 920px; margin: 0 auto 22px; padding: 16px 20px; border-radius: 16px;
+      background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border); box-shadow: var(--shadow);
     }
     @media (max-width: 640px) { .hero-live-strip { grid-template-columns: repeat(2, 1fr); } }
     .h-stat-val { font-size: 1.42rem; font-weight: 900; letter-spacing: -0.02em; }
     .h-stat-lbl { font-size: 0.73rem; color: var(--muted); font-weight: 600; margin-top: 2px; }
 
-    .spotlight-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 13px;
-      text-align: left;
-    }
+    .spotlight-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; text-align: left; }
     @media (max-width: 880px) { .spotlight-row { grid-template-columns: 1fr; } }
     .spotlight-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 13px 15px;
-      border-radius: 14px;
-      background: var(--glass-strong);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all 0.17s ease;
-      box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 13px 15px; border-radius: 14px; background: var(--glass-strong);
+      border: 1px solid var(--border); cursor: pointer; transition: all 0.17s ease; box-shadow: var(--shadow);
     }
     .spotlight-item:hover { border-color: var(--accent); transform: translateY(-2px); }
     .spot-name { font-weight: 800; font-size: 0.89rem; }
@@ -479,61 +334,27 @@
     .spot-right { text-align: right; flex-shrink: 0; }
 
     /* ========================================================================
-       CORPS PRINCIPAL : ANALYSES MATIN/SOIR + SCREENER COMPLET
+       CORPS PRINCIPAL
     ======================================================================== */
-    .container { max-width: 1480px; margin: 0 auto; padding: 26px 20px 64px; }
+    .container { max-width: 1520px; margin: 0 auto; padding: 26px 20px 92px; }
 
     .briefings-wrap { margin-bottom: 22px; }
-    .briefings-bar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 11px;
-    }
-    .briefings-bar h2 {
-      font-size: 0.88rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      font-weight: 800;
-    }
-    .briefings-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 15px;
-    }
+    .briefings-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 11px; }
+    .briefings-bar h2 { font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 800; }
+    .briefings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 15px; }
     .briefing-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 17px 19px;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--accent);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 17px 19px; box-shadow: var(--shadow); border-top: 4px solid var(--accent);
+      display: flex; flex-direction: column; gap: 10px;
     }
     .briefing-card.asia { border-top-color: var(--amber); }
     .briefing-card.west { border-top-color: var(--purple); }
-    .briefing-top {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
+    .briefing-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
     .briefing-title { font-weight: 800; font-size: 0.98rem; display: flex; align-items: center; gap: 8px; }
     .briefing-meta { font-size: 0.73rem; color: var(--muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .briefing-headline {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--text);
-      padding: 8px 11px;
-      border-radius: 10px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
+      font-weight: 700; font-size: 0.9rem; color: var(--text);
+      padding: 8px 11px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border);
     }
     .briefing-list { list-style: none; display: grid; gap: 7px; font-size: 0.83rem; color: var(--muted); }
     .briefing-list li strong { color: var(--text); }
@@ -541,26 +362,13 @@
 
     /* Onglets principaux */
     .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+      border-bottom: 1px solid var(--border); padding-bottom: 10px;
     }
     .tab-btn {
-      padding: 9px 15px;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      padding: 9px 15px; border-radius: 10px; font-size: 0.88rem; font-weight: 700;
+      border: 1px solid transparent; background: transparent; color: var(--muted);
+      cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px;
     }
     .tab-btn:hover { background: var(--surface); color: var(--text); }
     .tab-btn.active { background: var(--accent-soft); color: var(--accent); border-color: rgba(56,189,248,0.32); }
@@ -570,19 +378,19 @@
     .view.active { display: block; }
 
     /* KPIs */
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 14px; margin-bottom: 16px; }
     .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--shadow); }
-    .kpi-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-    .kpi-value { font-size: 1.48rem; font-weight: 800; margin-top: 4px; }
-    .kpi-sub { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+    .kpi-label { font-size: 0.74rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .kpi-value { font-size: 1.46rem; font-weight: 800; margin-top: 4px; }
+    .kpi-sub { font-size: 0.74rem; color: var(--muted); margin-top: 3px; }
 
     /* Panneau de filtres */
     .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); margin-bottom: 16px; }
     .market-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; align-items: center; justify-content: space-between; }
     .pills { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
     .pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+      border-radius: 999px; font-size: 0.82rem; font-weight: 700;
       border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
       cursor: pointer; transition: all 0.15s;
     }
@@ -591,26 +399,26 @@
     .pill.active .pill-cnt { background: rgba(255,255,255,0.22); color: #fff; }
     .pill-cnt { font-size: 0.71rem; padding: 1px 6px; border-radius: 999px; background: var(--border); color: var(--muted); font-weight: 700; }
 
-    .filters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 14px; align-items: end; }
-    .field label { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+    .filters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 13px; align-items: end; }
+    .field label { display: flex; justify-content: space-between; font-size: 0.77rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
     .field label span { color: var(--accent); font-weight: 700; }
     input[type="text"], select {
       width: 100%; padding: 9px 11px; border-radius: 9px;
       border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
-      font-size: 0.85rem; outline: none;
+      font-size: 0.84rem; outline: none;
     }
     input[type="text"]:focus, select:focus { border-color: var(--accent); }
     input[type="range"] { width: 100%; accent-color: #3b82f6; cursor: pointer; }
 
     .checkbox-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--border); }
     .check-group { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-    .check-label { display: inline-flex; align-items: center; gap: 7px; font-size: 0.83rem; font-weight: 600; cursor: pointer; }
+    .check-label { display: inline-flex; align-items: center; gap: 7px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
 
     /* Tableaux */
     .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
     thead th {
-      text-align: left; padding: 12px 10px; font-size: 0.72rem; text-transform: uppercase;
+      text-align: left; padding: 12px 9px; font-size: 0.71rem; text-transform: uppercase;
       letter-spacing: 0.04em; color: var(--muted); background: var(--surface-2);
       border-bottom: 1px solid var(--border); white-space: nowrap; cursor: pointer; user-select: none;
     }
@@ -618,35 +426,37 @@
     tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; cursor: pointer; }
     tbody tr:hover { background: var(--surface-2); }
     tbody tr:last-child { border-bottom: none; }
-    td { padding: 11px 10px; vertical-align: middle; white-space: nowrap; }
+    td { padding: 10px 9px; vertical-align: middle; white-space: nowrap; }
     .num { text-align: right; font-variant-numeric: tabular-nums; }
 
-    .star-btn {
-      background: transparent; border: none; cursor: pointer; font-size: 1.05rem;
-      color: var(--muted); padding: 2px 4px; line-height: 1; transition: transform 0.12s, color 0.12s;
+    .row-actions-cell { display: inline-flex; align-items: center; gap: 4px; }
+    .icon-btn {
+      background: transparent; border: 1px solid transparent; border-radius: 7px; cursor: pointer;
+      font-size: 0.98rem; color: var(--muted); padding: 3px 5px; line-height: 1; transition: all 0.12s;
     }
-    .star-btn:hover { transform: scale(1.18); color: var(--amber); }
-    .star-btn.starred { color: var(--amber); }
+    .icon-btn:hover { color: var(--accent); background: var(--accent-soft); }
+    .icon-btn.starred { color: var(--amber); }
+    .icon-btn.compared { color: var(--purple); background: var(--purple-soft); border-color: rgba(167,139,250,0.4); }
 
-    .stock-name { font-weight: 700; max-width: 195px; overflow: hidden; text-overflow: ellipsis; }
-    .stock-meta { font-size: 0.73rem; color: var(--muted); display: flex; align-items: center; gap: 5px; margin-top: 2px; flex-wrap: wrap; }
+    .stock-name { font-weight: 700; max-width: 185px; overflow: hidden; text-overflow: ellipsis; }
+    .stock-meta { font-size: 0.72rem; color: var(--muted); display: flex; align-items: center; gap: 5px; margin-top: 2px; flex-wrap: wrap; }
 
-    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; font-size: 0.71rem; font-weight: 700; }
     .badge.green { background: var(--green-soft); color: var(--green); }
     .badge.amber { background: var(--amber-soft); color: var(--amber); }
     .badge.red { background: var(--red-soft); color: var(--red); }
     .badge.blue { background: var(--accent-soft); color: var(--accent); }
     .badge.purple { background: var(--purple-soft); color: var(--purple); }
 
-    .delta-sub { font-size: 0.69rem; margin-top: 2px; font-weight: 600; }
-    .health-bar { width: 72px; height: 5px; border-radius: 999px; background: var(--border); overflow: hidden; margin-top: 4px; }
+    .delta-sub { font-size: 0.68rem; margin-top: 2px; font-weight: 600; }
+    .health-bar { width: 68px; height: 5px; border-radius: 999px; background: var(--border); overflow: hidden; margin-top: 4px; }
     .health-fill { height: 100%; border-radius: 999px; }
 
     .mini-scores { display: flex; gap: 4px; }
-    .mini-chip { font-size: 0.7rem; font-weight: 700; padding: 2px 5px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); }
+    .mini-chip { font-size: 0.69rem; font-weight: 700; padding: 2px 5px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); }
 
     .spark-cell { display: inline-flex; align-items: center; gap: 6px; }
-    .spark-svg { width: 68px; height: 24px; overflow: visible; }
+    .spark-svg { width: 64px; height: 22px; overflow: visible; }
 
     /* Carte Pépites */
     .scatter-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); position: relative; }
@@ -660,8 +470,60 @@
       position: fixed; pointer-events: none; z-index: 60;
       background: var(--surface); border: 1px solid var(--accent);
       border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow);
-      font-size: 0.8rem; opacity: 0; transition: opacity 0.12s; max-width: 250px;
+      font-size: 0.8rem; opacity: 0; transition: opacity 0.12s; max-width: 255px;
     }
+
+    /* ========================================================================
+       COMPARATEUR CÔTE À CÔTE + GRAPHIQUE RADAR 5 PILIERS (V4)
+    ======================================================================== */
+    .compare-selectors {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px; margin-bottom: 16px;
+    }
+    .compare-slot {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px;
+    }
+    .compare-slot-head {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.77rem; font-weight: 800; margin-bottom: 7px;
+    }
+    .compare-grid {
+      display: grid; grid-template-columns: 380px 1fr; gap: 18px; align-items: start;
+    }
+    @media (max-width: 1060px) { .compare-grid { grid-template-columns: 1fr; } }
+    .radar-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); text-align: center;
+    }
+    .radar-svg { width: 100%; max-width: 340px; height: auto; margin: 6px auto; display: block; }
+    .radar-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px; font-size: 0.79rem; font-weight: 700; }
+    .best-cell {
+      background: var(--green-soft);
+      color: var(--green);
+      font-weight: 800;
+      border-radius: 6px;
+    }
+
+    /* Barre flottante de comparaison en bas d'écran */
+    .compare-dock {
+      position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(120px);
+      z-index: 38; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+      padding: 11px 16px; border-radius: 16px;
+      background: var(--glass-strong); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-glow); box-shadow: var(--shadow-lg);
+      transition: transform 0.25s ease; max-width: calc(100vw - 24px);
+    }
+    .compare-dock.visible { transform: translateX(-50%) translateY(0); }
+    .dock-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;
+      background: var(--surface-2); border: 1px solid var(--border);
+    }
+    .dock-chip button {
+      background: none; border: none; color: var(--muted); cursor: pointer; font-weight: 800; font-size: 0.85rem;
+    }
+    .dock-chip button:hover { color: var(--red); }
 
     /* Macro */
     .gauge-wrap { min-width: 130px; }
@@ -672,24 +534,75 @@
     .fx-chip { background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; }
     .fx-chip span { color: var(--accent); font-weight: 800; margin-left: 6px; }
 
-    /* Panneau latéral de détail */
-    .overlay { position: fixed; inset: 0; background: rgba(2, 6, 23, 0.55); opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 40; }
+    /* ========================================================================
+       PANNEAU LATÉRAL ENRICHI V4 (TRADINGVIEW + TECHNIQUE + SIMULATEUR DCF)
+    ======================================================================== */
+    .overlay { position: fixed; inset: 0; background: rgba(2, 6, 23, 0.58); opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 40; }
     .overlay.open { opacity: 1; pointer-events: auto; }
     .drawer {
-      position: fixed; top: 0; right: -490px; width: min(470px, 100vw); height: 100vh;
+      position: fixed; top: 0; right: -600px; width: min(560px, 100vw); height: 100vh;
       background: var(--surface); border-left: 1px solid var(--border);
-      box-shadow: -12px 0 36px rgba(0, 0, 0, 0.35);
-      transition: right 0.24s ease; z-index: 50; padding: 22px; overflow-y: auto;
+      box-shadow: -14px 0 42px rgba(0, 0, 0, 0.42);
+      transition: right 0.24s ease; z-index: 50; padding: 20px 22px 34px; overflow-y: auto;
     }
     .drawer.open { right: 0; }
-    .drawer-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 16px; }
-    .drawer-section { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 13px; }
-    .drawer-section h3 { font-size: 0.81rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 10px; }
-    .row-kv { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 0.85rem; }
+    .drawer-head { display: flex; justify-content: space-between; align-items: start; gap: 10px; margin-bottom: 15px; }
+    .drawer-section { background: var(--surface-2); border: 1px solid var(--border); border-radius: 13px; padding: 14px 15px; margin-bottom: 13px; }
+    .drawer-section h3 {
+      font-size: 0.79rem; text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .row-kv { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 0.84rem; }
     .row-kv:last-child { border-bottom: none; }
     .pillar-row { margin-bottom: 9px; }
     .pillar-head { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px; }
     .pillar-bar { height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; }
+
+    /* TradingView container */
+    .tv-frame-wrap {
+      width: 100%; height: 295px; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--bg);
+    }
+    .tv-frame-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* RSI visual bar */
+    .rsi-bar-wrap { margin: 8px 0 10px; }
+    .rsi-track {
+      position: relative; height: 9px; border-radius: 999px;
+      background: linear-gradient(90deg, rgba(16,185,129,0.55) 0%, rgba(16,185,129,0.55) 30%, rgba(148,163,184,0.28) 30%, rgba(148,163,184,0.28) 70%, rgba(239,68,68,0.55) 70%, rgba(239,68,68,0.55) 100%);
+    }
+    .rsi-marker {
+      position: absolute; top: 50%; transform: translate(-50%, -50%);
+      width: 13px; height: 13px; border-radius: 50%; background: var(--text); border: 2px solid var(--accent);
+    }
+    .rsi-scale { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted); margin-top: 3px; }
+
+    .fibo-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px;
+    }
+    .fibo-box {
+      padding: 7px 9px; border-radius: 9px; background: var(--surface);
+      border: 1px solid var(--border); text-align: center; font-size: 0.76rem;
+    }
+    .fibo-box span { display: block; color: var(--muted); font-size: 0.69rem; }
+
+    /* Simulateur DCF interactif */
+    .dcf-sim-result {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      margin-bottom: 12px;
+    }
+    .dcf-kpi {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 9px 10px; text-align: center;
+    }
+    .dcf-kpi-lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; font-weight: 700; }
+    .dcf-kpi-val { font-size: 1rem; font-weight: 800; margin-top: 2px; }
+    .dcf-sliders { display: grid; gap: 10px; }
+    .dcf-slider-row label {
+      display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 3px;
+    }
+    .dcf-slider-row label strong { color: var(--accent); }
+    .dcf-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
 
     .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
     .pos { color: var(--green); font-weight: 700; }
@@ -711,8 +624,8 @@
       <div class="brand" id="brandTopBtn" title="Revenir en haut">
         <div class="logo-badge">V</div>
         <div class="brand-text">
-          <h1>Valoris <span style="font-size:0.71rem; padding:2px 7px; border-radius:999px; background:var(--accent-soft); color:var(--accent); vertical-align:middle;">V3</span></h1>
-          <p>Actions sous-évaluées · FR · DE · US · KR · JP</p>
+          <h1>Valoris <span style="font-size:0.71rem; padding:2px 7px; border-radius:999px; background:var(--accent-soft); color:var(--accent); vertical-align:middle;">V4</span></h1>
+          <p>Fondamentaux · Timing Technique · DCF · Comparateur</p>
         </div>
       </div>
 
@@ -720,6 +633,7 @@
         <a class="nav-link" id="navAccueil" href="#hero-accueil">Accueil</a>
         <a class="nav-link" id="navAnalyses" href="#analyses-section">Analyses Matin/Soir</a>
         <a class="nav-link" id="navScreener" href="#mainTabs">Screener</a>
+        <a class="nav-link" id="navCompare" href="#mainTabs">Comparateur</a>
         <a class="nav-link" id="navScatter" href="#mainTabs">Carte Pépites</a>
         <a class="nav-link" id="navMacro" href="#mainTabs">Macro</a>
       </nav>
@@ -729,7 +643,7 @@
           <span class="dot demo" id="statusDot"></span>
           <span id="statusText">Chargement…</span>
         </div>
-        <button class="btn" id="toggleHeroBtn" type="button" title="Afficher ou masquer le haut de page">Masquer l'accueil</button>
+        <button class="btn" id="toggleHeroBtn" type="button">Masquer l'accueil</button>
         <button class="btn" id="exportCsvBtn" type="button">CSV</button>
         <label class="btn" for="jsonUpload">JSON</label>
         <input id="jsonUpload" class="hidden-input" type="file" accept=".json" />
@@ -739,7 +653,7 @@
   </header>
 
   <!-- =========================================================================
-       SECTION 1 : HAUT DE PAGE CENTRÉ (STYLE L'INTELLIGENCE DES MARCHÉS)
+       SECTION 1 : HAUT DE PAGE CENTRÉ (L'INTELLIGENCE DES MARCHÉS)
   ========================================================================== -->
   <section class="hero-shell" id="hero-accueil" data-scroll-target>
     <canvas id="ambientCanvas"></canvas>
@@ -758,7 +672,7 @@
       </h2>
 
       <p class="hero-desc">
-        Valoris V3 scrute en continu les opportunités boursières à travers les deux poumons financiers de la planète. Détectez les anomalies de valorisation, la dynamique momentum et les signaux de rentabilité avant le marché.
+        Valoris V4 croise la <strong>Juste Valeur fondamentale</strong> (DCF interactif, multiples, consensus) avec le <strong>timing technique</strong> (RSI 14, MACD, EMA 50, Fibonacci &amp; TradingView) et un <strong>comparateur radar 5 piliers</strong> sur 5 marchés mondiaux.
       </p>
 
       <div class="hero-ctas">
@@ -767,6 +681,7 @@
           <span>↓</span>
         </button>
         <button class="cta-sec" id="heroGoAnalyses" type="button">Analyses Matin &amp; Soir</button>
+        <button class="cta-sec" id="heroGoCompare" type="button">Comparateur Radar</button>
         <button class="cta-sec" id="heroGoScatter" type="button">Carte Pépites</button>
         <button class="cta-sec" id="heroGoMacro" type="button">Macro &amp; Matières 1<sup>res</sup></button>
       </div>
@@ -780,7 +695,6 @@
         <button class="country-jump" data-jump-market="JP">🇯🇵 Japon <span class="chip-cnt" data-cnt="JP">0</span></button>
       </div>
 
-      <!-- KPIs Live compacts -->
       <div class="hero-live-strip">
         <div>
           <div class="h-stat-val mono" id="heroStatTotal">0</div>
@@ -800,16 +714,14 @@
         </div>
       </div>
 
-      <!-- Top 3 Pépites Live en 3 colonnes -->
       <div class="spotlight-row" id="heroSpotlight"></div>
     </div>
   </section>
 
   <!-- =========================================================================
-       SECTION 2 & 3 : ANALYSES MATIN/SOIR + SCREENER COMPLET INTACT
+       SECTION 2 & 3 : ANALYSES MATIN/SOIR + SCREENER V4 + COMPARATEUR
   ========================================================================== -->
   <main class="container" id="screener-app">
-    <!-- Analyses Matin (Asie) & Soir (Europe / US) -->
     <section class="briefings-wrap" id="analyses-section" data-scroll-target>
       <div class="briefings-bar">
         <h2>Analyses automatisées · Matin (Asie) &amp; Soir (Europe / US)</h2>
@@ -818,10 +730,12 @@
       <div class="briefings-grid" id="briefingsGrid"></div>
     </section>
 
-    <!-- Onglets V2 + V3 -->
     <nav class="tabs" id="mainTabs" data-scroll-target>
       <button class="tab-btn active" data-tab="screener">
         Screener Actions <span class="tab-count" id="countScreener">0</span>
+      </button>
+      <button class="tab-btn" data-tab="compare">
+        ⚖ Comparateur <span class="tab-count" id="countCompare">0</span>
       </button>
       <button class="tab-btn" data-tab="scatter">
         Carte Pépites <span class="tab-count" id="countScatter">0</span>
@@ -853,9 +767,9 @@
           <div class="kpi-sub">Score composite sur 5 piliers</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Nouvelles entrées</div>
-          <div class="kpi-value" style="color:var(--purple);" id="kpiNew">0</div>
-          <div class="kpi-sub">Fraîchement sous-évaluées</div>
+          <div class="kpi-label">Zones survente / rebond</div>
+          <div class="kpi-value" style="color:var(--accent);" id="kpiTechOpp">0</div>
+          <div class="kpi-sub">RSI ≤ 35 ou rebond support</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Pièges écartés</div>
@@ -877,8 +791,8 @@
           <div class="pills">
             <button class="btn" id="watchlistFilterBtn" type="button">★ Watchlist (<span id="watchCount">0</span>)</button>
             <button class="btn" id="presetValoris" type="button">Critères Valoris</button>
+            <button class="btn" id="presetOversold" type="button">Survente RSI ≤ 35</button>
             <button class="btn" id="presetQuality" type="button">Qualité ≥ 3,5</button>
-            <button class="btn" id="presetDividend" type="button">Rendement ≥ 3 %</button>
             <button class="btn" id="presetAll" type="button">Tout afficher</button>
           </div>
         </div>
@@ -891,6 +805,16 @@
           <div class="field">
             <label for="sectorSelect">Secteur</label>
             <select id="sectorSelect"><option value="ALL">Tous les secteurs</option></select>
+          </div>
+          <div class="field">
+            <label for="techSelect">Timing technique</label>
+            <select id="techSelect">
+              <option value="ALL">Tous signaux</option>
+              <option value="BUY_ZONE">Survente / Rebond</option>
+              <option value="RSI_LOW">RSI 14 ≤ 35</option>
+              <option value="BULL">Tendance haussière</option>
+              <option value="NO_KNIFE">Exclure couteaux qui tombent</option>
+            </select>
           </div>
           <div class="field">
             <label for="upsideRange">Potentiel min. <span id="upsideVal">20 %</span></label>
@@ -921,7 +845,7 @@
               Nouvelles entrées uniquement
             </label>
           </div>
-          <span class="muted" style="font-size:0.79rem;">Cliquez sur ★ pour suivre un titre · Cliquez sur une ligne pour ouvrir la fiche détaillée.</span>
+          <span class="muted" style="font-size:0.78rem;">★ Watchlist · ⚖ Comparer (jusqu'à 3 titres) · Cliquez sur une ligne pour ouvrir TradingView, Timing technique &amp; Simulateur DCF.</span>
         </div>
       </div>
 
@@ -929,9 +853,10 @@
         <table>
           <thead>
             <tr>
-              <th style="width:34px; cursor:default;">★</th>
+              <th style="width:62px; cursor:default;">★ / ⚖</th>
               <th data-sort="name">Société</th>
-              <th>Tendance 3M</th>
+              <th>3M</th>
+              <th data-sort="rsi14">Timing technique</th>
               <th class="num" data-sort="price">Cours</th>
               <th class="num" data-sort="fairValue">Juste Valeur</th>
               <th class="num" data-sort="upside">Potentiel</th>
@@ -949,7 +874,34 @@
       </div>
     </section>
 
-    <!-- VUE 2 : CARTE PÉPITES -->
+    <!-- VUE 2 : COMPARATEUR CÔTE À CÔTE + RADAR 5 PILIERS (V4) -->
+    <section id="view-compare" class="view">
+      <div class="panel">
+        <div class="market-bar" style="margin-bottom:10px;">
+          <div>
+            <h3 style="font-size:1rem; font-weight:800;">Comparateur fondamental &amp; technique (2 à 3 actions)</h3>
+            <p class="muted" style="font-size:0.81rem;">Sélectionnez des concurrents ci-dessous ou cliquez sur l'icône ⚖ dans le Screener. Le meilleur score sur chaque ligne est automatiquement mis en évidence en vert.</p>
+          </div>
+          <div class="pills">
+            <button class="btn" id="compareAutoTopBtn" type="button">Charger le Top 3 Pépites</button>
+            <button class="btn" id="compareClearBtn" type="button">Réinitialiser</button>
+          </div>
+        </div>
+        <div class="compare-selectors" id="compareSelectors"></div>
+      </div>
+
+      <div class="compare-grid" id="compareContent">
+        <div class="radar-card">
+          <h3 style="font-size:0.9rem; font-weight:800; margin-bottom:4px;">Radar Santé Financière (5 Piliers)</h3>
+          <p class="muted" style="font-size:0.76rem; margin-bottom:8px;">Superposition des notes sur 5</p>
+          <svg id="radarSvg" class="radar-svg" viewBox="0 0 340 320"></svg>
+          <div class="radar-legend" id="radarLegend"></div>
+        </div>
+        <div class="table-wrap" id="compareTableWrap"></div>
+      </div>
+    </section>
+
+    <!-- VUE 3 : CARTE PÉPITES -->
     <section id="view-scatter" class="view">
       <div class="scatter-card">
         <div class="scatter-legend">
@@ -968,7 +920,7 @@
       </div>
     </section>
 
-    <!-- VUE 3 : MACRO & MARCHÉS -->
+    <!-- VUE 4 : MACRO & MARCHÉS -->
     <section id="view-macro" class="view">
       <div class="fx-strip" id="fxStrip"></div>
       <div class="panel" style="padding:13px 18px;">
@@ -1001,7 +953,7 @@
       </div>
     </section>
 
-    <!-- VUE 4 : PRÉCÉDENTS GAGNANTS -->
+    <!-- VUE 5 : PRÉCÉDENTS GAGNANTS -->
     <section id="view-winners" class="view">
       <div class="panel" style="padding:14px 18px;">
         <p class="muted" style="font-size:0.87rem;">
@@ -1028,52 +980,152 @@
     </section>
 
     <footer class="site-footer">
-      Valoris V3 · Données collectées automatiquement via Yahoo Finance &amp; GitHub Actions · Outil d'aide à l'analyse fondamentale, ne constitue pas un conseil en investissement.
+      Valoris V4 · Données collectées automatiquement via Yahoo Finance &amp; GitHub Actions · Graphiques TradingView · Outil d'aide à l'analyse, ne constitue pas un conseil en investissement.
     </footer>
   </main>
+
+  <!-- Barre flottante de comparaison -->
+  <div class="compare-dock" id="compareDock">
+    <span style="font-size:0.8rem; font-weight:800; color:var(--purple);">⚖ Comparateur :</span>
+    <div id="dockChips" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+    <button class="btn primary" id="dockOpenBtn" type="button" style="padding:6px 13px;">Comparer →</button>
+    <button class="btn" id="dockClearBtn" type="button" style="padding:6px 10px;">Vider</button>
+  </div>
 
   <!-- Tooltip Carte Pépites -->
   <div class="scatter-tooltip" id="scatterTooltip"></div>
 
-  <!-- Panneau latéral de détail -->
+  <!-- Panneau latéral enrichi V4 : TradingView + Technique + Simulateur DCF + Santé -->
   <div class="overlay" id="drawerOverlay"></div>
   <aside class="drawer" id="detailDrawer" aria-hidden="true">
     <div class="drawer-head">
-      <div>
-        <h2 id="dName" style="font-size:1.22rem;"></h2>
-        <div class="muted" id="dSub" style="font-size:0.82rem;"></div>
+      <div style="min-width:0;">
+        <h2 id="dName" style="font-size:1.2rem;"></h2>
+        <div class="muted" id="dSub" style="font-size:0.8rem;"></div>
       </div>
-      <div style="display:flex; gap:6px;">
+      <div style="display:flex; gap:6px; flex-shrink:0;">
+        <button class="btn" id="dCompareBtn" type="button" title="Ajouter/retirer du Comparateur">⚖</button>
         <button class="btn" id="dStarBtn" type="button" title="Ajouter/retirer de ma Watchlist">★</button>
         <button class="btn" id="closeDrawer" type="button">Fermer</button>
       </div>
     </div>
     <div id="dTrapBanner"></div>
-    <div class="drawer-section" id="dSparkSection"></div>
+
+    <!-- 1. Graphique TradingView interactif -->
+    <div class="drawer-section" id="dTvSection">
+      <h3>
+        <span>Graphique interactif TradingView</span>
+        <a id="dTvFullLink" href="#" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:none; font-size:0.74rem; text-transform:none;">Ouvrir en grand ↗</a>
+      </h3>
+      <div class="tv-frame-wrap" id="dTvContainer"></div>
+    </div>
+
+    <!-- 2. Timing technique (RSI 14, MACD, EMA50, MM200, Fibo) -->
+    <div class="drawer-section" id="dTechSection"></div>
+
+    <!-- 3. Simulateur DCF interactif -->
+    <div class="drawer-section" id="dDcfSimSection"></div>
+
+    <!-- 4. Décomposition Juste Valeur -->
     <div class="drawer-section" id="dValuation"></div>
+
+    <!-- 5. Santé financière 5 piliers -->
     <div class="drawer-section" id="dHealth"></div>
+
+    <!-- 6. Multiples, Dividende & Calendrier -->
     <div class="drawer-section" id="dMultiples"></div>
+
     <a class="btn primary" id="dYahooLink" href="#" target="_blank" rel="noopener" style="width:100%; justify-content:center;">
-      Ouvrir la fiche sur Yahoo Finance
+      Ouvrir la fiche complète sur Yahoo Finance
     </a>
   </aside>
 
   <script>
     // =========================================================================
-    // DONNÉES DE SECOURS (si ./data.json et GitHub Pages sont tous deux inaccessibles)
+    // DONNÉES DE SECOURS V4 (si ./data.json et GitHub Pages sont tous deux inaccessibles)
     // =========================================================================
     const DEMO_DATA = {
-      version: "3.0-demo",
+      version: "4.0-demo",
       updatedAt: new Date().toISOString(),
       fxRates: { EUR: 1.0, USD: 1.08, JPY: 165.4, KRW: 1502.0 },
       stocks: [
-        { ticker: "CAP.PA", name: "Capgemini SE", market: "FR", currency: "€", sector: "Technologie", price: 158.4, fairValue: 214.2, upside: 35.2, upsideDelta5d: 2.1, marketCapB: 27.1, healthScore: 3.74, healthLabel: "Très bon", scores: { growth: 3.1, profitability: 3.8, cashflow: 4.2, balanceSheet: 3.6, valuation: 4.0 }, models: { dcf: 221.5, multiples: 206.1, analysts: 215.0 }, pe: 13.4, evEbitda: 9.2, dividendYield: 2.15, payoutRatio: 35.2, earningsDate: "2026-12-14", daysToEarnings: 22, sparkline: [176,174,171,169,165,163,166,162,159,157,155,156,158.4], chg3m: -10.0, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
-        { ticker: "TTE.PA", name: "TotalEnergies SE", market: "FR", currency: "€", sector: "Énergie", price: 58.2, fairValue: 74.8, upside: 28.5, upsideDelta5d: 0.8, marketCapB: 134.5, healthScore: 3.92, healthLabel: "Très bon", scores: { growth: 2.9, profitability: 4.1, cashflow: 4.5, balanceSheet: 4.0, valuation: 4.1 }, models: { dcf: 78.4, multiples: 72.0, analysts: 74.0 }, pe: 7.9, evEbitda: 4.3, dividendYield: 5.45, payoutRatio: 41.0, earningsDate: "2027-02-05", daysToEarnings: 75, sparkline: [62,61.5,60.2,61.0,59.8,58.5,57.9,58.8,59.1,57.6,58.0,58.2], chg3m: -6.1, analystConsensus: "Achat", valueTrap: false, isNewEntry: false },
-        { ticker: "IFX.DE", name: "Infineon Technologies", market: "DE", currency: "€", sector: "Technologie", price: 31.2, fairValue: 41.5, upside: 33.0, upsideDelta5d: -1.2, marketCapB: 40.7, healthScore: 3.62, healthLabel: "Très bon", scores: { growth: 3.3, profitability: 3.8, cashflow: 3.5, balanceSheet: 3.7, valuation: 3.8 }, models: { dcf: 42.1, multiples: 40.4, analysts: 42.0 }, pe: 16.5, evEbitda: 9.8, dividendYield: 1.12, payoutRatio: 21.5, earningsDate: "2027-02-02", daysToEarnings: 72, sparkline: [29.5,30.1,29.8,30.4,31.0,30.2,29.9,30.5,31.4,31.2], chg3m: 5.8, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "GOOGL", name: "Alphabet Inc.", market: "US", currency: "$", sector: "Télécoms & Médias", price: 174.5, fairValue: 218.0, upside: 24.9, upsideDelta5d: -0.9, marketCapB: 1980.0, healthScore: 4.52, healthLabel: "Excellent", scores: { growth: 4.3, profitability: 4.8, cashflow: 4.7, balanceSheet: 4.8, valuation: 4.0 }, models: { dcf: 224.0, multiples: 212.0, analysts: 218.0 }, pe: 20.4, evEbitda: 14.1, dividendYield: 0.46, payoutRatio: 10.2, earningsDate: "2027-02-03", daysToEarnings: 73, sparkline: [161,163,165,164,167,170,169,172,175,174.5], chg3m: 8.4, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "005930.KS", name: "Samsung Electronics", market: "KR", currency: "₩", sector: "Technologie", price: 59800, fairValue: 81500, upside: 36.3, upsideDelta5d: 1.9, marketCapB: 237.6, healthScore: 3.84, healthLabel: "Très bon", scores: { growth: 3.6, profitability: 3.5, cashflow: 3.9, balanceSheet: 4.4, valuation: 3.8 }, models: { dcf: 82400, multiples: 79100, analysts: 83000 }, pe: 10.4, evEbitda: 5.2, dividendYield: 2.42, payoutRatio: 26.0, earningsDate: "2027-01-30", daysToEarnings: 69, sparkline: [68000,66500,64000,62500,61000,59500,58200,59100,59800], chg3m: -12.1, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "8035.T", name: "Tokyo Electron", market: "JP", currency: "¥", sector: "Technologie", price: 23400, fairValue: 31200, upside: 33.3, upsideDelta5d: 1.1, marketCapB: 65.4, healthScore: 4.28, healthLabel: "Très bon", scores: { growth: 4.2, profitability: 4.6, cashflow: 4.3, balanceSheet: 4.7, valuation: 3.6 }, models: { dcf: 30800, multiples: 30200, analysts: 32600 }, pe: 19.2, evEbitda: 13.5, dividendYield: 2.35, payoutRatio: 48.0, earningsDate: "2027-02-07", daysToEarnings: 77, sparkline: [24800,24200,23900,23100,22800,23200,23400], chg3m: -5.6, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false },
-        { ticker: "WLN.PA", name: "Worldline SA", market: "FR", currency: "€", sector: "Technologie", price: 7.4, fairValue: 11.2, upside: 51.4, upsideDelta5d: 5.2, marketCapB: 2.1, healthScore: 2.12, healthLabel: "Passable", scores: { growth: 1.6, profitability: 2.1, cashflow: 1.8, balanceSheet: 1.9, valuation: 3.2 }, models: { dcf: 11.5, multiples: 10.9, analysts: 11.2 }, pe: 6.2, evEbitda: 4.1, dividendYield: null, payoutRatio: null, earningsDate: "2027-02-26", daysToEarnings: 96, sparkline: [9.8,9.4,8.9,8.5,8.1,7.9,7.6,7.4], chg3m: -24.5, analystConsensus: "Conserver", valueTrap: true, isNewEntry: false }
+        {
+          ticker: "CAP.PA", name: "Capgemini SE", market: "FR", currency: "€", sector: "Technologie",
+          price: 158.4, fairValue: 214.2, upside: 35.2, upsideDelta5d: 2.1, marketCapB: 27.1,
+          healthScore: 3.74, healthLabel: "Très bon",
+          scores: { growth: 3.1, profitability: 3.8, cashflow: 4.2, balanceSheet: 3.6, valuation: 4.0 },
+          models: { dcf: 221.5, multiples: 206.1, analysts: 215.0 },
+          dcfInputs: { fcfPerShare: 11.4, netCashPerShare: -14.2, baseGrowthPct: 6.5, baseWaccPct: 9.5, suggestedWaccPct: 9.2, terminalGrowthPct: 2.5, beta: 1.04 },
+          technicals: { rsi14: 31.4, macd: -1.85, macdSignal: -2.10, macdHist: 0.25, ema50: 168.5, sma200: 184.2, distEma50: -6.0, distSma200: -14.0, low52w: 151.0, high52w: 222.0, pos52w: 10.4, fib382: 194.9, fib500: 186.5, fib618: 178.1, signal: "Rebond survente", signalTone: "green" },
+          pe: 13.4, evEbitda: 9.2, dividendYield: 2.15, payoutRatio: 35.2, earningsDate: "2026-12-14", daysToEarnings: 20,
+          sparkline: [176,174,171,169,165,163,166,162,159,157,155,156,158.4], chg3m: -10.0, analystConsensus: "Achat", valueTrap: false, isNewEntry: false
+        },
+        {
+          ticker: "005930.KS", name: "Samsung Electronics", market: "KR", currency: "₩", sector: "Technologie",
+          price: 59800, fairValue: 81500, upside: 36.3, upsideDelta5d: 1.9, marketCapB: 237.6,
+          healthScore: 3.84, healthLabel: "Très bon",
+          scores: { growth: 3.6, profitability: 3.5, cashflow: 3.9, balanceSheet: 4.4, valuation: 3.8 },
+          models: { dcf: 82400, multiples: 79100, analysts: 83000 },
+          dcfInputs: { fcfPerShare: 3920, netCashPerShare: 11800, baseGrowthPct: 7.0, baseWaccPct: 9.5, suggestedWaccPct: 9.6, terminalGrowthPct: 2.5, beta: 1.11 },
+          technicals: { rsi14: 34.2, macd: -980, macdSignal: -1150, macdHist: 170, ema50: 63200, sma200: 71800, distEma50: -5.4, distSma200: -16.7, low52w: 55800, high52w: 88800, pos52w: 12.1, fib382: 76194, fib500: 72300, fib618: 68406, signal: "Rebond support", signalTone: "green" },
+          pe: 10.4, evEbitda: 5.2, dividendYield: 2.42, payoutRatio: 26.0, earningsDate: "2027-01-30", daysToEarnings: 67,
+          sparkline: [68000,66500,64000,62500,61000,59500,58200,59100,59800], chg3m: -12.1, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false
+        },
+        {
+          ticker: "000660.KS", name: "SK Hynix Inc.", market: "KR", currency: "₩", sector: "Technologie",
+          price: 194500, fairValue: 258000, upside: 32.6, upsideDelta5d: -1.5, marketCapB: 94.3,
+          healthScore: 4.12, healthLabel: "Très bon",
+          scores: { growth: 4.8, profitability: 4.3, cashflow: 4.0, balanceSheet: 3.5, valuation: 4.0 },
+          models: { dcf: 262000, multiples: 247000, analysts: 265000 },
+          dcfInputs: { fcfPerShare: 14500, netCashPerShare: -19000, baseGrowthPct: 10.0, baseWaccPct: 9.5, suggestedWaccPct: 10.8, terminalGrowthPct: 2.5, beta: 1.33 },
+          technicals: { rsi14: 58.4, macd: 3420, macdSignal: 2810, macdHist: 610, ema50: 185200, sma200: 176400, distEma50: 5.0, distSma200: 10.3, low52w: 142000, high52w: 241000, pos52w: 53.0, fib382: 203182, fib500: 191500, fib618: 179818, signal: "Tendance haussière", signalTone: "green" },
+          pe: 7.8, evEbitda: 4.9, dividendYield: 0.72, payoutRatio: 11.5, earningsDate: "2027-01-24", daysToEarnings: 61,
+          sparkline: [172000,175000,180000,178000,184000,189000,192000,194500], chg3m: 13.1, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false
+        },
+        {
+          ticker: "IFX.DE", name: "Infineon Technologies", market: "DE", currency: "€", sector: "Technologie",
+          price: 31.2, fairValue: 41.5, upside: 33.0, upsideDelta5d: -1.2, marketCapB: 40.7,
+          healthScore: 3.62, healthLabel: "Très bon",
+          scores: { growth: 3.3, profitability: 3.8, cashflow: 3.5, balanceSheet: 3.7, valuation: 3.8 },
+          models: { dcf: 42.1, multiples: 40.4, analysts: 42.0 },
+          dcfInputs: { fcfPerShare: 2.1, netCashPerShare: -2.4, baseGrowthPct: 8.5, baseWaccPct: 9.5, suggestedWaccPct: 10.4, terminalGrowthPct: 2.5, beta: 1.25 },
+          technicals: { rsi14: 52.1, macd: 0.32, macdSignal: 0.18, macdHist: 0.14, ema50: 30.6, sma200: 31.0, distEma50: 2.0, distSma200: 0.6, low52w: 27.1, high52w: 39.2, pos52w: 33.9, fib382: 34.58, fib500: 33.15, fib618: 31.72, signal: "Tendance haussière", signalTone: "green" },
+          pe: 16.5, evEbitda: 9.8, dividendYield: 1.12, payoutRatio: 21.5, earningsDate: "2027-02-02", daysToEarnings: 70,
+          sparkline: [29.5,30.1,29.8,30.4,31.0,30.2,29.9,30.5,31.4,31.2], chg3m: 5.8, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false
+        },
+        {
+          ticker: "GOOGL", name: "Alphabet Inc.", market: "US", currency: "$", sector: "Télécoms & Médias",
+          price: 174.5, fairValue: 218.0, upside: 24.9, upsideDelta5d: -0.9, marketCapB: 1980.0,
+          healthScore: 4.52, healthLabel: "Excellent",
+          scores: { growth: 4.3, profitability: 4.8, cashflow: 4.7, balanceSheet: 4.8, valuation: 4.0 },
+          models: { dcf: 224.0, multiples: 212.0, analysts: 218.0 },
+          dcfInputs: { fcfPerShare: 9.8, netCashPerShare: 6.4, baseGrowthPct: 10.5, baseWaccPct: 9.5, suggestedWaccPct: 9.3, terminalGrowthPct: 2.5, beta: 1.05 },
+          technicals: { rsi14: 56.8, macd: 2.15, macdSignal: 1.80, macdHist: 0.35, ema50: 169.2, sma200: 161.4, distEma50: 3.1, distSma200: 8.1, low52w: 131.5, high52w: 191.8, pos52w: 71.3, fib382: 168.77, fib500: 161.65, fib618: 154.53, signal: "Tendance haussière", signalTone: "green" },
+          pe: 20.4, evEbitda: 14.1, dividendYield: 0.46, payoutRatio: 10.2, earningsDate: "2027-02-03", daysToEarnings: 71,
+          sparkline: [161,163,165,164,167,170,169,172,175,174.5], chg3m: 8.4, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false
+        },
+        {
+          ticker: "8035.T", name: "Tokyo Electron", market: "JP", currency: "¥", sector: "Technologie",
+          price: 23400, fairValue: 31200, upside: 33.3, upsideDelta5d: 1.1, marketCapB: 65.4,
+          healthScore: 4.28, healthLabel: "Très bon",
+          scores: { growth: 4.2, profitability: 4.6, cashflow: 4.3, balanceSheet: 4.7, valuation: 3.6 },
+          models: { dcf: 30800, multiples: 30200, analysts: 32600 },
+          dcfInputs: { fcfPerShare: 1420, netCashPerShare: 1050, baseGrowthPct: 9.5, baseWaccPct: 9.5, suggestedWaccPct: 10.2, terminalGrowthPct: 2.5, beta: 1.22 },
+          technicals: { rsi14: 38.6, macd: -310, macdSignal: -420, macdHist: 110, ema50: 24400, sma200: 27900, distEma50: -4.1, distSma200: -16.1, low52w: 21100, high52w: 39800, pos52w: 12.3, fib382: 32657, fib500: 30450, fib618: 28243, signal: "Rebond support", signalTone: "green" },
+          pe: 19.2, evEbitda: 13.5, dividendYield: 2.35, payoutRatio: 48.0, earningsDate: "2027-02-07", daysToEarnings: 75,
+          sparkline: [24800,24200,23900,23100,22800,23200,23400], chg3m: -5.6, analystConsensus: "Achat fort", valueTrap: false, isNewEntry: false
+        },
+        {
+          ticker: "WLN.PA", name: "Worldline SA", market: "FR", currency: "€", sector: "Technologie",
+          price: 7.4, fairValue: 11.2, upside: 51.4, upsideDelta5d: 5.2, marketCapB: 2.1,
+          healthScore: 2.12, healthLabel: "Passable",
+          scores: { growth: 1.6, profitability: 2.1, cashflow: 1.8, balanceSheet: 1.9, valuation: 3.2 },
+          models: { dcf: 11.5, multiples: 10.9, analysts: 11.2 },
+          dcfInputs: { fcfPerShare: 0.92, netCashPerShare: -6.8, baseGrowthPct: 2.0, baseWaccPct: 9.5, suggestedWaccPct: 11.2, terminalGrowthPct: 2.5, beta: 1.40 },
+          technicals: { rsi14: 28.1, macd: -0.62, macdSignal: -0.48, macdHist: -0.14, ema50: 8.6, sma200: 10.8, distEma50: -14.0, distSma200: -31.5, low52w: 7.2, high52w: 16.4, pos52w: 2.2, fib382: 12.89, fib500: 11.8, fib618: 10.71, signal: "Couteau qui tombe", signalTone: "red" },
+          pe: 6.2, evEbitda: 4.1, dividendYield: null, payoutRatio: null, earningsDate: "2027-02-26", daysToEarnings: 94,
+          sparkline: [9.8,9.4,8.9,8.5,8.1,7.9,7.6,7.4], chg3m: -24.5, analystConsensus: "Conserver", valueTrap: true, isNewEntry: false
+        }
       ],
       macro: [
         { ticker: "^FCHI", name: "CAC 40", category: "Indices", region: "France", unit: "pts", price: 7420.5, chg1d: 0.48, chg1w: 1.12, chg1m: -0.85, chgYtd: 3.4, low52w: 7030, high52w: 8259, pos52w: 31.8, sma200: 7610, distSma200: -2.49, trend: "Baissière", sparkline: [7550,7520,7490,7440,7460,7380,7400,7420.5] },
@@ -1089,6 +1141,7 @@
     const REMOTE_DATA_FALLBACK = "https://riaseven.github.io/valoris/data.json";
     const MARKET_LABELS = { FR: "France", DE: "Allemagne", US: "États-Unis", KR: "Corée du Sud", JP: "Japon" };
     const MARKET_COLORS = { FR: "#3b82f6", DE: "#f59e0b", US: "#10b981", KR: "#a78bfa", JP: "#f43f5e" };
+    const COMPARE_COLORS = ["#38bdf8", "#10b981", "#a78bfa"];
 
     function loadWatchlist() {
       try { return new Set(JSON.parse(localStorage.getItem("valoris-watchlist") || "[]")); }
@@ -1106,6 +1159,7 @@
       macroCat: "ALL",
       search: "",
       sector: "ALL",
+      techFilter: "ALL",
       minUpside: 20,
       minCap: 1,
       minHealth: 2.5,
@@ -1114,6 +1168,7 @@
       onlyNew: false,
       onlyWatchlist: false,
       watchlist: loadWatchlist(),
+      compareList: [],
       sortKey: "upside",
       sortDir: "desc",
       currentDrawerTicker: null,
@@ -1139,9 +1194,9 @@
 
     const healthColor = (score) => score >= 3.5 ? "var(--green)" : score >= 2.5 ? "var(--accent)" : score >= 2.0 ? "var(--amber)" : "var(--red)";
 
-    function buildSparklineSvg(points, width = 68, height = 24) {
+    function buildSparklineSvg(points, width = 64, height = 22) {
       if (!Array.isArray(points) || points.length < 2) {
-        return `<span class="muted" style="font-size:0.75rem;">—</span>`;
+        return `<span class="muted" style="font-size:0.74rem;">—</span>`;
       }
       const min = Math.min(...points);
       const max = Math.max(...points);
@@ -1158,8 +1213,43 @@
       </svg>`;
     }
 
+    // Conversion Ticker Yahoo -> Symbole TradingView
+    function toTradingViewSymbol(ticker, market) {
+      if (!ticker) return "NASDAQ:AAPL";
+      if (ticker.endsWith(".PA")) return `EURONEXT:${ticker.slice(0, -3)}`;
+      if (ticker.endsWith(".DE")) return `XETR:${ticker.slice(0, -3)}`;
+      if (ticker.endsWith(".KS")) return `KRX:${ticker.slice(0, -3)}`;
+      if (ticker.endsWith(".T")) return `TSE:${ticker.slice(0, -2)}`;
+      if (ticker === "BRK-B") return "NYSE:BRK.B";
+      return ticker.replace("-", ".");
+    }
+
+    function buildTradingViewIframe(ticker, market) {
+      const tvSym = toTradingViewSymbol(ticker, market);
+      const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      const url = `https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSym)}&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=f1f3f6&studies=RSI%40tv-basicstudies&theme=${theme}&style=1&timezone=Europe%2FParis&locale=fr`;
+      return {
+        tvSym,
+        iframeHtml: `<iframe src="${url}" loading="lazy" allowtransparency="true" scrolling="no" title="Graphique TradingView ${tvSym}"></iframe>`,
+        fullUrl: `https://fr.tradingview.com/chart/?symbol=${encodeURIComponent(tvSym)}`
+      };
+    }
+
+    // Estimation technique de secours côté client si data.json provient encore de la V3
+    function getTech(stock) {
+      if (stock.technicals && stock.technicals.signal) return stock.technicals;
+      const pts = stock.sparkline || [];
+      if (pts.length >= 6) {
+        const chg = ((pts[pts.length - 1] - pts[0]) / (pts[0] || 1)) * 100;
+        const sig = chg <= -12 ? "Survente (est.)" : chg >= 8 ? "Momentum +" : "Neutre";
+        const tone = chg <= -12 ? "amber" : chg >= 8 ? "green" : "blue";
+        return { rsi14: null, macd: null, macdHist: null, ema50: null, sma200: null, signal: sig, signalTone: tone };
+      }
+      return { rsi14: null, macd: null, macdHist: null, ema50: null, sma200: null, signal: "En attente V4", signalTone: "blue" };
+    }
+
     // =========================================================================
-    // CALCUL EXACT DE LA HAUTEUR DU BANDEAU FIXE (CORRECTION DU DÉCALAGE SCROLL)
+    // HAUTEUR DU BANDEAU FIXE & SCROLL COMPENSÉ
     // =========================================================================
     function syncTopbarHeight() {
       const bar = document.getElementById("stickyTopbar");
@@ -1186,7 +1276,7 @@
     }
 
     // =========================================================================
-    // SYNTHÈSE MATIN (ASIE) & SOIR (EUROPE / US)
+    // BRIEFINGS MATIN (ASIE) & SOIR (EUROPE / US)
     // =========================================================================
     function synthesizeClientBriefing(zone) {
       const markets = zone === "asia" ? ["KR", "JP"] : ["FR", "DE", "US"];
@@ -1268,11 +1358,12 @@
     }
 
     // =========================================================================
-    // NAVIGATION & RENDU DU HAUT DE PAGE
+    // NAVIGATION, HERO & CONSTELLATION
     // =========================================================================
     function switchTab(tabName) {
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tabName));
       document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === `view-${tabName}`));
+      if (tabName === "compare") renderCompareView();
     }
 
     function setMarketFilter(mkt) {
@@ -1314,7 +1405,6 @@
 
       updateCountryCounts();
 
-      // Ticker défilant live
       const tickerItems = [];
       macro.slice(0, 7).forEach(m => {
         tickerItems.push(`<span class="tick-item"><span class="tick-tag">${m.name}</span><span class="mono">${fmtNum(m.price, m.price >= 100 ? 0 : 2)}</span>${fmtPct(m.chg1d, 2)}</span>`);
@@ -1326,26 +1416,25 @@
       const joined = tickerItems.join("");
       document.getElementById("tickerTrack").innerHTML = joined + joined;
 
-      // Top 3 Spotlight Cards
       const spotWrap = document.getElementById("heroSpotlight");
       const top3 = topRanked.slice(0, 3);
-      if (!top3.length) {
-        spotWrap.innerHTML = "";
-        return;
-      }
-      spotWrap.innerHTML = top3.map(s => `
-        <div class="spotlight-item" data-spot-ticker="${s.ticker}">
-          <div style="min-width:0;">
-            <div class="spot-name">${s.name}</div>
-            <div class="spot-meta">${s.ticker} · ${MARKET_LABELS[s.market] || s.market} · Santé <strong style="color:${healthColor(s.healthScore)};">${fmtNum(s.healthScore, 2)}/5</strong></div>
+      if (!top3.length) { spotWrap.innerHTML = ""; return; }
+      spotWrap.innerHTML = top3.map(s => {
+        const tech = getTech(s);
+        return `
+          <div class="spotlight-item" data-spot-ticker="${s.ticker}">
+            <div style="min-width:0;">
+              <div class="spot-name">${s.name}</div>
+              <div class="spot-meta">${s.ticker} · ${MARKET_LABELS[s.market] || s.market} · Santé <strong style="color:${healthColor(s.healthScore)};">${fmtNum(s.healthScore, 2)}/5</strong>${tech.rsi14 ? ` · RSI ${fmtNum(tech.rsi14, 0)}` : ""}</div>
+            </div>
+            <div>${buildSparklineSvg(s.sparkline, 58, 22)}</div>
+            <div class="spot-right">
+              <div><span class="badge green">+${fmtNum(s.upside, 1)} %</span></div>
+              <div class="mono muted" style="font-size:0.71rem; margin-top:3px;">${fmtPrice(s.price, s.currency)} → ${fmtPrice(s.fairValue, s.currency)}</div>
+            </div>
           </div>
-          <div>${buildSparklineSvg(s.sparkline, 58, 22)}</div>
-          <div class="spot-right">
-            <div><span class="badge green">+${fmtNum(s.upside, 1)} %</span></div>
-            <div class="mono muted" style="font-size:0.71rem; margin-top:3px;">${fmtPrice(s.price, s.currency)} → ${fmtPrice(s.fairValue, s.currency)}</div>
-          </div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
 
       spotWrap.querySelectorAll(".spotlight-item").forEach(el => {
         el.addEventListener("click", () => {
@@ -1355,7 +1444,6 @@
       });
     }
 
-    // Fond étoilé / particules discrètes (comme sur le haut de page précédent)
     (function initCanvas() {
       const canvas = document.getElementById("ambientCanvas");
       const heroEl = document.getElementById("hero-accueil");
@@ -1367,10 +1455,8 @@
         h = canvas.height = heroEl.clientHeight || 520;
         const count = Math.min(48, Math.max(20, Math.floor((w * h) / 20000)));
         pts = Array.from({ length: count }, () => ({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.28,
-          vy: (Math.random() - 0.5) * 0.28,
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
           r: Math.random() * 1.6 + 0.6
         }));
       }
@@ -1383,28 +1469,20 @@
           const isDark = document.documentElement.getAttribute("data-theme") === "dark";
           const dotColor = isDark ? "rgba(148, 163, 184, 0.45)" : "rgba(37, 99, 235, 0.24)";
           const lineBase = isDark ? "56, 189, 248" : "37, 99, 235";
-
           for (let i = 0; i < pts.length; i++) {
             const p = pts[i];
             p.x += p.vx; p.y += p.vy;
             if (p.x < 0 || p.x > w) p.vx *= -1;
             if (p.y < 0 || p.y > h) p.vy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = dotColor;
-            ctx.fill();
-
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = dotColor; ctx.fill();
             for (let j = i + 1; j < pts.length; j++) {
               const q = pts[j];
               const dist = Math.hypot(p.x - q.x, p.y - q.y);
               if (dist < 130) {
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(q.x, q.y);
+                ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
                 ctx.strokeStyle = `rgba(${lineBase}, ${((1 - dist / 130) * 0.13).toFixed(3)})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
+                ctx.lineWidth = 1; ctx.stroke();
               }
             }
           }
@@ -1415,7 +1493,7 @@
     })();
 
     // =========================================================================
-    // RENDU DU SCREENER COMPLET (V2 + V3)
+    // SCREENER ACTIONS (AVEC TIMING TECHNIQUE + COMPARATEUR)
     // =========================================================================
     function populateSectors() {
       const select = document.getElementById("sectorSelect");
@@ -1440,6 +1518,8 @@
       }
       document.getElementById("watchCount").textContent = state.watchlist.size;
       document.getElementById("watchlistFilterBtn").classList.toggle("active-toggle", state.onlyWatchlist);
+      document.getElementById("countCompare").textContent = state.compareList.length;
+      renderCompareDock();
     }
 
     function getFilteredStocks() {
@@ -1457,6 +1537,15 @@
         if (state.hideTraps && s.valueTrap) return false;
         if (state.onlyNew && !s.isNewEntry) return false;
         if (state.onlyWatchlist && !state.watchlist.has(s.ticker)) return false;
+
+        if (state.techFilter !== "ALL") {
+          const tech = getTech(s);
+          const sig = (tech.signal || "").toLowerCase();
+          if (state.techFilter === "BUY_ZONE" && !sig.includes("survente") && !sig.includes("rebond")) return false;
+          if (state.techFilter === "RSI_LOW" && (tech.rsi14 === null || tech.rsi14 === undefined || tech.rsi14 > 35)) return false;
+          if (state.techFilter === "BULL" && !sig.includes("haussière")) return false;
+          if (state.techFilter === "NO_KNIFE" && sig.includes("couteau")) return false;
+        }
         return true;
       });
     }
@@ -1467,15 +1556,20 @@
 
       const dir = state.sortDir === "asc" ? 1 : -1;
       filtered.sort((a, b) => {
-        const va = a[state.sortKey] ?? -999999;
-        const vb = b[state.sortKey] ?? -999999;
+        const getVal = (obj, k) => k === "rsi14" ? (getTech(obj).rsi14 ?? 999) : (obj[k] ?? -999999);
+        const va = getVal(a, state.sortKey);
+        const vb = getVal(b, state.sortKey);
         if (typeof va === "string") return va.localeCompare(vb, "fr") * dir;
         return (va - vb) * dir;
       });
       state.lastFiltered = filtered;
 
       const trapsInMarket = allStocks.filter(s => (state.market === "ALL" || s.market === state.market) && s.valueTrap).length;
-      const newCount = filtered.filter(s => s.isNewEntry).length;
+      const techOppCount = filtered.filter(s => {
+        const t = getTech(s);
+        const sig = (t.signal || "").toLowerCase();
+        return (t.rsi14 !== null && t.rsi14 !== undefined && t.rsi14 <= 35) || sig.includes("rebond");
+      }).length;
       const avgUpside = filtered.length ? filtered.reduce((acc, s) => acc + (s.upside || 0), 0) / filtered.length : 0;
       const avgHealth = filtered.length ? filtered.reduce((acc, s) => acc + (s.healthScore || 0), 0) / filtered.length : 0;
 
@@ -1484,12 +1578,12 @@
       document.getElementById("kpiTotalSub").textContent = `sur ${allStocks.length} actions suivies`;
       document.getElementById("kpiUpside").textContent = `${avgUpside >= 0 ? "+" : ""}${fmtNum(avgUpside, 1)} %`;
       document.getElementById("kpiHealth").textContent = `${fmtNum(avgHealth, 2)} / 5`;
-      document.getElementById("kpiNew").textContent = newCount;
+      document.getElementById("kpiTechOpp").textContent = techOppCount;
       document.getElementById("kpiTraps").textContent = trapsInMarket;
 
       const tbody = document.getElementById("stocksBody");
       if (!filtered.length) {
-        tbody.innerHTML = `<tr><td colspan="13" class="empty-state">Aucune action ne correspond à ces filtres. Cliquez sur <strong>Tout afficher</strong> ou assouplissez les curseurs.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="14" class="empty-state">Aucune action ne correspond à ces filtres. Cliquez sur <strong>Tout afficher</strong> ou assouplissez les curseurs.</td></tr>`;
         renderScatter(filtered);
         return;
       }
@@ -1499,7 +1593,9 @@
         const hc = healthColor(s.healthScore || 0);
         const pctWidth = Math.min(100, Math.max(10, ((s.healthScore || 0) / 5) * 100));
         const starred = state.watchlist.has(s.ticker);
+        const compared = state.compareList.includes(s.ticker);
         const consensus = s.analystConsensus || "Conserver";
+        const tech = getTech(s);
 
         const trapBadge = s.valueTrap ? `<span class="badge red">Piège</span>` : "";
         const newBadge = s.isNewEntry ? `<span class="badge purple">Nouveau</span>` : "";
@@ -1507,13 +1603,19 @@
           ? `<span class="badge amber" title="Publication prévue le ${s.earningsDate}">Résultats J-${s.daysToEarnings}</span>` : "";
 
         const deltaHtml = (s.upsideDelta5d !== null && s.upsideDelta5d !== undefined && s.upsideDelta5d !== 0)
-          ? `<div class="delta-sub ${s.upsideDelta5d > 0 ? "pos" : "neg"}" title="Variation du potentiel sur 5 séances">${s.upsideDelta5d > 0 ? "▲ +" : "▼ "}${fmtNum(s.upsideDelta5d, 1)} pts</div>`
+          ? `<div class="delta-sub ${s.upsideDelta5d > 0 ? "pos" : "neg"}">${s.upsideDelta5d > 0 ? "▲ +" : "▼ "}${fmtNum(s.upsideDelta5d, 1)} pts</div>`
           : "";
+
+        const rsiTxt = tech.rsi14 !== null && tech.rsi14 !== undefined ? `RSI ${fmtNum(tech.rsi14, 0)}` : "RSI —";
+        const rsiCls = (tech.rsi14 !== null && tech.rsi14 <= 35) ? "pos" : (tech.rsi14 !== null && tech.rsi14 >= 70) ? "neg" : "muted";
 
         return `
           <tr data-ticker="${s.ticker}">
             <td onclick="event.stopPropagation();">
-              <button class="star-btn ${starred ? "starred" : ""}" data-star="${s.ticker}" title="Suivre dans ma Watchlist">${starred ? "★" : "☆"}</button>
+              <div class="row-actions-cell">
+                <button class="icon-btn ${starred ? "starred" : ""}" data-star="${s.ticker}" title="Suivre dans ma Watchlist">${starred ? "★" : "☆"}</button>
+                <button class="icon-btn ${compared ? "compared" : ""}" data-compare="${s.ticker}" title="Comparer côte à côte (max 3)">⚖</button>
+              </div>
             </td>
             <td>
               <div class="stock-name">${s.name}</div>
@@ -1525,8 +1627,12 @@
             <td>
               <div class="spark-cell">
                 ${buildSparklineSvg(s.sparkline)}
-                <span style="font-size:0.74rem;">${fmtPct(s.chg3m, 1)}</span>
+                <span style="font-size:0.73rem;">${fmtPct(s.chg3m, 1)}</span>
               </div>
+            </td>
+            <td>
+              <div><span class="badge ${tech.signalTone || "blue"}">${tech.signal}</span></div>
+              <div class="mono ${rsiCls}" style="font-size:0.71rem; margin-top:2px;">${rsiTxt}${tech.distEma50 !== null && tech.distEma50 !== undefined ? ` · EMA50 ${tech.distEma50 >= 0 ? "+" : ""}${fmtNum(tech.distEma50, 1)}%` : ""}</div>
             </td>
             <td class="num">${fmtPrice(s.price, s.currency)}</td>
             <td class="num" style="font-weight:700;">${fmtPrice(s.fairValue, s.currency)}</td>
@@ -1535,7 +1641,7 @@
               ${deltaHtml}
             </td>
             <td>
-              <div style="font-weight:700; color:${hc};">${fmtNum(s.healthScore, 2)} <span class="muted" style="font-weight:500; font-size:0.74rem;">(${s.healthLabel || ""})</span></div>
+              <div style="font-weight:700; color:${hc};">${fmtNum(s.healthScore, 2)} <span class="muted" style="font-weight:500; font-size:0.73rem;">(${s.healthLabel || ""})</span></div>
               <div class="health-bar"><div class="health-fill" style="width:${pctWidth}%; background:${hc};"></div></div>
             </td>
             <td>
@@ -1557,6 +1663,9 @@
       tbody.querySelectorAll("button[data-star]").forEach(btn => {
         btn.addEventListener("click", () => toggleWatchlist(btn.dataset.star));
       });
+      tbody.querySelectorAll("button[data-compare]").forEach(btn => {
+        btn.addEventListener("click", () => toggleCompare(btn.dataset.compare));
+      });
       tbody.querySelectorAll("tr[data-ticker]").forEach(row => {
         row.addEventListener("click", () => {
           const stock = allStocks.find(x => x.ticker === row.dataset.ticker);
@@ -1567,6 +1676,229 @@
       renderScatter(filtered);
     }
 
+    // =========================================================================
+    // MODULE V4 : COMPARATEUR CÔTE À CÔTE (2 À 3 ACTIONS) + RADAR 5 PILIERS
+    // =========================================================================
+    function toggleCompare(ticker) {
+      const idx = state.compareList.indexOf(ticker);
+      if (idx >= 0) {
+        state.compareList.splice(idx, 1);
+      } else {
+        if (state.compareList.length >= 3) {
+          state.compareList.shift();
+        }
+        state.compareList.push(ticker);
+      }
+      updateStatus();
+      renderScreener();
+      if (state.currentDrawerTicker === ticker) {
+        document.getElementById("dCompareBtn").classList.toggle("compare-on", state.compareList.includes(ticker));
+      }
+      if (document.getElementById("view-compare").classList.contains("active")) {
+        renderCompareView();
+      }
+    }
+
+    function renderCompareDock() {
+      const dock = document.getElementById("compareDock");
+      const chips = document.getElementById("dockChips");
+      const all = state.data.stocks || [];
+      if (!state.compareList.length) {
+        dock.classList.remove("visible");
+        return;
+      }
+      dock.classList.add("visible");
+      chips.innerHTML = state.compareList.map((sym, idx) => {
+        const s = all.find(x => x.ticker === sym);
+        return `<span class="dock-chip" style="border-color:${COMPARE_COLORS[idx]};">
+          <span style="width:8px; height:8px; border-radius:50%; background:${COMPARE_COLORS[idx]};"></span>
+          <span>${s ? s.name : sym}</span>
+          <button type="button" data-rm-compare="${sym}" title="Retirer">×</button>
+        </span>`;
+      }).join("");
+      chips.querySelectorAll("button[data-rm-compare]").forEach(b => {
+        b.addEventListener("click", () => toggleCompare(b.dataset.rmCompare));
+      });
+    }
+
+    function autoSelectTop3Compare() {
+      const all = state.data.stocks || [];
+      const eligible = all.filter(s => !s.valueTrap).sort((a, b) => (b.upside * b.healthScore) - (a.upside * a.healthScore));
+      state.compareList = eligible.slice(0, 3).map(s => s.ticker);
+      updateStatus();
+      renderScreener();
+      renderCompareView();
+    }
+
+    function renderCompareView() {
+      const all = state.data.stocks || [];
+      const sortedOpts = [...all].sort((a, b) => (a.name || "").localeCompare(b.name || "", "fr"));
+
+      // 3 sélecteurs interactifs
+      const selWrap = document.getElementById("compareSelectors");
+      selWrap.innerHTML = [0, 1, 2].map(slotIdx => {
+        const current = state.compareList[slotIdx] || "";
+        return `
+          <div class="compare-slot" style="border-top:3px solid ${COMPARE_COLORS[slotIdx]};">
+            <div class="compare-slot-head">
+              <span style="color:${COMPARE_COLORS[slotIdx]};">Action #${slotIdx + 1}</span>
+              ${current ? `<button type="button" class="btn" data-clear-slot="${slotIdx}" style="padding:2px 7px; font-size:0.7rem;">Retirer</button>` : `<span class="muted">Optionnel</span>`}
+            </div>
+            <select data-compare-slot="${slotIdx}">
+              <option value="">— Choisir une société —</option>
+              ${sortedOpts.map(s => `<option value="${s.ticker}" ${s.ticker === current ? "selected" : ""}>${s.name} (${s.ticker} · ${s.market})</option>`).join("")}
+            </select>
+          </div>
+        `;
+      }).join("");
+
+      selWrap.querySelectorAll("select[data-compare-slot]").forEach(sel => {
+        sel.addEventListener("change", e => {
+          const slot = Number(sel.dataset.compareSlot);
+          const val = e.target.value;
+          const next = [...state.compareList];
+          next[slot] = val;
+          state.compareList = [...new Set(next.filter(Boolean))].slice(0, 3);
+          updateStatus();
+          renderScreener();
+          renderCompareView();
+        });
+      });
+      selWrap.querySelectorAll("button[data-clear-slot]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const slot = Number(btn.dataset.clearSlot);
+          state.compareList.splice(slot, 1);
+          updateStatus();
+          renderScreener();
+          renderCompareView();
+        });
+      });
+
+      const selected = state.compareList.map(sym => all.find(x => x.ticker === sym)).filter(Boolean);
+      const tableWrap = document.getElementById("compareTableWrap");
+      const radarSvg = document.getElementById("radarSvg");
+      const radarLegend = document.getElementById("radarLegend");
+
+      if (!selected.length) {
+        radarSvg.innerHTML = `<text x="170" y="160" text-anchor="middle" fill="var(--muted)" font-size="13">Sélectionnez 2 ou 3 actions pour afficher le radar.</text>`;
+        radarLegend.innerHTML = "";
+        tableWrap.innerHTML = `<div class="empty-state">Sélectionnez au moins 2 sociétés ci-dessus (ou cliquez sur <strong>Charger le Top 3 Pépites</strong>) pour lancer la comparaison côte à côte.</div>`;
+        return;
+      }
+
+      // 1. Radar SVG 5 piliers
+      const cx = 170, cy = 160, maxR = 112;
+      const axes = [
+        { key: "profitability", label: "Rentabilité" },
+        { key: "growth", label: "Croissance" },
+        { key: "cashflow", label: "Trésorerie" },
+        { key: "balanceSheet", label: "Bilan" },
+        { key: "valuation", label: "Valorisation" }
+      ];
+      const angleFor = i => (-Math.PI / 2) + (i * 2 * Math.PI / axes.length);
+      const pt = (r, i) => [cx + r * Math.cos(angleFor(i)), cy + r * Math.sin(angleFor(i))];
+
+      let svgOut = "";
+      // Pentagones concentriques (niveaux 1 à 5)
+      for (let lvl = 1; lvl <= 5; lvl++) {
+        const r = (lvl / 5) * maxR;
+        const ptsStr = axes.map((_, i) => pt(r, i).map(v => v.toFixed(1)).join(",")).join(" ");
+        svgOut += `<polygon points="${ptsStr}" fill="none" stroke="var(--border)" stroke-width="${lvl === 5 ? 1.4 : 1}" />`;
+      }
+      // Axes + labels
+      axes.forEach((ax, i) => {
+        const [x2, y2] = pt(maxR, i);
+        const [lx, ly] = pt(maxR + 22, i);
+        svgOut += `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--border)" stroke-width="1" />`;
+        svgOut += `<text x="${lx.toFixed(1)}" y="${(ly + 4).toFixed(1)}" text-anchor="middle" fill="var(--text)" font-size="11" font-weight="700">${ax.label}</text>`;
+      });
+
+      // Polygones des sociétés sélectionnées
+      selected.forEach((s, sIdx) => {
+        const col = COMPARE_COLORS[sIdx];
+        const coords = axes.map((ax, i) => {
+          const val = Math.max(0.5, Math.min(5, s.scores?.[ax.key] ?? 2.5));
+          return pt((val / 5) * maxR, i);
+        });
+        const polyPts = coords.map(c => c.map(v => v.toFixed(1)).join(",")).join(" ");
+        svgOut += `<polygon points="${polyPts}" fill="${col}" fill-opacity="0.18" stroke="${col}" stroke-width="2.4" />`;
+        coords.forEach(([x, y]) => {
+          svgOut += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.6" fill="${col}" stroke="var(--surface)" stroke-width="1.2" />`;
+        });
+      });
+
+      radarSvg.innerHTML = svgOut;
+      radarLegend.innerHTML = selected.map((s, idx) => `
+        <span style="display:inline-flex; align-items:center; gap:6px;">
+          <span style="width:10px; height:10px; border-radius:50%; background:${COMPARE_COLORS[idx]};"></span>
+          <span>${s.name} (${fmtNum(s.healthScore, 2)}/5)</span>
+        </span>
+      `).join("");
+
+      // 2. Tableau comparatif multi-critères avec mise en valeur du meilleur score
+      const rowsDef = [
+        { label: "Marché & Secteur", get: s => `${MARKET_LABELS[s.market] || s.market} · ${s.sector || "—"}`, best: null },
+        { label: "Cours actuel", get: s => fmtPrice(s.price, s.currency), best: null },
+        { label: "Juste Valeur moyenne", get: s => fmtPrice(s.fairValue, s.currency), best: null },
+        { label: "Potentiel de hausse", num: s => s.upside, fmt: v => v !== null ? `+${fmtNum(v, 1)} %` : "—", best: "max" },
+        { label: "Score Santé global (/5)", num: s => s.healthScore, fmt: v => `${fmtNum(v, 2)} / 5`, best: "max" },
+        { label: "· Rentabilité (/5)", num: s => s.scores?.profitability, fmt: v => `${fmtNum(v, 1)}`, best: "max" },
+        { label: "· Croissance (/5)", num: s => s.scores?.growth, fmt: v => `${fmtNum(v, 1)}`, best: "max" },
+        { label: "· Trésorerie FCF (/5)", num: s => s.scores?.cashflow, fmt: v => `${fmtNum(v, 1)}`, best: "max" },
+        { label: "· Solidité bilan (/5)", num: s => s.scores?.balanceSheet, fmt: v => `${fmtNum(v, 1)}`, best: "max" },
+        { label: "· Valorisation relative (/5)", num: s => s.scores?.valuation, fmt: v => `${fmtNum(v, 1)}`, best: "max" },
+        { label: "Capitalisation (Md €)", num: s => s.marketCapB, fmt: v => `${fmtNum(v, 1)} Md €`, best: null },
+        { label: "PER", num: s => s.pe, fmt: v => v ? `${fmtNum(v, 1)}×` : "—", best: "min" },
+        { label: "EV / EBITDA", num: s => s.evEbitda, fmt: v => v ? `${fmtNum(v, 1)}×` : "—", best: "min" },
+        { label: "Rendement dividende", num: s => s.dividendYield, fmt: v => v ? `${fmtNum(v, 2)} %` : "—", best: "max" },
+        { label: "RSI (14)", num: s => getTech(s).rsi14, fmt: v => v !== null && v !== undefined ? fmtNum(v, 1) : "—", best: "min" },
+        { label: "Signal technique", get: s => { const t = getTech(s); return `<span class="badge ${t.signalTone || "blue"}">${t.signal}</span>`; }, best: null },
+        { label: "Distance MM 200", num: s => getTech(s).distSma200, fmt: v => v !== null && v !== undefined ? `${v >= 0 ? "+" : ""}${fmtNum(v, 1)} %` : "—", best: null },
+        { label: "Consensus analystes", get: s => s.analystConsensus || "—", best: null }
+      ];
+
+      tableWrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Critère</th>
+              ${selected.map((s, idx) => `<th class="num" style="border-top:3px solid ${COMPARE_COLORS[idx]}; cursor:pointer;" data-open-cmp="${s.ticker}">${s.name} <div class="muted" style="font-size:0.68rem;">${s.ticker}</div></th>`).join("")}
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsDef.map(r => {
+              let bestVal = null;
+              if (r.best && selected.length >= 2) {
+                const nums = selected.map(s => r.num(s)).filter(v => v !== null && v !== undefined && !Number.isNaN(v));
+                if (nums.length >= 2) bestVal = r.best === "max" ? Math.max(...nums) : Math.min(...nums);
+              }
+              return `
+                <tr style="cursor:default;">
+                  <td style="font-weight:600; color:var(--muted);">${r.label}</td>
+                  ${selected.map(s => {
+                    if (r.get) return `<td class="num">${r.get(s)}</td>`;
+                    const val = r.num(s);
+                    const isBest = bestVal !== null && val === bestVal;
+                    return `<td class="num"><span class="${isBest ? "best-cell" : ""}" style="${isBest ? "padding:3px 7px;" : ""}">${r.fmt(val)}</span></td>`;
+                  }).join("")}
+                </tr>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
+      `;
+
+      tableWrap.querySelectorAll("th[data-open-cmp]").forEach(th => {
+        th.addEventListener("click", () => {
+          const stock = all.find(x => x.ticker === th.dataset.openCmp);
+          if (stock) openDrawer(stock);
+        });
+      });
+    }
+
+    // =========================================================================
+    // CARTE PÉPITES, MACRO & GAGNANTS
+    // =========================================================================
     function renderScatter(filteredList) {
       const svg = document.getElementById("scatterSvg");
       const tooltip = document.getElementById("scatterTooltip");
@@ -1575,21 +1907,16 @@
       document.getElementById("countScatter").textContent = list.length;
 
       const W = 960, H = 470, padL = 62, padR = 26, padT = 24, padB = 46;
-      const plotW = W - padL - padR;
-      const plotH = H - padT - padB;
-
+      const plotW = W - padL - padR, plotH = H - padT - padB;
       const minX = 1.0, maxX = 5.0;
       const maxUp = Math.max(55, ...list.map(s => s.upside || 0)) + 5;
       const minUp = Math.min(-10, ...list.map(s => s.upside || 0));
 
       const xScale = v => padL + ((Math.max(minX, Math.min(maxX, v)) - minX) / (maxX - minX)) * plotW;
       const yScale = v => padT + plotH - ((Math.max(minUp, Math.min(maxUp, v)) - minUp) / (maxUp - minUp)) * plotH;
+      const gx25 = xScale(2.5), gy20 = yScale(20);
 
-      const gx25 = xScale(2.5);
-      const gy20 = yScale(20);
-
-      let out = "";
-      out += `<rect x="${gx25}" y="${padT}" width="${W - padR - gx25}" height="${Math.max(0, gy20 - padT)}" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.35)" stroke-dasharray="5,5" rx="6" />`;
+      let out = `<rect x="${gx25}" y="${padT}" width="${W - padR - gx25}" height="${Math.max(0, gy20 - padT)}" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.35)" stroke-dasharray="5,5" rx="6" />`;
       out += `<text x="${W - padR - 10}" y="${padT + 18}" text-anchor="end" fill="#10b981" font-size="11.5" font-weight="700">ZONE PÉPITES (Santé ≥ 2,5 · Potentiel ≥ 20 %)</text>`;
 
       for (let u = Math.ceil(minUp / 10) * 10; u <= maxUp; u += 10) {
@@ -1602,14 +1929,12 @@
         out += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${H - padB}" stroke="var(--border)" stroke-width="1" />`;
         out += `<text x="${x}" y="${H - padB + 18}" text-anchor="middle" fill="var(--muted)" font-size="11">${h.toFixed(1)}</text>`;
       }
-
       out += `<text x="${padL + plotW / 2}" y="${H - 8}" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Score de Santé Financière (/5)</text>`;
       out += `<text x="16" y="${padT + plotH / 2}" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700" transform="rotate(-90 16 ${padT + plotH / 2})">Potentiel de hausse (%)</text>`;
 
       const sortedForDraw = [...list].sort((a, b) => (b.marketCapB || 0) - (a.marketCapB || 0));
       for (const s of sortedForDraw) {
-        const cx = xScale(s.healthScore || 1);
-        const cy = yScale(s.upside || 0);
+        const cx = xScale(s.healthScore || 1), cy = yScale(s.upside || 0);
         const r = Math.max(5.5, Math.min(20, 4 + Math.sqrt(s.marketCapB || 1) * 0.55));
         const color = MARKET_COLORS[s.market] || "#3b82f6";
         const stroke = state.watchlist.has(s.ticker) ? "#f59e0b" : "var(--surface)";
@@ -1624,19 +1949,20 @@
       svg.querySelectorAll(".bubble").forEach(el => {
         const stock = allStocks.find(x => x.ticker === el.dataset.ticker);
         if (!stock) return;
+        const tech = getTech(stock);
         el.addEventListener("mouseenter", ev => {
           tooltip.innerHTML = `
             <div style="font-weight:800; margin-bottom:3px;">${stock.name} (${stock.ticker})</div>
             <div>Marché : <strong>${MARKET_LABELS[stock.market] || stock.market}</strong> · ${stock.sector || "—"}</div>
             <div>Potentiel : <strong class="pos">+${fmtNum(stock.upside, 1)} %</strong> · Santé : <strong>${fmtNum(stock.healthScore, 2)}/5</strong></div>
-            <div>Cap. : <strong>${fmtNum(stock.marketCapB, 1)} Md €</strong> · PER : <strong>${stock.pe ? fmtNum(stock.pe, 1) + "×" : "—"}</strong></div>
+            <div>Technique : <strong>${tech.signal}</strong>${tech.rsi14 ? ` (RSI ${fmtNum(tech.rsi14, 0)})` : ""}</div>
           `;
           tooltip.style.opacity = "1";
-          tooltip.style.left = Math.min(window.innerWidth - 260, ev.clientX + 14) + "px";
+          tooltip.style.left = Math.min(window.innerWidth - 265, ev.clientX + 14) + "px";
           tooltip.style.top = Math.max(10, ev.clientY - 20) + "px";
         });
         el.addEventListener("mousemove", ev => {
-          tooltip.style.left = Math.min(window.innerWidth - 260, ev.clientX + 14) + "px";
+          tooltip.style.left = Math.min(window.innerWidth - 265, ev.clientX + 14) + "px";
           tooltip.style.top = Math.max(10, ev.clientY - 20) + "px";
         });
         el.addEventListener("mouseleave", () => { tooltip.style.opacity = "0"; });
@@ -1664,10 +1990,7 @@
 
       tbody.innerHTML = items.map(m => `
         <tr style="cursor:default;">
-          <td>
-            <div class="stock-name">${m.name}</div>
-            <div class="stock-meta">${m.ticker} · ${m.region || ""}</div>
-          </td>
+          <td><div class="stock-name">${m.name}</div><div class="stock-meta">${m.ticker} · ${m.region || ""}</div></td>
           <td><span class="badge blue">${m.category}</span></td>
           <td>${buildSparklineSvg(m.sparkline)}</td>
           <td class="num" style="font-weight:700;">${fmtNum(m.price, m.price >= 100 ? 1 : 2)} <span class="muted" style="font-size:0.74rem;">${m.unit || ""}</span></td>
@@ -1709,6 +2032,129 @@
       `).join("");
     }
 
+    // =========================================================================
+    // PANNEAU LATÉRAL V4 : TRADINGVIEW + TECHNIQUE + SIMULATEUR DCF EN DIRECT
+    // =========================================================================
+    function computeSimulatedDcf(dcfInputs, waccPct, growthPct, termPct) {
+      const wacc = waccPct / 100.0;
+      const g = growthPct / 100.0;
+      const gTerm = termPct / 100.0;
+      if (wacc <= gTerm + 0.005) return null;
+
+      let pvFcf = 0;
+      let proj = dcfInputs.fcfPerShare;
+      for (let y = 1; y <= 5; y++) {
+        proj *= (1 + g);
+        pvFcf += proj / Math.pow(1 + wacc, y);
+      }
+      const termVal = (proj * (1 + gTerm)) / (wacc - gTerm);
+      const pvTerm = termVal / Math.pow(1 + wacc, 5);
+      const fair = pvFcf + pvTerm + (dcfInputs.netCashPerShare || 0);
+      return fair > 0 ? fair : null;
+    }
+
+    function renderDcfSimulator(stock) {
+      const box = document.getElementById("dDcfSimSection");
+      const inp = stock.dcfInputs;
+
+      if (!inp || !inp.fcfPerShare || inp.fcfPerShare <= 0) {
+        box.innerHTML = `
+          <h3>Simulateur DCF interactif</h3>
+          <p class="muted" style="font-size:0.81rem;">
+            Simulateur DCF non disponible pour ce titre (Free Cash Flow négatif, établissement financier ou donnée en attente de la collecte V4). La valorisation s'appuie alors sur les multiples sectoriels et le consensus analystes.
+          </p>
+        `;
+        return;
+      }
+
+      const initWacc = inp.baseWaccPct ?? 9.5;
+      const initGrowth = inp.baseGrowthPct ?? 6.0;
+      const initTerm = inp.terminalGrowthPct ?? 2.5;
+      const betaTxt = inp.beta ? `Bêta ${fmtNum(inp.beta, 2)} · WACC suggéré ${fmtNum(inp.suggestedWaccPct, 1)} %` : "Paramètres modifiables en temps réel";
+
+      box.innerHTML = `
+        <h3>
+          <span>Simulateur DCF interactif</span>
+          <span style="font-size:0.71rem; text-transform:none; color:var(--accent);">${betaTxt}</span>
+        </h3>
+        <div class="dcf-sim-result">
+          <div class="dcf-kpi">
+            <div class="dcf-kpi-lbl">DCF simulé</div>
+            <div class="dcf-kpi-val mono" id="simDcfVal">—</div>
+          </div>
+          <div class="dcf-kpi">
+            <div class="dcf-kpi-lbl">Juste Valeur moy.</div>
+            <div class="dcf-kpi-val mono" id="simFairVal">—</div>
+          </div>
+          <div class="dcf-kpi">
+            <div class="dcf-kpi-lbl">Potentiel simulé</div>
+            <div class="dcf-kpi-val mono" id="simUpVal">—</div>
+          </div>
+        </div>
+        <div class="dcf-sliders">
+          <div class="dcf-slider-row">
+            <label for="simWacc">Taux d'actualisation (WACC) <strong id="simWaccLbl">${fmtNum(initWacc, 1)} %</strong></label>
+            <input id="simWacc" type="range" min="6" max="15" step="0.2" value="${initWacc}" />
+          </div>
+          <div class="dcf-slider-row">
+            <label for="simGrowth">Croissance FCF (5 ans) <strong id="simGrowthLbl">${fmtNum(initGrowth, 1)} %</strong></label>
+            <input id="simGrowth" type="range" min="-2" max="20" step="0.5" value="${initGrowth}" />
+          </div>
+          <div class="dcf-slider-row">
+            <label for="simTerm">Croissance terminale (g∞) <strong id="simTermLbl">${fmtNum(initTerm, 1)} %</strong></label>
+            <input id="simTerm" type="range" min="1" max="4" step="0.2" value="${initTerm}" />
+          </div>
+        </div>
+        <div class="dcf-actions">
+          ${inp.suggestedWaccPct ? `<button class="btn" id="simBetaBtn" type="button" style="padding:5px 10px; font-size:0.75rem;">Appliquer WACC Bêta (${fmtNum(inp.suggestedWaccPct, 1)} %)</button>` : ""}
+          <button class="btn" id="simPrudentBtn" type="button" style="padding:5px 10px; font-size:0.75rem;">Scénario prudent (WACC 11 %, g 3 %)</button>
+          <button class="btn" id="simResetBtn" type="button" style="padding:5px 10px; font-size:0.75rem;">Réinitialiser</button>
+        </div>
+      `;
+
+      const wEl = document.getElementById("simWacc");
+      const gEl = document.getElementById("simGrowth");
+      const tEl = document.getElementById("simTerm");
+
+      function recalc() {
+        const w = Number(wEl.value), g = Number(gEl.value), t = Number(tEl.value);
+        document.getElementById("simWaccLbl").textContent = `${fmtNum(w, 1)} %`;
+        document.getElementById("simGrowthLbl").textContent = `${fmtNum(g, 1)} %`;
+        document.getElementById("simTermLbl").textContent = `${fmtNum(t, 1)} %`;
+
+        const simDcf = computeSimulatedDcf(inp, w, g, t);
+        const otherModels = [stock.models?.multiples, stock.models?.analysts].filter(v => v !== null && v !== undefined);
+        const allModels = simDcf ? [simDcf, ...otherModels] : otherModels;
+        const avgFair = allModels.length ? allModels.reduce((a, b) => a + b, 0) / allModels.length : null;
+        const simUp = (avgFair && stock.price) ? ((avgFair - stock.price) / stock.price) * 100 : null;
+
+        document.getElementById("simDcfVal").textContent = simDcf ? fmtPrice(simDcf, stock.currency) : "N/A";
+        document.getElementById("simFairVal").textContent = avgFair ? fmtPrice(avgFair, stock.currency) : "—";
+        const upEl = document.getElementById("simUpVal");
+        if (simUp !== null) {
+          upEl.textContent = `${simUp >= 0 ? "+" : ""}${fmtNum(simUp, 1)} %`;
+          upEl.className = `dcf-kpi-val mono ${simUp >= 20 ? "pos" : simUp < 0 ? "neg" : ""}`;
+        } else {
+          upEl.textContent = "—";
+        }
+      }
+
+      wEl.addEventListener("input", recalc);
+      gEl.addEventListener("input", recalc);
+      tEl.addEventListener("input", recalc);
+      document.getElementById("simResetBtn").addEventListener("click", () => {
+        wEl.value = initWacc; gEl.value = initGrowth; tEl.value = initTerm; recalc();
+      });
+      document.getElementById("simPrudentBtn").addEventListener("click", () => {
+        wEl.value = 11.0; gEl.value = 3.0; tEl.value = 2.0; recalc();
+      });
+      const betaBtn = document.getElementById("simBetaBtn");
+      if (betaBtn) {
+        betaBtn.addEventListener("click", () => { wEl.value = inp.suggestedWaccPct; recalc(); });
+      }
+      recalc();
+    }
+
     function toggleWatchlist(ticker) {
       if (state.watchlist.has(ticker)) state.watchlist.delete(ticker);
       else state.watchlist.add(ticker);
@@ -1725,26 +2171,55 @@
       document.getElementById("dName").textContent = s.name;
       document.getElementById("dSub").textContent = `${s.ticker} · ${MARKET_LABELS[s.market] || s.market} · ${s.sector || "—"} · Cap. ${fmtNum(s.marketCapB, 1)} Md €`;
       document.getElementById("dStarBtn").classList.toggle("active-toggle", state.watchlist.has(s.ticker));
+      document.getElementById("dCompareBtn").classList.toggle("compare-on", state.compareList.includes(s.ticker));
 
       document.getElementById("dTrapBanner").innerHTML = s.valueTrap
-        ? `<div style="background:var(--red-soft); border:1px solid var(--red); color:var(--red); padding:11px 13px; border-radius:10px; font-size:0.83rem; font-weight:600; margin-bottom:13px;">Alerte Piège de valeur : décote ≥ 20 % mais fragilité sur la santé globale, la trésorerie ou le bilan.</div>`
+        ? `<div style="background:var(--red-soft); border:1px solid var(--red); color:var(--red); padding:10px 13px; border-radius:10px; font-size:0.82rem; font-weight:600; margin-bottom:13px;">Alerte Piège de valeur : décote ≥ 20 % mais fragilité sur la santé globale, la trésorerie ou le bilan.</div>`
         : "";
 
-      document.getElementById("dSparkSection").innerHTML = `
-        <h3>Dynamique 3 mois &amp; Calendrier</h3>
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px;">
-          <div>${buildSparklineSvg(s.sparkline, 210, 48)}</div>
-          <div style="text-align:right;">
-            <div class="muted" style="font-size:0.75rem;">Variation 3M</div>
-            <div style="font-size:1.05rem;">${fmtPct(s.chg3m, 1)}</div>
-          </div>
+      // 1. TradingView Widget
+      const tv = buildTradingViewIframe(s.ticker, s.market);
+      document.getElementById("dTvContainer").innerHTML = tv.iframeHtml;
+      document.getElementById("dTvFullLink").href = tv.fullUrl;
+
+      // 2. Timing technique
+      const tech = getTech(s);
+      const rsiPos = tech.rsi14 !== null && tech.rsi14 !== undefined ? Math.max(0, Math.min(100, tech.rsi14)) : 50;
+      document.getElementById("dTechSection").innerHTML = `
+        <h3>
+          <span>Timing Technique (1 an)</span>
+          <span class="badge ${tech.signalTone || "blue"}">${tech.signal}</span>
+        </h3>
+        <div class="row-kv">
+          <span>RSI (14 jours)</span>
+          <strong class="mono">${tech.rsi14 !== null && tech.rsi14 !== undefined ? fmtNum(tech.rsi14, 1) : "—"}</strong>
         </div>
-        <div class="row-kv"><span>Prochains résultats</span><strong>${s.earningsDate ? `${s.earningsDate} (J-${s.daysToEarnings})` : "Non communiqué"}</strong></div>
-        <div class="row-kv"><span>Variation du potentiel (5 séances)</span><strong>${s.upsideDelta5d !== null && s.upsideDelta5d !== undefined ? (s.upsideDelta5d > 0 ? "+" : "") + fmtNum(s.upsideDelta5d, 1) + " pts" : "—"}</strong></div>
+        ${tech.rsi14 !== null && tech.rsi14 !== undefined ? `
+          <div class="rsi-bar-wrap">
+            <div class="rsi-track"><div class="rsi-marker" style="left:${rsiPos}%;"></div></div>
+            <div class="rsi-scale"><span>0 (Survente)</span><span>30</span><span>50</span><span>70</span><span>100 (Surachat)</span></div>
+          </div>
+        ` : ""}
+        <div class="row-kv"><span>MACD / Histogramme</span><strong class="mono">${tech.macd !== null && tech.macd !== undefined ? `${fmtNum(tech.macd, 2)} (${tech.macdHist >= 0 ? "+" : ""}${fmtNum(tech.macdHist, 2)})` : "—"}</strong></div>
+        <div class="row-kv"><span>EMA 50</span><strong>${tech.ema50 ? `${fmtPrice(tech.ema50, s.currency)} (${fmtPct(tech.distEma50, 1)})` : "—"}</strong></div>
+        <div class="row-kv"><span>Moyenne mobile 200 j</span><strong>${tech.sma200 ? `${fmtPrice(tech.sma200, s.currency)} (${fmtPct(tech.distSma200, 1)})` : "—"}</strong></div>
+        <div class="row-kv"><span>Fourchette 52 sem.</span><strong>${tech.low52w ? `${fmtPrice(tech.low52w, s.currency)} — ${fmtPrice(tech.high52w, s.currency)} (${fmtNum(tech.pos52w, 0)} %)` : "—"}</strong></div>
+        ${tech.fib382 ? `
+          <div style="font-size:0.72rem; color:var(--muted); margin-top:8px; font-weight:700;">Retracements de Fibonacci (depuis le sommet 52 sem.) :</div>
+          <div class="fibo-grid">
+            <div class="fibo-box"><span>Fibo 38,2 %</span><strong class="mono">${fmtPrice(tech.fib382, s.currency)}</strong></div>
+            <div class="fibo-box"><span>Fibo 50,0 %</span><strong class="mono">${fmtPrice(tech.fib500, s.currency)}</strong></div>
+            <div class="fibo-box"><span>Fibo 61,8 %</span><strong class="mono">${fmtPrice(tech.fib618, s.currency)}</strong></div>
+          </div>
+        ` : ""}
       `;
 
+      // 3. Simulateur DCF interactif
+      renderDcfSimulator(s);
+
+      // 4. Juste Valeur
       document.getElementById("dValuation").innerHTML = `
-        <h3>Décomposition de la Juste Valeur</h3>
+        <h3>Décomposition de la Juste Valeur (Modèle par défaut)</h3>
         <div class="row-kv"><span>Cours actuel</span><strong>${fmtPrice(s.price, s.currency)}</strong></div>
         <div class="row-kv"><span>Juste Valeur moyenne</span><strong style="color:var(--green);">${fmtPrice(s.fairValue, s.currency)} (${s.upside >= 0 ? "+" : ""}${fmtNum(s.upside, 1)} %)</strong></div>
         <div class="row-kv"><span>Modèle 1 · DCF (5 ans + VT)</span><span>${fmtPrice(s.models?.dcf, s.currency)}</span></div>
@@ -1752,6 +2227,7 @@
         <div class="row-kv"><span>Modèle 3 · Consensus analystes</span><span>${fmtPrice(s.models?.analysts, s.currency)}</span></div>
       `;
 
+      // 5. Santé financière
       const pillars = [
         ["Rentabilité (ROE, marges)", s.scores?.profitability],
         ["Croissance (CA, bénéfices)", s.scores?.growth],
@@ -1772,12 +2248,14 @@
         }).join("")}
       `;
 
+      // 6. Multiples, Dividende & Calendrier
       document.getElementById("dMultiples").innerHTML = `
-        <h3>Multiples, Dividende &amp; Consensus</h3>
+        <h3>Multiples, Dividende &amp; Calendrier</h3>
         <div class="row-kv"><span>PER (Forward / Trailing)</span><strong>${s.pe ? fmtNum(s.pe, 1) + "×" : "—"}</strong></div>
         <div class="row-kv"><span>EV / EBITDA</span><strong>${s.evEbitda ? fmtNum(s.evEbitda, 1) + "×" : "—"}</strong></div>
         <div class="row-kv"><span>Rendement du dividende</span><strong>${s.dividendYield ? fmtNum(s.dividendYield, 2) + " %" : "—"}</strong></div>
         <div class="row-kv"><span>Payout Ratio</span><strong>${s.payoutRatio ? fmtNum(s.payoutRatio, 1) + " %" : "—"}</strong></div>
+        <div class="row-kv"><span>Prochains résultats</span><strong>${s.earningsDate ? `${s.earningsDate} (J-${s.daysToEarnings})` : "Non communiqué"}</strong></div>
         <div class="row-kv"><span>Avis des analystes</span><strong>${s.analystConsensus || "—"}</strong></div>
       `;
 
@@ -1789,26 +2267,30 @@
     function closeDrawer() {
       document.getElementById("drawerOverlay").classList.remove("open");
       document.getElementById("detailDrawer").classList.remove("open");
+      document.getElementById("dTvContainer").innerHTML = "";
     }
 
     function exportFilteredCsv() {
       const rows = state.lastFiltered || [];
       if (!rows.length) return alert("Aucune ligne à exporter.");
-      const headers = ["Ticker","Société","Marché","Secteur","Devise","Cours","Juste Valeur","Potentiel (%)","Santé (/5)","Label Santé","Cap (Md EUR)","Dividende (%)","PER","EV/EBITDA","Analystes","Prochains résultats"];
+      const headers = ["Ticker","Société","Marché","Secteur","Devise","Cours","Juste Valeur","Potentiel (%)","Santé (/5)","RSI 14","Signal Technique","Cap (Md EUR)","Dividende (%)","PER","EV/EBITDA","Analystes"];
       const esc = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
       const lines = [
         headers.join(";"),
-        ...rows.map(s => [
-          s.ticker, s.name, s.market, s.sector, s.currency, s.price, s.fairValue,
-          s.upside, s.healthScore, s.healthLabel, s.marketCapB, s.dividendYield ?? "",
-          s.pe ?? "", s.evEbitda ?? "", s.analystConsensus, s.earningsDate ?? ""
-        ].map(esc).join(";"))
+        ...rows.map(s => {
+          const t = getTech(s);
+          return [
+            s.ticker, s.name, s.market, s.sector, s.currency, s.price, s.fairValue,
+            s.upside, s.healthScore, t.rsi14 ?? "", t.signal, s.marketCapB, s.dividendYield ?? "",
+            s.pe ?? "", s.evEbitda ?? "", s.analystConsensus
+          ].map(esc).join(";");
+        })
       ];
       const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `valoris_selection_${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `valoris_v4_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -1819,18 +2301,27 @@
       renderBriefings();
       populateSectors();
       renderScreener();
+      renderCompareView();
       renderMacro();
       renderWinners();
       syncTopbarHeight();
     }
 
     // =========================================================================
-    // ÉVÉNEMENTS : THÈME, NAVIGATION COMPENSÉE, FILTRES, TRI & IMPORT
+    // ÉVÉNEMENTS : THÈME, NAVIGATION COMPENSÉE, FILTRES, COMPARATEUR & IMPORT
     // =========================================================================
     function applyTheme(theme) {
       document.documentElement.setAttribute("data-theme", theme);
       localStorage.setItem("valoris-theme", theme);
       document.getElementById("themeToggle").textContent = theme === "dark" ? "☀️ Mode Jour" : "🌙 Mode Nuit";
+      // Recharger le thème du widget TradingView si le panneau est ouvert
+      if (state.currentDrawerTicker && document.getElementById("detailDrawer").classList.contains("open")) {
+        const s = (state.data.stocks || []).find(x => x.ticker === state.currentDrawerTicker);
+        if (s) {
+          const tv = buildTradingViewIframe(s.ticker, s.market);
+          document.getElementById("dTvContainer").innerHTML = tv.iframeHtml;
+        }
+      }
     }
     applyTheme(localStorage.getItem("valoris-theme") || "dark");
     document.getElementById("themeToggle").addEventListener("click", () => {
@@ -1851,40 +2342,34 @@
       if (isCol) window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Tous les liens du menu horizontal passent par scrollToSection (zéro chevauchement avec le bandeau fixe)
     document.getElementById("brandTopBtn").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-    document.getElementById("navAccueil").addEventListener("click", e => {
-      e.preventDefault();
-      applyHeroCollapsed(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    document.getElementById("navAccueil").addEventListener("click", e => { e.preventDefault(); applyHeroCollapsed(false); window.scrollTo({ top: 0, behavior: "smooth" }); });
     document.getElementById("navAnalyses").addEventListener("click", e => {
       e.preventDefault();
       document.getElementById("briefingsGrid").classList.remove("collapsed");
       document.getElementById("toggleBriefings").textContent = "Masquer les analyses";
       scrollToSection("analyses-section");
     });
-    document.getElementById("navScreener").addEventListener("click", e => {
+    document.getElementById("navScreener").addEventListener("click", e => { e.preventDefault(); switchTab("screener"); scrollToSection("mainTabs"); });
+    document.getElementById("navCompare").addEventListener("click", e => {
       e.preventDefault();
-      switchTab("screener");
+      if (!state.compareList.length) autoSelectTop3Compare();
+      switchTab("compare");
       scrollToSection("mainTabs");
     });
-    document.getElementById("navScatter").addEventListener("click", e => {
-      e.preventDefault();
-      switchTab("scatter");
-      scrollToSection("mainTabs");
-    });
-    document.getElementById("navMacro").addEventListener("click", e => {
-      e.preventDefault();
-      switchTab("macro");
-      scrollToSection("mainTabs");
-    });
+    document.getElementById("navScatter").addEventListener("click", e => { e.preventDefault(); switchTab("scatter"); scrollToSection("mainTabs"); });
+    document.getElementById("navMacro").addEventListener("click", e => { e.preventDefault(); switchTab("macro"); scrollToSection("mainTabs"); });
 
     document.getElementById("heroGoScreener").addEventListener("click", () => { switchTab("screener"); scrollToSection("mainTabs"); });
     document.getElementById("heroGoAnalyses").addEventListener("click", () => {
       document.getElementById("briefingsGrid").classList.remove("collapsed");
       document.getElementById("toggleBriefings").textContent = "Masquer les analyses";
       scrollToSection("analyses-section");
+    });
+    document.getElementById("heroGoCompare").addEventListener("click", () => {
+      if (!state.compareList.length) autoSelectTop3Compare();
+      switchTab("compare");
+      scrollToSection("mainTabs");
     });
     document.getElementById("heroGoScatter").addEventListener("click", () => { switchTab("scatter"); scrollToSection("mainTabs"); });
     document.getElementById("heroGoMacro").addEventListener("click", () => { switchTab("macro"); scrollToSection("mainTabs"); });
@@ -1909,10 +2394,7 @@
     });
 
     document.querySelectorAll("#marketPills .pill").forEach(btn => {
-      btn.addEventListener("click", () => {
-        setMarketFilter(btn.dataset.market);
-        renderScreener();
-      });
+      btn.addEventListener("click", () => { setMarketFilter(btn.dataset.market); renderScreener(); });
     });
 
     document.querySelectorAll("#macroCategoryPills .pill").forEach(btn => {
@@ -1926,6 +2408,7 @@
 
     document.getElementById("searchInput").addEventListener("input", e => { state.search = e.target.value; renderScreener(); });
     document.getElementById("sectorSelect").addEventListener("change", e => { state.sector = e.target.value; renderScreener(); });
+    document.getElementById("techSelect").addEventListener("change", e => { state.techFilter = e.target.value; renderScreener(); });
     document.getElementById("upsideRange").addEventListener("input", e => {
       state.minUpside = Number(e.target.value);
       document.getElementById("upsideVal").textContent = `${state.minUpside} %`;
@@ -1954,9 +2437,10 @@
       renderScreener();
     });
 
-    function applyPreset(upside, cap, health, divMin, hideTraps) {
+    function applyPreset(upside, cap, health, divMin, techMode, hideTraps) {
       state.minUpside = upside; state.minCap = cap; state.minHealth = health;
-      state.minDiv = divMin; state.hideTraps = hideTraps; state.onlyNew = false; state.onlyWatchlist = false;
+      state.minDiv = divMin; state.techFilter = techMode; state.hideTraps = hideTraps;
+      state.onlyNew = false; state.onlyWatchlist = false;
       document.getElementById("upsideRange").value = upside;
       document.getElementById("upsideVal").textContent = `${upside} %`;
       document.getElementById("mcapRange").value = cap;
@@ -1965,15 +2449,31 @@
       document.getElementById("healthVal").textContent = `${fmtNum(health, 1)} / 5`;
       document.getElementById("divRange").value = divMin;
       document.getElementById("divVal").textContent = `${fmtNum(divMin, 1)} %`;
+      document.getElementById("techSelect").value = techMode;
       document.getElementById("hideTraps").checked = hideTraps;
       document.getElementById("onlyNew").checked = false;
       updateStatus();
       renderScreener();
     }
-    document.getElementById("presetValoris").addEventListener("click", () => applyPreset(20, 1, 2.5, 0, true));
-    document.getElementById("presetQuality").addEventListener("click", () => applyPreset(15, 5, 3.5, 0, true));
-    document.getElementById("presetDividend").addEventListener("click", () => applyPreset(15, 1, 2.5, 3, true));
-    document.getElementById("presetAll").addEventListener("click", () => applyPreset(-20, 0, 1.0, 0, false));
+    document.getElementById("presetValoris").addEventListener("click", () => applyPreset(20, 1, 2.5, 0, "ALL", true));
+    document.getElementById("presetOversold").addEventListener("click", () => applyPreset(15, 1, 2.5, 0, "RSI_LOW", true));
+    document.getElementById("presetQuality").addEventListener("click", () => applyPreset(15, 5, 3.5, 0, "ALL", true));
+    document.getElementById("presetAll").addEventListener("click", () => applyPreset(-20, 0, 1.0, 0, "ALL", false));
+
+    document.getElementById("compareAutoTopBtn").addEventListener("click", autoSelectTop3Compare);
+    document.getElementById("compareClearBtn").addEventListener("click", () => {
+      state.compareList = [];
+      updateStatus();
+      renderScreener();
+      renderCompareView();
+    });
+    document.getElementById("dockOpenBtn").addEventListener("click", () => { switchTab("compare"); scrollToSection("mainTabs"); });
+    document.getElementById("dockClearBtn").addEventListener("click", () => {
+      state.compareList = [];
+      updateStatus();
+      renderScreener();
+      renderCompareView();
+    });
 
     document.querySelectorAll("thead th[data-sort]").forEach(th => {
       th.addEventListener("click", () => {
@@ -1986,6 +2486,9 @@
 
     document.getElementById("dStarBtn").addEventListener("click", () => {
       if (state.currentDrawerTicker) toggleWatchlist(state.currentDrawerTicker);
+    });
+    document.getElementById("dCompareBtn").addEventListener("click", () => {
+      if (state.currentDrawerTicker) toggleCompare(state.currentDrawerTicker);
     });
     document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
     document.getElementById("drawerOverlay").addEventListener("click", closeDrawer);
