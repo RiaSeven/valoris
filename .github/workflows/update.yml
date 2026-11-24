@@ -1,4 +1,4 @@
-name: Mise à jour Valoris V3 (Asie matin & Occident soir)
+name: Mise à jour Valoris V4 (Asie matin & Occident soir)
 
 on:
   schedule:
@@ -37,7 +37,7 @@ jobs:
       - name: Installer les dépendances
         run: pip install --upgrade pip && pip install -r requirements.txt
 
-      - name: Collecter données, scores et briefing de session
+      - name: Collecter fondamentaux, technique (RSI/MACD/Fibo) et briefings
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -64,7 +64,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "Aucun changement détecté."
           else
-            git commit -m "chore: mise à jour Valoris V3 ($(date +'%Y-%m-%d %H:%M UTC'))"
+            git commit -m "chore: mise à jour Valoris V4 ($(date +'%Y-%m-%d %H:%M UTC'))"
             git pull --rebase origin main
             git push
           fi
